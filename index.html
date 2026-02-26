@@ -25,9 +25,7 @@
       --rule: #c8bfb4;
     }
 
-    html, body {
-      height: 100%;
-    }
+    html, body { height: 100%; }
 
     body {
       background: var(--paper);
@@ -43,7 +41,6 @@
       overflow-x: hidden;
     }
 
-    /* Grain overlay */
     body::before {
       content: '';
       position: fixed;
@@ -54,7 +51,6 @@
       opacity: 0.6;
     }
 
-    /* Ruled lines background */
     body::after {
       content: '';
       position: fixed;
@@ -78,7 +74,6 @@
       max-width: 560px;
     }
 
-    /* Header / Name block */
     .header {
       margin-bottom: 3rem;
       opacity: 0;
@@ -112,7 +107,14 @@
       width: 100%;
       height: 2px;
       background: var(--ink);
-      margin: 1.5rem 0 0.5rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .sub-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
     .sub {
@@ -120,15 +122,53 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      display: flex;
-      gap: 1.5rem;
     }
 
-    /* Link buttons */
+    /* Chit Chat CTA button */
+    .chit-chat-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      padding: 0.45rem 0.8rem 0.45rem 0.6rem;
+      transition: all 0.18s ease;
+      flex-shrink: 0;
+    }
+
+    .chit-chat-cta:hover {
+      background: var(--rust);
+      border-color: var(--rust);
+      color: var(--paper);
+    }
+
+    .cta-icon {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+    }
+
+    .icon-stroke {
+      stroke: var(--ink);
+      transition: stroke 0.18s ease;
+    }
+
+    .chit-chat-cta:hover .icon-stroke {
+      stroke: var(--paper);
+    }
+
+    .cta-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* Link rows */
     .links {
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
 
     .link-item {
@@ -141,33 +181,17 @@
       transition: transform 0.15s ease;
     }
 
-    .link-item:first-child {
-      border-top: 1.5px solid var(--ink);
-    }
-
-    .link-item:last-child {
-      border-bottom: 1.5px solid var(--ink);
-    }
+    .link-item:first-child { border-top: 1.5px solid var(--ink); }
+    .link-item:last-child  { border-bottom: 1.5px solid var(--ink); }
 
     .link-item:nth-child(1) { animation-delay: 0.3s; }
     .link-item:nth-child(2) { animation-delay: 0.42s; }
     .link-item:nth-child(3) { animation-delay: 0.54s; }
     .link-item:nth-child(4) { animation-delay: 0.66s; }
 
-    .link-item:hover {
-      transform: translate(-3px, -3px);
-      z-index: 2;
-    }
-
-    .link-item:hover .link-number {
-      background: var(--rust);
-      color: var(--paper);
-      border-right-color: var(--rust);
-    }
-
-    .link-item:hover .link-arrow {
-      transform: translate(3px, -3px);
-    }
+    .link-item:hover { transform: translate(-3px, -3px); z-index: 2; }
+    .link-item:hover .link-number { background: var(--rust); color: var(--paper); border-right-color: var(--rust); }
+    .link-item:hover .link-arrow  { transform: translate(3px, -3px); }
 
     .link-item a {
       display: flex;
@@ -193,10 +217,7 @@
       flex-shrink: 0;
     }
 
-    .link-content {
-      padding: 1.4rem 1.4rem;
-      flex: 1;
-    }
+    .link-content { padding: 1.4rem; flex: 1; }
 
     .link-tag {
       font-size: 0.6rem;
@@ -226,7 +247,6 @@
       flex-shrink: 0;
     }
 
-    /* Footer */
     .footer {
       margin-top: 2rem;
       display: flex;
@@ -234,7 +254,7 @@
       align-items: center;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards;
-      animation-delay: 0.7s;
+      animation-delay: 0.8s;
     }
 
     .footer-note {
@@ -245,8 +265,7 @@
     }
 
     .dot {
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--rust);
       display: inline-block;
@@ -254,7 +273,6 @@
       vertical-align: middle;
     }
 
-    /* URL display */
     .url-pill {
       font-size: 0.6rem;
       letter-spacing: 0.1em;
@@ -264,7 +282,6 @@
       border-radius: 2px;
     }
 
-    /* Easter egg - completely invisible links */
     a.egg {
       color: inherit;
       text-decoration: none;
@@ -273,41 +290,43 @@
       letter-spacing: inherit;
       display: inline;
     }
-    a.egg:hover,
-    a.egg:visited,
-    a.egg:active,
-    a.egg:focus {
+    a.egg:hover, a.egg:visited, a.egg:active, a.egg:focus {
       color: inherit;
       text-decoration: none;
       outline: none;
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 480px) {
-      .link-title {
-        font-size: 1.15rem;
-      }
+      .link-title { font-size: 1.15rem; }
+      .cta-label { display: none; }
+      .chit-chat-cta { padding: 0.45rem 0.6rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+
     <header class="header">
       <p class="label">bobcorrigan.com</p>
-      <h1 class="name"><a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="egg">Bob<br /><em>Corrigan</em></a></h1>
+      <h1 class="name">
+        <a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="egg">Bob<br /><em>Corrigan</em></a>
+      </h1>
       <div class="divider"></div>
-      <div class="sub">
-        <span>Beep Boop.</span>
+      <div class="sub-row">
+        <span class="sub">Beep Boop.</span>
+        <a href="/schedule.html" class="chit-chat-cta">
+          <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+            <!-- Two speech bubbles -->
+            <path class="icon-stroke" d="M3 6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H9l-3 3v-3H5a2 2 0 0 1-2-2V6z"/>
+            <path class="icon-stroke" d="M16 9h1a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v2l-2-2"/>
+          </svg>
+          <span class="cta-label">Chit Chat</span>
+        </a>
       </div>
     </header>
 
@@ -361,6 +380,7 @@
       <span class="footer-note"><span class="dot"></span>PNW Based · Midwest Roots</span>
       <span class="url-pill">bobcorrigan.com</span>
     </footer>
+
   </div>
 </body>
 </html>
