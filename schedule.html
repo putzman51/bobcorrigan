@@ -76,7 +76,24 @@
       animation-delay: 0.05s;
     }
     .back:hover { color: var(--rust); }
-    .back::before { content: '← '; }
+    .back::after { content: ' →'; }
+
+    .footer-btn {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      padding: 0.4rem 0.7rem;
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .footer-btn:hover { border-color: var(--rust); color: var(--rust); }
+    .footer-btn .dot { margin-right: 0.5rem; }
 
     .header {
       margin-bottom: 2.5rem;
@@ -505,7 +522,9 @@
 <body>
   <div class="container">
 
-    <a href="/" class="back">bobcorrigan.com</a>
+    <div style="display:flex; justify-content:flex-end; width:100%;">
+      <a href="/" class="back" style="margin-bottom:2.5rem;">bobcorrigan.com</a>
+    </div>
 
     <header class="header">
       <p class="label">05 — Let's Talk</p>
@@ -592,7 +611,9 @@
     </div>
 
     <footer class="footer">
-      <span class="footer-note"><span class="dot"></span>PNW Based · Midwest Roots</span>
+      <a href="https://www.lorettasnorthwesterner.com" target="_blank" rel="noopener" class="footer-btn">
+        <span class="dot"></span>PNW Based · Midwest Roots
+      </a>
       <span class="url-pill">bobcorrigan.com</span>
     </footer>
 
