@@ -18,7 +18,7 @@
       --ink: #1a1714;
       --paper: #f0ebe3;
       --cream: #e8e0d4;
-      --rust: #b84c2b;
+      --rust: #B8860B;
       --muted: #8a8178;
       --rule: #c8bfb4;
     }
@@ -76,7 +76,7 @@
       animation-delay: 0.05s;
     }
     .back:hover { color: var(--rust); }
-    .back::before { content: '← '; }
+    .back::after { content: ' →'; }
 
     /* ── HEADER ── */
     .header {
@@ -144,7 +144,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--rust);
       display: block;
       margin-bottom: 0.2rem;
     }
@@ -155,6 +155,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.1rem;
       font-weight: 700;
+      color: var(--rust);
     }
 
     .profile-arrow {
@@ -435,6 +436,27 @@
       border-radius: 2px;
     }
 
+    .footer-btn {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      padding: 0.4rem 0.7rem;
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .footer-btn:hover {
+      border-color: var(--rust);
+      color: var(--rust);
+    }
+
+    .footer-btn .dot { margin-right: 0.5rem; }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -449,20 +471,22 @@
 <body>
   <div class="container">
 
-    <a href="/" class="back">bobcorrigan.com</a>
+    <div style="display:flex; justify-content:flex-end; width:100%;">
+      <a href="/" class="back" style="margin-bottom:2.5rem;">bobcorrigan.com</a>
+    </div>
 
     <header class="header">
-      <p class="label">02 — Professional</p>
+      <p class="label">02 — Professional Administrator & Sales</p>
       <h1 class="title">Benefits<br /><em>Bob</em></h1>
       <div class="divider"></div>
-      <p class="sub">Regional Sales Director · Navia Benefit Solutions · 10+ yrs</p>
+      <p class="sub">Sales Director · Navia Benefit Solutions · 10+ yrs</p>
     </header>
 
     <!-- LINKEDIN -->
     <a href="https://www.linkedin.com/in/benefitsbob" target="_blank" rel="noopener" class="profile-link">
       <div>
-        <span class="profile-link-label">Official Profile</span>
-        <span class="profile-link-text">LinkedIn · Benefits Bob</span>
+        <span class="profile-link-label">LinkedIn Profile</span>
+        <span class="profile-link-text">Employee Benefits + Sales</span>
       </div>
       <span class="profile-arrow">↗</span>
     </a>
@@ -506,7 +530,7 @@
     <div class="block d2">
       <div class="exp-row">
         <div class="exp-top">
-          <div class="exp-title">Regional Sales Director · Onboarding Specialist</div>
+          <div class="exp-title">Sales Director · Onboarding Specialist</div>
           <div class="exp-duration">4 yrs</div>
         </div>
         <div class="exp-company">Navia Benefit Solutions · Redmond, WA · Hybrid</div>
@@ -555,7 +579,7 @@
         <div class="exp-company">Lexus of Dayton · Dayton, OH · On-site</div>
         <ul class="exp-detail">
           <li>Support for technicians and customer-facing service staff</li>
-          <li>Near-luxury customer support for discerning clientele</li>
+          <li>Luxury customer support for discerning clientele</li>
         </ul>
       </div>
     </div>
@@ -577,7 +601,7 @@
         <div class="edu-school">Sinclair Community College</div>
         <div class="edu-years">2010–2012</div>
         <div class="edu-field">Transfer · General</div>
-        <div class="edu-note">GPA 3.8 · Completed pre-requisite courses to enter University of Cincinnati</div>
+        <div class="edu-note">GPA 3.8 · Completed required transfer courses to enter University of Cincinnati</div>
       </div>
       <div class="edu-row">
         <div class="edu-school">Aveda Fredric's Institute</div>
@@ -616,7 +640,7 @@
         <div class="vol-content">
           <div class="vol-title">Donor</div>
           <div class="vol-org">Bloodworks Northwest</div>
-          <div class="vol-desc">Whole blood donation to help support the community.</div>
+          <div class="vol-desc">Whole blood donation to support the community.</div>
         </div>
         <div class="vol-date">2023–2024</div>
       </div>
@@ -625,7 +649,7 @@
         <div class="vol-content">
           <div class="vol-title">S.T.A.R.P.A.L.S. Mentor</div>
           <div class="vol-org">San Diego Police Department</div>
-          <div class="vol-desc">Community service in conjunction with the SDPD to help serve youth through a street violence diversion program.</div>
+          <div class="vol-desc">Community service with the SDPD to help serve youth through a street violence diversion program.</div>
         </div>
         <div class="vol-date">2014</div>
       </div>
@@ -641,7 +665,7 @@
       <div class="vol-row">
         <div class="vol-dot"></div>
         <div class="vol-content">
-          <div class="vol-title">9/11 Relief — Servicing Uniformed Personnel</div>
+          <div class="vol-title">Sound Healing for Uniformed Personnel</div>
           <div class="vol-org">American Red Cross</div>
           <div class="vol-desc">Spa services for authorized recipients who served in lower Manhattan at ground zero in the wake of the attacks on September 11th, 2001.</div>
         </div>
@@ -650,7 +674,9 @@
     </div>
 
     <footer class="footer">
-      <span class="footer-note"><span class="dot"></span>PNW Based · Midwest Roots</span>
+      <a href="https://www.lorettasnorthwesterner.com" target="_blank" rel="noopener" class="footer-btn">
+        <span class="dot"></span>PNW Based · Midwest Roots
+      </a>
       <span class="url-pill">bobcorrigan.com</span>
     </footer>
 
