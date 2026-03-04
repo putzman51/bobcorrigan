@@ -48,7 +48,7 @@
     .panel {
       position: relative;
       width: min(400px, 88vw);
-      aspect-ratio: 5.5 / 8.5;
+      aspect-ratio: 4 / 5;
       background: var(--paper);
       overflow: hidden;
       margin-bottom: 24px;
@@ -356,53 +356,6 @@
   <!-- ── PHOTOS (built by JS) ── -->
   <div id="photo-container"></div>
 
-  <!-- ── I'm outside. ── -->
-  <div class="panel" id="p-outside">
-    <div class="brush-line">
-      <svg viewBox="0 0 20 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10,2 C9,18 11,35 10,52 C9,70 11,88 10,105 C9,123 11,140 10,158 C9,175 11,193 10,210 C9,228 11,245 10,263 C9,280 11,298 10,315 C9,332 11,350 10,368 C9,385 11,402 10,420 C9,437 11,455 10,472 C9,490 11,507 10,525 C9,542 11,559 10,577 C9.5,590 10.5,596 10,598"
-          stroke="#2FA5A7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
-      </svg>
-    </div>
-    <div class="content">
-      <div class="w1">I'm</div>
-      <div class="w2">outside.</div>
-      <div class="tick"></div>
-    </div>
-    <div class="frame-num">22 / 24</div>
-    <div class="reg-mark">
-      <div class="reg-cross"><div class="reg-circle"></div></div>
-      <div class="reg-swatches">
-        <span style="background:#c8f0f0"></span><span style="background:#8dd8d9"></span><span style="background:#52bfc1"></span><span style="background:#2FA5A7"></span>
-        <span style="background:#9ecbcc"></span><span style="background:#267f81"></span><span style="background:#1d6163"></span><span style="background:#124446"></span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── It's your boy. ── -->
-  <div class="panel" id="p-yourboy">
-    <div class="brush-line">
-      <svg viewBox="0 0 20 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10,2 C9,18 11,35 10,52 C9,70 11,88 10,105 C9,123 11,140 10,158 C9,175 11,193 10,210 C9,228 11,245 10,263 C9,280 11,298 10,315 C9,332 11,350 10,368 C9,385 11,402 10,420 C9,437 11,455 10,472 C9,490 11,507 10,525 C9,542 11,559 10,577 C9.5,590 10.5,596 10,598"
-          stroke="#2FA5A7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
-      </svg>
-    </div>
-    <div class="content">
-      <div class="tick"></div>
-      <div class="w1">It's</div>
-      <div class="w2">your</div>
-      <div class="w3">boy.</div>
-    </div>
-    <div class="frame-num">23 / 24</div>
-    <div class="reg-mark">
-      <div class="reg-cross"><div class="reg-circle"></div></div>
-      <div class="reg-swatches">
-        <span style="background:#c8f0f0"></span><span style="background:#8dd8d9"></span><span style="background:#52bfc1"></span><span style="background:#2FA5A7"></span>
-        <span style="background:#9ecbcc"></span><span style="background:#267f81"></span><span style="background:#1d6163"></span><span style="background:#124446"></span>
-      </div>
-    </div>
-  </div>
-
   <!-- ── BACK COVER ── -->
   <div class="panel" id="p-back">
     <div class="brush-line">
@@ -439,25 +392,23 @@
 <script>
   const photos = [
     { file: 'p1.jpg', tag: 'frolf' },
-    { file: 'p2.jpg', tag: 'disc path' },
-    { file: 'p3.jpg', tag: 'fairway' },
-    { file: 'p4.jpg', tag: 'elevated lie' },
-    { file: 'p5.jpg', tag: 'ace run' },
-    { file: 'p6.jpg', tag: 'PNW' },
-    { file: 'p7.jpg', tag: 'the bag' },
-    { file: 'p8.jpg', tag: 'morning round' },
-    { file: 'p9.jpg', tag: 'frolf' },
     { file: 'o1.jpg', tag: 'outside' },
-    { file: 'o2.jpg', tag: 'out there' },
-    { file: 'o3.jpg', tag: 'open air' },
-    { file: 'o4.jpg', tag: 'PNW' },
-    { file: 'o5.jpg', tag: 'midwest' },
-    { file: 'o6.jpg', tag: 'field notes' },
-    { file: 'o7.jpg', tag: 'off course' },
-    { file: 'o8.jpg', tag: 'home range' },
-    { file: 'o9.jpg', tag: 'found object' },
+    { file: 'p5.jpg', tag: 'ace run' },
     { file: 'i1.jpg', tag: 'inside' },
+    { file: 'o4.jpg', tag: 'PNW' },
+    { file: 'p7.jpg', tag: 'the bag' },
+    { file: 'o7.jpg', tag: 'off course' },
+    { file: 'p2.jpg', tag: 'disc path' },
+    { file: 'o5.jpg', tag: 'midwest' },
+    { file: 'p6.jpg', tag: 'PNW' },
+    { file: 'o2.jpg', tag: 'out there' },
+    { file: 'p4.jpg', tag: 'elevated lie' },
+    { file: 'o6.jpg', tag: 'field notes' },
     { file: 'i2.jpg', tag: 'beep boop' },
+    { file: 'p8.jpg', tag: 'morning round' },
+    { file: 'o8.jpg', tag: 'home range' },
+    { file: 'p9.jpg', tag: 'frolf' },
+    { file: 'o9.jpg', tag: 'found object' },
   ];
 
   const BRUSH = `<div class="brush-line"><svg viewBox="0 0 20 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M10,2 C9,18 11,35 10,52 C9,70 11,88 10,105 C9,123 11,140 10,158 C9,175 11,193 10,210 C9,228 11,245 10,263 C9,280 11,298 10,315 C9,332 11,350 10,368 C9,385 11,402 10,420 C9,437 11,455 10,472 C9,490 11,507 10,525 C9,542 11,559 10,577 C9.5,590 10.5,596 10,598" stroke="#2FA5A7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/></svg></div>`;
@@ -466,7 +417,43 @@
 
   const container = document.getElementById('photo-container');
 
+  // Text panel HTML builders
+  function makeTextPanel(id, inner, frameNum) {
+    const div = document.createElement('div');
+    div.className = 'panel';
+    div.id = id;
+    div.innerHTML = `
+      ${BRUSH}
+      ${inner}
+      <div class="frame-num">${frameNum}</div>
+      ${REG}
+    `;
+    return div;
+  }
+
+  const outsideInner = `
+    <div class="content" style="position:absolute;inset:0;left:0;display:flex;flex-direction:column;justify-content:center;padding:0 32px 0 34px;">
+      <div class="w1" style="font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:clamp(42px,13vw,58px);color:var(--muted);line-height:1;">I'm</div>
+      <div class="w2" style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(50px,16vw,70px);color:var(--ink);line-height:0.9;">outside.</div>
+      <div style="width:18px;height:1px;background:var(--teal);margin-top:26px;"></div>
+    </div>`;
+
+  const yourboyInner = `
+    <div style="position:absolute;inset:0;left:0;background:var(--ink);"></div>
+    <div class="content" style="position:absolute;inset:0;left:0;display:flex;flex-direction:column;justify-content:center;padding:0 32px 0 34px;">
+      <div style="width:18px;height:1px;background:var(--teal);margin-bottom:28px;"></div>
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);color:var(--paper);line-height:0.92;">It's</div>
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);color:var(--paper);line-height:0.92;">your</div>
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-style:italic;font-size:clamp(42px,13vw,58px);color:var(--teal);line-height:0.92;">boy.</div>
+    </div>`;
+
+  // Build all panels: inject text panels at index 5 and 12 (0-based among photos)
   photos.forEach((p, i) => {
+    // Insert "I'm outside." before photo index 5
+    if (i === 5) container.appendChild(makeTextPanel('p-outside', outsideInner, '— / 22'));
+    // Insert "It's your boy." before photo index 12
+    if (i === 12) container.appendChild(makeTextPanel('p-yourboy', yourboyInner, '— / 22'));
+
     const panelNum = String(i + 2).padStart(2, '0');
     const div = document.createElement('div');
     div.className = 'panel photo-panel';
@@ -480,7 +467,7 @@
         <div class="dot"></div>
         <span class="tag">${p.tag}</span>
       </div>
-      <div class="frame-num">${panelNum} / 24</div>
+      <div class="frame-num">${panelNum} / 22</div>
       ${REG}
     `;
     container.appendChild(div);
