@@ -146,15 +146,25 @@
     }
 
     /* ════════════ COVER ════════════ */
-    #p-cover { background: var(--ink); }
+    #p-cover {
+      background: var(--paper);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 19px,
+        var(--rule) 19px,
+        var(--rule) 20px
+      );
+    }
 
-    #p-cover .brush-line path { opacity: 0.55; }
+    #p-cover .brush-line path { opacity: 0.45; stroke: #2FA5A7; }
 
     #p-cover .content {
       position: absolute; inset: 0; left: 0;
       display: flex; flex-direction: column;
       justify-content: center;
       padding: 0 30px 0 34px;
+      z-index: 2;
     }
     #p-cover .eyebrow {
       font-size: 6px; letter-spacing: .3em;
@@ -165,7 +175,7 @@
       font-family: 'Playfair Display', serif;
       font-weight: 900;
       font-size: clamp(48px, 15vw, 68px);
-      line-height: 0.88; color: var(--paper);
+      line-height: 0.88; color: var(--ink);
       letter-spacing: -0.02em;
     }
     #p-cover h1 em { font-style: italic; color: var(--teal); display: inline; }
@@ -181,26 +191,24 @@
       font-size: 15px; letter-spacing: .06em;
       color: rgba(240,235,227,.22); line-height: 1;
     }
-    #p-cover .frame-num { color: rgba(240,235,227,.35); }
-    #p-cover .cover-top-band {
+    #p-cover .frame-num { color: var(--muted); opacity: 0.5; }
+    #p-cover .cover-dolphin {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 28%;
-      background: var(--paper);
-      background-image: repeating-linear-gradient(
-        to bottom,
-        transparent,
-        transparent 19px,
-        var(--rule) 19px,
-        var(--rule) 20px
-      );
-      z-index: 1;
+      top: 18px; right: 18px;
+      font-size: 22px;
+      z-index: 5;
+      opacity: 0.88;
+      line-height: 1;
     }
-    /* push content below the band */
-    #p-cover .content {
-      justify-content: flex-end;
-      padding-bottom: 18%;
+    #p-cover .cover-goofball {
+      position: absolute;
+      bottom: 18px; left: 34px;
+      font-size: 6px; letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #FF8C00;
+      z-index: 5;
     }
+
 
     /* ════════════ PHOTO PANELS ════════════ */
     .photo-panel { background: var(--paper); }
@@ -349,7 +357,6 @@
 
   <!-- ── COVER ── -->
   <div class="panel" id="p-cover">
-    <div class="cover-top-band"></div>
     <div class="brush-line">
       <svg viewBox="0 0 20 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10,2 C9,18 11,35 10,52 C9,70 11,88 10,105 C9,123 11,140 10,158 C9,175 11,193 10,210 C9,228 11,245 10,263 C9,280 11,298 10,315 C9,332 11,350 10,368 C9,385 11,402 10,420 C9,437 11,455 10,472 C9,490 11,507 10,525 C9,542 11,559 10,577 C9.5,590 10.5,596 10,598"
@@ -357,9 +364,10 @@
       </svg>
     </div>
     <div class="content">
-      <h1>Bob<em>ert</em></h1>
-      <div class="sub" style="margin-top:22px;">Goofball takes selfies</div>
+      <h1>The Fairway<em>&amp; Other Places</em></h1>
     </div>
+    <div class="cover-dolphin">🐬</div>
+    <div class="cover-goofball">Goofball takes selfies</div>
     <div class="frame-num">01 / 24</div>
     <div class="reg-mark">
       <div class="reg-cross"><div class="reg-circle"></div></div>
