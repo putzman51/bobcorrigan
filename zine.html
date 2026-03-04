@@ -85,7 +85,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 5px;
+      gap: 0;
       pointer-events: none;
       z-index: 20;
     }
@@ -160,7 +160,8 @@
     #p-cover .brush-line path { opacity: 0.45; stroke: #2FA5A7; }
 
     #p-cover .content {
-      position: absolute; inset: 0; left: 0;
+      position: absolute;
+      top: 52px; left: 0; right: 0; bottom: 0;
       display: flex; flex-direction: column;
       justify-content: center;
       padding: 0 30px 0 34px;
@@ -178,7 +179,7 @@
       line-height: 0.88; color: var(--ink);
       letter-spacing: -0.02em;
     }
-    #p-cover h1 em { font-style: italic; color: var(--teal); display: inline; }
+    #p-cover h1 em { font-style: italic; color: #5a9ea0; display: inline; }
     #p-cover .rule { width: 32px; height: 1px; background: var(--teal); margin: 28px 0; }
     #p-cover .sub {
       font-size: 6px; letter-spacing: .24em;
@@ -192,18 +193,28 @@
       color: rgba(240,235,227,.22); line-height: 1;
     }
     #p-cover .frame-num { color: var(--muted); opacity: 0.5; }
+    #p-cover .cover-white-strip {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      background: #fff;
+      z-index: 4;
+    }
     #p-cover .cover-dolphin {
       position: absolute;
-      top: 18px; right: 18px;
+      top: 0; right: 16px;
+      height: 52px;
+      display: flex;
+      align-items: center;
       font-size: 22px;
       z-index: 5;
-      opacity: 0.88;
       line-height: 1;
     }
     #p-cover .cover-goofball {
       position: absolute;
       bottom: 18px; left: 34px;
-      font-size: 6px; letter-spacing: .22em;
+      font-size: 9px; letter-spacing: .18em;
+      font-weight: 500;
       text-transform: uppercase;
       color: #FF8C00;
       z-index: 5;
@@ -364,13 +375,13 @@
       </svg>
     </div>
     <div class="content">
-      <h1>The Fairway<em>&amp; Other Places</em></h1>
+      <h1>The Fairway<em>&amp; Other Places.</em></h1>
     </div>
+    <div class="cover-white-strip"></div>
     <div class="cover-dolphin">🐬</div>
     <div class="cover-goofball">Goofball takes selfies</div>
-    <div class="frame-num">01 / 24</div>
     <div class="reg-mark">
-      <div class="reg-cross"><div class="reg-circle"></div></div>
+      
       <div class="reg-swatches">
         <span style="background:#c8f0f0"></span><span style="background:#8dd8d9"></span><span style="background:#52bfc1"></span><span style="background:#2FA5A7"></span>
         <span style="background:#9ecbcc"></span><span style="background:#267f81"></span><span style="background:#1d6163"></span><span style="background:#124446"></span>
@@ -395,9 +406,8 @@
       </div>
       <div style="font-size:6px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);">2026</div>
     </div>
-    <div class="frame-num">24 / 24</div>
     <div class="reg-mark">
-      <div class="reg-cross"><div class="reg-circle"></div></div>
+      
       <div class="reg-swatches">
         <span style="background:#c8f0f0"></span><span style="background:#8dd8d9"></span><span style="background:#52bfc1"></span><span style="background:#2FA5A7"></span>
         <span style="background:#9ecbcc"></span><span style="background:#267f81"></span><span style="background:#1d6163"></span><span style="background:#124446"></span>
@@ -411,7 +421,7 @@
 
 <script>
   const photos = [
-    { file: 'p1.jpg', tag: 'Bobert' },
+    { file: 'o9.jpg', tag: 'Bobert' },
     { file: 'o1.jpg', tag: 'Bobert' },
     { file: 'p5.jpg', tag: 'Bobert' },
     { file: 'i1.jpg', tag: 'Bobert' },
@@ -428,12 +438,12 @@
     { file: 'p8.jpg', tag: 'Bobert' },
     { file: 'o8.jpg', tag: 'Bobert' },
     { file: 'p9.jpg', tag: 'Bobert' },
-    { file: 'o9.jpg', tag: 'Bobert' },
+    { file: 'p1.jpg', tag: 'Bobert' },
   ];
 
   const BRUSH = `<div class="brush-line"><svg viewBox="0 0 20 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M10,2 C9,18 11,35 10,52 C9,70 11,88 10,105 C9,123 11,140 10,158 C9,175 11,193 10,210 C9,228 11,245 10,263 C9,280 11,298 10,315 C9,332 11,350 10,368 C9,385 11,402 10,420 C9,437 11,455 10,472 C9,490 11,507 10,525 C9,542 11,559 10,577 C9.5,590 10.5,596 10,598" stroke="#2FA5A7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/></svg></div>`;
 
-  const REG = `<div class="reg-mark"><div class="reg-cross"><div class="reg-circle"></div></div><div class="reg-swatches"><span style="background:#c8f0f0"></span><span style="background:#8dd8d9"></span><span style="background:#52bfc1"></span><span style="background:#2FA5A7"></span><span style="background:#9ecbcc"></span><span style="background:#267f81"></span><span style="background:#1d6163"></span><span style="background:#124446"></span></div></div>`;
+  const REG = `<div class="reg-mark"><div class="reg-swatches"><span style="background:#c8f0f0"></span><span style="background:#8dd8d9"></span><span style="background:#52bfc1"></span><span style="background:#2FA5A7"></span><span style="background:#9ecbcc"></span><span style="background:#267f81"></span><span style="background:#1d6163"></span><span style="background:#124446"></span></div></div>`;
 
   const container = document.getElementById('photo-container');
 
@@ -445,7 +455,6 @@
     div.innerHTML = `
       ${BRUSH}
       ${inner}
-      <div class="frame-num">${frameNum}</div>
       ${REG}
     `;
     return div;
@@ -486,7 +495,6 @@
         <div class="dot"></div>
         <span class="tag">Bobert</span>
       </div>
-      <div class="frame-num">${panelNum} / 22</div>
       ${REG}
     `;
     container.appendChild(div);
