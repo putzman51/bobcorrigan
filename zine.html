@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bob Corrigan — Zine №1</title>
+  <title>Bobert</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
@@ -168,7 +168,7 @@
       line-height: 0.88; color: var(--paper);
       letter-spacing: -0.02em;
     }
-    #p-cover h1 em { font-style: italic; color: var(--teal); display: block; }
+    #p-cover h1 em { font-style: italic; color: var(--teal); display: inline; }
     #p-cover .rule { width: 32px; height: 1px; background: var(--teal); margin: 28px 0; }
     #p-cover .sub {
       font-size: 6px; letter-spacing: .24em;
@@ -182,6 +182,25 @@
       color: rgba(240,235,227,.22); line-height: 1;
     }
     #p-cover .frame-num { color: rgba(240,235,227,.35); }
+    #p-cover .cover-top-band {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 28%;
+      background: var(--paper);
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 19px,
+        var(--rule) 19px,
+        var(--rule) 20px
+      );
+      z-index: 1;
+    }
+    /* push content below the band */
+    #p-cover .content {
+      justify-content: flex-end;
+      padding-bottom: 18%;
+    }
 
     /* ════════════ PHOTO PANELS ════════════ */
     .photo-panel { background: var(--paper); }
@@ -330,6 +349,7 @@
 
   <!-- ── COVER ── -->
   <div class="panel" id="p-cover">
+    <div class="cover-top-band"></div>
     <div class="brush-line">
       <svg viewBox="0 0 20 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M10,2 C9,18 11,35 10,52 C9,70 11,88 10,105 C9,123 11,140 10,158 C9,175 11,193 10,210 C9,228 11,245 10,263 C9,280 11,298 10,315 C9,332 11,350 10,368 C9,385 11,402 10,420 C9,437 11,455 10,472 C9,490 11,507 10,525 C9,542 11,559 10,577 C9.5,590 10.5,596 10,598"
@@ -337,10 +357,8 @@
       </svg>
     </div>
     <div class="content">
-      <div class="eyebrow">Zine &nbsp;№1 &nbsp;·&nbsp; 2025</div>
-      <h1>Bob<em>Corrigan</em></h1>
-      <div class="rule"></div>
-      <div class="sub">PNW &nbsp;·&nbsp; Midwest Roots</div>
+      <h1>Bob<em>ert</em></h1>
+      <div class="sub" style="margin-top:22px;">Goofball takes selfies</div>
     </div>
     <div class="frame-num">01 / 24</div>
     <div class="reg-mark">
@@ -350,7 +368,6 @@
         <span style="background:#9ecbcc"></span><span style="background:#267f81"></span><span style="background:#1d6163"></span><span style="background:#124446"></span>
       </div>
     </div>
-    <div class="vol">Vol.01</div>
   </div>
 
   <!-- ── PHOTOS (built by JS) ── -->
@@ -364,18 +381,11 @@
           stroke="#2FA5A7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
       </svg>
     </div>
-    <div class="content">
+    <div class="content" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
       <div class="ring">
         <div class="ring-inner"><span class="init">bc</span></div>
       </div>
-      <ul>
-        <li><a href="https://bobcorrigan.com">bobcorrigan.com</a></li>
-        <li><a href="https://fallingspoon.com" target="_blank">fallingspoon.com</a></li>
-        <li><a href="https://secretvendingmachine.com" target="_blank">secretvendingmachine.com</a></li>
-        <li>PDGA AM</li>
-      </ul>
-      <div class="hr"></div>
-      <div class="tagline">this object found you for a reason</div>
+      <div style="font-size:6px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);">2026</div>
     </div>
     <div class="frame-num">24 / 24</div>
     <div class="reg-mark">
@@ -387,28 +397,30 @@
     </div>
   </div>
 
+  
+
   <a class="back-link" href="/">← bobcorrigan.com</a>
 
 <script>
   const photos = [
-    { file: 'p1.jpg', tag: 'frolf' },
-    { file: 'o1.jpg', tag: 'outside' },
-    { file: 'p5.jpg', tag: 'ace run' },
-    { file: 'i1.jpg', tag: 'inside' },
-    { file: 'o4.jpg', tag: 'PNW' },
-    { file: 'p7.jpg', tag: 'the bag' },
-    { file: 'o7.jpg', tag: 'off course' },
-    { file: 'p2.jpg', tag: 'disc path' },
-    { file: 'o5.jpg', tag: 'midwest' },
-    { file: 'p6.jpg', tag: 'PNW' },
-    { file: 'o2.jpg', tag: 'out there' },
-    { file: 'p4.jpg', tag: 'elevated lie' },
-    { file: 'o6.jpg', tag: 'field notes' },
-    { file: 'i2.jpg', tag: 'beep boop' },
-    { file: 'p8.jpg', tag: 'morning round' },
-    { file: 'o8.jpg', tag: 'home range' },
-    { file: 'p9.jpg', tag: 'frolf' },
-    { file: 'o9.jpg', tag: 'found object' },
+    { file: 'p1.jpg', tag: 'Bobert' },
+    { file: 'o1.jpg', tag: 'Bobert' },
+    { file: 'p5.jpg', tag: 'Bobert' },
+    { file: 'i1.jpg', tag: 'Bobert' },
+    { file: 'o4.jpg', tag: 'Bobert' },
+    { file: 'p7.jpg', tag: 'Bobert' },
+    { file: 'o7.jpg', tag: 'Bobert' },
+    { file: 'p2.jpg', tag: 'Bobert' },
+    { file: 'o5.jpg', tag: 'Bobert' },
+    { file: 'p6.jpg', tag: 'Bobert' },
+    { file: 'o2.jpg', tag: 'Bobert' },
+    { file: 'p4.jpg', tag: 'Bobert' },
+    { file: 'o6.jpg', tag: 'Bobert' },
+    { file: 'i2.jpg', tag: 'Bobert' },
+    { file: 'p8.jpg', tag: 'Bobert' },
+    { file: 'o8.jpg', tag: 'Bobert' },
+    { file: 'p9.jpg', tag: 'Bobert' },
+    { file: 'o9.jpg', tag: 'Bobert' },
   ];
 
   const BRUSH = `<div class="brush-line"><svg viewBox="0 0 20 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M10,2 C9,18 11,35 10,52 C9,70 11,88 10,105 C9,123 11,140 10,158 C9,175 11,193 10,210 C9,228 11,245 10,263 C9,280 11,298 10,315 C9,332 11,350 10,368 C9,385 11,402 10,420 C9,437 11,455 10,472 C9,490 11,507 10,525 C9,542 11,559 10,577 C9.5,590 10.5,596 10,598" stroke="#2FA5A7" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/></svg></div>`;
@@ -443,16 +455,15 @@
     <div class="content" style="position:absolute;inset:0;left:0;display:flex;flex-direction:column;justify-content:center;padding:0 32px 0 34px;">
       <div style="width:18px;height:1px;background:var(--teal);margin-bottom:28px;"></div>
       <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);color:var(--paper);line-height:0.92;">It's</div>
-      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);color:var(--paper);line-height:0.92;">your</div>
-      <div style="font-family:'Playfair Display',serif;font-weight:900;font-style:italic;font-size:clamp(42px,13vw,58px);color:var(--teal);line-height:0.92;">boy.</div>
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);line-height:0.92;"><span style="color:var(--paper);">your </span><span style="color:var(--teal);font-style:italic;">boy.</span></div>
     </div>`;
 
   // Build all panels: inject text panels at index 5 and 12 (0-based among photos)
   photos.forEach((p, i) => {
     // Insert "I'm outside." before photo index 5
-    if (i === 5) container.appendChild(makeTextPanel('p-outside', outsideInner, '— / 22'));
+    if (i === 5) container.appendChild(makeTextPanel('p-outside', outsideInner, ''));
     // Insert "It's your boy." before photo index 12
-    if (i === 12) container.appendChild(makeTextPanel('p-yourboy', yourboyInner, '— / 22'));
+    if (i === 12) container.appendChild(makeTextPanel('p-yourboy', yourboyInner, ''));
 
     const panelNum = String(i + 2).padStart(2, '0');
     const div = document.createElement('div');
@@ -460,12 +471,12 @@
     div.innerHTML = `
       ${BRUSH}
       <div class="img-area">
-        <img src="/${p.file}" alt="${p.tag}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <img src="/${p.file}" alt="Bobert" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
         <div class="ph" style="display:none"><div class="ph-ring"></div></div>
       </div>
       <div class="caption">
         <div class="dot"></div>
-        <span class="tag">${p.tag}</span>
+        <span class="tag">Bobert</span>
       </div>
       <div class="frame-num">${panelNum} / 22</div>
       ${REG}
