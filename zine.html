@@ -119,11 +119,11 @@
     }
     .reg-swatches {
       display: grid;
-      grid-template-columns: repeat(4, 9px);
-      grid-template-rows: repeat(2, 9px);
+      grid-template-columns: repeat(4, 13.5px);
+      grid-template-rows: repeat(2, 13.5px);
       gap: 0;
     }
-    .reg-swatches span { display: block; width: 9px; height: 9px; }
+    .reg-swatches span { display: block; width: 13.5px; height: 13.5px; }
 
     /* ── Frame number ── */
     .frame-num {
@@ -197,7 +197,7 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 52px;
-      background: #fff;
+      background: #2FA5A7;
       z-index: 4;
     }
     #p-cover .cover-dolphin {
@@ -375,10 +375,9 @@
       </svg>
     </div>
     <div class="content">
-      <h1>The Fairway<em>&amp; Other Places.</em></h1>
+      <h1>The Fairway<em style="font-size:0.8em;">&amp; Other Places.</em></h1>
     </div>
     <div class="cover-white-strip"></div>
-    <div class="cover-dolphin">🐬</div>
     <div class="cover-goofball">Goofball takes selfies</div>
     <div class="reg-mark">
       
@@ -429,7 +428,6 @@
     { file: 'p7.jpg', tag: 'Bobert' },
     { file: 'o7.jpg', tag: 'Bobert' },
     { file: 'p2.jpg', tag: 'Bobert' },
-    { file: 'o5.jpg', tag: 'Bobert' },
     { file: 'p6.jpg', tag: 'Bobert' },
     { file: 'o2.jpg', tag: 'Bobert' },
     { file: 'p4.jpg', tag: 'Bobert' },
@@ -460,27 +458,35 @@
     return div;
   }
 
+  const TEAL_STRIP = `<div style="position:absolute;top:0;left:0;right:0;height:52px;background:#2FA5A7;z-index:4;"></div>`;
+  const GOOFBALL = `<div style="position:absolute;bottom:18px;left:34px;font-size:9px;letter-spacing:.18em;font-weight:500;text-transform:uppercase;color:#FF8C00;z-index:5;">Goofball takes selfies</div>`;
+  const RULED_BG = `background-color:var(--paper);background-image:repeating-linear-gradient(to bottom,transparent,transparent 19px,var(--rule) 19px,var(--rule) 20px);`;
+
   const outsideInner = `
-    <div class="content" style="position:absolute;inset:0;left:0;display:flex;flex-direction:column;justify-content:center;padding:0 32px 0 34px;">
+    <div style="position:absolute;inset:0;${RULED_BG}"></div>
+    ${TEAL_STRIP}
+    <div class="content" style="position:absolute;top:52px;left:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:0 32px 0 34px;">
       <div class="w1" style="font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:clamp(42px,13vw,58px);color:var(--muted);line-height:1;">I'm</div>
       <div class="w2" style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(50px,16vw,70px);color:var(--ink);line-height:0.9;">outside.</div>
       <div style="width:18px;height:1px;background:var(--teal);margin-top:26px;"></div>
-    </div>`;
+    </div>
+    ${GOOFBALL}`;
 
   const yourboyInner = `
-    <div style="position:absolute;inset:0;left:0;background:var(--ink);"></div>
-    <div class="content" style="position:absolute;inset:0;left:0;display:flex;flex-direction:column;justify-content:center;padding:0 32px 0 34px;">
+    ${TEAL_STRIP}
+    <div class="content" style="position:absolute;top:52px;left:0;right:0;bottom:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:0 32px 0 34px;">
       <div style="width:18px;height:1px;background:var(--teal);margin-bottom:28px;"></div>
-      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);color:var(--paper);line-height:0.92;">It's</div>
-      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);line-height:0.92;"><span style="color:var(--paper);">your </span><span style="color:var(--teal);font-style:italic;">boy.</span></div>
-    </div>`;
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);color:var(--ink);line-height:0.92;">Standing on</div>
+      <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,13vw,58px);color:var(--ink);line-height:0.92;">business.</div>
+      <div style="font-family:'Playfair Display',serif;font-weight:700;font-style:italic;font-size:clamp(36px,11vw,50px);color:var(--teal);line-height:1;margin-top:8px;">Clocking.</div>
+    </div>
+    ${GOOFBALL}`;
 
   // Build all panels: inject text panels at index 5 and 12 (0-based among photos)
   photos.forEach((p, i) => {
     // Insert "I'm outside." before photo index 5
     if (i === 5) container.appendChild(makeTextPanel('p-outside', outsideInner, ''));
-    // Insert "It's your boy." before photo index 12
-    if (i === 12) container.appendChild(makeTextPanel('p-yourboy', yourboyInner, ''));
+
 
     const panelNum = String(i + 2).padStart(2, '0');
     const div = document.createElement('div');
