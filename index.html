@@ -37,7 +37,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: safe center;
       padding: 2rem;
       position: relative;
       overflow-x: hidden;
@@ -74,6 +74,7 @@
       z-index: 1;
       width: 100%;
       max-width: 560px;
+      margin: auto;
     }
 
     .header {
@@ -404,7 +405,14 @@
         <a href="https://www.secretvendingmachine.com" target="_blank" rel="noopener">
           <div class="link-number">04</div>
           <div class="link-content">
-            <span class="link-tag">Pix</span>
+            <span class="link-tag" style="display:flex;align-items:center;gap:0.4rem;">
+              <svg style="width:11px;height:11px;flex-shrink:0;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path class="c-body" d="M2 9.5C2 8.4 2.9 7.5 4 7.5h1.5l1.2-2h6.6l1.2 2H20c1.1 0 2 .9 2 2V18c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9.5z"/>
+                <circle class="c-lens" cx="12" cy="13" r="3.2"/>
+                <circle class="c-dot" cx="18.5" cy="10" r="0.9"/>
+              </svg>
+              Art Pix
+            </span>
             <span class="link-title">Secret Vending Machine</span>
           </div>
           <div class="link-arrow">↗</div>
