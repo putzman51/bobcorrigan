@@ -336,6 +336,45 @@
       outline: none;
     }
 
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--rust);
+      display: inline-block;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .live-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid var(--rust);
+      animation: livePulse 1.4s ease-out infinite;
+      opacity: 0;
+    }
+
+    .live-scores-btn:hover {
+      background: var(--rust);
+      border-color: var(--rust) !important;
+      color: var(--paper) !important;
+    }
+
+    .live-scores-btn:hover .live-dot {
+      background: var(--paper);
+    }
+
+    .live-scores-btn:hover .live-dot::after {
+      border-color: var(--paper);
+    }
+
+    @keyframes livePulse {
+      0%   { transform: scale(0.6); opacity: 0.8; }
+      100% { transform: scale(2);   opacity: 0; }
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -364,6 +403,9 @@
       <div class="divider"></div>
       <div class="sub-row">
         <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="sub" style="border: 1.5px solid var(--ink); padding: 0.45rem 0.8rem; text-decoration: none; display: inline-block;">Beep Boop.</a>
+        <a href="https://www.pdga.com/live/event/98863/MA40/scores?round=1" target="_blank" rel="noopener" class="sub live-scores-btn" style="border: 1.5px solid var(--ink); padding: 0.45rem 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          <span class="live-dot"></span>Live PDGA Scores
+        </a>
       </div>
     </header>
 
