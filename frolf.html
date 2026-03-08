@@ -227,7 +227,6 @@
 
     /* ── RESULTS TABLE ── */
     .results-block {
-      border: 1.5px solid var(--ink);
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards;
@@ -238,12 +237,12 @@
       display: grid;
       grid-template-columns: 5rem 1fr auto;
       align-items: center;
-      padding: 0.9rem 1.2rem;
+      padding: 0.75rem 0;
       border-bottom: 1px solid var(--rule);
       gap: 1rem;
     }
 
-    .result-row:last-child { border-bottom: none; }
+    .result-row:first-child { border-top: 1px solid var(--rule); }
 
     .result-place {
       font-family: 'Playfair Display', serif;
@@ -281,7 +280,6 @@
 
     /* ── RATING HISTORY ── */
     .rating-block {
-      border: 1.5px solid var(--ink);
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards;
@@ -292,13 +290,13 @@
       display: grid;
       grid-template-columns: 1fr auto auto;
       align-items: center;
-      padding: 0.85rem 1.2rem;
+      padding: 0.75rem 0;
       border-bottom: 1px solid var(--rule);
       gap: 1.5rem;
     }
 
+    .rating-row:first-child { border-top: 1px solid var(--rule); }
     .rating-row:last-child { border-bottom: none; }
-    .rating-row:first-child { background: var(--cream); }
 
     .rating-date {
       font-size: 0.65rem;
@@ -326,7 +324,6 @@
 
     /* ── COURSES ── */
     .courses-block {
-      border: 1.5px solid var(--ink);
       margin-bottom: 2rem;
       opacity: 0;
       animation: fadeUp 0.5s ease forwards;
@@ -337,10 +334,11 @@
       display: flex;
       align-items: baseline;
       gap: 1rem;
-      padding: 0.9rem 1.2rem;
+      padding: 0.75rem 0;
       border-bottom: 1px solid var(--rule);
     }
 
+    .course-row:first-child { border-top: 1px solid var(--rule); }
     .course-row:last-child { border-bottom: none; }
 
     .course-num {
@@ -563,14 +561,15 @@
     </a>
 
     <!-- NEXT EVENT -->
-    <div style="border: 1.5px solid var(--ink); padding: 1rem 1.2rem; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.5s ease forwards; animation-delay: 0.25s;">
+    <div style="padding: 0 0 2rem 0; margin-bottom: 2rem; border-bottom: 1px solid var(--rule); opacity: 0; animation: fadeUp 0.5s ease forwards; animation-delay: 0.25s;">
       <span style="font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--rust); display:block; margin-bottom:0.5rem;">Next Event</span>
-      <span style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; display:block; line-height:1.2; margin-bottom:0.6rem;">Cloud City Chaos (part 4)</span>
-      <span style="font-size:0.6rem; color:var(--muted); display:block; margin-bottom:0.15rem; letter-spacing:0.05em;">Presented by Emerald City Discs</span>
-      <div style="display:flex; flex-wrap:wrap; gap:0.5rem 1.5rem; margin-top:0.5rem;">
-        <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;"><span style="color:var(--ink); font-weight:500;">Course:</span> SeaTac DGC</span>
-        <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;"><span style="color:var(--ink); font-weight:500;">Date:</span> Mar 7, 2026</span>
-        <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;"><span style="color:var(--ink); font-weight:500;">Division:</span> MA40</span>
+      <span style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; display:block; line-height:1.2; margin-bottom:0.3rem;">NWO: North Whidbey Open</span>
+      <span style="font-size:0.6rem; color:var(--muted); display:block; margin-bottom:0.5rem; letter-spacing:0.05em;">Sponsored by Dynamic Discs</span>
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem 1.5rem;">
+        <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;">PDGA C-Tier</span>
+        <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;">Sat, Mar 14, 2026</span>
+        <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;">Oak Harbor, WA</span>
+        <span style="font-size:0.6rem; color:var(--muted); letter-spacing:0.08em;">MA40</span>
       </div>
     </div>
 
@@ -583,7 +582,7 @@
       </div>
       <div class="stat-card">
         <span class="stat-label">Career Events</span>
-        <span class="stat-value">6</span>
+        <span class="stat-value">7</span>
         <span class="stat-note">Member since 2025</span>
       </div>
       <div class="stat-card">
@@ -611,7 +610,9 @@
           <div class="result-name">Say it Ain't Snow by Emerald City Discs</div>
           <span class="result-division">MA40 · C Tier</span>
         </div>
-        <div class="result-date">10 Jan</div>
+        <a href="/sayitaintsnow.html" style="display:flex;align-items:center;justify-content:center;padding:0.4rem;border:1.5px solid var(--rule);color:var(--muted);text-decoration:none;transition:all 0.15s;flex-shrink:0;" title="View photos">
+          <svg style="width:16px;height:16px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path style="fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round;" d="M2 9.5C2 8.4 2.9 7.5 4 7.5h1.5l1.2-2h6.6l1.2 2H20c1.1 0 2 .9 2 2V18c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9.5z"/><circle style="fill:none;stroke:currentColor;stroke-width:1.2;" cx="12" cy="13" r="3.2"/><circle style="fill:currentColor;" cx="18.5" cy="10" r="0.9"/></svg>
+        </a>
       </div>
       <div class="result-row">
         <div class="result-place silver">2nd Place</div>
@@ -619,7 +620,9 @@
           <div class="result-name">2026 NADGT C Tier 2 Rounder @ Bullion Plaza</div>
           <span class="result-division">MA40 · C Tier</span>
         </div>
-        <div class="result-date">31 Jan</div>
+        <a href="/bullion.html" style="display:flex;align-items:center;justify-content:center;padding:0.4rem;border:1.5px solid var(--rule);color:var(--muted);text-decoration:none;transition:all 0.15s;flex-shrink:0;" title="View photos">
+          <svg style="width:16px;height:16px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path style="fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round;" d="M2 9.5C2 8.4 2.9 7.5 4 7.5h1.5l1.2-2h6.6l1.2 2H20c1.1 0 2 .9 2 2V18c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9.5z"/><circle style="fill:none;stroke:currentColor;stroke-width:1.2;" cx="12" cy="13" r="3.2"/><circle style="fill:currentColor;" cx="18.5" cy="10" r="0.9"/></svg>
+        </a>
       </div>
       <div class="result-row">
         <div class="result-place bronze">3rd Place</div>
@@ -627,9 +630,24 @@
           <div class="result-name">Slingin' Singles 4! by Emerald City Discs</div>
           <span class="result-division">MA40 · C Tier</span>
         </div>
-        <div class="result-date">7 Feb</div>
+        <a href="/slingin.html" style="display:flex;align-items:center;justify-content:center;padding:0.4rem;border:1.5px solid var(--rule);color:var(--muted);text-decoration:none;transition:all 0.15s;flex-shrink:0;" title="View photos">
+          <svg style="width:16px;height:16px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path style="fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round;" d="M2 9.5C2 8.4 2.9 7.5 4 7.5h1.5l1.2-2h6.6l1.2 2H20c1.1 0 2 .9 2 2V18c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9.5z"/><circle style="fill:none;stroke:currentColor;stroke-width:1.2;" cx="12" cy="13" r="3.2"/><circle style="fill:currentColor;" cx="18.5" cy="10" r="0.9"/></svg>
+        </a>
       </div>
-    </div>
+      <div class="result-row">
+        <div class="result-place">4th Place</div>
+        <div>
+          <div class="result-name">Cloud City Chaos (part 4) by Emerald City Discs</div>
+          <span class="result-division">MA40 · C Tier · SeaTac DGC</span>
+        </div>
+        <a href="/cloudcity4.html" style="display:flex; align-items:center; justify-content:center; padding:0.4rem; border:1.5px solid var(--rule); color:var(--muted); text-decoration:none; transition:all 0.15s; flex-shrink:0;" title="View photos">
+          <svg style="width:16px;height:16px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path style="fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round;" d="M2 9.5C2 8.4 2.9 7.5 4 7.5h1.5l1.2-2h6.6l1.2 2H20c1.1 0 2 .9 2 2V18c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V9.5z"/>
+            <circle style="fill:none;stroke:currentColor;stroke-width:1.2;" cx="12" cy="13" r="3.2"/>
+            <circle style="fill:currentColor;" cx="18.5" cy="10" r="0.9"/>
+          </svg>
+        </a>
+      </div>
 
     <!-- RATING HISTORY -->
     <div class="section-header delay-2">
