@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Benefits Bob — Bob Corrigan</title>
+  <meta name="description" content="Bob Corrigan — Regional Sales Director at Navia Benefit Solutions. Employee benefits consulting, strategy, and placement." />
+  <meta property="og:title" content="Benefits Bob — Bob Corrigan" />
+  <meta property="og:description" content="Regional Sales Director at Navia Benefit Solutions. Employee benefits consulting, strategy, and placement." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://bobcorrigan.com/pro.html" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -18,10 +23,14 @@
       --ink: #1a1714;
       --paper: #f0ebe3;
       --cream: #e8e0d4;
-      --rust: #2FA5A7;
+      --teal: #2FA5A7;
+      --teal-dim: #2fa5a730;
+      --teal-glow: #2fa5a718;
       --muted: #8a8178;
       --rule: #c8bfb4;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--paper);
@@ -34,6 +43,8 @@
       padding: 3rem 2rem 5rem;
       position: relative;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body::before {
@@ -72,18 +83,17 @@
       text-decoration: none;
       margin-bottom: 2.5rem;
       opacity: 0;
-      animation: fadeUp 0.4s ease forwards;
-      animation-delay: 0.05s;
+      animation: fadeUp 0.4s ease forwards 0.05s;
+      transition: color 0.15s ease;
     }
-    .back:hover { color: var(--rust); }
-    .back::after { content: ' →'; }
+    .back:hover { color: var(--teal); }
+    .back::before { content: '← '; }
 
     /* ── HEADER ── */
     .header {
       margin-bottom: 1.5rem;
       opacity: 0;
-      animation: fadeUp 0.6s ease forwards;
-      animation-delay: 0.1s;
+      animation: fadeUp 0.6s ease forwards 0.1s;
     }
 
     .label {
@@ -102,7 +112,7 @@
       letter-spacing: -0.02em;
     }
 
-    .title em { font-style: italic; color: var(--rust); }
+    .title em { font-style: italic; color: var(--teal); }
 
     .divider {
       width: 100%;
@@ -127,24 +137,29 @@
       padding: 1rem 1.2rem;
       text-decoration: none;
       color: var(--ink);
-      transition: all 0.15s;
+      transition: all 0.2s ease;
       margin-bottom: 2rem;
       opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-      animation-delay: 0.2s;
+      animation: fadeUp 0.5s ease forwards 0.2s;
     }
 
     .profile-link:hover {
       background: var(--ink);
       color: var(--paper);
       transform: translate(-3px, -3px);
+      box-shadow: 3px 3px 0 var(--teal-dim);
+    }
+
+    .profile-link:focus-visible {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
     }
 
     .profile-link-label {
       font-size: 0.6rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--rust);
+      color: var(--muted);
       display: block;
       margin-bottom: 0.2rem;
     }
@@ -155,15 +170,15 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--rust);
     }
 
     .profile-arrow {
       font-size: 1.2rem;
-      color: var(--rust);
+      color: var(--teal);
+      transition: transform 0.15s ease;
     }
 
-    .profile-link:hover .profile-arrow { color: var(--paper); }
+    .profile-link:hover .profile-arrow { color: var(--paper); transform: translate(2px, -2px); }
 
     /* ── SECTION HEADERS ── */
     .section-header {
@@ -213,9 +228,11 @@
     .exp-row {
       padding: 1.1rem 1.2rem;
       border-bottom: 1px solid var(--rule);
+      transition: background 0.15s ease;
     }
 
     .exp-row:last-child { border-bottom: none; }
+    .exp-row:hover { background: var(--teal-glow); }
 
     .exp-top {
       display: flex;
@@ -243,7 +260,7 @@
 
     .exp-company {
       font-size: 0.62rem;
-      color: var(--rust);
+      color: var(--teal);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
@@ -276,13 +293,15 @@
       gap: 1rem;
       padding: 0.9rem 1.2rem;
       border-bottom: 1px solid var(--rule);
+      transition: background 0.15s ease;
     }
 
     .award-row:last-child { border-bottom: none; }
+    .award-row:hover { background: var(--teal-glow); }
 
     .award-year {
       font-size: 0.58rem;
-      color: var(--rust);
+      color: var(--teal);
       letter-spacing: 0.1em;
       flex-shrink: 0;
       min-width: 2.5rem;
@@ -313,9 +332,11 @@
       padding: 0.9rem 1.2rem;
       border-bottom: 1px solid var(--rule);
       align-items: start;
+      transition: background 0.15s ease;
     }
 
     .edu-row:last-child { border-bottom: none; }
+    .edu-row:hover { background: var(--teal-glow); }
 
     .edu-school {
       font-family: 'Playfair Display', serif;
@@ -333,7 +354,7 @@
 
     .edu-field {
       font-size: 0.62rem;
-      color: var(--rust);
+      color: var(--teal);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       grid-column: 1 / -1;
@@ -355,15 +376,17 @@
       padding: 0.9rem 1.2rem;
       border-bottom: 1px solid var(--rule);
       align-items: baseline;
+      transition: background 0.15s ease;
     }
 
     .vol-row:last-child { border-bottom: none; }
+    .vol-row:hover { background: var(--teal-glow); }
 
     .vol-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--rust);
+      background: var(--teal);
       flex-shrink: 0;
       margin-top: 0.35rem;
     }
@@ -380,7 +403,7 @@
 
     .vol-org {
       font-size: 0.6rem;
-      color: var(--rust);
+      color: var(--teal);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin: 0.15rem 0;
@@ -407,8 +430,7 @@
       justify-content: space-between;
       align-items: center;
       opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-      animation-delay: 1.1s;
+      animation: fadeUp 0.5s ease forwards 1.1s;
     }
 
     .footer-note {
@@ -421,7 +443,7 @@
     .dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--rust);
+      background: var(--teal);
       display: inline-block;
       margin-right: 0.5rem;
       vertical-align: middle;
@@ -434,41 +456,6 @@
       border: 1px solid var(--rule);
       padding: 0.3rem 0.7rem;
       border-radius: 2px;
-    }
-
-    .footer-btn {
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      border: 1px solid var(--rule);
-      padding: 0.4rem 0.7rem;
-      border-radius: 2px;
-      display: inline-flex;
-      align-items: center;
-      transition: border-color 0.15s, color 0.15s;
-    }
-
-    .footer-btn:hover {
-      border-color: var(--rust);
-      color: var(--rust);
-    }
-
-    .footer-btn .dot { margin-right: 0.5rem; }
-
-    a.egg {
-      color: inherit;
-      text-decoration: none;
-      cursor: text;
-      font: inherit;
-      letter-spacing: inherit;
-      display: inline;
-    }
-    a.egg:hover, a.egg:visited, a.egg:active, a.egg:focus {
-      color: inherit;
-      text-decoration: none;
-      outline: none;
     }
 
     @keyframes fadeUp {
@@ -485,22 +472,20 @@
 <body>
   <div class="container">
 
-    <div style="display:flex; justify-content:space-between; align-items:baseline; width:100%; margin-bottom:2.5rem;">
-      <p class="label" style="margin-bottom:0;">02 — Pro Admin</p>
-      <a href="/" class="back" style="margin-bottom:0;">bobcorrigan.com</a>
-    </div>
+    <a href="/" class="back">bobcorrigan.com</a>
 
     <header class="header">
-      <h1 class="title"><a href="https://www.youtube.com/watch?v=iHlKL4_5YyQ&list=RDiHlKL4_5YyQ&start_radio=1" target="_blank" rel="noopener" class="egg">Benefits<br /><em>Bob</em></a></h1>
+      <p class="label">02 — Professional</p>
+      <h1 class="title">Benefits<br /><em>Bob</em></h1>
       <div class="divider"></div>
-      <p class="sub">Sales @ Navia Benefit Solutions</p>
+      <p class="sub">Regional Sales Director · Navia Benefit Solutions · 10+ yrs</p>
     </header>
 
     <!-- LINKEDIN -->
     <a href="https://www.linkedin.com/in/benefitsbob" target="_blank" rel="noopener" class="profile-link">
       <div>
-        <span class="profile-link-label">LinkedIn Profile</span>
-        <span class="profile-link-text">Employee Benefits + Sales</span>
+        <span class="profile-link-label">Official Profile</span>
+        <span class="profile-link-text">LinkedIn · Benefits Bob</span>
       </div>
       <span class="profile-arrow">↗</span>
     </a>
@@ -544,7 +529,7 @@
     <div class="block d2">
       <div class="exp-row">
         <div class="exp-top">
-          <div class="exp-title">Sales Director · Onboarding Specialist</div>
+          <div class="exp-title">Regional Sales Director · Onboarding Specialist</div>
           <div class="exp-duration">4 yrs</div>
         </div>
         <div class="exp-company">Navia Benefit Solutions · Redmond, WA · Hybrid</div>
@@ -575,17 +560,12 @@
         </ul>
       </div>
       <div class="exp-row">
-        <a href="https://www.gondolacompany.com" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:inherit;">
-          <div>
-            <div class="exp-title">Singing Gondolier</div>
-            <div class="exp-company" style="margin-top:0.2rem;">The Gondola Company · San Diego, CA · On-site</div>
-          </div>
-          <div style="display:flex; align-items:center; gap:0.75rem; flex-shrink:0;">
-            <div class="exp-duration">1 yr 8 mos</div>
-            <span style="color:var(--rust); font-size:1.2rem;">↗</span>
-          </div>
-        </a>
-        <ul class="exp-detail" style="margin-top:0.5rem;">
+        <div class="exp-top">
+          <div class="exp-title"><a href="https://www.gondolacompany.com" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);transition:border-color 0.15s;">Singing Gondolier ↗</a></div>
+          <div class="exp-duration">1 yr 8 mos</div>
+        </div>
+        <div class="exp-company">The Gondola Company · San Diego, CA · On-site</div>
+        <ul class="exp-detail">
           <li>Enthusiastically providing a memorable peak experience</li>
           <li>Luxury service for discerning clients</li>
         </ul>
@@ -598,7 +578,7 @@
         <div class="exp-company">Lexus of Dayton · Dayton, OH · On-site</div>
         <ul class="exp-detail">
           <li>Support for technicians and customer-facing service staff</li>
-          <li>Luxury customer support for discerning clientele</li>
+          <li>Near-luxury customer support for discerning clientele</li>
         </ul>
       </div>
     </div>
@@ -620,7 +600,7 @@
         <div class="edu-school">Sinclair Community College</div>
         <div class="edu-years">2010–2012</div>
         <div class="edu-field">Transfer · General</div>
-        <div class="edu-note">GPA 3.8 · Completed required transfer courses to enter University of Cincinnati</div>
+        <div class="edu-note">GPA 3.8 · Completed pre-requisite courses to enter University of Cincinnati</div>
       </div>
       <div class="edu-row">
         <div class="edu-school">Aveda Fredric's Institute</div>
@@ -659,7 +639,7 @@
         <div class="vol-content">
           <div class="vol-title">Donor</div>
           <div class="vol-org">Bloodworks Northwest</div>
-          <div class="vol-desc">Whole blood donation to support the community.</div>
+          <div class="vol-desc">Whole blood donation to help support the community.</div>
         </div>
         <div class="vol-date">2023–2024</div>
       </div>
@@ -668,7 +648,7 @@
         <div class="vol-content">
           <div class="vol-title">S.T.A.R.P.A.L.S. Mentor</div>
           <div class="vol-org">San Diego Police Department</div>
-          <div class="vol-desc">Community service with the SDPD to help serve youth through a street violence diversion program.</div>
+          <div class="vol-desc">Community service in conjunction with the SDPD to help serve youth through a street violence diversion program.</div>
         </div>
         <div class="vol-date">2014</div>
       </div>
@@ -684,7 +664,7 @@
       <div class="vol-row">
         <div class="vol-dot"></div>
         <div class="vol-content">
-          <div class="vol-title">Sound Healing for Uniformed Personnel</div>
+          <div class="vol-title">9/11 Relief — Servicing Uniformed Personnel</div>
           <div class="vol-org">American Red Cross</div>
           <div class="vol-desc">Spa services for authorized recipients who served in lower Manhattan at ground zero in the wake of the attacks on September 11th, 2001.</div>
         </div>
@@ -693,10 +673,8 @@
     </div>
 
     <footer class="footer">
-      <a href="https://www.lorettasnorthwesterner.com" target="_blank" rel="noopener" class="footer-btn">
-        <span class="dot"></span>PNW Based · Midwest Roots
-      </a>
-      
+      <span class="footer-note"><span class="dot"></span>PNW Based · Midwest Roots</span>
+      <span class="url-pill">bobcorrigan.com</span>
     </footer>
 
   </div>
