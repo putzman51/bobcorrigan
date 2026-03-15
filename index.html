@@ -222,8 +222,44 @@
       box-shadow: 6px 6px 0 var(--teal-dim);
     }
 
-    .section:nth-child(1) { animation-delay: 0.3s; }
-    .section:nth-child(2) { animation-delay: 0.45s; }
+    .section:nth-child(1) { animation-delay: 0.4s; }
+    .section:nth-child(2) { animation-delay: 0.55s; }
+
+    /* ── Workout feature card ── */
+    .workout-card {
+      border: 1.5px solid var(--ink);
+      background: var(--paper);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.25s;
+      transition: box-shadow 0.25s ease;
+    }
+
+    .workout-card:hover {
+      box-shadow: 6px 6px 0 var(--teal-dim);
+    }
+
+    .workout-card .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.1rem;
+      border-bottom: 1.5px solid var(--ink);
+      background: var(--cream);
+    }
+
+    .workout-body {
+      padding: 1.2rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .workout-body .card-link {
+      border-bottom: none;
+      padding: 0;
+      flex: 1;
+    }
 
     .section-header {
       display: flex;
@@ -531,6 +567,25 @@
       <p class="tagline">PDGA #316354 <span>·</span> MA40 <span>·</span> Employee Benefits</p>
     </header>
 
+    <!-- Workout Card -->
+    <section class="workout-card">
+      <div class="section-header">
+        <svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.5 6.5a2 2 0 0 0-4 0v11a2 2 0 0 0 4 0v-4.5h11v4.5a2 2 0 0 0 4 0v-11a2 2 0 0 0-4 0v4.5h-11z" />
+        </svg>
+        <span class="section-label">My Daily Workout Plan</span>
+      </div>
+      <div class="workout-body">
+        <a href="/rotational_athlete_protocol.html" class="card-link">
+          <div>
+            <div class="card-link-title">Rotational Athlete Protocol</div>
+            <div class="card-link-sub">Disc golf strength + mobility training</div>
+          </div>
+          <span class="card-link-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
     <!-- Two-column grid -->
     <div class="grid">
 
@@ -612,7 +667,7 @@
             <span class="card-link-arrow">↗</span>
           </a>
           <div class="contact-row">
-            <a href="mailto:rcorrigan@naviabenefits.com" class="contact-btn primary">Say Hello</a>
+            <a href="/cdn-cgi/l/email-protection#eb9988849999828c8a85ab858a9d828a898e858e8d829f98c5888486" class="contact-btn primary">Say Hello</a>
             <a href="/pro.html" class="contact-btn">Learn More</a>
           </div>
         </div>
@@ -626,7 +681,7 @@
         <span class="footer-dot"></span>
         Updated 2026
       </div>
-      <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="beep-boop">Beep Boop.</a>
+      <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="beep-boop">Beep Boop</a>
     </footer>
 
   </div>
