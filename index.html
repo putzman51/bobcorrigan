@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bob Corrigan</title>
-  <meta name="description" content="Bob Corrigan — disc golfer, benefits consultant, PNW-based with Midwest roots." />
+  <meta name="description" content="Bob Corrigan — disc golfer, PNW-based with Midwest roots." />
   <meta property="og:title" content="Bob Corrigan" />
-  <meta property="og:description" content="Disc golfer, benefits consultant, PNW-based with Midwest roots." />
+  <meta property="og:description" content="Disc golfer, PNW-based with Midwest roots." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://bobcorrigan.com" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -15,7 +15,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -27,9 +27,10 @@
       --ink: #1a1714;
       --paper: #f0ebe3;
       --cream: #e8e0d4;
-      --teal: #2FA5A7;
-      --teal-dim: #2fa5a730;
-      --teal-glow: #2fa5a718;
+      --green: #5ec46a;
+      --green-dim: #5ec46a30;
+      --green-glow: #5ec46a18;
+      --green-dark: #4db85a;
       --muted: #8a8178;
       --rule: #c8bfb4;
       --warm: #d4a373;
@@ -41,9 +42,10 @@
     }
 
     body {
-      background: var(--paper);
+      background: #b8b0a4;
       color: var(--ink);
       font-family: 'DM Mono', monospace;
+      font-weight: 300;
       min-height: 100vh;
       padding: 1.5rem;
       position: relative;
@@ -52,22 +54,91 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Paper texture */
+    /* Subtle crosshatch desktop pattern */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.15'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
-      z-index: 100;
-      opacity: 0.6;
+      z-index: 0;
     }
 
-    .page {
+    /* The main "window" */
+    .mac-window {
       position: relative;
       z-index: 1;
-      max-width: 720px;
-      margin: 0 auto;
+      max-width: 700px;
+      margin: 1rem auto;
+      border: 2px solid var(--ink);
+      border-radius: 8px 8px 2px 2px;
+      background: var(--paper);
+      box-shadow:
+        4px 4px 0 rgba(0,0,0,0.15),
+        inset 0 0 0 1px rgba(255,255,255,0.3);
+      overflow: hidden;
+    }
+
+    /* Title bar */
+    .title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 28px;
+      background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
+      border-bottom: 2px solid var(--ink);
+      user-select: none;
+    }
+
+    .traffic-lights {
+      position: absolute;
+      left: 10px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .traffic-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+
+    .traffic-dot.close { background: #ff6058; }
+    .traffic-dot.minimize { background: #ffbd2e; }
+    .traffic-dot.maximize { background: var(--green); }
+
+    .title-bar-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+
+    /* Menu bar */
+    .menu-bar {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 0.3rem 1rem;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      color: var(--muted);
+      user-select: none;
+    }
+
+    .menu-bar span { cursor: default; }
+    .menu-bar span:first-child { font-weight: 700; color: var(--ink); }
+    .menu-bar span:hover { color: var(--green); }
+
+    /* Window body */
+    .window-body {
+      padding: 1.5rem;
     }
 
     /* ── Top bar ── */
@@ -77,14 +148,24 @@
       align-items: center;
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--rule);
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
       opacity: 0;
       animation: fadeIn 0.5s ease forwards 0.1s;
     }
 
     .site-url {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .location-tag {
+      font-size: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
     }
@@ -92,195 +173,55 @@
     .top-right {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.6rem;
     }
 
-    .location-tag {
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
+    /* ── Cards ── */
+    .card-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
     }
 
-    .live-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--teal);
-      border: 1.5px solid var(--ink);
-      padding: 0.35rem 0.65rem;
-      background: var(--paper);
-      transition: all 0.18s ease;
-    }
-
-    .live-link:hover {
-      background: var(--teal);
-      border-color: var(--teal);
-      color: var(--paper);
-    }
-
-    .live-link:focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 2px;
-    }
-
-    .pulse-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--teal);
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .pulse-dot::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      border: 1.5px solid var(--teal);
-      animation: pulse 1.4s ease-out infinite;
-      opacity: 0;
-    }
-
-    .live-link:hover .pulse-dot { background: var(--paper); }
-    .live-link:hover .pulse-dot::after { border-color: var(--paper); }
-
-    @keyframes pulse {
-      0% { transform: scale(0.6); opacity: 0.8; }
-      100% { transform: scale(2.2); opacity: 0; }
-    }
-
-    /* ── Hero ── */
-    .hero {
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease forwards 0.15s;
-    }
-
-    .name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 11vw, 6.5rem);
-      font-weight: 900;
-      line-height: 0.9;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-    }
-
-    .name em {
-      font-style: italic;
-      color: var(--teal);
-    }
-
-    a.egg {
-      color: inherit;
-      text-decoration: none;
-      cursor: text;
-    }
-    a.egg:hover, a.egg:visited, a.egg:active, a.egg:focus {
-      color: inherit;
-      text-decoration: none;
-      outline: none;
-    }
-
-    .tagline {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.25rem;
-    }
-
-    .tagline span {
-      color: var(--teal);
-      margin: 0 0.3rem;
-    }
-
-    /* ── Two-column grid ── */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    /* ── Section card ── */
-    .section {
-      border: 1.5px solid var(--ink);
+    .card {
+      border: 1.5px solid var(--rule);
       background: var(--paper);
       opacity: 0;
       animation: fadeUp 0.5s ease forwards;
-      transition: box-shadow 0.25s ease;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
     }
 
-    .section:hover {
-      box-shadow: 6px 6px 0 var(--teal-dim);
+    .card:hover {
+      box-shadow: 4px 4px 0 var(--green-dim);
+      border-color: var(--muted);
     }
 
-    .section:nth-child(1) { animation-delay: 0.4s; }
-    .section:nth-child(2) { animation-delay: 0.55s; }
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.35s; }
+    .card:nth-child(3) { animation-delay: 0.5s; }
+    .card:nth-child(4) { animation-delay: 0.65s; }
+    .card:nth-child(5) { animation-delay: 0.8s; }
 
-    /* ── Workout feature card ── */
-    .workout-card {
-      border: 1.5px solid var(--ink);
-      background: var(--paper);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.25s;
-      transition: box-shadow 0.25s ease;
-    }
-
-    .workout-card:hover {
-      box-shadow: 6px 6px 0 var(--teal-dim);
-    }
-
-    .workout-card .section-header {
+    .card-header {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      padding: 0.9rem 1.1rem;
-      border-bottom: 1.5px solid var(--ink);
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--rule);
       background: var(--cream);
     }
 
-    .workout-body {
-      padding: 1.2rem 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .workout-body .card-link {
-      border-bottom: none;
-      padding: 0;
-      flex: 1;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.9rem 1.1rem;
-      border-bottom: 1.5px solid var(--ink);
-      background: var(--cream);
-    }
-
-    .section-icon {
-      width: 18px;
-      height: 18px;
+    .card-icon {
+      width: 14px;
+      height: 14px;
       flex-shrink: 0;
     }
 
-    .section-icon path,
-    .section-icon circle,
-    .section-icon line,
-    .section-icon polyline,
-    .section-icon rect {
+    .card-icon path,
+    .card-icon circle,
+    .card-icon line,
+    .card-icon polyline,
+    .card-icon rect {
       fill: none;
       stroke: var(--muted);
       stroke-width: 1.5;
@@ -288,19 +229,124 @@
       stroke-linejoin: round;
     }
 
-    .section-label {
-      font-size: 0.6rem;
+    .card-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      font-weight: 400;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
-      font-weight: 500;
     }
 
-    .section-body {
-      padding: 1.2rem 1.1rem;
+    .card-number {
+      margin-left: auto;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.48rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--rule);
     }
 
-    /* ── Stats grid (disc golf) ── */
+    .card-body {
+      padding: 1rem;
+    }
+
+    /* ── Unified action button ── */
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1.5px solid var(--green);
+      background: var(--green);
+      text-decoration: none;
+      color: var(--paper);
+      font-family: 'DM Mono', monospace;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      margin-bottom: 0.6rem;
+    }
+
+    .action-btn:last-child {
+      margin-bottom: 0;
+    }
+
+    .action-btn:hover {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+    }
+
+    .action-btn:hover .action-btn-arrow {
+      transform: translate(3px, -3px);
+    }
+
+    .action-btn:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+
+    .action-btn-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      text-align: left;
+    }
+
+    .action-btn-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: var(--paper);
+      transition: color 0.15s ease;
+    }
+
+    .action-btn-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.48rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 235, 227, 0.7);
+    }
+
+    .action-btn-arrow {
+      font-size: 1.4rem;
+      color: var(--paper);
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+      margin-left: 1rem;
+      line-height: 1;
+    }
+
+    /* Pulse dot for warm up */
+    .pulse-dot-inline {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--paper);
+      position: relative;
+      flex-shrink: 0;
+      margin-right: 0.5rem;
+    }
+
+    .pulse-dot-inline::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid var(--paper);
+      animation: pulse 1.4s ease-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.6); opacity: 0.7; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* ── Stats grid ── */
     .stats-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -308,151 +354,244 @@
     }
 
     .stat {
-      padding: 0.8rem 0.6rem;
+      padding: 0.7rem 0.7rem;
       border-bottom: 1px solid var(--rule);
       border-right: 1px solid var(--rule);
       transition: background 0.2s ease;
     }
 
     .stat:hover {
-      background: var(--teal-glow);
+      background: var(--green-glow);
     }
 
     .stat:nth-child(even) { border-right: none; }
     .stat:nth-last-child(-n+2) { border-bottom: none; }
 
     .stat-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
       line-height: 1;
       color: var(--ink);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
     }
 
-    .stat-value.accent { color: var(--teal); }
+    .stat-value.accent { color: var(--green); }
 
     .stat-label {
-      font-size: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.44rem;
+      font-weight: 300;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
-    .section-divider {
-      height: 1px;
-      background: var(--rule);
-      margin: 0.2rem 0;
+    /* Warm up card body */
+    .warmup-body {
+      padding: 1rem;
     }
 
-    /* ── Link rows inside cards ── */
-    .card-link {
+    .warmup-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* PDGA card */
+    .pdga-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .pdga-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .pdga-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.45rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── MIDI Player ── */
+    .midi-player {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .midi-track-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .midi-track {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.65rem;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .midi-track:hover {
+      border-color: var(--green);
+      background: var(--green-glow);
+    }
+
+    .midi-track.active {
+      border-color: var(--green);
+      background: var(--green-glow);
+    }
+
+    .midi-track-play {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid var(--rule);
+      background: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .midi-track.active .midi-track-play {
+      border-color: var(--green);
+      background: var(--green);
+    }
+
+    .midi-track-play svg {
+      width: 8px;
+      height: 8px;
+    }
+
+    .midi-track-play svg polygon,
+    .midi-track-play svg rect {
+      fill: var(--muted);
+      transition: fill 0.2s ease;
+    }
+
+    .midi-track.active .midi-track-play svg polygon,
+    .midi-track.active .midi-track-play svg rect {
+      fill: var(--paper);
+    }
+
+    .midi-track-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .midi-track-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--ink);
+      transition: color 0.15s;
+    }
+
+    .midi-track:hover .midi-track-name,
+    .midi-track.active .midi-track-name {
+      color: var(--green);
+    }
+
+    .midi-track-desc {
+      font-size: 0.44rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .midi-track-duration {
+      font-size: 0.48rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--rule);
+      flex-shrink: 0;
+    }
+
+    .midi-visualizer {
+      height: 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 2px;
+      padding: 0.4rem 0;
+    }
+
+    .midi-bar {
+      width: 3px;
+      background: var(--rule);
+      border-radius: 1px;
+      transition: background 0.2s ease;
+      height: 3px;
+    }
+
+    .midi-bar.active {
+      background: var(--green);
+    }
+
+    .midi-controls {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--rule);
-      text-decoration: none;
-      color: var(--ink);
-      transition: all 0.15s ease;
     }
 
-    .card-link:last-child { border-bottom: none; }
-
-    .card-link:hover {
-      padding-left: 0.4rem;
-    }
-
-    .card-link:hover .card-link-title {
-      color: var(--teal);
-    }
-
-    .card-link:focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 2px;
-    }
-
-    .card-link-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      transition: color 0.15s ease;
-    }
-
-    .card-link-sub {
-      font-size: 0.55rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 0.15rem;
-    }
-
-    .card-link-arrow {
-      color: var(--teal);
-      font-size: 1rem;
-      flex-shrink: 0;
-      transition: transform 0.15s ease;
-    }
-
-    .card-link:hover .card-link-arrow {
-      transform: translate(2px, -2px);
-    }
-
-    /* ── Professional section specifics ── */
-    .pro-intro {
-      font-size: 0.75rem;
-      line-height: 1.7;
-      color: var(--ink);
-      margin-bottom: 1rem;
-      font-weight: 300;
-    }
-
-    .pro-intro strong {
-      color: var(--teal);
-      font-weight: 500;
-    }
-
-    .contact-row {
+    .midi-vol {
       display: flex;
-      gap: 0.6rem;
-      margin-top: 1rem;
-    }
-
-    .contact-btn {
-      display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.14em;
+      font-size: 0.44rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      text-decoration: none;
-      color: var(--ink);
-      border: 1.5px solid var(--ink);
-      padding: 0.45rem 0.75rem;
-      background: var(--paper);
-      transition: all 0.18s ease;
+      color: var(--muted);
     }
 
-    .contact-btn:hover {
-      background: var(--ink);
-      color: var(--paper);
+    .midi-vol input[type="range"] {
+      width: 60px;
+      height: 3px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--rule);
+      border-radius: 2px;
+      outline: none;
     }
 
-    .contact-btn:focus-visible {
-      outline: 2px solid var(--teal);
-      outline-offset: 2px;
+    .midi-vol input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 1px solid var(--green-dark);
+      cursor: pointer;
     }
 
-    .contact-btn.primary {
-      background: var(--teal);
-      border-color: var(--teal);
-      color: var(--paper);
-    }
-
-    .contact-btn.primary:hover {
-      background: var(--ink);
-      border-color: var(--ink);
+    .midi-status {
+      font-size: 0.44rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     /* ── Footer ── */
@@ -462,12 +601,14 @@
       align-items: center;
       padding-top: 1rem;
       border-top: 1px solid var(--rule);
+      margin-top: 1.5rem;
       opacity: 0;
-      animation: fadeIn 0.5s ease forwards 0.7s;
+      animation: fadeIn 0.5s ease forwards 0.9s;
     }
 
     .footer-left {
-      font-size: 0.55rem;
+      font-size: 0.45rem;
+      font-weight: 300;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -480,11 +621,12 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: var(--teal);
+      background: var(--green);
     }
 
     .beep-boop {
-      font-size: 0.55rem;
+      font-size: 0.45rem;
+      font-weight: 300;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -492,11 +634,22 @@
       transition: color 0.15s;
     }
 
-    .beep-boop:hover { color: var(--teal); }
+    .beep-boop:hover { color: var(--green); }
+
+    a.egg {
+      color: inherit;
+      text-decoration: none;
+      cursor: text;
+    }
+    a.egg:hover, a.egg:visited, a.egg:active, a.egg:focus {
+      color: inherit;
+      text-decoration: none;
+      outline: none;
+    }
 
     /* ── Animations ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
@@ -507,21 +660,14 @@
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
-      body { padding: 1rem; }
-
-      .grid {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-      }
-
-      .name {
-        font-size: clamp(2.8rem, 14vw, 4.5rem);
-      }
+      body { padding: 0.75rem; }
+      .mac-window { margin: 0.5rem auto; }
+      .window-body { padding: 1rem; }
 
       .top-bar {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.6rem;
+        gap: 0.5rem;
       }
 
       .top-right {
@@ -529,161 +675,504 @@
         justify-content: space-between;
       }
 
-      .contact-row {
-        flex-direction: column;
-      }
-
-      .contact-btn {
-        text-align: center;
-        justify-content: center;
-      }
-
       .stat-value {
-        font-size: 1.35rem;
+        font-size: 1.25rem;
+      }
+
+      .title-bar-text {
+        font-size: 0.5rem;
+      }
+
+      .action-btn-title {
+        font-size: 0.95rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="page">
 
-    <!-- Top bar -->
-    <div class="top-bar">
-      <span class="site-url">bobcorrigan.com</span>
-      <div class="top-right">
-        <span class="location-tag">PNW Based · Midwest Roots</span>
-        <a href="/pre_round_warmup.html" class="live-link">
-          <span class="pulse-dot"></span>
-          Warm Up
-        </a>
+  <div class="mac-window">
+
+    <!-- macOS title bar -->
+    <div class="title-bar">
+      <div class="traffic-lights">
+        <span class="traffic-dot close"></span>
+        <span class="traffic-dot minimize"></span>
+        <span class="traffic-dot maximize"></span>
       </div>
+      <span class="title-bar-text"><a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="egg">bobcorrigan.com</a></span>
     </div>
 
-    <!-- Hero -->
-    <header class="hero">
-      <h1 class="name">
-        <a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="egg">Bob<br><em>Corrigan</em></a>
-      </h1>
-      <p class="tagline">PDGA #316354 <span>·</span> MA40 <span>·</span> Employee Benefits</p>
-    </header>
+    <!-- Menu bar -->
+    <nav class="menu-bar">
+      <span>File</span>
+      <span>Disc Golf</span>
+      <span>Fitness</span>
+      <span>Tunes</span>
+    </nav>
 
-    <!-- Workout Card -->
-    <section class="workout-card">
-      <div class="section-header">
-        <svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6.5 6.5a2 2 0 0 0-4 0v11a2 2 0 0 0 4 0v-4.5h11v4.5a2 2 0 0 0 4 0v-11a2 2 0 0 0-4 0v4.5h-11z" />
-        </svg>
-        <span class="section-label">My Daily Workout Plan</span>
+    <!-- Content -->
+    <div class="window-body">
+
+      <div class="top-bar">
+        <span class="site-url">PDGA #316354 · MA40</span>
       </div>
-      <div class="workout-body">
-        <a href="/rotational_athlete_protocol.html" class="card-link">
-          <div>
-            <div class="card-link-title">Rotational Athlete Protocol</div>
-            <div class="card-link-sub">Disc golf strength + mobility training</div>
-          </div>
-          <span class="card-link-arrow">↗</span>
-        </a>
-      </div>
-    </section>
 
-    <!-- Two-column grid -->
-    <div class="grid">
+      <div class="card-stack">
 
-      <!-- Disc Golf Card -->
-      <section class="section">
-        <div class="section-header">
-          <svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="9" />
-            <circle cx="12" cy="12" r="3.5" />
-            <line x1="12" y1="3" x2="12" y2="8.5" />
-          </svg>
-          <span class="section-label">On the Course</span>
-        </div>
-        <div class="section-body" style="padding:0;">
-          <!-- Stats -->
-          <div class="stats-grid">
-            <div class="stat">
-              <div class="stat-value accent">887</div>
-              <div class="stat-label">Current Rating</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value">MA40</div>
-              <div class="stat-label">Division</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value">7</div>
-              <div class="stat-label">Career Events</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value accent">1st</div>
-              <div class="stat-label">Best Finish</div>
-            </div>
+        <!-- 01: Pre-Round Warm Up -->
+        <section class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <span class="card-label">Pre-Round Warm Up</span>
+            <span class="card-number">01</span>
           </div>
-          <div style="padding: 0.6rem 1.1rem 1.1rem;">
-            <a href="/frolf.html" class="card-link">
-              <div>
-                <div class="card-link-title">Tournament History</div>
-                <div class="card-link-sub">Full results + rounds</div>
+          <div class="warmup-body">
+            <p class="warmup-text">Quick mobility &amp; activation routine to dial in before your round.</p>
+            <a href="/pre_round_warmup.html" class="action-btn">
+              <div style="display:flex;align-items:center;">
+                <span class="pulse-dot-inline"></span>
+                <span class="action-btn-title">Start Warm Up</span>
               </div>
-              <span class="card-link-arrow">↗</span>
-            </a>
-            <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener" class="card-link">
-              <div>
-                <div class="card-link-title">PDGA Profile</div>
-                <div class="card-link-sub">Official player page</div>
-              </div>
-              <span class="card-link-arrow">↗</span>
+              <span class="action-btn-arrow">↗</span>
             </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Professional Card -->
-      <section class="section">
-        <div class="section-header">
-          <svg class="section-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="7" width="20" height="13" rx="2" />
-            <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
-            <line x1="2" y1="13" x2="22" y2="13" />
-          </svg>
-          <span class="section-label">The Day Job</span>
-        </div>
-        <div class="section-body">
-          <p class="pro-intro">
-            I help companies build <strong>employee benefits programs</strong> that actually make sense.
-          </p>
-          <a href="/pro.html" class="card-link">
-            <div>
-              <div class="card-link-title">What I Do</div>
-              <div class="card-link-sub">Benefits consulting + sales</div>
-            </div>
-            <span class="card-link-arrow">↗</span>
-          </a>
-          <a href="https://www.linkedin.com/in/benefitsbob" target="_blank" rel="noopener" class="card-link">
-            <div>
-              <div class="card-link-title">LinkedIn</div>
-              <div class="card-link-sub">Connect with me</div>
-            </div>
-            <span class="card-link-arrow">↗</span>
-          </a>
-          <div class="contact-row">
-            <a href="/cdn-cgi/l/email-protection#eb9988849999828c8a85ab858a9d828a898e858e8d829f98c5888486" class="contact-btn primary">Say Hello</a>
-            <a href="/pro.html" class="contact-btn">Learn More</a>
+        <!-- 02: Daily Workout -->
+        <section class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.5 6.5a2 2 0 0 0-4 0v11a2 2 0 0 0 4 0v-4.5h11v4.5a2 2 0 0 0 4 0v-11a2 2 0 0 0-4 0v4.5h-11z" />
+            </svg>
+            <span class="card-label">Daily Workout</span>
+            <span class="card-number">02</span>
           </div>
+          <div class="card-body">
+            <a href="/rotational_athlete_protocol.html" class="action-btn">
+              <div class="action-btn-text">
+                <span class="action-btn-title">Rotational Athlete Protocol</span>
+                <span class="action-btn-sub">Disc golf strength + mobility training</span>
+              </div>
+              <span class="action-btn-arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- 03: On the Course -->
+        <section class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="12" r="3.5" />
+              <line x1="12" y1="3" x2="12" y2="8.5" />
+            </svg>
+            <span class="card-label">On the Course</span>
+            <span class="card-number">03</span>
+          </div>
+          <div style="padding:0;">
+            <div class="stats-grid">
+              <div class="stat">
+                <div class="stat-value accent">887</div>
+                <div class="stat-label">Current Rating</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">MA40</div>
+                <div class="stat-label">Division</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value">7</div>
+                <div class="stat-label">Career Events</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value accent">1st</div>
+                <div class="stat-label">Best Finish</div>
+              </div>
+            </div>
+            <div style="padding: 0.65rem 1rem 1rem;">
+              <a href="/frolf.html" class="action-btn">
+                <div class="action-btn-text">
+                  <span class="action-btn-title">Tournament History</span>
+                  <span class="action-btn-sub">Full results + rounds</span>
+                </div>
+                <span class="action-btn-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04: PDGA Profile -->
+        <section class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <line x1="3" y1="9" x2="21" y2="9"/>
+              <line x1="9" y1="9" x2="9" y2="20"/>
+            </svg>
+            <span class="card-label">PDGA Profile</span>
+            <span class="card-number">04</span>
+          </div>
+          <div class="card-body">
+            <div class="pdga-info">
+              <span class="pdga-number">#316354</span>
+              <span class="pdga-sub">Professional Disc Golf Association · Active Member</span>
+            </div>
+            <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener" class="action-btn">
+              <div class="action-btn-text">
+                <span class="action-btn-title">View PDGA Profile</span>
+                <span class="action-btn-sub">Official player page</span>
+              </div>
+              <span class="action-btn-arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- 05: MIDI Jukebox -->
+        <section class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18V5l12-2v13"/>
+              <circle cx="6" cy="18" r="3"/>
+              <circle cx="18" cy="16" r="3"/>
+            </svg>
+            <span class="card-label">Jukebox</span>
+            <span class="card-number">05</span>
+          </div>
+          <div class="card-body">
+            <div class="midi-player" id="midiPlayer">
+              <div class="midi-track-list" id="trackList">
+                <div class="midi-track" data-track="0" onclick="toggleTrack(0)">
+                  <div class="midi-track-play">
+                    <svg viewBox="0 0 10 12"><polygon points="2,0 10,6 2,12"/></svg>
+                  </div>
+                  <div class="midi-track-info">
+                    <div class="midi-track-name">Ace Run</div>
+                    <div class="midi-track-desc">Upbeat chiptune · C major</div>
+                  </div>
+                  <span class="midi-track-duration">loop</span>
+                </div>
+                <div class="midi-track" data-track="1" onclick="toggleTrack(1)">
+                  <div class="midi-track-play">
+                    <svg viewBox="0 0 10 12"><polygon points="2,0 10,6 2,12"/></svg>
+                  </div>
+                  <div class="midi-track-info">
+                    <div class="midi-track-name">Fairway Drift</div>
+                    <div class="midi-track-desc">Chill ambient · A minor</div>
+                  </div>
+                  <span class="midi-track-duration">loop</span>
+                </div>
+                <div class="midi-track" data-track="2" onclick="toggleTrack(2)">
+                  <div class="midi-track-play">
+                    <svg viewBox="0 0 10 12"><polygon points="2,0 10,6 2,12"/></svg>
+                  </div>
+                  <div class="midi-track-info">
+                    <div class="midi-track-name">Chains Hit Different</div>
+                    <div class="midi-track-desc">Lo-fi groove · D minor</div>
+                  </div>
+                  <span class="midi-track-duration">loop</span>
+                </div>
+              </div>
+              <div class="midi-visualizer" id="visualizer"></div>
+              <div class="midi-controls">
+                <div class="midi-vol">
+                  <span>Vol</span>
+                  <input type="range" id="volumeSlider" min="0" max="100" value="40" oninput="setVolume(this.value)">
+                </div>
+                <span class="midi-status" id="midiStatus">Ready</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-left">
+          <span class="footer-dot"></span>
+          Updated 2026
         </div>
-      </section>
+        <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="beep-boop">Beep Boop</a>
+      </footer>
 
     </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-left">
-        <span class="footer-dot"></span>
-        Updated 2026
-      </div>
-      <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="beep-boop">Beep Boop</a>
-    </footer>
-
   </div>
+
+  <!-- Decorative disc -->
+  <svg style="position:fixed;bottom:-60px;right:-40px;width:220px;height:220px;opacity:0.04;z-index:0;pointer-events:none;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#1a1714" stroke-width="2"/>
+    <circle cx="50" cy="50" r="30" fill="none" stroke="#1a1714" stroke-width="1"/>
+    <circle cx="50" cy="50" r="14" fill="none" stroke="#1a1714" stroke-width="1.5"/>
+    <circle cx="50" cy="50" r="5" fill="#1a1714"/>
+  </svg>
+
+  <script>
+    // ─── Web Audio MIDI Synth ───
+    let audioCtx = null;
+    let masterGain = null;
+    let currentTrack = -1;
+    let activeNodes = [];
+    let animFrame = null;
+    let bars = [];
+    let loopTimers = [];
+
+    // Build visualizer bars
+    (function initVisualizer() {
+      const viz = document.getElementById('visualizer');
+      for (let i = 0; i < 32; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'midi-bar';
+        bar.style.height = '3px';
+        viz.appendChild(bar);
+        bars.push(bar);
+      }
+    })();
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = 0.4;
+        masterGain.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function setVolume(val) {
+      if (masterGain) masterGain.gain.value = val / 100;
+    }
+
+    function stopAll() {
+      loopTimers.forEach(t => clearTimeout(t));
+      loopTimers = [];
+      activeNodes.forEach(n => {
+        try { n.stop(); } catch(e) {}
+        try { n.disconnect(); } catch(e) {}
+      });
+      activeNodes = [];
+      if (animFrame) cancelAnimationFrame(animFrame);
+      bars.forEach(b => { b.style.height = '3px'; b.classList.remove('active'); });
+    }
+
+    const playIcon = '<svg viewBox="0 0 10 12"><polygon points="2,0 10,6 2,12"/></svg>';
+    const pauseIcon = '<svg viewBox="0 0 10 12"><rect x="1" y="0" width="3" height="12"/><rect x="6" y="0" width="3" height="12"/></svg>';
+
+    function toggleTrack(idx) {
+      const tracks = document.querySelectorAll('.midi-track');
+      const status = document.getElementById('midiStatus');
+
+      if (currentTrack === idx) {
+        stopAll();
+        tracks[idx].classList.remove('active');
+        tracks[idx].querySelector('.midi-track-play').innerHTML = playIcon;
+        currentTrack = -1;
+        status.textContent = 'Ready';
+        return;
+      }
+
+      if (currentTrack >= 0) {
+        stopAll();
+        tracks[currentTrack].classList.remove('active');
+        tracks[currentTrack].querySelector('.midi-track-play').innerHTML = playIcon;
+      }
+
+      initAudio();
+      currentTrack = idx;
+      tracks[idx].classList.add('active');
+      tracks[idx].querySelector('.midi-track-play').innerHTML = pauseIcon;
+      status.textContent = 'Playing';
+
+      if (idx === 0) playAceRun();
+      else if (idx === 1) playFairwayDrift();
+      else if (idx === 2) playChainsHitDifferent();
+
+      animateVisualizer();
+    }
+
+    // ─── Track 1: Ace Run (upbeat chiptune in C major) ───
+    function playAceRun() {
+      const bpm = 140;
+      const eighth = 60 / bpm / 2;
+      const melody = [
+        523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33,
+        523.25, 659.25, 783.99, 1046.50, 880.00, 783.99, 659.25, 523.25,
+        587.33, 659.25, 783.99, 880.00, 1046.50, 880.00, 783.99, 659.25,
+        523.25, 0, 659.25, 0, 783.99, 523.25, 587.33, 659.25,
+      ];
+      const bass = [
+        130.81, 0, 130.81, 0, 164.81, 0, 164.81, 0,
+        174.61, 0, 174.61, 0, 130.81, 0, 164.81, 0,
+        130.81, 0, 130.81, 0, 164.81, 0, 164.81, 0,
+        174.61, 0, 196.00, 0, 130.81, 0, 130.81, 0,
+      ];
+
+      function scheduleLoop(startTime) {
+        const loopLen = melody.length * eighth;
+        for (let i = 0; i < melody.length; i++) {
+          const t = startTime + i * eighth;
+          if (melody[i] > 0) {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.type = 'square';
+            osc.frequency.value = melody[i];
+            g.gain.setValueAtTime(0.12, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + eighth * 0.9);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + eighth * 0.95);
+            activeNodes.push(osc);
+          }
+          if (bass[i] > 0) {
+            const osc2 = audioCtx.createOscillator();
+            const g2 = audioCtx.createGain();
+            osc2.type = 'triangle';
+            osc2.frequency.value = bass[i];
+            g2.gain.setValueAtTime(0.15, t);
+            g2.gain.exponentialRampToValueAtTime(0.001, t + eighth * 1.8);
+            osc2.connect(g2); g2.connect(masterGain);
+            osc2.start(t); osc2.stop(t + eighth * 1.9);
+            activeNodes.push(osc2);
+          }
+        }
+        const nextStart = startTime + loopLen;
+        const delay = Math.max(0, (nextStart - audioCtx.currentTime) * 1000 - 200);
+        const tid = setTimeout(() => { if (currentTrack === 0) scheduleLoop(nextStart); }, delay);
+        loopTimers.push(tid);
+      }
+      scheduleLoop(audioCtx.currentTime + 0.05);
+    }
+
+    // ─── Track 2: Fairway Drift (ambient pads in A minor) ───
+    function playFairwayDrift() {
+      const chords = [
+        [220.00, 261.63, 329.63],
+        [196.00, 246.94, 293.66],
+        [174.61, 220.00, 261.63],
+        [196.00, 246.94, 329.63],
+      ];
+
+      function scheduleLoop(startTime) {
+        const chordLen = 2.5;
+        const loopLen = chords.length * chordLen;
+        chords.forEach((chord, ci) => {
+          const t = startTime + ci * chordLen;
+          chord.forEach(freq => {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            g.gain.setValueAtTime(0, t);
+            g.gain.linearRampToValueAtTime(0.08, t + 0.6);
+            g.gain.linearRampToValueAtTime(0.05, t + chordLen * 0.7);
+            g.gain.linearRampToValueAtTime(0, t + chordLen);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + chordLen + 0.1);
+            activeNodes.push(osc);
+          });
+          // Shimmer
+          const shimmer = audioCtx.createOscillator();
+          const sg = audioCtx.createGain();
+          shimmer.type = 'sine';
+          shimmer.frequency.value = chord[2] * 2;
+          sg.gain.setValueAtTime(0, t + 0.3);
+          sg.gain.linearRampToValueAtTime(0.03, t + 0.8);
+          sg.gain.linearRampToValueAtTime(0, t + chordLen);
+          shimmer.connect(sg); sg.connect(masterGain);
+          shimmer.start(t); shimmer.stop(t + chordLen + 0.1);
+          activeNodes.push(shimmer);
+        });
+        const nextStart = startTime + loopLen;
+        const delay = Math.max(0, (nextStart - audioCtx.currentTime) * 1000 - 300);
+        const tid = setTimeout(() => { if (currentTrack === 1) scheduleLoop(nextStart); }, delay);
+        loopTimers.push(tid);
+      }
+      scheduleLoop(audioCtx.currentTime + 0.05);
+    }
+
+    // ─── Track 3: Chains Hit Different (lo-fi groove in D minor) ───
+    function playChainsHitDifferent() {
+      const bpm = 85;
+      const sixteenth = 60 / bpm / 4;
+      const melody = [
+        293.66, 0, 349.23, 0, 392.00, 0, 349.23, 293.66,
+        0, 261.63, 0, 293.66, 0, 0, 261.63, 0,
+        293.66, 0, 349.23, 0, 440.00, 0, 392.00, 349.23,
+        0, 293.66, 0, 261.63, 0, 0, 233.08, 0,
+      ];
+      const bassNotes = [
+        146.83, 0, 0, 0, 146.83, 0, 0, 0,
+        174.61, 0, 0, 0, 174.61, 0, 0, 0,
+        130.81, 0, 0, 0, 130.81, 0, 0, 0,
+        116.54, 0, 0, 0, 130.81, 0, 0, 0,
+      ];
+
+      function scheduleLoop(startTime) {
+        const loopLen = melody.length * sixteenth;
+        for (let i = 0; i < melody.length; i++) {
+          const t = startTime + i * sixteenth;
+          if (melody[i] > 0) {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.value = melody[i];
+            g.gain.setValueAtTime(0.09, t);
+            g.gain.exponentialRampToValueAtTime(0.001, t + sixteenth * 3);
+            osc.connect(g); g.connect(masterGain);
+            osc.start(t); osc.stop(t + sixteenth * 3.5);
+            activeNodes.push(osc);
+          }
+          if (bassNotes[i] > 0) {
+            const osc2 = audioCtx.createOscillator();
+            const g2 = audioCtx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.value = bassNotes[i];
+            g2.gain.setValueAtTime(0.18, t);
+            g2.gain.exponentialRampToValueAtTime(0.001, t + sixteenth * 6);
+            osc2.connect(g2); g2.connect(masterGain);
+            osc2.start(t); osc2.stop(t + sixteenth * 7);
+            activeNodes.push(osc2);
+          }
+          // Hi-hat on even steps
+          if (i % 2 === 0) {
+            const bufSize = audioCtx.sampleRate * 0.03;
+            const buf = audioCtx.createBuffer(1, bufSize, audioCtx.sampleRate);
+            const data = buf.getChannelData(0);
+            for (let j = 0; j < bufSize; j++) data[j] = (Math.random() * 2 - 1) * 0.3;
+            const noise = audioCtx.createBufferSource();
+            const ng = audioCtx.createGain();
+            noise.buffer = buf;
+            ng.gain.setValueAtTime(0.06, t);
+            ng.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+            noise.connect(ng); ng.connect(masterGain);
+            noise.start(t); noise.stop(t + 0.05);
+            activeNodes.push(noise);
+          }
+        }
+        const nextStart = startTime + loopLen;
+        const delay = Math.max(0, (nextStart - audioCtx.currentTime) * 1000 - 200);
+        const tid = setTimeout(() => { if (currentTrack === 2) scheduleLoop(nextStart); }, delay);
+        loopTimers.push(tid);
+      }
+      scheduleLoop(audioCtx.currentTime + 0.05);
+    }
+
+    // ─── Visualizer ───
+    function animateVisualizer() {
+      if (currentTrack < 0) return;
+      const time = Date.now();
+      bars.forEach((bar, i) => {
+        const speed = currentTrack === 1 ? 0.001 : 0.004;
+        const offset = i * (currentTrack === 1 ? 0.4 : 0.25);
+        const wave = Math.sin(time * speed + offset) * 0.5 + 0.5;
+        const bounce = Math.sin(time * 0.002 + i * 0.15) * 0.3 + 0.7;
+        const h = 3 + wave * bounce * 22;
+        bar.style.height = h + 'px';
+        bar.classList.add('active');
+      });
+      animFrame = requestAnimationFrame(animateVisualizer);
+    }
+  </script>
+
 </body>
 </html>
