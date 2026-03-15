@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Pre-Round</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f3ee;
+    --text: #2a2520;
+    --dim: #8a837a;
+    --muted: #b8b2a8;
+    --line: #e0dbd4;
+    --accent: #e8650a;
+    --accent-soft: rgba(232,101,10,0.06);
+    --accent-glow: rgba(232,101,10,0.12);
+    --done-bg: rgba(232,101,10,0.04);
+    --done-border: rgba(232,101,10,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    min-height: 100dvh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+  .header .mark {
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--text);
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+  .header .time {
+    font-size: 13px;
+    color: var(--dim);
+    margin-top: 12px;
+    font-weight: 300;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1;
+    min-width: 24px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.5px;
+  }
+  .section-time {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ITEMS */
+  .item {
+    padding: 14px 16px;
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: all 0.35s ease;
+    position: relative;
+    user-select: none;
+  }
+  .item:last-child {
+    border-bottom: 1px solid transparent;
+  }
+  .item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.3s ease;
+    border-radius: 1px;
+  }
+  .item.done {
+    background: var(--done-bg);
+    border-color: var(--done-border);
+    border-radius: 4px;
+    margin-bottom: 2px;
+  }
+  .item.done::before {
+    height: 60%;
+  }
+  .item.done .item-name {
+    color: var(--accent);
+  }
+  .item.done .item-detail {
+    color: var(--dim);
+  }
+  .item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    transition: color 0.35s ease;
+    line-height: 1.4;
+  }
+  .item-detail {
+    font-size: 12px;
+    color: var(--dim);
+    font-weight: 300;
+    margin-top: 3px;
+    line-height: 1.5;
+    transition: color 0.35s ease;
+    font-style: italic;
+  }
+  .item-rx {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  /* DIVIDER */
+  .breath {
+    text-align: center;
+    padding: 20px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 2px;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    margin-top: 12px;
+  }
+  .footer p {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* RESET */
+  .reset {
+    display: block;
+    margin: 24px auto 0;
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+  .reset:hover { border-color: var(--dim); color: var(--dim); }
+
+  /* PROGRESS */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+    z-index: 100;
+    box-shadow: 0 0 8px rgba(232,101,10,0.3);
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<div class="app">
+  <div class="header">
+    <div class="mark">before the round</div>
+    <h1>Pre-Round Warm-Up</h1>
+    <div class="time">8 minutes · tap each as you go</div>
+  </div>
+
+  <div id="sections"></div>
+
+  <div class="footer">
+    <p>Never go max effort on your first throw.<br>Smooth is far. Smooth is accurate.</p>
+    <button class="reset" onclick="resetAll()">reset</button>
+  </div>
+</div>
+
+<script>
+const data = [
+  {
+    num: "1", title: "Get Moving", time: "2–3 min",
+    items: [
+      { name: "Light jog or brisk walk to the first tee", detail: "Get your heart rate up gently. Big arm swings as you walk." },
+      { name: "High knees", detail: "20 seconds. Wake up the hip flexors and get blood moving.", rx: "easy pace" },
+    ]
+  },
+  {
+    num: "2", title: "Hip Openers", time: "2 min",
+    items: [
+      { name: "90/90 hip switches", detail: "Sit on ground, knees at 90°. Rotate both knees side to side.", rx: "8 reps" },
+      { name: "Walking lunge with torso twist", detail: "Deep lunge, twist toward front knee. Unlocks hip rotation + t-spine.", rx: "5 per side" },
+    ]
+  },
+  {
+    num: "3", title: "T-Spine Rotation", time: "1 min",
+    items: [
+      { name: "Open book rotations", detail: "Stand in throwing stance. Rotate and reach. Let your thoracic spine do the work.", rx: "6 per side" },
+      { name: "Standing trunk rotations", detail: "Gradually increase speed and range. Arms relaxed, hips stable.", rx: "15 seconds" },
+    ]
+  },
+  {
+    num: "4", title: "Shoulder & Arm Prep", time: "1 min",
+    items: [
+      { name: "Arm circles — small to large", detail: "Forward then backward. Smooth and controlled.", rx: "10 each direction" },
+      { name: "Band pull-aparts", detail: "Keep a light band in your bag. Brief hold at the back. Fires rear delts + rotator cuff.", rx: "10–15 reps" },
+    ]
+  },
+  {
+    num: "5", title: "Throwing Ramp-Up", time: "2 min",
+    breath: "the most important part",
+    items: [
+      { name: "Putters at 50% — smooth timing only", detail: "150 feet. Focus on weight transfer and clean release. Feel the ground.", rx: "5–8 throws" },
+      { name: "Putters at 70%", detail: "Same distance. Let the power come from your hips, not your arm.", rx: "3–4 throws" },
+      { name: "Mids or drivers at 85–90%", detail: "Almost full power but still controlled. Save 100% for the course.", rx: "2–3 throws" },
+    ]
+  }
+];
+
+let done = {};
+const total = data.reduce((a, s) => a + s.items.length, 0);
+
+function render() {
+  const el = document.getElementById('sections');
+  let h = '';
+  let idx = 0;
+
+  data.forEach((s, si) => {
+    if (s.breath) {
+      h += `<div class="breath">${s.breath}</div>`;
+    }
+    h += `<div class="section">`;
+    h += `<div class="section-header">
+      <span class="section-num">${s.num}</span>
+      <span class="section-title">${s.title}</span>
+      <span class="section-time">${s.time}</span>
+    </div>`;
+    s.items.forEach((item, ii) => {
+      const key = `${si}-${ii}`;
+      const d = done[key] ? 'done' : '';
+      h += `<div class="item ${d}" onclick="toggle('${key}')">
+        <div class="item-name">${item.name}</div>
+        <div class="item-detail">${item.detail}</div>
+        ${item.rx ? `<div class="item-rx">${item.rx}</div>` : ''}
+      </div>`;
+      idx++;
+    });
+    h += `</div>`;
+  });
+
+  el.innerHTML = h;
+  updateProgress();
+}
+
+function toggle(key) {
+  done[key] = !done[key];
+  render();
+}
+
+function resetAll() {
+  done = {};
+  render();
+}
+
+function updateProgress() {
+  const count = Object.values(done).filter(Boolean).length;
+  const pct = (count / total) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+render();
+</script>
+</body>
+</html>
