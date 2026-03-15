@@ -696,9 +696,25 @@
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
-      body { padding: 0.75rem; }
-      .mac-window { margin: 0.5rem auto; }
-      .window-body { padding: 1rem; }
+      body { padding: 0.5rem; }
+      .mac-window {
+        margin: 0;
+        min-height: calc(100vh - 1rem);
+        border-radius: 8px 8px 2px 2px;
+      }
+      .window-body {
+        padding: 1rem;
+        min-height: calc(100vh - 1rem - 28px - 24px);
+        display: flex;
+        flex-direction: column;
+      }
+      .card-stack {
+        flex: 1;
+        justify-content: center;
+      }
+      .footer {
+        margin-top: auto;
+      }
 
       .top-bar {
         flex-direction: column;
@@ -709,10 +725,6 @@
       .top-right {
         width: 100%;
         justify-content: space-between;
-      }
-
-      .stat-value {
-        font-size: 1.25rem;
       }
 
       .title-bar-text {
