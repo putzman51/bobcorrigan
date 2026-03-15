@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotational Athlete Protocol — Disc Golf Strength Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: #222;
+    --border-hi: #333;
+    --text: #e4e0d8;
+    --text-dim: #888;
+    --text-muted: #555;
+    --accent: #ff4d00;
+    --accent-glow: rgba(255, 77, 0, 0.15);
+    --accent-dim: #cc3d00;
+    --green: #2ecc71;
+    --green-dim: rgba(46, 204, 113, 0.15);
+    --green-border: rgba(46, 204, 113, 0.3);
+    --yellow: #d4a832;
+    --yellow-dim: rgba(212, 168, 50, 0.1);
+    --yellow-border: rgba(212, 168, 50, 0.25);
+    --timer-bg: #1a0800;
+    --timer-border: #331a00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Mono', 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app { max-width: 720px; margin: 0 auto; padding: 16px; }
+
+  /* HEADER */
+  .header {
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 20px var(--accent), 0 0 60px rgba(255,77,0,0.3);
+  }
+  .header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(18px, 4.5vw, 26px);
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .header .sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+
+  /* NAV TABS */
+  .view-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .view-tab {
+    padding: 5px 12px;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .view-tab:hover { border-color: var(--text-dim); color: var(--text-dim); }
+  .view-tab.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* DAY TABS */
+  .day-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+  .day-tab {
+    flex: 1;
+    padding: 10px 4px;
+    background: var(--surface);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    letter-spacing: 1px;
+  }
+  .day-tab:hover { border-color: var(--border-hi); }
+  .day-tab .day-icon { font-size: 16px; display: block; margin-bottom: 3px; }
+  .day-tab.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+  .day-tab .day-complete-dot {
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    margin-top: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .day-tab .day-complete-dot.show { opacity: 1; }
+
+  /* DAY HEADER */
+  .day-header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .day-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  .day-header .focus {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .day-header .duration {
+    display: inline-block;
+    font-size: 10px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 2px 8px;
+    margin-top: 8px;
+  }
+  .dg-transfer {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: var(--yellow-dim);
+    border: 1px solid var(--yellow-border);
+    font-size: 10px;
+    color: var(--yellow);
+    letter-spacing: 0.5px;
+  }
+  .dg-transfer strong { color: #e8c24a; }
+
+  /* WARMUP */
+  .warmup {
+    background: var(--green-dim);
+    border: 1px solid var(--green-border);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+  }
+  .warmup-title {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  .warmup-item {
+    font-size: 11px;
+    color: rgba(46, 204, 113, 0.75);
+    padding: 1px 0;
+  }
+
+  /* BLOCKS */
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 6px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .block.all-done { border-color: var(--green-border); }
+  .block-header {
+    width: 100%;
+    padding: 11px 14px;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s;
+  }
+  .block-header:hover { background: var(--surface2); }
+  .block-header .toggle { color: var(--accent); font-size: 16px; font-weight: 400; }
+  .block-body { padding: 0 14px 14px; }
+  .block-notes {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  /* EXERCISES */
+  .exercise {
+    padding: 10px 0;
+    border-top: 1px solid var(--border);
+  }
+  .exercise:first-child { border-top: none; }
+  .ex-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .ex-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .ex-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .ex-sets-label {
+    font-size: 9px;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 2px 6px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .ex-rest {
+    font-size: 9px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .ex-notes {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .ex-equip {
+    display: inline-block;
+    font-size: 8px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 1px 5px;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+
+  /* SET BUBBLES */
+  .set-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .set-label {
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    width: 32px;
+    flex-shrink: 0;
+  }
+  .set-bubble {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border-hi);
+    background: transparent;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .set-bubble:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  .set-bubble.done {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 12px var(--accent-glow);
+  }
+  .set-bubble.done::after {
+    content: '✓';
+    font-size: 12px;
+  }
+  .set-bubble:not(.done)::after {
+    content: attr(data-num);
+  }
+
+  /* TIMER */
+  .timer-bar {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: var(--timer-bg);
+    border: 1px solid var(--timer-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: timerSlideIn 0.3s ease-out;
+  }
+  @keyframes timerSlideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .timer-display {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--accent);
+    min-width: 60px;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  .timer-display.urgent { color: #ff6633; }
+  .timer-label {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .timer-progress {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .timer-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 1s linear;
+    box-shadow: 0 0 6px var(--accent);
+  }
+  .timer-btn {
+    padding: 4px 10px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 9px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .timer-btn:hover { background: var(--accent); color: var(--bg); }
+
+  /* RESET */
+  .reset-row {
+    margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  .reset-btn {
+    padding: 6px 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { border-color: #c0392b; color: #e74c3c; }
+
+  /* PROGRESSION VIEW */
+  .prog-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    margin-bottom: 6px;
+  }
+  .prog-card .week-badge {
+    font-size: 9px;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 2px 8px;
+    font-weight: 700;
+    display: inline-block;
+    margin-right: 8px;
+  }
+  .prog-card .phase-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 1px;
+    display: inline;
+  }
+  .prog-card .phase-detail {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+  .info-box {
+    padding: 14px 16px;
+    margin-top: 12px;
+    font-size: 11px;
+    line-height: 1.8;
+  }
+  .info-box.green { background: var(--green-dim); border: 1px solid var(--green-border); color: rgba(46,204,113,0.8); }
+  .info-box.green strong { color: var(--green); }
+  .info-box.yellow { background: var(--yellow-dim); border: 1px solid var(--yellow-border); color: rgba(212,168,50,0.8); }
+  .info-box.yellow strong { color: var(--yellow); }
+
+  /* PRINCIPLES */
+  .principle {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    margin-bottom: 6px;
+  }
+  .principle h3 {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .principle p {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  /* SESSION STATS */
+  .session-stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .stat-chip {
+    padding: 6px 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+  }
+  .stat-chip .stat-val {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 14px;
+    font-family: 'Outfit', sans-serif;
+    margin-right: 4px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 480px) {
+    .app { padding: 10px; }
+    .set-bubble { width: 28px; height: 28px; font-size: 9px; }
+    .timer-display { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+
+<script>
+// ============ DATA ============
+const DAYS = [
+  {
+    day: "Monday", label: "ROTATIONAL POWER + PUSH", icon: "🌀",
+    focus: "Explosive rotation, chest, shoulders, triceps",
+    dgTransfer: "Backhand & forehand power generation, release speed",
+    duration: "~70 min",
+    warmup: ["Jump rope — 3 min","Band pull-aparts — 2×15","World's greatest stretch — 5/side","Cable trunk rotations (light) — 2×10/side"],
+    blocks: [
+      { name: "A — ROTATIONAL POWER", notes: "Explosive intent. Move fast on the concentric.", exercises: [
+        { name: "Cable Woodchop (Low to High)", sets: "4×8/side", rest: "90s", restSec: 90, numSets: 4, notes: "Explode through hips. This IS your disc golf throw pattern.", equip: "Cable" },
+        { name: "Half-Kneeling Cable Chop (High to Low)", sets: "3×10/side", rest: "60s", restSec: 60, numSets: 3, notes: "Anti-rotation + deceleration. Trains the braking muscles.", equip: "Cable" },
+        { name: "Rotational MB Slam (or DB Rotational Press)", sets: "3×6/side", rest: "90s", restSec: 90, numSets: 3, notes: "Max intent. Use explosive single-arm cable press with rotation.", equip: "Floor/Cable" },
+      ]},
+      { name: "B — HORIZONTAL PUSH", notes: "Strength foundation for shoulder stability and pressing power.", exercises: [
+        { name: "Dumbbell Bench Press", sets: "4×8", rest: "2.5 min", restSec: 150, numSets: 4, notes: "Progressive overload — aim for PR sets.", equip: "DB" },
+        { name: "Incline DB Press", sets: "3×10", rest: "2 min", restSec: 120, numSets: 3, notes: "30° incline. Upper chest + front delts.", equip: "DB" },
+        { name: "Cable Flye", sets: "3×12", rest: "60s", restSec: 60, numSets: 3, notes: "Squeeze at peak contraction.", equip: "Cable" },
+      ]},
+      { name: "C — SHOULDERS & FINISHER", notes: "Shoulder health is non-negotiable for disc golfers.", exercises: [
+        { name: "DB Lateral Raise", sets: "4×12", rest: "60s", restSec: 60, numSets: 4, notes: "Control the eccentric. Capped delts = aesthetics.", equip: "DB" },
+        { name: "Cable Face Pull", sets: "3×15", rest: "60s", restSec: 60, numSets: 3, notes: "External rotation at the top. Protects rotator cuff.", equip: "Cable" },
+        { name: "Overhead Tricep Extension (Cable)", sets: "3×12", rest: "60s", restSec: 60, numSets: 3, notes: "Long head tricep. Arm size + elbow health.", equip: "Cable" },
+      ]},
+    ]
+  },
+  {
+    day: "Tuesday", label: "PULL + PULL-UP PROGRESSION", icon: "🎯",
+    focus: "Back, biceps, grip, pull-up volume",
+    dgTransfer: "Lat engagement in the pull-through, grip endurance for 18+ holes",
+    duration: "~65 min",
+    warmup: ["Rowing machine — 3 min easy","Band pull-aparts — 2×15","Scapular pull-ups — 3×5","Cat-cow — 10 reps"],
+    blocks: [
+      { name: "A — PULL-UP PROGRESSION", notes: "Build to sets of 5+ within 8 weeks.", exercises: [
+        { name: "Pull-Ups (Cluster Sets)", sets: "5×(1-2)", rest: "60s", restSec: 60, numSets: 5, notes: "Singles or doubles. Accumulate 8-10 total reps. Add a rep weekly.", equip: "Bar" },
+        { name: "Negative Pull-Ups", sets: "3×4 (5s down)", rest: "90s", restSec: 90, numSets: 3, notes: "Jump up, lower as slowly as possible.", equip: "Bar" },
+        { name: "Band-Assisted Pull-Ups", sets: "2×max", rest: "90s", restSec: 90, numSets: 2, notes: "Lightest band. Drop when you can do 3×3 unassisted.", equip: "Bar/Band" },
+      ]},
+      { name: "B — HORIZONTAL PULL", notes: "Thick back = aesthetics + disc golf power.", exercises: [
+        { name: "Single-Arm DB Row", sets: "4×8/side", rest: "90s", restSec: 90, numSets: 4, notes: "Heavy. PR tracker exercise. Brace hard.", equip: "DB" },
+        { name: "Cable Seated Row", sets: "4×10", rest: "2 min", restSec: 120, numSets: 4, notes: "Squeeze shoulder blades. Vary grip weekly.", equip: "Cable" },
+        { name: "Chest-Supported DB Row", sets: "3×12", rest: "60s", restSec: 60, numSets: 3, notes: "Incline bench face-down. Pure back.", equip: "DB" },
+      ]},
+      { name: "C — ARMS & GRIP", notes: "Forearm/grip endurance directly impacts late-round putting.", exercises: [
+        { name: "Hammer Curls", sets: "3×10", rest: "60s", restSec: 60, numSets: 3, notes: "Brachioradialis + forearm.", equip: "DB" },
+        { name: "Cable Curl", sets: "3×12", rest: "60s", restSec: 60, numSets: 3, notes: "Constant tension. Great for peak contraction.", equip: "Cable" },
+        { name: "Farmer's Carry", sets: "3×40yd", rest: "60s", restSec: 60, numSets: 3, notes: "Heaviest DBs you can hold. Grip, traps, core.", equip: "DB" },
+      ]},
+    ]
+  },
+  {
+    day: "Wednesday", label: "LEGS + SINGLE-LEG POWER", icon: "⚡",
+    focus: "Quads, glutes, hip power, single-leg stability",
+    dgTransfer: "X-step drive, plant-foot bracing, hill navigation, injury-proof knees",
+    duration: "~75 min",
+    warmup: ["Bike — 4 min progressive","Goblet squat hold — 30 sec","Walking lunges (BW) — 10/side","Single-leg glute bridge — 2×10/side"],
+    blocks: [
+      { name: "A — COMPOUND LOWER", notes: "Build raw leg strength. These are your PR lifts.", exercises: [
+        { name: "Goblet Squat (or DB Front Squat)", sets: "4×8", rest: "2.5 min", restSec: 150, numSets: 4, notes: "Heaviest DB. When 50 lbs is easy, add pauses or tempo.", equip: "DB" },
+        { name: "DB Romanian Deadlift", sets: "4×10", rest: "2 min", restSec: 120, numSets: 4, notes: "Slow eccentric (3s down). Protects low back for DG rounds.", equip: "DB" },
+      ]},
+      { name: "B — SINGLE-LEG (DG SPECIFIC)", notes: "Disc golf is a single-leg sport. Your brace foot absorbs massive force.", exercises: [
+        { name: "Bulgarian Split Squat", sets: "3×8/side", rest: "90s", restSec: 90, numSets: 3, notes: "THE most transferable exercise to disc golf. Mimics the plant.", equip: "DB" },
+        { name: "Single-Leg DB Step-Up", sets: "3×10/side", rest: "60s", restSec: 60, numSets: 3, notes: "Drive through the heel. No push-off from back foot.", equip: "DB" },
+        { name: "Cable Pull-Through", sets: "3×12", rest: "60s", restSec: 60, numSets: 3, notes: "Hip hinge. Glute activation + posterior chain.", equip: "Cable" },
+      ]},
+      { name: "C — CORE STABILITY", notes: "Anti-rotation and bracing — protects your spine during max-distance throws.", exercises: [
+        { name: "Pallof Press (Cable)", sets: "3×10/side", rest: "60s", restSec: 60, numSets: 3, notes: "THE anti-rotation exercise. Trains resisting forces that hurt backs.", equip: "Cable" },
+        { name: "Dead Bug", sets: "3×8/side", rest: "45s", restSec: 45, numSets: 3, notes: "Slow and controlled. Add DB or band when easy.", equip: "Floor" },
+        { name: "Plank Shoulder Taps", sets: "3×10/side", rest: "45s", restSec: 45, numSets: 3, notes: "Anti-rotation under fatigue. Hips dead still.", equip: "Floor" },
+      ]},
+    ]
+  },
+  {
+    day: "Thursday", label: "UPPER HYPERTROPHY + SHOULDER HEALTH", icon: "💎",
+    focus: "Volume — chest, back, shoulders, arms. Chase the pump.",
+    dgTransfer: "Muscle endurance for tournament rounds, balanced physique, injury-proofing",
+    duration: "~60 min",
+    warmup: ["Jump rope — 3 min","Band dislocates — 2×10","Push-ups — 2×10","Arm circles — 30s each direction"],
+    blocks: [
+      { name: "A — PUSH/PULL SUPERSETS", notes: "Paired sets. Rest 60-90s between pairs.", exercises: [
+        { name: "A1: DB Floor Press", sets: "4×10", rest: "—", restSec: 0, numSets: 4, notes: "Floor limits ROM — safer for shoulders under volume.", equip: "DB" },
+        { name: "A2: Cable Lat Pulldown (or Pull-Ups)", sets: "4×10", rest: "90s", restSec: 90, numSets: 4, notes: "Superset with floor press. Wide grip for V-taper.", equip: "Cable/Bar" },
+        { name: "B1: Arnold Press", sets: "3×10", rest: "—", restSec: 0, numSets: 3, notes: "Rotation during press mimics throwing mechanics.", equip: "DB" },
+        { name: "B2: Cable Face Pull + Ext Rotation", sets: "3×15", rest: "60s", restSec: 60, numSets: 3, notes: "Superset. Rear delts + rotator cuff. Non-negotiable.", equip: "Cable" },
+      ]},
+      { name: "B — ARMS & DETAIL", notes: "Aesthetics day. Chase the pump.", exercises: [
+        { name: "Incline DB Curl", sets: "3×10", rest: "60s", restSec: 60, numSets: 3, notes: "Stretched position. Long head bicep.", equip: "DB" },
+        { name: "Cable Tricep Pushdown", sets: "3×12", rest: "60s", restSec: 60, numSets: 3, notes: "Rope attachment. Squeeze hard at bottom.", equip: "Cable" },
+        { name: "DB Lateral Raise (Drop Set)", sets: "2×(12,10,8)", rest: "90s", restSec: 90, numSets: 2, notes: "2 brutal drop sets. Boulder shoulders.", equip: "DB" },
+        { name: "Cable Rear Delt Fly", sets: "3×15", rest: "45s", restSec: 45, numSets: 3, notes: "Light weight. Feel the squeeze.", equip: "Cable" },
+      ]},
+    ]
+  },
+  {
+    day: "Friday", label: "ATHLETIC POWER + CONDITIONING", icon: "🔥",
+    focus: "Explosive movement, conditioning, mobility",
+    dgTransfer: "Round stamina, explosive first-step, mental toughness in playoff holes",
+    duration: "~70 min",
+    warmup: ["Rowing machine — 3 min building intensity","Kettlebell halo — 2×8/direction","Hip 90/90 switches — 10 reps","High knees — 30 sec"],
+    blocks: [
+      { name: "A — POWER", notes: "Train the nervous system to produce force FAST.", exercises: [
+        { name: "KB Swing", sets: "5×10", rest: "90s", restSec: 90, numSets: 5, notes: "Explosive hip snap. Think about your throw's hip engagement.", equip: "KB" },
+        { name: "Jump Squat (BW or Light DB)", sets: "4×6", rest: "90s", restSec: 90, numSets: 4, notes: "Max height. Land soft. Rate of force development.", equip: "Floor/DB" },
+        { name: "Rotational Cable Chop (Explosive)", sets: "3×8/side", rest: "60s", restSec: 60, numSets: 3, notes: "Lighter than Monday. Focus on SPEED of rotation.", equip: "Cable" },
+      ]},
+      { name: "B — CONDITIONING CIRCUIT", notes: "3 rounds, minimal rest. Simulates tournament effort.", exercises: [
+        { name: "KB Goblet Squat → Push-Ups → Renegade Row → Jump Rope", sets: "3 rounds", rest: "90s between rounds", restSec: 90, numSets: 3, notes: "10 squats / 15 push-ups / 8 rows per side / 60s rope. No rest between exercises.", equip: "KB/DB/Rope" },
+      ]},
+      { name: "C — MOBILITY COOLDOWN", notes: "Disc golf demands range of motion. Invest here.", exercises: [
+        { name: "90/90 Hip Stretch", sets: "60s/side", rest: "—", restSec: 0, numSets: 2, notes: "Hip internal rotation is the hidden key to huge drives.", equip: "Floor" },
+        { name: "Thoracic Spine Rotation (Open Book)", sets: "8/side", rest: "—", restSec: 0, numSets: 2, notes: "Unlock your t-spine. More rotation = more distance.", equip: "Floor" },
+        { name: "Shoulder Sleeper Stretch", sets: "45s/side", rest: "—", restSec: 0, numSets: 2, notes: "Prevents internal rotation deficit that wrecks throwers.", equip: "Floor" },
+      ]},
+    ]
+  }
+];
+
+const PROGRESSION = [
+  { week: "1–3", focus: "FOUNDATION", detail: "Learn all new movements. Hit prescribed reps/sets. Establish baseline weights." },
+  { week: "4–6", focus: "BUILD", detail: "Add 2.5–5 lbs to compounds weekly. Pull-up clusters increase by 1 rep/week." },
+  { week: "7–9", focus: "PUSH", detail: "Intensity techniques: drop sets, pause reps, tempo. Target 3×3 unassisted pull-ups." },
+  { week: "10–12", focus: "PEAK & DELOAD", detail: "Wk 10-11: PR attempts. Wk 12: deload at 60% volume. Test max pull-ups." },
+];
+
+const PRINCIPLES = [
+  { title: "WHY THIS ISN'T PPL ANYMORE", body: "PPL is a bodybuilding split. You're a rotational athlete who wants to look great. This program organizes around movement patterns and athletic qualities — rotational power, single-leg stability, push/pull strength, and conditioning. Every session has a disc golf purpose." },
+  { title: "REST PERIODS — SMARTER, NOT LONGER", body: "2–2.5 min for heavy compounds, 60–90s for accessories, supersets on Thursday. Power exercises get full 90s because quality > fatigue." },
+  { title: "THE BARELA PRINCIPLE", body: "Anthony Barela generates 60+ mph arm speed from his hips and core, not his arm. This program prioritizes hip-driven rotation (cable woodchops, KB swings), anti-rotation stability (Pallof press, dead bugs), and single-leg strength (Bulgarian split squats)." },
+  { title: "PROGRESSIVE OVERLOAD WITH 50 LB MAX", body: "Your DBs cap at 50 lbs. When that's easy: tempo manipulation, pause reps, 1.5 reps, drop sets, pre-exhaust supersets. The cable machine has unlimited progression — lean on it." },
+  { title: "RECOVERY & DG SCHEDULING", body: "Sat/Sun are OFF from lifting — perfect for rounds. Friday's mobility cooldown preps you for weekend play. Tournament Saturday? Skip Friday's conditioning circuit, keep power + mobility." },
+  { title: "TRACKING IN HEVY", body: "Log everything. Key PR lifts: DB Bench, Single-Arm Row, Goblet Squat, Bulgarian Split Squat, Pull-Up total reps/session, KB Swing weight. If you're not PRing somewhere every 2 weeks, adjust." },
+];
+
+// ============ STATE ============
+let state = {
+  view: 'program',
+  activeDay: 0,
+  expandedBlocks: {},
+  completedSets: {},
+  activeTimer: null,
+  timerRemaining: 0,
+  timerTotal: 0,
+  timerInterval: null,
+  timerExKey: null,
+};
+
+function getStorageKey() {
+  return 'rap_tracker_v2';
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(getStorageKey(), JSON.stringify({
+      completedSets: state.completedSets,
+    }));
+  } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(getStorageKey()));
+    if (saved && saved.completedSets) {
+      state.completedSets = saved.completedSets;
+    }
+  } catch(e) {}
+}
+
+function exKey(dayIdx, blockIdx, exIdx) {
+  return `${dayIdx}-${blockIdx}-${exIdx}`;
+}
+
+function isSetDone(key, setIdx) {
+  return state.completedSets[key] && state.completedSets[key].includes(setIdx);
+}
+
+function toggleSet(key, setIdx, restSec) {
+  if (!state.completedSets[key]) state.completedSets[key] = [];
+  const idx = state.completedSets[key].indexOf(setIdx);
+  if (idx === -1) {
+    state.completedSets[key].push(setIdx);
+    // Start timer if rest > 0
+    if (restSec > 0) {
+      startTimer(restSec, key);
+    }
+  } else {
+    state.completedSets[key].splice(idx, 1);
+    if (state.timerExKey === key) {
+      stopTimer();
+    }
+  }
+  saveState();
+  render();
+}
+
+function startTimer(seconds, exKeyVal) {
+  stopTimer();
+  state.timerTotal = seconds;
+  state.timerRemaining = seconds;
+  state.timerExKey = exKeyVal;
+  state.timerInterval = setInterval(() => {
+    state.timerRemaining--;
+    if (state.timerRemaining <= 0) {
+      stopTimer();
+      // audible chime — 3 tones
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTone(freq, startTime, duration, vol) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+          gain.gain.setValueAtTime(vol, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + duration);
+        }
+        const t = ctx.currentTime;
+        playTone(660, t, 0.25, 0.5);
+        playTone(880, t + 0.2, 0.25, 0.5);
+        playTone(1100, t + 0.4, 0.35, 0.6);
+      } catch(e) {}
+    }
+    render();
+  }, 1000);
+  render();
+}
+
+function stopTimer() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.timerInterval = null;
+  state.timerRemaining = 0;
+  state.timerTotal = 0;
+  state.timerExKey = null;
+}
+
+function skipTimer() {
+  stopTimer();
+  render();
+}
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+function getDayCompletionPct(dayIdx) {
+  const day = DAYS[dayIdx];
+  let total = 0, done = 0;
+  day.blocks.forEach((b, bi) => {
+    b.exercises.forEach((ex, ei) => {
+      const k = exKey(dayIdx, bi, ei);
+      total += ex.numSets;
+      done += (state.completedSets[k] || []).length;
+    });
+  });
+  return total > 0 ? done / total : 0;
+}
+
+function getSessionStats(dayIdx) {
+  const day = DAYS[dayIdx];
+  let total = 0, done = 0;
+  day.blocks.forEach((b, bi) => {
+    b.exercises.forEach((ex, ei) => {
+      const k = exKey(dayIdx, bi, ei);
+      total += ex.numSets;
+      done += (state.completedSets[k] || []).length;
+    });
+  });
+  return { total, done };
+}
+
+function resetDay(dayIdx) {
+  const day = DAYS[dayIdx];
+  day.blocks.forEach((b, bi) => {
+    b.exercises.forEach((ex, ei) => {
+      delete state.completedSets[exKey(dayIdx, bi, ei)];
+    });
+  });
+  stopTimer();
+  saveState();
+  render();
+}
+
+function resetAll() {
+  state.completedSets = {};
+  stopTimer();
+  saveState();
+  render();
+}
+
+// ============ RENDER ============
+function render() {
+  const app = document.getElementById('app');
+  let html = '';
+
+  // Header
+  html += `<div class="header">
+    <h1>ROTATIONAL ATHLETE PROTOCOL</h1>
+    <div class="sub">5-DAY DISC GOLF STRENGTH & POWER — DB / CABLE / KB / PULL-UP BAR</div>
+  </div>`;
+
+  // View tabs
+  html += `<div class="view-tabs">
+    ${['program','progression','principles'].map(v =>
+      `<button class="view-tab ${state.view === v ? 'active' : ''}" onclick="state.view='${v}'; render();">${v.toUpperCase()}</button>`
+    ).join('')}
+  </div>`;
+
+  if (state.view === 'program') {
+    html += renderProgram();
+  } else if (state.view === 'progression') {
+    html += renderProgression();
+  } else {
+    html += renderPrinciples();
+  }
+
+  // Footer
+  html += `<div class="footer">SAT + SUN → DISC GOLF / ACTIVE RECOVERY / REST &nbsp;|&nbsp; SLEEP 7–8 HRS &nbsp;|&nbsp; PROTEIN 0.8–1G/LB</div>`;
+
+  app.innerHTML = html;
+}
+
+function renderProgram() {
+  let html = '';
+  const di = state.activeDay;
+  const day = DAYS[di];
+
+  // Day tabs
+  html += `<div class="day-tabs">`;
+  DAYS.forEach((d, i) => {
+    const pct = getDayCompletionPct(i);
+    html += `<button class="day-tab ${state.activeDay === i ? 'active' : ''}" onclick="state.activeDay=${i}; state.expandedBlocks={}; render();">
+      <span class="day-icon">${d.icon}</span>
+      ${d.day.slice(0,3).toUpperCase()}
+      <span class="day-complete-dot ${pct >= 1 ? 'show' : ''}"></span>
+    </button>`;
+  });
+  html += `</div>`;
+
+  // Session stats
+  const stats = getSessionStats(di);
+  const pct = stats.total > 0 ? Math.round(stats.done / stats.total * 100) : 0;
+  html += `<div class="session-stats">
+    <div class="stat-chip"><span class="stat-val">${stats.done}</span>/<span>${stats.total}</span> SETS</div>
+    <div class="stat-chip"><span class="stat-val">${pct}%</span> COMPLETE</div>
+  </div>`;
+
+  // Day header
+  html += `<div class="day-header">
+    <h2>${day.day.toUpperCase()} — ${day.label}</h2>
+    <div class="focus">${day.focus}</div>
+    <span class="duration">${day.duration}</span>
+    <div class="dg-transfer"><strong>DG TRANSFER:</strong> ${day.dgTransfer}</div>
+  </div>`;
+
+  // Warmup
+  html += `<div class="warmup">
+    <div class="warmup-title">WARMUP</div>
+    ${day.warmup.map(w => `<div class="warmup-item">→ ${w}</div>`).join('')}
+  </div>`;
+
+  // Blocks
+  day.blocks.forEach((block, bi) => {
+    const expanded = state.expandedBlocks[bi];
+    // Check if all sets in block are done
+    let blockTotal = 0, blockDone = 0;
+    block.exercises.forEach((ex, ei) => {
+      const k = exKey(di, bi, ei);
+      blockTotal += ex.numSets;
+      blockDone += (state.completedSets[k] || []).length;
+    });
+    const allDone = blockTotal > 0 && blockDone >= blockTotal;
+
+    html += `<div class="block ${allDone ? 'all-done' : ''}">
+      <button class="block-header" onclick="state.expandedBlocks[${bi}] = !state.expandedBlocks[${bi}]; render();">
+        <span>${block.name} ${allDone ? '✓' : ''}</span>
+        <span class="toggle">${expanded ? '−' : '+'}</span>
+      </button>`;
+
+    if (expanded) {
+      html += `<div class="block-body">
+        <div class="block-notes">${block.notes}</div>`;
+
+      block.exercises.forEach((ex, ei) => {
+        const k = exKey(di, bi, ei);
+        html += `<div class="exercise">
+          <div class="ex-top">
+            <span class="ex-name">${ex.name}</span>
+            <div class="ex-meta">
+              <span class="ex-sets-label">${ex.sets}</span>
+              ${ex.rest !== '—' ? `<span class="ex-rest">REST ${ex.rest}</span>` : ''}
+            </div>
+          </div>
+          <div class="ex-notes">${ex.notes}</div>
+          <span class="ex-equip">${ex.equip}</span>
+          <div class="set-row">
+            <span class="set-label">SETS</span>`;
+
+        for (let s = 0; s < ex.numSets; s++) {
+          const done = isSetDone(k, s);
+          html += `<button class="set-bubble ${done ? 'done' : ''}" data-num="${s+1}" onclick="toggleSet('${k}', ${s}, ${ex.restSec})"></button>`;
+        }
+        html += `</div>`;
+
+        // Timer for this exercise
+        if (state.timerExKey === k && state.timerRemaining > 0) {
+          const pctLeft = (state.timerRemaining / state.timerTotal) * 100;
+          const urgent = state.timerRemaining <= 5;
+          html += `<div class="timer-bar">
+            <div class="timer-display ${urgent ? 'urgent' : ''}">${formatTime(state.timerRemaining)}</div>
+            <div class="timer-label">REST</div>
+            <div class="timer-progress"><div class="timer-progress-fill" style="width:${pctLeft}%"></div></div>
+            <button class="timer-btn" onclick="skipTimer()">SKIP</button>
+          </div>`;
+        }
+
+        html += `</div>`;
+      });
+
+      html += `</div>`;
+    }
+    html += `</div>`;
+  });
+
+  // Reset buttons
+  html += `<div class="reset-row">
+    <button class="reset-btn" onclick="if(confirm('Reset today\\'s sets?')) resetDay(${di})">RESET TODAY</button>
+    <button class="reset-btn" onclick="if(confirm('Reset ALL tracked data?')) resetAll()">RESET ALL</button>
+  </div>`;
+
+  return html;
+}
+
+function renderProgression() {
+  let html = '';
+  html += `<h2 style="font-family:'Outfit',sans-serif;font-size:16px;color:var(--accent);letter-spacing:2px;margin-bottom:14px;">12-WEEK PROGRESSION MODEL</h2>`;
+  PROGRESSION.forEach(p => {
+    html += `<div class="prog-card">
+      <span class="week-badge">WK ${p.week}</span>
+      <span class="phase-name">${p.focus}</span>
+      <div class="phase-detail">${p.detail}</div>
+    </div>`;
+  });
+
+  html += `<div class="info-box green">
+    <strong>PULL-UP ROADMAP</strong><br>
+    Wk 1–3: Cluster singles/doubles + negatives → 8–10 reps/session<br>
+    Wk 4–6: Build to 5×2 unassisted → drop band assistance<br>
+    Wk 7–9: Target 3×3 → add weighted negatives<br>
+    Wk 10–12: Test max set → goal: 5+ unassisted
+  </div>`;
+
+  html += `<div class="info-box yellow">
+    <strong>WHEN 50 LB DUMBBELLS AREN'T ENOUGH</strong><br>
+    → 3-sec eccentric, 1-sec pause, explosive concentric<br>
+    → 1.5 reps: down, halfway up, back down, all the way up = 1<br>
+    → 2-sec paused reps at the hardest point<br>
+    → Single-arm/single-leg variations<br>
+    → Pre-exhaust: isolation before compound
+  </div>`;
+
+  return html;
+}
+
+function renderPrinciples() {
+  let html = '';
+  html += `<h2 style="font-family:'Outfit',sans-serif;font-size:16px;color:var(--accent);letter-spacing:2px;margin-bottom:14px;">PROGRAMMING PRINCIPLES</h2>`;
+  PRINCIPLES.forEach(p => {
+    html += `<div class="principle">
+      <h3>${p.title}</h3>
+      <p>${p.body}</p>
+    </div>`;
+  });
+  return html;
+}
+
+// ============ INIT ============
+loadState();
+render();
+</script>
+</body>
+</html>
