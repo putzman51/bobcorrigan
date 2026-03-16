@@ -1,230 +1,985 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rotational Athlete Protocol</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #080808;
-    --surface: #111;
-    --surface2: #1a1a1a;
-    --border: #1e1e1e;
-    --border-hi: #2a2a2a;
-    --text: #e4e0d8;
-    --text-dim: #999;
-    --text-muted: #555;
-    --accent: #ff4d00;
-    --green: #2ecc71;
-    --green-dim: rgba(46,204,113,0.08);
-    --green-border: rgba(46,204,113,0.2);
-    --yellow: #d4a832;
-    --yellow-dim: rgba(212,168,50,0.07);
-    --yellow-border: rgba(212,168,50,0.18);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'DM Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
-  }
-  .app { max-width: 680px; margin: 0 auto; padding: 20px 16px; }
-  .header { border-bottom: 2px solid var(--accent); padding-bottom: 14px; margin-bottom: 24px; position: relative; }
-  .header::after { content:''; position:absolute; bottom:-2px; left:0; width:100%; height:1px; background:var(--accent); box-shadow:0 0 20px var(--accent),0 0 60px rgba(255,77,0,0.25); }
-  .header h1 { font-family:'Outfit',sans-serif; font-size:clamp(18px,4.5vw,26px); font-weight:900; color:var(--accent); letter-spacing:3px; text-transform:uppercase; }
-  .header .sub { font-size:10px; color:var(--text-muted); letter-spacing:2px; margin-top:4px; }
-  .view-btns { display:flex; gap:6px; margin-bottom:18px; }
-  .view-btn { padding:5px 14px; background:transparent; color:var(--text-muted); border:1px solid var(--border); font-family:inherit; font-size:10px; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all .15s; }
-  .view-btn:hover { border-color:var(--text-dim); color:var(--text-dim); }
-  .view-btn.active { background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
-  .day-tabs { display:flex; gap:4px; margin-bottom:20px; position:sticky; top:0; z-index:10; background:var(--bg); padding:4px 0 8px; }
-  .day-tab { flex:1; padding:10px 4px; background:var(--surface); color:var(--text-dim); border:1px solid var(--border); font-family:inherit; font-size:10px; cursor:pointer; text-align:center; transition:all .15s; letter-spacing:1px; }
-  .day-tab:hover { border-color:var(--border-hi); color:var(--text); }
-  .day-tab .di { font-size:16px; display:block; margin-bottom:2px; }
-  .day-tab.active { background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:700; }
-  .day-header { background:var(--surface); border:1px solid var(--border); padding:16px; margin-bottom:12px; }
-  .day-header h2 { font-family:'Outfit',sans-serif; font-size:16px; font-weight:800; color:var(--accent); letter-spacing:2px; }
-  .day-header .focus { font-size:11px; color:var(--text-dim); margin-top:4px; }
-  .day-header .dur { display:inline-block; font-size:10px; color:var(--accent); border:1px solid rgba(255,77,0,0.4); padding:2px 8px; margin-top:8px; }
-  .dgt { margin-top:8px; padding:8px 12px; background:var(--yellow-dim); border:1px solid var(--yellow-border); font-size:10px; color:var(--yellow); line-height:1.5; }
-  .dgt strong { color:#e8c24a; }
-  .warmup { background:var(--green-dim); border:1px solid var(--green-border); padding:12px 14px; margin-bottom:14px; }
-  .warmup-t { font-size:9px; font-weight:700; color:var(--green); letter-spacing:3px; margin-bottom:6px; }
-  .warmup-i { font-size:11px; color:rgba(46,204,113,0.7); padding:2px 0; }
-  .block { background:var(--surface); border:1px solid var(--border); margin-bottom:6px; overflow:hidden; }
-  .bh { width:100%; padding:12px 14px; background:transparent; color:var(--text); border:none; font-family:inherit; font-size:12px; font-weight:700; letter-spacing:1px; cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center; transition:background .1s; }
-  .bh:hover { background:var(--surface2); }
-  .bh .tgl { color:var(--accent); font-size:14px; }
-  .bb { padding:0 14px 14px; }
-  .bn { font-size:10px; color:var(--text-dim); font-style:italic; margin-bottom:10px; line-height:1.5; }
-  .ex { padding:10px 0; border-top:1px solid var(--border); }
-  .ex:first-child { border-top:none; }
-  .et { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; flex-wrap:wrap; }
-  .en { font-size:12px; font-weight:700; color:var(--text); line-height:1.3; }
-  .em { display:flex; gap:8px; align-items:center; flex-shrink:0; }
-  .es { font-size:9px; color:var(--bg); background:var(--accent); padding:2px 6px; font-weight:700; white-space:nowrap; }
-  .er { font-size:9px; color:var(--text-muted); white-space:nowrap; }
-  .eno { font-size:10px; color:var(--text-dim); margin-top:4px; line-height:1.5; }
-  .eq { display:inline-block; font-size:8px; color:var(--text-muted); background:var(--surface2); padding:1px 5px; margin-top:4px; letter-spacing:1px; }
-  .pc { background:var(--surface); border:1px solid var(--border); padding:14px 16px; margin-bottom:6px; }
-  .wb { font-size:9px; background:var(--accent); color:var(--bg); padding:2px 8px; font-weight:700; display:inline-block; margin-right:8px; }
-  .pn { font-family:'Outfit',sans-serif; font-size:14px; font-weight:700; letter-spacing:1px; }
-  .pd { font-size:11px; color:var(--text-dim); margin-top:6px; line-height:1.6; }
-  .ib { padding:14px 16px; margin-top:12px; font-size:11px; line-height:1.8; }
-  .ib.g { background:var(--green-dim); border:1px solid var(--green-border); color:rgba(46,204,113,0.75); }
-  .ib.g strong { color:var(--green); }
-  .ib.y { background:var(--yellow-dim); border:1px solid var(--yellow-border); color:rgba(212,168,50,0.75); }
-  .ib.y strong { color:var(--yellow); }
-  .footer { margin-top:24px; padding-top:10px; border-top:1px solid var(--border); font-size:9px; color:var(--text-muted); letter-spacing:1px; text-align:center; }
-  @media(max-width:480px){ .app{padding:12px 10px;} }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Workout — Bob Corrigan</title>
+  <meta name="description" content="5-day disc golf strength & power program — rotational power, pull-up progression, single-leg stability, hypertrophy, and conditioning." />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #1a1714;
+      --paper: #f0ebe3;
+      --cream: #e8e0d4;
+      --green: #d4f0d8;
+      --green-dim: #d4f0d830;
+      --green-glow: #d4f0d818;
+      --green-dark: #c2e8c7;
+      --green-accent: #4a9e6e;
+      --muted: #8a8178;
+      --rule: #c8bfb4;
+      --warm: #d4a373;
+      --yellow: #9a7d2e;
+      --yellow-dim: rgba(176, 141, 50, 0.06);
+      --yellow-border: rgba(176, 141, 50, 0.22);
+    }
+
+    html { height: 100%; scroll-behavior: smooth; }
+
+    body {
+      background: #b8b0a4;
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      min-height: 100vh;
+      padding: 1.5rem;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Crosshatch desktop pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.15'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Mac window ── */
+    .mac-window {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 1rem auto;
+      border: 2px solid var(--ink);
+      border-radius: 8px 8px 2px 2px;
+      background: var(--paper);
+      box-shadow:
+        4px 4px 0 rgba(0,0,0,0.15),
+        inset 0 0 0 1px rgba(255,255,255,0.3);
+      overflow: hidden;
+    }
+
+    .title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 28px;
+      background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
+      border-bottom: 2px solid var(--ink);
+      user-select: none;
+    }
+
+    .traffic-lights {
+      position: absolute;
+      left: 10px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .traffic-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+    .traffic-dot.close { background: #ff6058; }
+    .traffic-dot.minimize { background: #ffbd2e; }
+    .traffic-dot.maximize { background: var(--green); }
+
+    .title-bar-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+
+    .menu-bar {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 0.3rem 1rem;
+      background: var(--cream);
+      border-bottom: 1px solid var(--rule);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5rem;
+      color: var(--muted);
+      user-select: none;
+    }
+    .menu-bar span { cursor: default; }
+    .menu-bar span:first-child { font-weight: 700; color: var(--ink); }
+
+    .menu-link {
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.15s;
+      cursor: pointer;
+    }
+    .menu-link:hover { color: var(--green-accent); }
+
+    .window-body { padding: 1.5rem; }
+
+    /* ── Top bar ── */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.1s;
+    }
+
+    .site-url {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .top-right-label {
+      font-size: 0.48rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Hero ── */
+    .hero {
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.15s;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero .tagline {
+      font-size: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero .tagline span {
+      color: var(--green-accent);
+      margin: 0 0.25rem;
+    }
+
+    /* ── View tabs ── */
+    .view-tabs {
+      display: flex;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.25s;
+    }
+
+    .view-tab {
+      padding: 0.35rem 0.7rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.5rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1.5px solid var(--rule);
+      background: var(--paper);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .view-tab:hover { border-color: var(--ink); color: var(--ink); }
+    .view-tab.active {
+      background: var(--green);
+      color: var(--ink);
+      border-color: var(--green-dark);
+      font-weight: 400;
+      box-shadow: 0 2px 0 var(--green-dark);
+    }
+
+    /* ── Day tabs ── */
+    .day-tabs {
+      display: flex;
+      gap: 0.3rem;
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards 0.3s;
+    }
+
+    .day-tab {
+      flex: 1;
+      padding: 0.75rem 0.2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-align: center;
+      color: var(--muted);
+      border: 1.5px solid var(--rule);
+      background: var(--paper);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+    .day-tab:hover { border-color: var(--muted); color: var(--ink); }
+    .day-tab.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* ── Card (day header) ── */
+    .card {
+      border: 1.5px solid var(--rule);
+      background: var(--paper);
+      margin-bottom: 0.65rem;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .card:hover {
+      box-shadow: 4px 4px 0 var(--green-dim);
+      border-color: var(--muted);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--rule);
+      background: var(--cream);
+    }
+
+    .card-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    .card-icon path,
+    .card-icon circle,
+    .card-icon line,
+    .card-icon rect {
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card-number {
+      margin-left: auto;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.48rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--rule);
+    }
+
+    .card-body { padding: 1rem; }
+
+    .day-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .day-focus {
+      font-size: 0.55rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 0.6rem;
+    }
+
+    .day-duration {
+      display: inline-block;
+      font-size: 0.48rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--green);
+      border: 1.5px solid var(--green-dark);
+      padding: 0.12rem 0.5rem;
+      box-shadow: 0 1px 0 var(--green-dark);
+    }
+
+    .dg-transfer {
+      margin-top: 0.6rem;
+      padding: 0.5rem 0.7rem;
+      background: var(--yellow-dim);
+      border: 1px solid var(--yellow-border);
+      font-size: 0.5rem;
+      font-weight: 300;
+      color: var(--yellow);
+      line-height: 1.6;
+    }
+    .dg-transfer strong { color: #7a6520; font-weight: 400; }
+
+    /* ── Warmup ── */
+    .warmup-card {
+      border: 2px solid #3a7d55;
+      background: #e8f5ec;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.65rem;
+      border-radius: 2px;
+    }
+    .warmup-label {
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #2d6a46;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #b8dcc4;
+    }
+    .warmup-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #1a3d28;
+      padding: 0.35rem 0;
+      line-height: 1.5;
+      border-bottom: 1px solid #d0e8d6;
+    }
+    .warmup-item:last-child { border-bottom: none; }
+
+    /* ── Exercise blocks ── */
+    .block {
+      border: 1.5px solid var(--rule);
+      background: var(--paper);
+      margin-bottom: 0.45rem;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .block:hover {
+      box-shadow: 4px 4px 0 var(--green-dim);
+      border-color: var(--muted);
+    }
+
+    .block-header {
+      display: flex;
+      align-items: center;
+      padding: 0.65rem 0.9rem;
+      background: var(--cream);
+      border: none;
+      border-bottom: 1px solid var(--rule);
+      cursor: pointer;
+      transition: background 0.15s;
+      width: 100%;
+      font-family: 'DM Mono', monospace;
+      text-align: left;
+      color: var(--ink);
+    }
+    .block-header:hover { background: #ddd6c8; }
+
+    .block-label {
+      font-size: 0.52rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .block-toggle {
+      color: var(--green-accent);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      font-weight: 300;
+    }
+
+    .block-body {
+      display: none;
+      padding: 0.5rem 0.9rem 0.9rem;
+    }
+    .block.open .block-body { display: block; }
+
+    .block-notes {
+      font-size: 0.55rem;
+      font-weight: 300;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 0.4rem;
+      padding-top: 0.3rem;
+    }
+
+    /* ── Exercises ── */
+    .exercise {
+      padding: 0.6rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .exercise:first-child { border-top: none; }
+
+    .ex-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .ex-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .ex-meta {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .ex-sets {
+      font-size: 0.48rem;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--green);
+      border: 1px solid var(--green-dark);
+      padding: 0.1rem 0.4rem;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .ex-rest {
+      font-size: 0.48rem;
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+
+    .ex-notes {
+      font-size: 0.55rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      line-height: 1.6;
+    }
+
+    .ex-equip {
+      display: inline-block;
+      font-size: 0.42rem;
+      font-weight: 300;
+      color: var(--muted);
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      padding: 0.06rem 0.3rem;
+      margin-top: 0.2rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ── Progression cards ── */
+    .prog-card {
+      border: 1.5px solid var(--rule);
+      background: var(--paper);
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.45rem;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .prog-card:hover {
+      box-shadow: 4px 4px 0 var(--green-dim);
+      border-color: var(--muted);
+    }
+
+    .week-badge {
+      display: inline-block;
+      font-size: 0.48rem;
+      font-weight: 400;
+      background: var(--green);
+      color: var(--ink);
+      border: 1px solid var(--green-dark);
+      padding: 0.1rem 0.4rem;
+      letter-spacing: 0.1em;
+      margin-right: 0.45rem;
+    }
+
+    .phase-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .phase-detail {
+      font-size: 0.55rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      line-height: 1.7;
+    }
+
+    /* ── Info boxes ── */
+    .info-box {
+      padding: 0.85rem 1rem;
+      margin-top: 0.65rem;
+      font-size: 0.55rem;
+      font-weight: 300;
+      line-height: 1.8;
+      border: 1.5px solid;
+    }
+    .info-box.gb {
+      background: var(--green-glow);
+      border-color: var(--green-dark);
+      color: var(--green-accent);
+    }
+    .info-box.gb strong { color: #3a7d55; font-weight: 400; }
+    .info-box.yb {
+      background: var(--yellow-dim);
+      border-color: var(--yellow-border);
+      color: var(--yellow);
+    }
+    .info-box.yb strong { color: #7a6520; font-weight: 400; }
+
+    /* ── Footer ── */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards 0.6s;
+    }
+
+    .footer-left {
+      font-size: 0.45rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .footer-note {
+      font-size: 0.42rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      body { padding: 0.5rem; }
+      .mac-window {
+        margin: 0;
+        min-height: calc(100vh - 1rem);
+        border-radius: 8px 8px 2px 2px;
+      }
+      .window-body {
+        padding: 1rem;
+        min-height: calc(100vh - 1rem - 28px - 24px);
+        display: flex;
+        flex-direction: column;
+      }
+      .footer { margin-top: auto; }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      .hero h1 { font-size: clamp(1.5rem, 8vw, 2rem); }
+      .day-tabs { gap: 0.2rem; }
+      .day-tab { padding: 0.65rem 0.1rem; font-size: 0.65rem; }
+      .warmup-card { padding: 0.9rem 1rem; }
+      .warmup-item { font-size: 0.9rem; padding: 0.4rem 0; }
+      .title-bar-text { font-size: 0.5rem; }
+    }
+  </style>
 </head>
 <body>
-<div class="app" id="app"></div>
-<script>
-const D=[
-{day:"Monday",label:"ROTATIONAL POWER + PUSH",icon:"🌀",focus:"Explosive rotation, chest, shoulders, triceps",dg:"Backhand & forehand power generation, release speed",dur:"~70 min",
-warmup:["Jump rope — 3 min","Band pull-aparts — 2×15","World's greatest stretch — 5/side","Cable trunk rotations (light) — 2×10/side"],
-blocks:[
-{name:"A — ROTATIONAL POWER",notes:"Explosive intent. Move fast on the concentric.",ex:[
-{n:"Cable Woodchop (Low to High)",s:"4×8/side",r:"90s",no:"Explode through hips. This IS your disc golf throw pattern.",eq:"Cable"},
-{n:"Half-Kneeling Cable Chop (High to Low)",s:"3×10/side",r:"60s",no:"Anti-rotation + deceleration. Trains the braking muscles.",eq:"Cable"},
-{n:"Rotational MB Slam (or DB Rotational Press)",s:"3×6/side",r:"90s",no:"Max intent. Use explosive single-arm cable press with rotation.",eq:"Floor/Cable"},
-]},
-{name:"B — HORIZONTAL PUSH",notes:"Strength foundation for shoulder stability and pressing power.",ex:[
-{n:"Dumbbell Bench Press",s:"4×8",r:"2.5 min",no:"Progressive overload — aim for PR sets.",eq:"DB"},
-{n:"Incline DB Press",s:"3×10",r:"2 min",no:"30° incline. Upper chest + front delts.",eq:"DB"},
-{n:"Cable Flye",s:"3×12",r:"60s",no:"Squeeze at peak contraction.",eq:"Cable"},
-]},
-{name:"C — SHOULDERS & FINISHER",notes:"Shoulder health is non-negotiable for disc golfers.",ex:[
-{n:"DB Lateral Raise",s:"4×12",r:"60s",no:"Control the eccentric. Capped delts = aesthetics.",eq:"DB"},
-{n:"Cable Face Pull",s:"3×15",r:"60s",no:"External rotation at the top. Protects rotator cuff.",eq:"Cable"},
-{n:"Overhead Tricep Extension (Cable)",s:"3×12",r:"60s",no:"Long head tricep. Arm size + elbow health.",eq:"Cable"},
-]}
-]},
-{day:"Tuesday",label:"PULL + PULL-UP PROGRESSION",icon:"🎯",focus:"Back, biceps, grip, pull-up volume",dg:"Lat engagement in pull-through, grip endurance for 18+ holes",dur:"~65 min",
-warmup:["Rowing machine — 3 min easy","Band pull-aparts — 2×15","Scapular pull-ups — 3×5","Cat-cow — 10 reps"],
-blocks:[
-{name:"A — PULL-UP PROGRESSION",notes:"Build to sets of 5+ within 8 weeks.",ex:[
-{n:"Pull-Ups (Cluster Sets)",s:"5×(1-2)",r:"60s",no:"Singles or doubles. Accumulate 8-10 total reps. Add a rep weekly.",eq:"Bar"},
-{n:"Negative Pull-Ups",s:"3×4 (5s down)",r:"90s",no:"Jump up, lower as slowly as possible.",eq:"Bar"},
-{n:"Band-Assisted Pull-Ups",s:"2×max",r:"90s",no:"Lightest band. Drop when you can do 3×3 unassisted.",eq:"Bar/Band"},
-]},
-{name:"B — HORIZONTAL PULL",notes:"Thick back = aesthetics + disc golf power.",ex:[
-{n:"Single-Arm DB Row",s:"4×8/side",r:"90s",no:"Heavy. PR tracker exercise. Brace hard.",eq:"DB"},
-{n:"Cable Seated Row",s:"4×10",r:"2 min",no:"Squeeze shoulder blades. Vary grip weekly.",eq:"Cable"},
-{n:"Chest-Supported DB Row",s:"3×12",r:"60s",no:"Incline bench face-down. Pure back.",eq:"DB"},
-]},
-{name:"C — ARMS & GRIP",notes:"Forearm/grip endurance directly impacts late-round putting.",ex:[
-{n:"Hammer Curls",s:"3×10",r:"60s",no:"Brachioradialis + forearm.",eq:"DB"},
-{n:"Cable Curl",s:"3×12",r:"60s",no:"Constant tension. Great for peak contraction.",eq:"Cable"},
-{n:"Farmer's Carry",s:"3×40yd",r:"60s",no:"Heaviest DBs you can hold. Grip, traps, core.",eq:"DB"},
-]}
-]},
-{day:"Wednesday",label:"LEGS + SINGLE-LEG POWER",icon:"⚡",focus:"Quads, glutes, hip power, single-leg stability",dg:"X-step drive, plant-foot bracing, hill navigation, injury-proof knees",dur:"~75 min",
-warmup:["Bike — 4 min progressive","Goblet squat hold — 30 sec","Walking lunges (BW) — 10/side","Single-leg glute bridge — 2×10/side"],
-blocks:[
-{name:"A — COMPOUND LOWER",notes:"Build raw leg strength. These are your PR lifts.",ex:[
-{n:"Goblet Squat (or DB Front Squat)",s:"4×8",r:"2.5 min",no:"Heaviest DB. When 50 lbs is easy, add pauses or tempo.",eq:"DB"},
-{n:"DB Romanian Deadlift",s:"4×10",r:"2 min",no:"Slow eccentric (3s down). Protects low back for DG rounds.",eq:"DB"},
-]},
-{name:"B — SINGLE-LEG (DG SPECIFIC)",notes:"Disc golf is a single-leg sport. Your brace foot absorbs massive force.",ex:[
-{n:"Bulgarian Split Squat",s:"3×8/side",r:"90s",no:"THE most transferable exercise to disc golf. Mimics the plant.",eq:"DB"},
-{n:"Single-Leg DB Step-Up",s:"3×10/side",r:"60s",no:"Drive through the heel. No push-off from back foot.",eq:"DB"},
-{n:"Cable Pull-Through",s:"3×12",r:"60s",no:"Hip hinge. Glute activation + posterior chain.",eq:"Cable"},
-]},
-{name:"C — CORE STABILITY",notes:"Anti-rotation and bracing — protects your spine during max throws.",ex:[
-{n:"Pallof Press (Cable)",s:"3×10/side",r:"60s",no:"THE anti-rotation exercise.",eq:"Cable"},
-{n:"Dead Bug",s:"3×8/side",r:"45s",no:"Slow and controlled. Add DB or band when easy.",eq:"Floor"},
-{n:"Plank Shoulder Taps",s:"3×10/side",r:"45s",no:"Anti-rotation under fatigue. Hips dead still.",eq:"Floor"},
-]}
-]},
-{day:"Thursday",label:"UPPER HYPERTROPHY + SHOULDER HEALTH",icon:"💎",focus:"Volume — chest, back, shoulders, arms",dg:"Muscle endurance for tournament rounds, balanced physique, injury-proofing",dur:"~60 min",
-warmup:["Jump rope — 3 min","Band dislocates — 2×10","Push-ups — 2×10","Arm circles — 30s each direction"],
-blocks:[
-{name:"A — PUSH/PULL SUPERSETS",notes:"Paired sets. Rest 60-90s between pairs.",ex:[
-{n:"A1: DB Floor Press",s:"4×10",r:"—",no:"Floor limits ROM — safer for shoulders under volume.",eq:"DB"},
-{n:"A2: Cable Lat Pulldown (or Pull-Ups)",s:"4×10",r:"90s",no:"Superset with floor press. Wide grip for V-taper.",eq:"Cable/Bar"},
-{n:"B1: Arnold Press",s:"3×10",r:"—",no:"Rotation during press mimics throwing mechanics.",eq:"DB"},
-{n:"B2: Cable Face Pull + Ext Rotation",s:"3×15",r:"60s",no:"Superset. Rear delts + rotator cuff.",eq:"Cable"},
-]},
-{name:"B — ARMS & DETAIL",notes:"Chase the pump.",ex:[
-{n:"Incline DB Curl",s:"3×10",r:"60s",no:"Stretched position. Long head bicep.",eq:"DB"},
-{n:"Cable Tricep Pushdown",s:"3×12",r:"60s",no:"Rope attachment. Squeeze hard at bottom.",eq:"Cable"},
-{n:"DB Lateral Raise (Drop Set)",s:"2×(12,10,8)",r:"90s",no:"2 brutal drop sets. Boulder shoulders.",eq:"DB"},
-{n:"Cable Rear Delt Fly",s:"3×15",r:"45s",no:"Light weight. Feel the squeeze.",eq:"Cable"},
-]}
-]},
-{day:"Friday",label:"ATHLETIC POWER + CONDITIONING",icon:"🔥",focus:"Explosive movement, conditioning, mobility",dg:"Round stamina, explosive first-step, mental toughness in playoff holes",dur:"~70 min",
-warmup:["Rowing machine — 3 min building intensity","Kettlebell halo — 2×8/direction","Hip 90/90 switches — 10 reps","High knees — 30 sec"],
-blocks:[
-{name:"A — POWER",notes:"Train the nervous system to produce force FAST.",ex:[
-{n:"KB Swing",s:"5×10",r:"90s",no:"Explosive hip snap. Think about your throw's hip engagement.",eq:"KB"},
-{n:"Jump Squat (BW or Light DB)",s:"4×6",r:"90s",no:"Max height. Land soft. Rate of force development.",eq:"Floor/DB"},
-{n:"Rotational Cable Chop (Explosive)",s:"3×8/side",r:"60s",no:"Lighter than Monday. Focus on SPEED of rotation.",eq:"Cable"},
-]},
-{name:"B — CONDITIONING CIRCUIT",notes:"3 rounds, minimal rest. Simulates tournament effort.",ex:[
-{n:"KB Goblet Squat → Push-Ups → Renegade Row → Jump Rope",s:"3 rounds",r:"90s between",no:"10 squats / 15 push-ups / 8 rows per side / 60s rope. No rest between exercises.",eq:"KB/DB/Rope"},
-]},
-{name:"C — MOBILITY COOLDOWN",notes:"Disc golf demands range of motion. Invest here.",ex:[
-{n:"90/90 Hip Stretch",s:"60s/side",r:"—",no:"Hip internal rotation — hidden key to huge drives.",eq:"Floor"},
-{n:"Thoracic Spine Rotation (Open Book)",s:"8/side",r:"—",no:"Unlock your t-spine. More rotation = more distance.",eq:"Floor"},
-{n:"Shoulder Sleeper Stretch",s:"45s/side",r:"—",no:"Prevents internal rotation deficit that wrecks throwers.",eq:"Floor"},
-]}
-]}
-];
 
-const PR=[
-{w:"1–3",f:"FOUNDATION",d:"Learn all new movements. Hit prescribed reps/sets. Establish baseline weights."},
-{w:"4–6",f:"BUILD",d:"Add 2.5–5 lbs to compounds weekly. Pull-up clusters increase by 1 rep/week."},
-{w:"7–9",f:"PUSH",d:"Intensity techniques: drop sets, pause reps, tempo. Target 3×3 unassisted pull-ups."},
-{w:"10–12",f:"PEAK & DELOAD",d:"Wk 10-11: PR attempts. Wk 12: deload at 60% volume. Test max pull-ups."},
-];
+  <div class="mac-window">
 
-let ad=0,eb={},vw='w';
+    <!-- macOS title bar -->
+    <div class="title-bar">
+      <div class="traffic-lights">
+        <span class="traffic-dot close"></span>
+        <span class="traffic-dot minimize"></span>
+        <span class="traffic-dot maximize"></span>
+      </div>
+      <span class="title-bar-text">5 Day Weekly Workout Program</span>
+    </div>
 
-function R(){
-const a=document.getElementById('app');
-let h='';
-h+=`<div class="header"><h1>ROTATIONAL ATHLETE PROTOCOL</h1><div class="sub">5-DAY DISC GOLF STRENGTH & POWER — DB / CABLE / KB / PULL-UP BAR</div></div>`;
-h+=`<div class="view-btns"><button class="view-btn ${vw==='w'?'active':''}" onclick="vw='w';R()">WORKOUTS</button><button class="view-btn ${vw==='p'?'active':''}" onclick="vw='p';R()">PROGRESSION</button></div>`;
-if(vw==='p'){h+=rP();}else{h+=rW();}
-h+=`<div class="footer">SAT + SUN → DISC GOLF / ACTIVE RECOVERY / REST &nbsp;·&nbsp; SLEEP 7–8 HRS &nbsp;·&nbsp; PROTEIN 0.8–1G/LB</div>`;
-a.innerHTML=h;
-}
+    <!-- Menu bar -->
+    <nav class="menu-bar">
+      <span>File</span>
+      <a href="/" class="menu-link">Home</a>
+      <span>Program</span>
+      <span>Progression</span>
+    </nav>
 
-function rW(){
-let h='';const d=D[ad];
-h+=`<div class="day-tabs">`;
-D.forEach((x,i)=>{h+=`<button class="day-tab ${ad===i?'active':''}" onclick="ad=${i};eb={};R()"><span class="di">${x.icon}</span>${x.day.slice(0,3).toUpperCase()}</button>`;});
-h+=`</div>`;
-h+=`<div class="day-header"><h2>${d.day.toUpperCase()} — ${d.label}</h2><div class="focus">${d.focus}</div><span class="dur">${d.dur}</span><div class="dgt"><strong>DG TRANSFER:</strong> ${d.dg}</div></div>`;
-h+=`<div class="warmup"><div class="warmup-t">WARMUP</div>${d.warmup.map(w=>`<div class="warmup-i">→ ${w}</div>`).join('')}</div>`;
-d.blocks.forEach((b,bi)=>{
-const o=eb[bi];
-h+=`<div class="block"><button class="bh" onclick="eb[${bi}]=!eb[${bi}];R()"><span>${b.name}</span><span class="tgl">${o?'−':'+'}</span></button>`;
-if(o){
-h+=`<div class="bb"><div class="bn">${b.notes}</div>`;
-b.ex.forEach(e=>{
-h+=`<div class="ex"><div class="et"><span class="en">${e.n}</span><div class="em"><span class="es">${e.s}</span>${e.r!=='—'?`<span class="er">REST ${e.r}</span>`:''}</div></div><div class="eno">${e.no}</div><span class="eq">${e.eq}</span></div>`;
-});
-h+=`</div>`;}
-h+=`</div>`;});
-return h;
-}
+    <!-- Content -->
+    <div class="window-body">
 
-function rP(){
-let h=`<h2 style="font-family:'Outfit',sans-serif;font-size:16px;color:var(--accent);letter-spacing:2px;margin-bottom:14px;">12-WEEK PROGRESSION</h2>`;
-PR.forEach(p=>{h+=`<div class="pc"><span class="wb">WK ${p.w}</span><span class="pn">${p.f}</span><div class="pd">${p.d}</div></div>`;});
-h+=`<div class="ib g"><strong>PULL-UP ROADMAP</strong><br>Wk 1–3: Cluster singles/doubles + negatives → 8–10 reps/session<br>Wk 4–6: Build to 5×2 unassisted → drop band assistance<br>Wk 7–9: Target 3×3 → add weighted negatives<br>Wk 10–12: Test max set → goal: 5+ unassisted</div>`;
-h+=`<div class="ib y"><strong>WHEN 50 LB DUMBBELLS AREN'T ENOUGH</strong><br>→ 3-sec eccentric, 1-sec pause, explosive concentric<br>→ 1.5 reps: down, halfway up, back down, all the way up = 1<br>→ 2-sec paused reps at the hardest point<br>→ Single-arm/single-leg variations<br>→ Pre-exhaust: isolation before compound</div>`;
-return h;
-}
+      <div class="top-bar">
+        <span class="site-url">Loading Workout Sequence...</span>
+        <span class="top-right-label">5-Day Split</span>
+      </div>
 
-R();
-</script>
+      <!-- Hero -->
+      <header class="hero">
+        <h1>Daily Workout</h1>
+        <p class="tagline">DG Focused for Rotation Mechanics <span>·</span> DB <span>·</span> Cable <span>·</span> KB <span>·</span> Bar</p>
+      </header>
+
+      <!-- View tabs -->
+      <div class="view-tabs">
+        <button class="view-tab active" data-view="program">Program</button>
+        <button class="view-tab" data-view="progression">Progression</button>
+      </div>
+
+      <!-- ═══ PROGRAM VIEW ═══ -->
+      <div id="view-program">
+        <div class="day-tabs" id="day-tabs"></div>
+        <div id="day-content"></div>
+      </div>
+
+      <!-- ═══ PROGRESSION VIEW ═══ -->
+      <div id="view-progression" style="display:none;">
+
+        <div class="prog-card" style="opacity:0;animation:fadeUp 0.4s ease forwards 0.1s;">
+          <span class="week-badge">WK 1–3</span>
+          <span class="phase-name">Foundation</span>
+          <div class="phase-detail">Learn all new movements. Hit prescribed reps/sets. Establish baseline weights.</div>
+        </div>
+        <div class="prog-card" style="opacity:0;animation:fadeUp 0.4s ease forwards 0.15s;">
+          <span class="week-badge">WK 4–6</span>
+          <span class="phase-name">Build</span>
+          <div class="phase-detail">Add 2.5–5 lbs to compounds weekly. Pull-up clusters increase by 1 rep/week.</div>
+        </div>
+        <div class="prog-card" style="opacity:0;animation:fadeUp 0.4s ease forwards 0.2s;">
+          <span class="week-badge">WK 7–9</span>
+          <span class="phase-name">Push</span>
+          <div class="phase-detail">Intensity techniques: drop sets, pause reps, tempo. Target 3×3 unassisted pull-ups.</div>
+        </div>
+        <div class="prog-card" style="opacity:0;animation:fadeUp 0.4s ease forwards 0.25s;">
+          <span class="week-badge">WK 10–12</span>
+          <span class="phase-name">Peak & Deload</span>
+          <div class="phase-detail">Wk 10-11: PR attempts. Wk 12: deload at 60% volume. Test max pull-ups.</div>
+        </div>
+
+        <div class="info-box gb" style="opacity:0;animation:fadeUp 0.4s ease forwards 0.3s;">
+          <strong>PULL-UP ROADMAP</strong><br>
+          Wk 1–3: Cluster singles/doubles + negatives → 8–10 reps/session<br>
+          Wk 4–6: Build to 5×2 unassisted → drop band assistance<br>
+          Wk 7–9: Target 3×3 → add weighted negatives<br>
+          Wk 10–12: Test max set → goal: 5+ unassisted
+        </div>
+
+        <div class="info-box yb" style="opacity:0;animation:fadeUp 0.4s ease forwards 0.35s;">
+          <strong>WHEN 50 LB DUMBBELLS AREN'T ENOUGH</strong><br>
+          → 3-sec eccentric, 1-sec pause, explosive concentric<br>
+          → 1.5 reps: down, halfway up, back down, all the way up = 1<br>
+          → 2-sec paused reps at the hardest point<br>
+          → Single-arm/single-leg variations<br>
+          → Pre-exhaust: isolation before compound
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-left">
+          <span class="footer-dot"></span>
+          Sat + Sun Off
+        </div>
+        <span class="footer-note">Sleep 7–8 hrs · Protein 0.8–1g/lb</span>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Decorative dumbbell -->
+  <svg style="position:fixed;bottom:-40px;right:-30px;width:180px;height:180px;opacity:0.04;z-index:0;pointer-events:none;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="35" width="18" height="30" rx="3" fill="none" stroke="#1a1714" stroke-width="2"/>
+    <rect x="72" y="35" width="18" height="30" rx="3" fill="none" stroke="#1a1714" stroke-width="2"/>
+    <rect x="28" y="45" width="44" height="10" rx="2" fill="none" stroke="#1a1714" stroke-width="2"/>
+  </svg>
+
+  <script>
+    const DAYS = [
+      {
+        day: "Monday", label: "Rotational Power + Push", icon: "🌀",
+        focus: "Explosive rotation, chest, shoulders, triceps",
+        dgTransfer: "Backhand & forehand power generation, release speed",
+        duration: "~70 min",
+        warmup: ["Jump rope — 3 min","Band pull-aparts — 2×15","World's greatest stretch — 5/side","Cable trunk rotations (light) — 2×10/side"],
+        blocks: [
+          { name: "A — Rotational Power", notes: "Explosive intent. Move fast on the concentric.", exercises: [
+            { name: "Cable Woodchop (Low to High)", sets: "4×8/side", rest: "90s", notes: "Explode through hips. This IS your disc golf throw pattern.", equip: "Cable" },
+            { name: "Half-Kneeling Cable Chop (High to Low)", sets: "3×10/side", rest: "60s", notes: "Anti-rotation + deceleration. Trains the braking muscles.", equip: "Cable" },
+            { name: "Rotational MB Slam (or DB Rotational Press)", sets: "3×6/side", rest: "90s", notes: "Max intent. Use explosive single-arm cable press with rotation.", equip: "Floor/Cable" },
+          ]},
+          { name: "B — Horizontal Push", notes: "Strength foundation for shoulder stability and pressing power.", exercises: [
+            { name: "Dumbbell Bench Press", sets: "4×8", rest: "2.5 min", notes: "Progressive overload — aim for PR sets.", equip: "DB" },
+            { name: "Incline DB Press", sets: "3×10", rest: "2 min", notes: "30° incline. Upper chest + front delts.", equip: "DB" },
+            { name: "Cable Flye", sets: "3×12", rest: "60s", notes: "Squeeze at peak contraction.", equip: "Cable" },
+          ]},
+          { name: "C — Shoulders & Finisher", notes: "Shoulder health is non-negotiable for disc golfers.", exercises: [
+            { name: "DB Lateral Raise", sets: "4×12", rest: "60s", notes: "Control the eccentric. Capped delts = aesthetics.", equip: "DB" },
+            { name: "Cable Face Pull", sets: "3×15", rest: "60s", notes: "External rotation at the top. Protects rotator cuff.", equip: "Cable" },
+            { name: "Overhead Tricep Extension (Cable)", sets: "3×12", rest: "60s", notes: "Long head tricep. Arm size + elbow health.", equip: "Cable" },
+          ]},
+        ]
+      },
+      {
+        day: "Tuesday", label: "Pull + Pull-Up Progression", icon: "🎯",
+        focus: "Back, biceps, grip, pull-up volume",
+        dgTransfer: "Lat engagement in the pull-through, grip endurance for 18+ holes",
+        duration: "~65 min",
+        warmup: ["Rowing machine — 3 min easy","Band pull-aparts — 2×15","Scapular pull-ups — 3×5","Cat-cow — 10 reps"],
+        blocks: [
+          { name: "A — Pull-Up Progression", notes: "Build to sets of 5+ within 8 weeks.", exercises: [
+            { name: "Pull-Ups (Cluster Sets)", sets: "5×(1-2)", rest: "60s", notes: "Singles or doubles. Accumulate 8-10 total reps. Add a rep weekly.", equip: "Bar" },
+            { name: "Negative Pull-Ups", sets: "3×4 (5s down)", rest: "90s", notes: "Jump up, lower as slowly as possible.", equip: "Bar" },
+            { name: "Band-Assisted Pull-Ups", sets: "2×max", rest: "90s", notes: "Lightest band. Drop when you can do 3×3 unassisted.", equip: "Bar/Band" },
+          ]},
+          { name: "B — Horizontal Pull", notes: "Thick back = aesthetics + disc golf power.", exercises: [
+            { name: "Single-Arm DB Row", sets: "4×8/side", rest: "90s", notes: "Heavy. PR tracker exercise. Brace hard.", equip: "DB" },
+            { name: "Cable Seated Row", sets: "4×10", rest: "2 min", notes: "Squeeze shoulder blades. Vary grip weekly.", equip: "Cable" },
+            { name: "Chest-Supported DB Row", sets: "3×12", rest: "60s", notes: "Incline bench face-down. Pure back.", equip: "DB" },
+          ]},
+          { name: "C — Arms & Grip", notes: "Forearm/grip endurance directly impacts late-round putting.", exercises: [
+            { name: "Hammer Curls", sets: "3×10", rest: "60s", notes: "Brachioradialis + forearm.", equip: "DB" },
+            { name: "Cable Curl", sets: "3×12", rest: "60s", notes: "Constant tension. Great for peak contraction.", equip: "Cable" },
+            { name: "Farmer's Carry", sets: "3×40yd", rest: "60s", notes: "Heaviest DBs you can hold. Grip, traps, core.", equip: "DB" },
+          ]},
+        ]
+      },
+      {
+        day: "Wednesday", label: "Legs + Single-Leg Power", icon: "⚡",
+        focus: "Quads, glutes, hip power, single-leg stability",
+        dgTransfer: "X-step drive, plant-foot bracing, hill navigation, injury-proof knees",
+        duration: "~75 min",
+        warmup: ["Bike — 4 min progressive","Goblet squat hold — 30 sec","Walking lunges (BW) — 10/side","Single-leg glute bridge — 2×10/side"],
+        blocks: [
+          { name: "A — Compound Lower", notes: "Build raw leg strength. These are your PR lifts.", exercises: [
+            { name: "Goblet Squat (or DB Front Squat)", sets: "4×8", rest: "2.5 min", notes: "Heaviest DB. When 50 lbs is easy, add pauses or tempo.", equip: "DB" },
+            { name: "DB Romanian Deadlift", sets: "4×10", rest: "2 min", notes: "Slow eccentric (3s down). Protects low back for DG rounds.", equip: "DB" },
+          ]},
+          { name: "B — Single-Leg (DG Specific)", notes: "Disc golf is a single-leg sport. Your brace foot absorbs massive force.", exercises: [
+            { name: "Bulgarian Split Squat", sets: "3×8/side", rest: "90s", notes: "THE most transferable exercise to disc golf. Mimics the plant.", equip: "DB" },
+            { name: "Single-Leg DB Step-Up", sets: "3×10/side", rest: "60s", notes: "Drive through the heel. No push-off from back foot.", equip: "DB" },
+            { name: "Cable Pull-Through", sets: "3×12", rest: "60s", notes: "Hip hinge. Glute activation + posterior chain.", equip: "Cable" },
+          ]},
+          { name: "C — Core Stability", notes: "Anti-rotation and bracing — protects your spine during max-distance throws.", exercises: [
+            { name: "Pallof Press (Cable)", sets: "3×10/side", rest: "60s", notes: "THE anti-rotation exercise. Trains resisting forces that hurt backs.", equip: "Cable" },
+            { name: "Dead Bug", sets: "3×8/side", rest: "45s", notes: "Slow and controlled. Add DB or band when easy.", equip: "Floor" },
+            { name: "Plank Shoulder Taps", sets: "3×10/side", rest: "45s", notes: "Anti-rotation under fatigue. Hips dead still.", equip: "Floor" },
+          ]},
+        ]
+      },
+      {
+        day: "Thursday", label: "Upper Hypertrophy + Shoulder Health", icon: "💎",
+        focus: "Volume — chest, back, shoulders, arms. Chase the pump.",
+        dgTransfer: "Muscle endurance for tournament rounds, balanced physique, injury-proofing",
+        duration: "~60 min",
+        warmup: ["Jump rope — 3 min","Band dislocates — 2×10","Push-ups — 2×10","Arm circles — 30s each direction"],
+        blocks: [
+          { name: "A — Push/Pull Supersets", notes: "Paired sets. Rest 60-90s between pairs.", exercises: [
+            { name: "A1: DB Floor Press", sets: "4×10", rest: "—", notes: "Floor limits ROM — safer for shoulders under volume.", equip: "DB" },
+            { name: "A2: Cable Lat Pulldown (or Pull-Ups)", sets: "4×10", rest: "90s", notes: "Superset with floor press. Wide grip for V-taper.", equip: "Cable/Bar" },
+            { name: "B1: Arnold Press", sets: "3×10", rest: "—", notes: "Rotation during press mimics throwing mechanics.", equip: "DB" },
+            { name: "B2: Cable Face Pull + Ext Rotation", sets: "3×15", rest: "60s", notes: "Superset. Rear delts + rotator cuff. Non-negotiable.", equip: "Cable" },
+          ]},
+          { name: "B — Arms & Detail", notes: "Aesthetics day. Chase the pump.", exercises: [
+            { name: "Incline DB Curl", sets: "3×10", rest: "60s", notes: "Stretched position. Long head bicep.", equip: "DB" },
+            { name: "Cable Tricep Pushdown", sets: "3×12", rest: "60s", notes: "Rope attachment. Squeeze hard at bottom.", equip: "Cable" },
+            { name: "DB Lateral Raise (Drop Set)", sets: "2×(12,10,8)", rest: "90s", notes: "2 brutal drop sets. Boulder shoulders.", equip: "DB" },
+            { name: "Cable Rear Delt Fly", sets: "3×15", rest: "45s", notes: "Light weight. Feel the squeeze.", equip: "Cable" },
+          ]},
+        ]
+      },
+      {
+        day: "Friday", label: "Athletic Power + Conditioning", icon: "🔥",
+        focus: "Explosive movement, conditioning, mobility",
+        dgTransfer: "Round stamina, explosive first-step, mental toughness in playoff holes",
+        duration: "~70 min",
+        warmup: ["Rowing machine — 3 min building intensity","Kettlebell halo — 2×8/direction","Hip 90/90 switches — 10 reps","High knees — 30 sec"],
+        blocks: [
+          { name: "A — Power", notes: "Train the nervous system to produce force FAST.", exercises: [
+            { name: "KB Swing", sets: "5×10", rest: "90s", notes: "Explosive hip snap. Think about your throw's hip engagement.", equip: "KB" },
+            { name: "Jump Squat (BW or Light DB)", sets: "4×6", rest: "90s", notes: "Max height. Land soft. Rate of force development.", equip: "Floor/DB" },
+            { name: "Rotational Cable Chop (Explosive)", sets: "3×8/side", rest: "60s", notes: "Lighter than Monday. Focus on SPEED of rotation.", equip: "Cable" },
+          ]},
+          { name: "B — Conditioning Circuit", notes: "3 rounds, minimal rest. Simulates tournament effort.", exercises: [
+            { name: "KB Goblet Squat → Push-Ups → Renegade Row → Jump Rope", sets: "3 rounds", rest: "90s between rounds", notes: "10 squats / 15 push-ups / 8 rows per side / 60s rope. No rest between exercises.", equip: "KB/DB/Rope" },
+          ]},
+          { name: "C — Mobility Cooldown", notes: "Disc golf demands range of motion. Invest here.", exercises: [
+            { name: "90/90 Hip Stretch", sets: "60s/side", rest: "—", notes: "Hip internal rotation is the hidden key to huge drives.", equip: "Floor" },
+            { name: "Thoracic Spine Rotation (Open Book)", sets: "8/side", rest: "—", notes: "Unlock your t-spine. More rotation = more distance.", equip: "Floor" },
+            { name: "Shoulder Sleeper Stretch", sets: "45s/side", rest: "—", notes: "Prevents internal rotation deficit that wrecks throwers.", equip: "Floor" },
+          ]},
+        ]
+      }
+    ];
+
+    let activeDay = 0;
+    let openBlocks = {};
+
+    // View switching
+    document.querySelectorAll('.view-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const view = tab.dataset.view;
+        document.getElementById('view-program').style.display = view === 'program' ? '' : 'none';
+        document.getElementById('view-progression').style.display = view === 'progression' ? '' : 'none';
+      });
+    });
+
+    function renderDayTabs() {
+      document.getElementById('day-tabs').innerHTML = DAYS.map((d, i) =>
+        `<button class="day-tab ${i === activeDay ? 'active' : ''}" onclick="switchDay(${i})">
+          ${d.day.slice(0, 3).toUpperCase()}
+        </button>`
+      ).join('');
+    }
+
+    function renderDay() {
+      const d = DAYS[activeDay];
+      let html = '';
+
+      // Warmup (shown first for easy mobile access)
+      html += `<div class="warmup-card">
+        <div class="warmup-label">Warmup — ${d.day}</div>
+        ${d.warmup.map(w => `<div class="warmup-item">→ ${w}</div>`).join('')}
+      </div>`;
+
+      // Day header card
+      html += `<div class="card">
+        <div class="card-header">
+          <svg class="card-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.5 6.5a2 2 0 0 0-4 0v11a2 2 0 0 0 4 0v-4.5h11v4.5a2 2 0 0 0 4 0v-11a2 2 0 0 0-4 0v4.5h-11z"/>
+          </svg>
+          <span class="card-label">${d.day}</span>
+          <span class="card-number">${d.duration}</span>
+        </div>
+        <div class="card-body">
+          <div class="day-title">${d.label}</div>
+          <div class="day-focus">${d.focus}</div>
+          <span class="day-duration">${d.duration}</span>
+          <div class="dg-transfer"><strong>DG Transfer:</strong> ${d.dgTransfer}</div>
+        </div>
+      </div>`;
+
+      // Blocks
+      d.blocks.forEach((block, bi) => {
+        const isOpen = openBlocks[`${activeDay}-${bi}`];
+        html += `<div class="block ${isOpen ? 'open' : ''}">
+          <button class="block-header" onclick="toggleBlock(${bi})">
+            <span class="block-label">${block.name}</span>
+            <span class="block-toggle">${isOpen ? '−' : '+'}</span>
+          </button>
+          <div class="block-body">
+            <div class="block-notes">${block.notes}</div>`;
+
+        block.exercises.forEach(ex => {
+          html += `<div class="exercise">
+            <div class="ex-top">
+              <span class="ex-name">${ex.name}</span>
+              <div class="ex-meta">
+                <span class="ex-sets">${ex.sets}</span>
+                ${ex.rest !== '—' ? `<span class="ex-rest">Rest ${ex.rest}</span>` : ''}
+              </div>
+            </div>
+            <div class="ex-notes">${ex.notes}</div>
+            <span class="ex-equip">${ex.equip}</span>
+          </div>`;
+        });
+
+        html += `</div></div>`;
+      });
+
+      document.getElementById('day-content').innerHTML = html;
+    }
+
+    function switchDay(i) {
+      activeDay = i;
+      openBlocks = {};
+      renderDayTabs();
+      renderDay();
+    }
+
+    function toggleBlock(bi) {
+      const key = `${activeDay}-${bi}`;
+      openBlocks[key] = !openBlocks[key];
+      renderDay();
+    }
+
+    renderDayTabs();
+    renderDay();
+  </script>
 </body>
 </html>
