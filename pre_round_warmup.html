@@ -3,222 +3,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Pre-Round</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Pre-Round Warm-Up — Bob Corrigan</title>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f6f3ee;
-    --text: #2a2520;
-    --dim: #8a837a;
-    --muted: #b8b2a8;
-    --line: #e0dbd4;
-    --accent: #e8650a;
-    --accent-soft: rgba(232,101,10,0.06);
-    --accent-glow: rgba(232,101,10,0.12);
-    --done-bg: rgba(232,101,10,0.04);
-    --done-border: rgba(232,101,10,0.2);
+    --ink: #1a1714;
+    --paper: #f0ebe3;
+    --cream: #e8e0d4;
+    --green: #d4f0d8;
+    --green-dim: #d4f0d830;
+    --green-glow: #d4f0d818;
+    --green-dark: #c2e8c7;
+    --green-accent: #4a9e6e;
+    --muted: #8a8178;
+    --rule: #c8bfb4;
+    --warm: #d4a373;
+    --done-bg: rgba(74, 158, 110, 0.06);
+    --done-border: rgba(74, 158, 110, 0.3);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+  html { height: 100%; scroll-behavior: smooth; }
+
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: #b8b0a4;
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
     min-height: 100vh;
     min-height: 100dvh;
+    padding: 1.5rem;
+    position: relative;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  .app {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 40px 24px 60px;
+  /* Crosshatch desktop */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.15'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
   }
 
-  /* HEADER */
-  .header {
-    text-align: center;
-    margin-bottom: 48px;
-    padding-bottom: 32px;
-    border-bottom: 1px solid var(--line);
+  /* ── Progress bar ── */
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--green-accent);
+    transition: width 0.4s ease;
+    z-index: 200;
+    box-shadow: 0 0 10px rgba(74, 158, 110, 0.4);
   }
-  .header .mark {
-    font-size: 11px;
-    letter-spacing: 6px;
+
+  /* ── Mac window ── */
+  .mac-window {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 1rem auto;
+    border: 2px solid var(--ink);
+    border-radius: 8px 8px 2px 2px;
+    background: var(--paper);
+    box-shadow:
+      4px 4px 0 rgba(0,0,0,0.15),
+      inset 0 0 0 1px rgba(255,255,255,0.3);
+    overflow: hidden;
+  }
+
+  .title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 28px;
+    background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
+    border-bottom: 2px solid var(--ink);
+    user-select: none;
+  }
+
+  .traffic-lights {
+    position: absolute;
+    left: 10px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .traffic-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+  .traffic-dot.close { background: #ff6058; }
+  .traffic-dot.minimize { background: #ffbd2e; }
+  .traffic-dot.maximize { background: var(--green); }
+
+  .title-bar-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  .menu-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0.3rem 1rem;
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    color: var(--muted);
+    user-select: none;
+  }
+  .menu-bar span { cursor: default; }
+  .menu-bar span:first-child { font-weight: 700; color: var(--ink); }
+  .menu-link {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.15s;
+    cursor: pointer;
+  }
+  .menu-link:hover { color: var(--green-accent); }
+
+  .window-body {
+    padding: 1.5rem;
+  }
+
+  /* ── Top bar ── */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.1s;
+  }
+
+  .site-url {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
-    font-weight: 400;
-    margin-bottom: 16px;
-  }
-  .header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px;
-    font-weight: 300;
-    color: var(--text);
-    letter-spacing: 1px;
-    line-height: 1.1;
-  }
-  .header .time {
-    font-size: 13px;
-    color: var(--dim);
-    margin-top: 12px;
-    font-weight: 300;
   }
 
-  /* SECTION */
-  .section {
-    margin-bottom: 36px;
+  .top-right-label {
+    font-size: 0.48rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
-  .section-header {
+
+  /* ── Header ── */
+  .header {
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.15s;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  .header .tagline {
+    font-size: 0.5rem;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .header .tagline span {
+    color: var(--green-accent);
+    margin: 0 0.25rem;
+  }
+
+  /* ── Sections ── */
+  .section {
+    margin-bottom: 1.25rem;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
+  }
+  .section:nth-child(1) { animation-delay: 0.25s; }
+  .section:nth-child(2) { animation-delay: 0.3s; }
+  .section:nth-child(3) { animation-delay: 0.35s; }
+  .section:nth-child(4) { animation-delay: 0.4s; }
+  .section:nth-child(5) { animation-delay: 0.45s; }
+  .section:nth-child(6) { animation-delay: 0.5s; }
+  .section:nth-child(7) { animation-delay: 0.55s; }
+
+  .section-header-row {
     display: flex;
     align-items: baseline;
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
   }
+
   .section-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+    font-size: 1.5rem;
     font-weight: 300;
-    color: var(--muted);
+    color: var(--rule);
     line-height: 1;
-    min-width: 24px;
+    min-width: 1.2rem;
   }
+
   .section-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--text);
-    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
   }
+
   .section-time {
-    font-size: 11px;
-    color: var(--muted);
+    font-size: 0.45rem;
     font-weight: 300;
-    letter-spacing: 1px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     margin-left: auto;
     flex-shrink: 0;
   }
 
-  /* ITEMS */
+  /* ── Items ── */
   .item {
-    padding: 14px 16px;
-    border: 1px solid transparent;
-    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 0.9rem;
+    border: 1.5px solid var(--rule);
+    background: var(--paper);
     cursor: pointer;
-    transition: all 0.35s ease;
+    transition: all 0.3s ease;
     position: relative;
     user-select: none;
+    margin-bottom: 0.35rem;
   }
-  .item:last-child {
-    border-bottom: 1px solid transparent;
+
+  .item:hover {
+    box-shadow: 4px 4px 0 var(--green-dim);
+    border-color: var(--muted);
   }
+
   .item::before {
     content: '';
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 2px;
+    width: 3px;
     height: 0;
-    background: var(--accent);
+    background: var(--green-accent);
     transition: height 0.3s ease;
-    border-radius: 1px;
+    border-radius: 0 1px 1px 0;
   }
+
   .item.done {
     background: var(--done-bg);
     border-color: var(--done-border);
-    border-radius: 4px;
-    margin-bottom: 2px;
+  }
+  .item.done:hover {
+    box-shadow: 4px 4px 0 rgba(74, 158, 110, 0.1);
   }
   .item.done::before {
     height: 60%;
   }
   .item.done .item-name {
-    color: var(--accent);
+    color: var(--green-accent);
   }
-  .item.done .item-detail {
-    color: var(--dim);
-  }
+
   .item-name {
-    font-size: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
     font-weight: 500;
-    color: var(--text);
-    transition: color 0.35s ease;
+    color: var(--ink);
+    transition: color 0.3s ease;
     line-height: 1.4;
   }
+
   .item-detail {
-    font-size: 12px;
-    color: var(--dim);
+    font-size: 0.55rem;
     font-weight: 300;
-    margin-top: 3px;
-    line-height: 1.5;
-    transition: color 0.35s ease;
-    font-style: italic;
-  }
-  .item-rx {
-    font-size: 11px;
     color: var(--muted);
-    font-weight: 400;
-    margin-top: 2px;
-    letter-spacing: 0.5px;
+    margin-top: 0.15rem;
+    line-height: 1.6;
+    font-style: italic;
+    transition: color 0.3s ease;
   }
 
-  /* DIVIDER */
+  .item-rx {
+    display: inline-block;
+    font-size: 0.45rem;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--green);
+    border: 1px solid var(--green-dark);
+    padding: 0.08rem 0.35rem;
+    margin-top: 0.25rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Breath divider ── */
   .breath {
     text-align: center;
-    padding: 20px 0;
+    padding: 1rem 0;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
+    font-size: 0.85rem;
     font-style: italic;
-    color: var(--muted);
+    color: var(--rule);
     font-weight: 300;
-    letter-spacing: 2px;
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.45s;
   }
 
-  /* FOOTER */
-  .footer {
-    text-align: center;
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
-    margin-top: 12px;
-  }
-  .footer p {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 300;
-    line-height: 1.8;
-    font-style: italic;
-  }
-
-  /* RESET */
-  .reset {
+  /* ── Reset ── */
+  .reset-btn {
     display: block;
-    margin: 24px auto 0;
-    padding: 8px 20px;
+    margin: 1rem auto 0;
+    padding: 0.4rem 1.2rem;
     background: transparent;
-    border: 1px solid var(--line);
+    border: 1.5px solid var(--rule);
     color: var(--muted);
-    font-family: inherit;
-    font-size: 11px;
-    letter-spacing: 3px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.48rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s;
-    font-weight: 400;
   }
-  .reset:hover { border-color: var(--dim); color: var(--dim); }
+  .reset-btn:hover { border-color: var(--ink); color: var(--ink); }
 
-  /* PROGRESS */
-  .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.4s ease;
-    z-index: 100;
-    box-shadow: 0 0 8px rgba(232,101,10,0.3);
+  /* ── Footer ── */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards 0.6s;
+  }
+
+  .footer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .footer-left {
+    font-size: 0.45rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .beep-boop {
+    font-size: 0.45rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .beep-boop:hover { color: var(--green-accent); }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    body { padding: 0.5rem; }
+    .mac-window {
+      margin: 0;
+      min-height: calc(100vh - 1rem);
+      border-radius: 8px 8px 2px 2px;
+    }
+    .window-body {
+      padding: 1rem;
+      min-height: calc(100vh - 1rem - 28px - 24px);
+      display: flex;
+      flex-direction: column;
+    }
+    .footer { margin-top: auto; }
+    .top-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .title-bar-text { font-size: 0.5rem; }
+    .item-name { font-size: 1rem; }
+    .item-detail { font-size: 0.6rem; }
+    .item-rx { font-size: 0.5rem; }
   }
 </style>
 </head>
@@ -226,20 +460,62 @@
 
 <div class="progress-bar" id="progress"></div>
 
-<div class="app">
-  <div class="header">
-    <div class="mark">before the round</div>
-    <h1>Pre-Round Warm-Up</h1>
-    <div class="time">8 minutes · tap each as you go</div>
+<div class="mac-window">
+
+  <!-- macOS title bar -->
+  <div class="title-bar">
+    <div class="traffic-lights">
+      <span class="traffic-dot close"></span>
+      <span class="traffic-dot minimize"></span>
+      <span class="traffic-dot maximize"></span>
+    </div>
+    <span class="title-bar-text">Pre-Round Warm-Up</span>
   </div>
 
-  <div id="sections"></div>
+  <!-- Menu bar -->
+  <nav class="menu-bar">
+    <span>File</span>
+    <a href="/" class="menu-link">Home</a>
+    <a href="/rotational_athlete_protocol.html" class="menu-link">Workout</a>
+  </nav>
 
-  <div class="footer">
-    <p>Never go max effort on your first throw.<br>Smooth is far. Smooth is accurate.</p>
-    <button class="reset" onclick="resetAll()">reset</button>
+  <!-- Content -->
+  <div class="window-body">
+
+    <div class="top-bar">
+      <span class="site-url">Loading Warm-Up Sequence...</span>
+      <span class="top-right-label">8 Minutes · Tap Each</span>
+    </div>
+
+    <header class="header">
+      <h1>Pre-Round Warm-Up</h1>
+      <p class="tagline">Before the Round <span>·</span> 5 Phases <span>·</span> Tap to Complete</p>
+    </header>
+
+    <div id="sections"></div>
+
+    <footer class="footer">
+      <p class="footer-quote">Never go max effort on your first throw.<br>Smooth is far. Smooth is accurate.</p>
+      <button class="reset-btn" onclick="resetAll()">Reset All</button>
+      <div class="footer-bottom">
+        <div class="footer-left">
+          <span class="footer-dot"></span>
+          Go Throw
+        </div>
+        <a href="/" class="beep-boop">Home</a>
+      </div>
+    </footer>
+
   </div>
 </div>
+
+<!-- Decorative disc -->
+<svg style="position:fixed;bottom:-60px;right:-40px;width:220px;height:220px;opacity:0.04;z-index:0;pointer-events:none;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="46" fill="none" stroke="#1a1714" stroke-width="2"/>
+  <circle cx="50" cy="50" r="30" fill="none" stroke="#1a1714" stroke-width="1"/>
+  <circle cx="50" cy="50" r="14" fill="none" stroke="#1a1714" stroke-width="1.5"/>
+  <circle cx="50" cy="50" r="5" fill="#1a1714"/>
+</svg>
 
 <script>
 const data = [
@@ -288,14 +564,13 @@ const total = data.reduce((a, s) => a + s.items.length, 0);
 function render() {
   const el = document.getElementById('sections');
   let h = '';
-  let idx = 0;
 
   data.forEach((s, si) => {
     if (s.breath) {
       h += `<div class="breath">${s.breath}</div>`;
     }
     h += `<div class="section">`;
-    h += `<div class="section-header">
+    h += `<div class="section-header-row">
       <span class="section-num">${s.num}</span>
       <span class="section-title">${s.title}</span>
       <span class="section-time">${s.time}</span>
@@ -306,9 +581,8 @@ function render() {
       h += `<div class="item ${d}" onclick="toggle('${key}')">
         <div class="item-name">${item.name}</div>
         <div class="item-detail">${item.detail}</div>
-        ${item.rx ? `<div class="item-rx">${item.rx}</div>` : ''}
+        ${item.rx ? `<span class="item-rx">${item.rx}</span>` : ''}
       </div>`;
-      idx++;
     });
     h += `</div>`;
   });
