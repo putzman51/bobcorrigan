@@ -15,7 +15,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -263,7 +263,8 @@
     }
 
     .post-date {
-      font-size: 0.42rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.52rem;
       font-weight: 400;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -271,15 +272,16 @@
     }
 
     .post-tag {
-      font-size: 0.38rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--green-dark);
       background: var(--green-glow);
       border: 1px solid var(--green-dim);
-      padding: 0.15rem 0.5rem;
-      border-radius: 1px;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
     }
 
     /* Post headline */
@@ -294,6 +296,7 @@
 
     /* Subhead / location line */
     .post-subhead {
+      font-family: 'DM Mono', monospace;
       font-size: 0.46rem;
       font-weight: 300;
       letter-spacing: 0.12em;
@@ -302,17 +305,51 @@
       padding: 0.2rem 1rem 0;
     }
 
-    /* Body copy */
+    /* Round ratings strip — between headline and body */
+    .post-rounds {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1rem 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .post-rounds-label {
+      font-size: 0.42rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .post-rounds-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+
+    .post-rounds-sep {
+      color: var(--rule);
+    }
+
+    /* Body copy — editorial serif for readability */
     .post-body {
       padding: 0.6rem 1rem 0.9rem;
-      font-size: 0.62rem;
-      font-weight: 300;
-      line-height: 1.7;
+      font-family: 'Source Serif 4', 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.75;
       color: var(--ink);
     }
 
     .post-body p {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.7rem;
     }
     .post-body p:last-child {
       margin-bottom: 0;
@@ -321,7 +358,7 @@
     /* Pull quote — for that one great line */
     .post-pull {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 400;
       font-style: italic;
       line-height: 1.4;
@@ -351,6 +388,7 @@
       padding: 0.55rem 1rem;
       background: var(--cream);
       border-top: 1px solid var(--rule);
+      font-family: 'DM Mono', monospace;
       font-size: 0.44rem;
       font-weight: 300;
       letter-spacing: 0.1em;
@@ -372,15 +410,6 @@
     .post-result-value.bronze { color: var(--bronze); }
     .post-result-value.accent { color: var(--green-dark); }
 
-    .post-result-rounds {
-      margin-left: auto;
-      font-size: 0.42rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      text-transform: none;
-    }
-
     /* Caption overlay on image */
     .post-img-wrap {
       position: relative;
@@ -392,13 +421,15 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 2rem 0.8rem 0.45rem;
-      background: linear-gradient(to top, rgba(26,23,20,0.55) 0%, transparent 100%);
-      font-size: 0.4rem;
-      font-weight: 300;
+      padding: 2.5rem 0.8rem 0.55rem;
+      background: linear-gradient(to top, rgba(26,23,20,0.65) 0%, transparent 100%);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem;
+      font-weight: 700;
       letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255,255,255,0.92);
       text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
 
     /* Issue number / post count */
@@ -407,15 +438,16 @@
       top: 0.5rem;
       right: 0.6rem;
       font-family: 'Space Mono', monospace;
-      font-size: 0.4rem;
+      font-size: 0.48rem;
       font-weight: 700;
       letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.7);
-      background: rgba(26,23,20,0.45);
-      padding: 0.15rem 0.4rem;
+      color: rgba(255,255,255,0.85);
+      background: rgba(26,23,20,0.5);
+      padding: 0.2rem 0.45rem;
       border-radius: 1px;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
     }
 
     /* Divider between posts — decorative */
@@ -514,9 +546,42 @@
       }
       .post-img { aspect-ratio: 4 / 3; }
       .post-headline { font-size: 1.2rem; }
-      .post-body { font-size: 0.58rem; }
-      .post-pull { font-size: 0.95rem; }
+
+      /* Bigger body text on mobile */
+      .post-body {
+        font-size: 0.95rem;
+        line-height: 1.8;
+      }
+
+      .post-pull { font-size: 1.05rem; }
       .post-img-inline { aspect-ratio: 4 / 3; }
+
+      /* Bigger image overlay text on mobile */
+      .post-caption {
+        font-size: 0.58rem;
+        font-weight: 700;
+        padding: 2.8rem 0.8rem 0.6rem;
+      }
+
+      .post-issue {
+        font-size: 0.52rem;
+        padding: 0.22rem 0.5rem;
+      }
+
+      /* Bigger tag on mobile */
+      .post-tag {
+        font-size: 0.52rem;
+        padding: 0.3rem 0.7rem;
+      }
+
+      .post-date {
+        font-size: 0.52rem;
+      }
+
+      /* Round ratings on mobile */
+      .post-rounds-value {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -559,20 +624,25 @@
           </div>
           <div class="post-meta">
             <span class="post-date">14 Mar 2026</span>
-            <span class="post-tag">Tournament</span>
+            <span class="post-tag">PDGA C-Tier</span>
           </div>
           <h2 class="post-headline">Deception Pass Windy DG (First Trophy!)</h2>
           <p class="post-subhead">Deception Pass · Whidbey Island, WA</p>
+          <div class="post-rounds">
+            <span class="post-rounds-label">Rounds</span>
+            <span class="post-rounds-value">R1: 906</span>
+            <span class="post-rounds-sep">·</span>
+            <span class="post-rounds-value">R2: 885</span>
+          </div>
           <div class="post-body">
-            <p>A beautiful day on the course with two great dudes on the card. Deception Pass gets wind — it's kind of the whole deal up there — but at least we didn't get rained on, which in March qualifies as a gift. The course itself presented some real footing challenges, but summer will sort that out soon enough. Driving over the bridges onto Whidbey Island is such a treat every time. I will absolutely be back up here for more disc golf.</p>
-            <p>Stayed in the mix all day. Hit one big 60-foot putt that I'm still thinking about, and was parking for birdie from 250–300 feet six different times. Finished 3rd, and then got a genuine surprise: my first trophy. Hardware! They handed it over and I just stood there grinning. Used the credits to pick up a Berg and a Berg X — both in colors I'm excited about. My friend Brian from Dips Discs is going to dip-dye one of them so it looks like a black-and-white cookie but with neon colors. Can't wait to see how that turns out.</p>
+            <p>A beautiful day on the course with two great dudes on the card. Deception Pass gets wind, it's kind of the whole deal up there, but at least we didn't get rained on, which in March qualifies as a gift. The course itself presented some real footing challenges, but summer will sort that out soon enough. Driving over the bridges onto Whidbey Island is such a treat every time. I will absolutely be back up here for more disc golf.</p>
+            <p>Stayed in the mix all day. Hit one big 60-foot putt that I'm still thinking about, and was parking for birdie from 250 to 300 feet six different times. Finished 3rd, and then got a genuine surprise: my first trophy. Hardware! They handed it over and I just stood there grinning. Used the credits to pick up a Berg and a Berg X, both in colors I'm excited about. My friend Brian from Dips Discs is going to dip-dye one of them so it looks like a black-and-white cookie but with neon colors. Can't wait to see how that turns out.</p>
           </div>
           <img class="post-img-inline" src="images/dipsdiscs.jpg" alt="Custom dip-dyed discs from Dips Discs" />
           <div class="post-pull">"They handed over the trophy and I just stood there grinning."</div>
           <div class="post-result">
             <span>Result</span>
             <span class="post-result-value bronze">3rd Place · MA40</span>
-            <span class="post-result-rounds">R1: 906 · R2: 885</span>
           </div>
         </article>
 
@@ -595,19 +665,24 @@
           </div>
           <div class="post-meta">
             <span class="post-date">7 Mar 2026</span>
-            <span class="post-tag">Tournament</span>
+            <span class="post-tag">PDGA B-Tier</span>
           </div>
           <h2 class="post-headline">SeaTac (Cloud City Chaos 4)</h2>
           <p class="post-subhead">Cloud City Chaos 4 · SeaTac DGC · SeaTac, WA</p>
+          <div class="post-rounds">
+            <span class="post-rounds-label">Rounds</span>
+            <span class="post-rounds-value">R1: 890</span>
+            <span class="post-rounds-sep">·</span>
+            <span class="post-rounds-value">R2: 899</span>
+          </div>
           <div class="post-body">
-            <p>Fun day throwing in good weather. SeaTac really knows how to present a challenge, and I stayed fairly steady with minimal blow-ups. Not my best performance numbers-wise, but the kind of day where you learn something. Got to play with a few seasoned regional players I hadn't met yet, which is one of the best parts of these events — the card is always teaching you something if you're paying attention.</p>
-            <p>Picked up some real lessons watching the better players shape their shots and stay consistent hole after hole. The kind of stuff you can't get from YouTube. Shooting one stroke better in Round 2 than Round 1 felt genuinely strong — finishing on the upswing is a good habit to build, and both rounds pushed my rating up slightly. Progress is progress.</p>
+            <p>Fun day throwing in good weather. SeaTac really knows how to present a challenge, and I stayed fairly steady with minimal blow-ups. Not my best performance numbers-wise, but the kind of day where you learn something. Got to play with a few seasoned regional players I hadn't met yet, which is one of the best parts of these events, the card is always teaching you something if you're paying attention.</p>
+            <p>Picked up some real lessons watching the better players shape their shots and stay consistent hole after hole. The kind of stuff you can't get from YouTube. Shooting one stroke better in Round 2 than Round 1 felt genuinely strong, finishing on the upswing is a good habit to build, and both rounds pushed my rating up slightly. Progress is progress.</p>
           </div>
           <div class="post-pull">"The card is always teaching you something if you're paying attention."</div>
           <div class="post-result">
             <span>Result</span>
             <span class="post-result-value accent">4th Place · MA40</span>
-            <span class="post-result-rounds">R1: 890 · R2: 899</span>
           </div>
         </article>
 
@@ -630,19 +705,24 @@
           </div>
           <div class="post-meta">
             <span class="post-date">7 Feb 2026</span>
-            <span class="post-tag">Tournament</span>
+            <span class="post-tag">PDGA C-Tier</span>
           </div>
           <h2 class="post-headline">Behold, the Rain Wizard</h2>
           <p class="post-subhead">Slingin' Singles 4 · Emerald City Discs</p>
+          <div class="post-rounds">
+            <span class="post-rounds-label">Rounds</span>
+            <span class="post-rounds-value">R1: 930</span>
+            <span class="post-rounds-sep">·</span>
+            <span class="post-rounds-value">R2: 842</span>
+          </div>
           <div class="post-body">
-            <p>Round 1 was a revelation. Finished 1 under par — clean, confident, everything clicking. Felt like I was finally figuring this whole thing out. Then lunch happened, and after lunch, the Pacific Northwest remembered what it does best. A cold, persistent rain rolled in and turned the course into a slip-and-slide. Traction? Gone. Dry towels? Submerged by the halfway point. Gear? Soggy. Morale? Fading.</p>
-            <p>The 88-point swing between rounds was humbling. Even in the rain, I should be staying more consistent rating-wise — that's the honest takeaway. But the card had a calm energy to it, everybody grinding through the same conditions, nobody complaining too hard. Lessons learned. The Rain Wizard title is aspirational at best, but you gotta name the chapter something.</p>
+            <p>Round 1 was a revelation. Finished 1 under par, clean, confident, everything clicking. Felt like I was finally figuring this whole thing out. Then lunch happened, and after lunch, the Pacific Northwest remembered what it does best. A cold, persistent rain rolled in and turned the course into a slip-and-slide. Traction? Gone. Dry towels? Submerged by the halfway point. Gear? Soggy. Morale? Fading.</p>
+            <p>The 88-point swing between rounds was humbling. Even in the rain, I should be staying more consistent rating-wise, that's the honest takeaway. But the card had a calm energy to it, everybody grinding through the same conditions, nobody complaining too hard. Lessons learned. The Rain Wizard title is aspirational at best, but you gotta name the chapter something.</p>
           </div>
           <div class="post-pull">"The Rain Wizard title is aspirational at best."</div>
           <div class="post-result">
             <span>Result</span>
             <span class="post-result-value bronze">3rd Place · MA40</span>
-            <span class="post-result-rounds">R1: 930 · R2: 842</span>
           </div>
         </article>
 
@@ -665,20 +745,25 @@
           </div>
           <div class="post-meta">
             <span class="post-date">31 Jan 2026</span>
-            <span class="post-tag">Tournament · Ace</span>
+            <span class="post-tag">PDGA C-Tier · Ace</span>
           </div>
           <h2 class="post-headline">Copper in the Mountains</h2>
           <p class="post-subhead">NADGT C Tier 2 Rounder · Discmania DGP · Miami, AZ</p>
+          <div class="post-rounds">
+            <span class="post-rounds-label">Rounds</span>
+            <span class="post-rounds-value">R1: 853</span>
+            <span class="post-rounds-sep">·</span>
+            <span class="post-rounds-value">R2: 943</span>
+          </div>
           <div class="post-body">
-            <p>Worth the drive up to the mountains just for the signature hole alone: a big dumptruck bed as a backdrop with a hanging basket, sitting right in the heart of copper country. This Discmania Disc Golf Park is a short course, but don't let that fool you — the mandos and generous OB markings make it a serious short-game exercise. Extremely fun and well designed to punish lazy shots.</p>
-            <p>And then it happened. First sanctioned ace. The signature hole, no less. An official 1 now living on my PDGA stats forever. Garrett on our card aced one too, and we were both losing our minds about it. Finished just a few strokes short of first, but the guy who took it played beautifully steady all day — genuinely honored to compete with him. Todd the tournament director and his wife Anissa were incredible hosts, making sure everyone enjoyed themselves from start to finish. Oh, and the local Mexican restaurant afterward? Possibly the best I've ever had. The whole trip was a 10.</p>
+            <p>Worth the drive up to the mountains just for the signature hole alone: a big dumptruck bed as a backdrop with a hanging basket, sitting right in the heart of copper country. This Discmania Disc Golf Park is a short course, but don't let that fool you, the mandos and generous OB markings make it a serious short-game exercise. Extremely fun and well designed to punish lazy shots.</p>
+            <p>And then it happened. First sanctioned ace. The signature hole, no less. An official 1 now living on my PDGA stats forever. Garrett on our card aced one too, and we were both losing our minds about it. Finished just a few strokes short of first, but the guy who took it played beautifully steady all day, genuinely honored to compete with him. Todd the tournament director and his wife Anissa were incredible hosts, making sure everyone enjoyed themselves from start to finish. Oh, and the local Mexican restaurant afterward? Possibly the best I've ever had. The whole trip was a 10.</p>
           </div>
           <img class="post-img-inline" src="images/AZ tourney director.jpg" alt="With tournament director Todd and Anissa in Arizona" />
           <div class="post-pull">"An official 1 now living on my PDGA stats forever."</div>
           <div class="post-result">
             <span>Result</span>
             <span class="post-result-value silver">2nd Place · MA40</span>
-            <span class="post-result-rounds">R1: 853 · R2: 943</span>
           </div>
         </article>
 
@@ -701,19 +786,24 @@
           </div>
           <div class="post-meta">
             <span class="post-date">10 Jan 2026</span>
-            <span class="post-tag">Tournament · W</span>
+            <span class="post-tag">PDGA C-Tier · W</span>
           </div>
           <h2 class="post-headline">SeaTac Shenanigans</h2>
           <p class="post-subhead">Say it Ain't Snow · SeaTac DGC · SeaTac, WA</p>
+          <div class="post-rounds">
+            <span class="post-rounds-label">Rounds</span>
+            <span class="post-rounds-value">R1: 914</span>
+            <span class="post-rounds-sep">·</span>
+            <span class="post-rounds-value">R2: 904</span>
+          </div>
           <div class="post-body">
-            <p>Pretty weather, my 4th tournament, and somehow I won the whole thing. Started both rounds with a double bogey — just absolutely punting the opening hole like it's a tradition now — then tightened up and played real golf the rest of the way. The group on the card was great, and the competition stayed close until the very end. Finished one stroke better in each round, meaning the last two holes could have gone either way. That kind of pressure is exactly why you sign up for these.</p>
-            <p>The highlights reel is short but sweet: a throw-in from about 100 feet on hole 6 for the birdie — the kind of shot where the disc disappears behind some trees and you just hear chains — and a 45-foot putt that felt significant because I practice that distance obsessively. Big moments, both of them. Bought P2 D-Line putters with the prize money, which feels like the most disc golf way possible to reinvest your winnings.</p>
+            <p>Pretty weather, my 4th tournament, and somehow I won the whole thing. Started both rounds with a double bogey, just absolutely punting the opening hole like it's a tradition now, then tightened up and played real golf the rest of the way. The group on the card was great, and the competition stayed close until the very end. Finished one stroke better in each round, meaning the last two holes could have gone either way. That kind of pressure is exactly why you sign up for these.</p>
+            <p>The highlights reel is short but sweet: a throw-in from about 100 feet on hole 6 for the birdie, the kind of shot where the disc disappears behind some trees and you just hear chains, and a 45-foot putt that felt significant because I practice that distance obsessively. Big moments, both of them. Bought P2 D-Line putters with the prize money, which feels like the most disc golf way possible to reinvest your winnings.</p>
           </div>
           <div class="post-pull">"The disc disappears behind some trees and you just hear chains."</div>
           <div class="post-result">
             <span>Result</span>
             <span class="post-result-value gold">1st Place · MA40</span>
-            <span class="post-result-rounds">R1: 914 · R2: 904</span>
           </div>
         </article>
 
