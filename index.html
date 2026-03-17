@@ -86,7 +86,7 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      height: 28px;
+      height: 34px;
       background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
       border-bottom: 2px solid var(--ink);
       user-select: none;
@@ -112,10 +112,25 @@
 
     .title-bar-text {
       font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       color: var(--ink);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    }
+
+    .title-bar-text .egg {
+      color: inherit;
+      text-decoration: none;
+      cursor: text;
+    }
+    .title-bar-text .egg:hover,
+    .title-bar-text .egg:visited,
+    .title-bar-text .egg:active,
+    .title-bar-text .egg:focus {
+      color: inherit;
+      text-decoration: none;
+      outline: none;
     }
 
     /* Menu bar */
@@ -135,6 +150,16 @@
     .menu-bar span { cursor: default; }
     .menu-bar span:first-child { font-weight: 700; color: var(--ink); }
     .menu-bar span:hover { color: var(--green); }
+    .menu-link {
+      text-decoration: none;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .menu-link:first-child {
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .menu-link:hover { color: var(--green); }
 
     /* Window body */
     .window-body {
@@ -423,213 +448,6 @@
       color: var(--muted);
     }
 
-    /* Warm up card body */
-    .warmup-body {
-      padding: 1rem;
-    }
-
-    .warmup-text {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    /* PDGA card */
-    .pdga-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      margin-bottom: 0.85rem;
-    }
-
-    .pdga-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: var(--ink);
-    }
-
-    .pdga-sub {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.45rem;
-      font-weight: 300;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── MIDI Player ── */
-    .midi-player {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .midi-track-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .midi-track {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      padding: 0.55rem 0.65rem;
-      border: 1px solid var(--rule);
-      background: var(--paper);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'DM Mono', monospace;
-    }
-
-    .midi-track:hover {
-      border-color: var(--green);
-      background: var(--green-glow);
-    }
-
-    .midi-track.active {
-      border-color: var(--green);
-      background: var(--green-glow);
-    }
-
-    .midi-track-play {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1.5px solid var(--rule);
-      background: var(--paper);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: all 0.2s ease;
-    }
-
-    .midi-track.active .midi-track-play {
-      border-color: var(--green);
-      background: var(--green);
-    }
-
-    .midi-track-play svg {
-      width: 8px;
-      height: 8px;
-    }
-
-    .midi-track-play svg polygon,
-    .midi-track-play svg rect {
-      fill: var(--muted);
-      transition: fill 0.2s ease;
-    }
-
-    .midi-track.active .midi-track-play svg polygon,
-    .midi-track.active .midi-track-play svg rect {
-      fill: var(--paper);
-    }
-
-    .midi-track-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .midi-track-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: var(--ink);
-      transition: color 0.15s;
-    }
-
-    .midi-track:hover .midi-track-name,
-    .midi-track.active .midi-track-name {
-      color: var(--green);
-    }
-
-    .midi-track-desc {
-      font-size: 0.44rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .midi-track-duration {
-      font-size: 0.48rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: var(--rule);
-      flex-shrink: 0;
-    }
-
-    .midi-visualizer {
-      height: 28px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 2px;
-      padding: 0.4rem 0;
-    }
-
-    .midi-bar {
-      width: 3px;
-      background: var(--rule);
-      border-radius: 1px;
-      transition: background 0.2s ease;
-      height: 3px;
-    }
-
-    .midi-bar.active {
-      background: var(--green);
-    }
-
-    .midi-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .midi-vol {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.44rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .midi-vol input[type="range"] {
-      width: 60px;
-      height: 3px;
-      -webkit-appearance: none;
-      appearance: none;
-      background: var(--rule);
-      border-radius: 2px;
-      outline: none;
-    }
-
-    .midi-vol input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--green);
-      border: 1px solid var(--green-dark);
-      cursor: pointer;
-    }
-
-    .midi-status {
-      font-size: 0.44rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
     /* ── Footer ── */
     .footer {
       display: flex;
@@ -704,7 +522,7 @@
       }
       .window-body {
         padding: 1rem;
-        min-height: calc(100vh - 1rem - 28px - 24px);
+        min-height: calc(100vh - 1rem - 34px - 24px);
         display: flex;
         flex-direction: column;
       }
@@ -727,7 +545,7 @@
       }
 
       .title-bar-text {
-        font-size: 0.5rem;
+        font-size: 0.7rem;
       }
 
       .action-btn-title {
@@ -752,15 +570,15 @@
 
     <!-- Menu bar -->
     <nav class="menu-bar">
-      <span>File</span>
-      <span>Disc Golf</span>
+      <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="menu-link">File</a>
+      <a href="/frolf.html" class="menu-link" style="font-weight:400;">Disc Golf</a>
     </nav>
 
     <!-- Content -->
     <div class="window-body">
 
       <div class="top-bar">
-        <span class="site-url">Loading Disc Golf Sequence...</span>
+        <span class="site-url">Select a Module</span>
       </div>
 
       <div class="card-stack">
