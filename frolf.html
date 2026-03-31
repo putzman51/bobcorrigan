@@ -513,6 +513,107 @@
     }
     .beep-boop:hover { color: var(--green-dark); }
 
+    /* ── Slideshow ── */
+    .post-slideshow {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1.5px solid var(--rule);
+    }
+
+    .post-slideshow img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      filter: contrast(1.02) saturate(0.92);
+    }
+
+    .post-slideshow img.active {
+      opacity: 1;
+    }
+
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(26,23,20,0.45);
+      color: rgba(255,255,255,0.9);
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      z-index: 3;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      transition: background 0.15s;
+    }
+
+    .slide-btn:hover {
+      background: rgba(26,23,20,0.7);
+    }
+
+    .slide-btn.prev { left: 0.5rem; }
+    .slide-btn.next { right: 0.5rem; }
+
+    .slide-counter {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.85);
+      background: rgba(26,23,20,0.5);
+      padding: 0.2rem 0.45rem;
+      border-radius: 1px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      z-index: 3;
+    }
+
+    .slide-dots {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      z-index: 3;
+    }
+
+    .slide-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .slide-dot.active {
+      background: rgba(255,255,255,0.9);
+    }
+
+    @media (max-width: 600px) {
+      .post-slideshow { aspect-ratio: 4 / 3; }
+      .slide-btn { width: 28px; height: 28px; font-size: 0.8rem; }
+    }
+
     /* ── Animations ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
@@ -612,6 +713,103 @@
       <h1 class="page-title">Field Notes</h1>
 
       <div class="field-notes">
+
+        <!-- ┌─────────────────────────────────┐
+             │  POST 10 — Sunnyside Up B-Tier   │
+             └─────────────────────────────────┘ -->
+        <article class="post">
+          <div class="post-img-wrap">
+            <div class="post-slideshow" id="pullman-slideshow">
+              <img src="images/ace17.jpg" alt="Skip-ace on Hole 17 at Sunnyside Park" class="active" />
+              <img src="images/sponsorsign.jpg" alt="Hole sponsor sign at Sunnyside Up" />
+              <img src="images/palouse.jpg" alt="The Palouse landscape near Pullman" />
+              <img src="images/pretty.jpg" alt="Beautiful views on the course" />
+              <img src="images/pav.jpg" alt="On the course at Sunnyside Park" />
+              <img src="images/ma3nerds.jpg" alt="The MA3 crew at Sunnyside Up" />
+              <img src="images/group2.jpg" alt="Group photo at Sunnyside Up" />
+              <img src="images/handoff.jpg" alt="Trophy handoff moment" />
+              <img src="images/haul.jpg" alt="The haul from Sunnyside Up" />
+              <img src="images/rescue.jpg" alt="Disc rescue mission" />
+              <img src="images/hobohotel.jpg" alt="The hobo hotel lodging situation" />
+              <button class="slide-btn prev" onclick="slideNav('pullman-slideshow',-1)">‹</button>
+              <button class="slide-btn next" onclick="slideNav('pullman-slideshow',1)">›</button>
+              <span class="slide-counter" id="pullman-slideshow-counter">1 / 11</span>
+              <div class="slide-dots" id="pullman-slideshow-dots"></div>
+            </div>
+            <span class="post-caption">Sunnyside Up · Sunnyside Park · Pullman, WA</span>
+          </div>
+          <div class="post-meta">
+            <span class="post-date">28–29 Mar 2026</span>
+            <span class="post-tag">PDGA B-Tier · W · Ace</span>
+          </div>
+          <h2 class="post-headline">Sunnyside Up (First MA3 Win!)</h2>
+          <p class="post-subhead">Sunnyside Up B-Tier · Sunnyside Park · Pullman, WA</p>
+          <div class="post-rounds">
+            <span class="post-rounds-label">Rounds</span>
+            <span class="post-rounds-value">R1: 866</span>
+            <span class="post-rounds-sep">·</span>
+            <span class="post-rounds-value">R2: 906</span>
+            <span class="post-rounds-sep">·</span>
+            <span class="post-rounds-value">R3: 916</span>
+          </div>
+          <div class="post-body">
+            <p>First time playing MA3, and had an amazing time meeting eastern WA locals and ripping their course with them. Took 1st place by 3 strokes, but it was close all the way down to the last hole. I was sitting at E and 2nd place was sitting at +1 stepping up to the last tee pad. The whole thing came down to a downhill island shot, and the island was smaller than C1.</p>
+            <p>I had honors, grabbed my Envy, and knew that I had to give this a smooth throw with a firm snap to both get it there and keep it straight. I had missed the island in practice and was 1 for 2 in the first two rounds. I decided to keep my nerves at bay when I stepped up. I knew being relaxed is the way. I thought of a friend who I used to disc golf with a lot, pretended he was standing down by the basket, and tossed it down to him. It floated straight toward the basket and landed about 10 feet to the left. 200 or so feet down, kept it straight.</p>
+            <p>After hitting the green and just needing to watch everyone drive, I checked the score for the first time. I knew I was doing pretty good, but once I looked I immediately knew I was standing there a winner of the 3 rounds in MA3. A great feeling, and as we all played out the hole I just enjoyed the moment. When Michael came up to shake my hand on the win I gave him a hug and thanked him. What a day!</p>
+            <p>Especially when my morning started with a skip-ace on the hole I sponsored for the event. 3/29, Hole 17, Sunnyside Park, Skip-Ace. Pro who witnessed it: Isaac McGonigal. He inked me up. Also, I wrote "hole 2" on the disc because I started each round on 16, so I saw it as hole 2. I was so excited on the ace I didn't really think it through and now I just want to keep it as "hole 2" because it shows how unbelievable the feeling of an ace is. Hole what? Does it even matter?!</p>
+          </div>
+          <div class="post-pull">"I thought of a friend, pretended he was standing down by the basket, and tossed it down to him."</div>
+          <div class="post-result">
+            <span>Result</span>
+            <span class="post-result-value gold">1st Place · MA3</span>
+          </div>
+        </article>
+
+        <div class="post-divider">
+          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
+            <circle cx="50" cy="50" r="6" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <!-- ┌─────────────────────────────────┐
+             │  POST 9 — SeaTac Spring League    │
+             └─────────────────────────────────┘ -->
+        <article class="post">
+          <div class="post-img-wrap">
+            <img class="post-img" src="images/seatac spring 2.jpg" alt="SeaTac Spring League Round 2" />
+            <span class="post-issue">No. 09</span>
+            <span class="post-caption">SeaTac Disc Golf Course · SeaTac, WA</span>
+          </div>
+          <div class="post-meta">
+            <span class="post-date">26 Mar 2026</span>
+            <span class="post-tag">League</span>
+          </div>
+          <h2 class="post-headline">SeaTac Spring League #2</h2>
+          <p class="post-subhead">Spring League Round 2 · SeaTac DGC · SeaTac, WA</p>
+          <div class="post-rounds">
+            <span class="post-rounds-label">Rating</span>
+            <span class="post-rounds-value">906</span>
+          </div>
+          <div class="post-body">
+            <p>Had a great time playing on a really cool card. Good group, with a 950+ rated pro in the group! I was able to follow a few of his lines and really enjoyed the great weather and solid disc golf. Shooting over 900 was fun, I was really hitting some great putts. Feels good to make them stick!</p>
+            <p>This round was a great way to get warm for the 3-rounder ahead Saturday/Sunday in Pullman.</p>
+          </div>
+          <div class="post-pull">"Shooting over 900 was fun. Feels good to make them stick!"</div>
+          <div class="post-result">
+            <span>Rating</span>
+            <span class="post-result-value accent">906 · MA40</span>
+          </div>
+        </article>
+
+        <div class="post-divider">
+          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
+            <circle cx="50" cy="50" r="6" fill="currentColor"/>
+          </svg>
+        </div>
 
         <!-- ┌─────────────────────────────────┐
              │  POST 8 — Star Frame Sunday      │
@@ -942,6 +1140,47 @@
     <circle cx="50" cy="50" r="14" fill="none" stroke="#1a1714" stroke-width="1.5"/>
     <circle cx="50" cy="50" r="5" fill="#1a1714"/>
   </svg>
+
+  <script>
+    function initSlideshow(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var imgs = el.querySelectorAll('img');
+      var dots = document.getElementById(id + '-dots');
+      for (var i = 0; i < imgs.length; i++) {
+        var d = document.createElement('span');
+        d.className = 'slide-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('data-i', i);
+        d.onclick = function() { goTo(id, parseInt(this.getAttribute('data-i'))); };
+        dots.appendChild(d);
+      }
+    }
+
+    function goTo(id, n) {
+      var el = document.getElementById(id);
+      var imgs = el.querySelectorAll('img');
+      var dots = document.getElementById(id + '-dots').children;
+      var counter = document.getElementById(id + '-counter');
+      for (var i = 0; i < imgs.length; i++) {
+        imgs[i].classList.remove('active');
+        dots[i].classList.remove('active');
+      }
+      imgs[n].classList.add('active');
+      dots[n].classList.add('active');
+      counter.textContent = (n + 1) + ' / ' + imgs.length;
+      el.setAttribute('data-current', n);
+    }
+
+    function slideNav(id, dir) {
+      var el = document.getElementById(id);
+      var imgs = el.querySelectorAll('img');
+      var cur = parseInt(el.getAttribute('data-current') || '0');
+      var next = (cur + dir + imgs.length) % imgs.length;
+      goTo(id, next);
+    }
+
+    initSlideshow('pullman-slideshow');
+  </script>
 
 </body>
 </html>
