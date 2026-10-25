@@ -4,633 +4,347 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bob Corrigan</title>
-  <meta name="description" content="Bob Corrigan — disc golfer, PNW-based with Midwest roots." />
+  <meta name="description" content="Bob Corrigan — disc golf, friends, and good days on the course." />
   <meta property="og:title" content="Bob Corrigan" />
-  <meta property="og:description" content="Disc golfer, PNW-based with Midwest roots." />
+  <meta property="og:description" content="Disc golf, friends, and good days on the course." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://bobcorrigan.com" />
+  <meta property="og:image" content="https://bobcorrigan.com/images/firstplaceflower.jpg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --ink: #1a1714;
       --paper: #f0ebe3;
       --cream: #e8e0d4;
       --green: #d4f0d8;
-      --green-dim: #d4f0d830;
-      --green-glow: #d4f0d818;
       --green-dark: #c2e8c7;
       --muted: #8a8178;
       --rule: #c8bfb4;
-      --warm: #d4a373;
     }
 
-    html {
-      height: 100%;
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: #b8b0a4;
       color: var(--ink);
-      font-family: 'DM Mono', monospace;
-      font-weight: 300;
+      font-family: 'Space Mono', monospace;
       min-height: 100vh;
       padding: 1.5rem;
-      position: relative;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Subtle crosshatch desktop pattern */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image:
-        url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.15'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.15'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
     }
 
-    /* The main "window" */
+    /* ── Window ── */
     .mac-window {
       position: relative;
       z-index: 1;
-      max-width: 700px;
-      margin: 1rem auto;
+      max-width: 1100px;
+      margin: 0.5rem auto 1.5rem;
       border: 2px solid var(--ink);
       border-radius: 8px;
       background: var(--paper);
-      box-shadow:
-        4px 4px 0 rgba(0,0,0,0.15),
-        inset 0 0 0 1px rgba(255,255,255,0.3);
-      overflow: hidden;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3);
     }
 
-    /* Title bar */
     .title-bar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      height: 40px;
+      height: 44px;
       background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
       border-bottom: 2px solid var(--ink);
+      border-radius: 6px 6px 0 0;
       user-select: none;
     }
 
     .traffic-lights {
       position: absolute;
-      left: 10px;
+      left: 12px;
       display: flex;
       gap: 6px;
     }
 
     .traffic-dot {
+      display: block;
       width: 11px;
       height: 11px;
       border-radius: 50%;
       border: 1px solid rgba(0,0,0,0.2);
     }
-
     .traffic-dot.close { background: #ff6058; }
     .traffic-dot.minimize { background: #ffbd2e; }
     .traffic-dot.maximize { background: var(--green); }
 
-    .title-bar-text {
-      font-family: 'Space Mono', monospace;
+    .wordmark {
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 0.06em;
       color: var(--ink);
+      text-decoration: none;
       text-shadow: 0 1px 0 rgba(255,255,255,0.4);
-    }
-
-    .title-bar-text .egg {
-      color: inherit;
-      text-decoration: none;
       cursor: text;
     }
-    .title-bar-text .egg:hover,
-    .title-bar-text .egg:visited,
-    .title-bar-text .egg:active,
-    .title-bar-text .egg:focus {
-      color: inherit;
-      text-decoration: none;
-      outline: none;
-    }
 
-    /* Menu bar */
-    .menu-bar {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      padding: 0.3rem 1rem;
-      background: var(--cream);
-      border-bottom: 1px solid var(--rule);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.5rem;
-      color: var(--muted);
-      user-select: none;
-    }
-
-    .menu-bar span { cursor: default; }
-    .menu-bar span:first-child { font-weight: 700; color: var(--ink); }
-    .menu-bar span:hover { color: var(--green); }
-    .menu-link {
-      text-decoration: none;
-      color: var(--muted);
-      transition: color 0.15s;
-    }
-    .menu-link:first-child {
-      font-weight: 700;
-      color: var(--ink);
-    }
-    .menu-link:hover { color: var(--green); }
-
-    /* Window body */
-    .window-body {
-      padding: 1.5rem;
-    }
-
-    /* ── Top bar ── */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--rule);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeIn 0.5s ease forwards 0.1s;
-    }
-
-    .site-url {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .location-tag {
-      font-size: 0.5rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .top-right {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    /* ── Cards ── */
-    .card-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .card {
-      border: 1.5px solid var(--rule);
-      background: var(--paper);
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-      transition: box-shadow 0.25s ease, border-color 0.25s ease;
-    }
-
-    .card:hover {
-      box-shadow: 4px 4px 0 var(--green-dim);
-      border-color: var(--muted);
-    }
-
-    .card:nth-child(1) { animation-delay: 0.2s; }
-    .card:nth-child(2) { animation-delay: 0.35s; }
-    .card:nth-child(3) { animation-delay: 0.5s; }
-    .card:nth-child(4) { animation-delay: 0.65s; }
-    .card:nth-child(5) { animation-delay: 0.8s; }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.7rem 1rem;
-      border-bottom: 1px solid var(--rule);
-      background: var(--cream);
-    }
-
-    .card-icon {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-    }
-
-    .card-icon path,
-    .card-icon circle,
-    .card-icon line,
-    .card-icon polyline,
-    .card-icon rect {
-      fill: none;
-      stroke: var(--muted);
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .card-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.52rem;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .card-number {
-      margin-left: auto;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.48rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: var(--rule);
-    }
-
-    .card-body {
-      padding: 1rem;
-    }
-
-    /* ── Unified action button ── */
-    .action-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      padding: 0.75rem 0.9rem;
-      border: 1.5px solid var(--green-dark);
-      background: var(--green);
-      text-decoration: none;
-      color: var(--ink);
-      font-family: 'DM Mono', monospace;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      margin-bottom: 0.6rem;
-      box-shadow: 0 2px 0 var(--green-dark);
-    }
-
-    .action-btn:last-child {
-      margin-bottom: 0;
-    }
-
-    .action-btn:hover {
-      background: var(--green-dark);
-      border-color: var(--green-dark);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.15);
-    }
-
-    .action-btn:hover .action-btn-arrow {
-      transform: translate(3px, -3px);
-    }
-
-    .action-btn:active {
-      box-shadow: none;
-      transform: translateY(1px);
-    }
-
-    .action-btn:focus-visible {
-      outline: 2px solid var(--ink);
-      outline-offset: 2px;
-    }
-
-    .action-btn-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-      text-align: left;
-    }
-
-    .action-btn-title {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-      transition: color 0.15s ease;
-    }
-
-    .action-btn-sub {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.48rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(26, 23, 20, 0.55);
-    }
-
-    .action-btn-arrow {
-      flex-shrink: 0;
-      transition: all 0.15s ease;
-      margin-left: 1rem;
-      line-height: 1;
-      width: 30px;
-      height: 30px;
-      filter: drop-shadow(0 0 4px rgba(212, 240, 216, 0.9)) drop-shadow(0 0 8px rgba(212, 240, 216, 0.5));
-    }
-
-    .action-btn-arrow svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .action-btn:hover .action-btn-arrow {
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 12px rgba(212, 240, 216, 0.8));
-    }
-
-    /* Icons inside buttons */
-    .btn-icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-
-    .btn-icon path,
-    .btn-icon circle,
-    .btn-icon line,
-    .btn-icon rect {
-      fill: none;
-      stroke: var(--ink);
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      opacity: 0.5;
-    }
-
-    /* Pulse dot for warm up */
-    .pulse-dot-inline {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--ink);
-      position: relative;
-      flex-shrink: 0;
-      margin-right: 0.5rem;
-    }
-
-    .pulse-dot-inline::after {
-      content: '';
+    /* PDGA button */
+    .pdga {
       position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      border: 1.5px solid var(--ink);
-      animation: pulse 1.4s ease-out infinite;
-      opacity: 0;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.6); opacity: 0.7; }
-      100% { transform: scale(2.2); opacity: 0; }
-    }
-
-    /* ── Stats grid ── */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-
-    .stat {
-      padding: 0.7rem 0.7rem;
-      border-bottom: 1px solid var(--rule);
-      border-right: 1px solid var(--rule);
-      transition: background 0.2s ease;
-    }
-
-    .stat:hover {
-      background: var(--green-glow);
-    }
-
-    .stat:nth-child(even) { border-right: none; }
-    .stat:nth-last-child(-n+2) { border-bottom: none; }
-
-    .stat-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      line-height: 1;
-      color: var(--ink);
-      margin-bottom: 0.15rem;
-    }
-
-    .stat-value.accent { color: var(--green); }
-
-    .stat-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.44rem;
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── Footer ── */
-    .footer {
-      display: flex;
-      justify-content: space-between;
+      right: 10px;
+      display: inline-flex;
       align-items: center;
-      padding-top: 1rem;
-      border-top: 1px solid var(--rule);
-      margin-top: 1.5rem;
-      opacity: 0;
-      animation: fadeIn 0.5s ease forwards 0.9s;
-    }
-
-    .footer-left {
-      font-size: 0.45rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .footer-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
+      gap: 0.3rem;
+      padding: 0.3rem 0.6rem 0.3rem 0.65rem;
       background: var(--green);
-    }
-
-    .beep-boop {
-      font-size: 0.45rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
+      border: 1.5px solid var(--ink);
+      border-radius: 4px;
+      box-shadow: 2px 2px 0 var(--ink);
+      color: var(--ink);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-decoration: none;
-      transition: color 0.15s;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+    .pdga:hover { background: var(--green-dark); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+    .pdga:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+    .pdga:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .pdga svg { width: 12px; height: 12px; }
+
+    /* ── Photo wall ── */
+    .wall {
+      columns: 3 280px;
+      column-gap: 14px;
+      padding: 14px;
     }
 
-    .beep-boop:hover { color: var(--green); }
-
-    a.egg {
-      color: inherit;
-      text-decoration: none;
-      cursor: text;
+    .shot {
+      break-inside: avoid;
+      margin-bottom: 14px;
+      border: 1.5px solid var(--ink);
+      background: var(--cream);
+      box-shadow: 3px 3px 0 rgba(26,23,20,0.18);
+      cursor: zoom-in;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(18px) rotate(var(--tilt, 0deg));
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s ease;
     }
-    a.egg:hover, a.egg:visited, a.egg:active, a.egg:focus {
-      color: inherit;
-      text-decoration: none;
-      outline: none;
-    }
+    .shot.in { opacity: 1; transform: translateY(0) rotate(0deg); }
+    .shot:hover { box-shadow: 6px 6px 0 rgba(26,23,20,0.22); transform: translate(-2px, -2px) rotate(var(--tilt, 0deg)); }
 
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.4s ease;
     }
+    .shot:hover img { transform: scale(1.03); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(26,23,20,0.92);
+      padding: 3.5rem 1rem;
+      touch-action: pan-y;
     }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border: 2px solid var(--paper);
+      box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+      animation: pop 0.25s ease;
+    }
+    .lb-btn {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      box-shadow: 2px 2px 0 var(--ink);
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .lb-btn svg { width: 18px; height: 18px; }
+    .lb-btn:hover { background: var(--green); }
+    .lb-close { top: 12px; right: 12px; }
+    .lb-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 12px; top: 50%; transform: translateY(-50%); }
 
-    /* ── Responsive ── */
+    @keyframes pop { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+
     @media (max-width: 600px) {
-      body {
-        padding: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-      }
-      .mac-window {
-        margin: 0;
-        border-radius: 8px;
-        width: 100%;
-      }
-      .window-body {
-        padding: 0.75rem;
-      }
-      .card-stack {
-        gap: 0.5rem;
-      }
-      .action-btn {
-        margin-bottom: 0;
-        padding: 0.6rem 0.75rem;
-      }
-      .footer {
-        margin-top: 1rem;
-      }
+      body { padding: 0.6rem; }
+      .mac-window { margin: 0 auto 0.6rem; }
+      .wordmark { font-size: 0.85rem; }
+      .traffic-lights { left: 10px; gap: 5px; }
+      .traffic-dot { width: 9px; height: 9px; }
+      .wall { columns: 2; column-gap: 8px; padding: 8px; }
+      .shot { margin-bottom: 8px; box-shadow: 2px 2px 0 rgba(26,23,20,0.18); }
+      .lb-prev, .lb-next { top: auto; bottom: 14px; transform: none; }
+    }
 
-      .top-bar {
-        padding-bottom: 0.6rem;
-        margin-bottom: 0.75rem;
-      }
+    @media (max-width: 380px) {
+      .wordmark { display: none; }
+    }
 
-      .title-bar-text {
-        font-size: 0.85rem;
-      }
-
-      .action-btn-title {
-        font-size: 0.75rem;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      .shot { opacity: 1; transform: none; transition: none; }
+      .shot img, .lightbox img { transition: none; animation: none; }
     }
   </style>
 </head>
 <body>
-
   <div class="mac-window">
-
-    <!-- macOS title bar -->
-    <div class="title-bar">
+    <header class="title-bar">
       <div class="traffic-lights">
         <span class="traffic-dot close"></span>
         <span class="traffic-dot minimize"></span>
-        <span class="traffic-dot maximize"></span>
+        <a class="traffic-dot maximize" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a>
       </div>
-      <span class="title-bar-text"><a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="egg">bobcorrigan.com</a></span>
-    </div>
+      <a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="wordmark">bobcorrigan.com</a>
+      <a class="pdga" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">
+        PDGA
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </header>
 
-    <!-- Menu bar -->
-    <nav class="menu-bar">
-      <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="menu-link">File</a>
-      <a href="/frolf.html" class="menu-link" style="font-weight:400;">Disc Golf</a>
-    </nav>
-
-    <!-- Content -->
-    <div class="window-body">
-
-      <div class="top-bar">
-        <span class="site-url">Select a Module</span>
-      </div>
-
-      <div class="card-stack">
-
-        <a href="/pre_round_warmup.html" class="action-btn">
-          <div style="display:flex;align-items:center;gap:0.6rem;">
-            <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            <span class="action-btn-title">Pre-Round Warm Up</span>
-          </div>
-          <span class="action-btn-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-
-        <a href="/rotational_athlete_protocol.html" class="action-btn">
-          <div style="display:flex;align-items:center;gap:0.6rem;">
-            <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.5 6.5a2 2 0 0 0-4 0v11a2 2 0 0 0 4 0v-4.5h11v4.5a2 2 0 0 0 4 0v-11a2 2 0 0 0-4 0v4.5h-11z"/></svg>
-            <span class="action-btn-title">Daily Workout</span>
-          </div>
-          <span class="action-btn-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-
-        <a href="/frolf.html" class="action-btn">
-          <div style="display:flex;align-items:center;gap:0.6rem;">
-            <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><line x1="12" y1="3" x2="12" y2="8.5"/></svg>
-            <span class="action-btn-title">On the Course</span>
-          </div>
-          <span class="action-btn-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-
-        <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener" class="action-btn">
-          <div style="display:flex;align-items:center;gap:0.6rem;">
-            <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg>
-            <span class="action-btn-title">PDGA Profile</span>
-          </div>
-          <span class="action-btn-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        </a>
-
-      </div>
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-left">
-          <span class="footer-dot"></span>
-          Updated 2026
-        </div>
-        <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="beep-boop">Beep Boop</a>
-      </footer>
-
-    </div>
+    <main class="wall" id="wall">
+        <figure class="shot"><img src="images/firstplaceflower.jpg" width="1512" height="1793" alt="firstplaceflower" loading="eager" decoding="async"></figure>
+        <figure class="shot"><img src="images/dips.jpg" width="1920" height="1440" alt="dips" loading="eager" decoding="async"></figure>
+        <figure class="shot"><img src="images/icecream.jpg" width="1920" height="1440" alt="icecream" loading="eager" decoding="async"></figure>
+        <figure class="shot"><img src="images/aced%20in%20az.jpg" width="640" height="481" alt="aced in az" loading="eager" decoding="async"></figure>
+        <figure class="shot"><img src="images/pie.jpg" width="1125" height="1032" alt="pie" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/kayak4.jpg" width="1920" height="1326" alt="kayak4" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/ace17.jpg" width="1920" height="1440" alt="ace17" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/am%20crew.jpg" width="481" height="640" alt="am crew" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/sponsorsign.jpg" width="1440" height="1920" alt="sponsorsign" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/palouse.jpg" width="1920" height="1440" alt="palouse" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/pretty.jpg" width="1440" height="1920" alt="pretty" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/bokbob.jpg" width="1440" height="1920" alt="bokbob" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/pav.jpg" width="1920" height="1440" alt="pav" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/ma3nerds.jpg" width="1920" height="1440" alt="ma3nerds" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/group2.jpg" width="1920" height="1440" alt="group2" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/dunkin%20with%20dylan.jpg" width="640" height="481" alt="dunkin with dylan" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/handoff.jpg" width="722" height="1280" alt="handoff" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/haul.jpg" width="1440" height="1920" alt="haul" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/rescue.jpg" width="1920" height="1440" alt="rescue" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/godsgrove.jpg" width="481" height="640" alt="godsgrove" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/hobohotel.jpg" width="1440" height="988" alt="hobohotel" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/seatac%20spring%202.jpg" width="1920" height="1440" alt="seatac spring 2" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/markymark.jpg" width="1920" height="1440" alt="markymark" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/nick%20brian%20bob.jpg" width="640" height="481" alt="nick brian bob" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/fun%20card%20shelton.jpg" width="640" height="481" alt="fun card shelton" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/sogfrolf.jpg" width="481" height="640" alt="sogfrolf" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/wetfrolf.jpg" width="481" height="640" alt="wetfrolf" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/parkjob.jpg" width="481" height="640" alt="parkjob" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/dips%20discs.jpg" width="481" height="640" alt="dips discs" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/dipsdiscs.jpg" width="640" height="481" alt="dipsdiscs" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/3boys.jpg" width="640" height="481" alt="3boys" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/practice%20ace.jpg" width="481" height="640" alt="practice ace" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/slingin%20singles%20card.jpg" width="640" height="481" alt="slingin singles card" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/copper%20card.jpg" width="481" height="640" alt="copper card" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/AZ%20tourney%20director.jpg" width="640" height="481" alt="AZ tourney director" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/putt%20assassin.jpg" width="532" height="640" alt="putt assassin" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/1st%20place%20card.jpg" width="640" height="481" alt="1st place card" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/seatac%20practice%20ace.jpg" width="481" height="640" alt="seatac practice ace" loading="lazy" decoding="async"></figure>
+        <figure class="shot"><img src="images/throw%20in%20almost.jpg" width="1066" height="727" alt="throw in almost" loading="lazy" decoding="async"></figure>
+    </main>
   </div>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <img id="lbImg" alt="" />
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  </div>
 
+  <script>
+    (function () {
+      var shots = Array.prototype.slice.call(document.querySelectorAll('.shot'));
 
+      // Playful tilt as each photo drops in
+      shots.forEach(function (s, i) {
+        s.style.setProperty('--tilt', ((i * 37) % 5 - 2) * 0.6 + 'deg');
+      });
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -40px 0px' });
+        shots.forEach(function (s) { io.observe(s); });
+      } else {
+        shots.forEach(function (s) { s.classList.add('in'); });
+      }
+
+      // Lightbox
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lbImg');
+      var current = 0;
+
+      function show(i) {
+        current = (i + shots.length) % shots.length;
+        var img = shots[current].querySelector('img');
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbImg.style.animation = 'none'; void lbImg.offsetWidth; lbImg.style.animation = '';
+      }
+      function open(i) { show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+      shots.forEach(function (s, i) { s.addEventListener('click', function () { open(i); }); });
+      document.getElementById('lbClose').addEventListener('click', close);
+      document.getElementById('lbPrev').addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+      document.getElementById('lbNext').addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+      lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+
+      document.addEventListener('keydown', function (e) {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') show(current - 1);
+        if (e.key === 'ArrowRight') show(current + 1);
+      });
+
+      // Swipe on phones
+      var x0 = null;
+      lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', function (e) {
+        if (x0 === null) return;
+        var dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+        x0 = null;
+      });
+    })();
+  </script>
 </body>
 </html>
