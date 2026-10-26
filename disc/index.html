@@ -2,11 +2,8 @@
 <!--
   Found My Disc page — served at bobcorrigan.com/disc
 
-  PLACEHOLDERS TO FILL IN (search this file for each):
-    [ECD ADDRESS]  – Emerald City Discs street address
-    [ECD HOURS]    – store hours
-    [MAP LINK]     – Google/Apple Maps link to ECD (used by both "Get directions" buttons).
-                     Until it's replaced, the buttons fall back to a Google Maps search for "Emerald City Discs".
+  Emerald City Discs: 1521 SW 98th St, Seattle, WA 98106
+  Hours: Mon–Fri Noon–6 PM, Sat–Sun 11 AM–5 PM (update here if they change)
 -->
 <html lang="en">
 <head>
@@ -492,7 +489,7 @@
         <p class="lede">Seriously, you're a legend. Pick whichever way back is easiest for you — and either way, there's <a href="#rewards">a reward in it for you</a>.</p>
 
         <div class="quick">
-          <a class="btn primary js-map" href="[MAP LINK]" target="_blank" rel="noopener">
+          <a class="btn primary js-map" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
             Get directions to ECD
           </a>
@@ -515,11 +512,11 @@
           <li>Send me a quick email saying you dropped it off, so I can set up your reward.</li>
         </ol>
         <dl class="info">
-          <div class="info-row"><dt>Address</dt><dd><span class="placeholder">[ECD ADDRESS]</span></dd></div>
-          <div class="info-row"><dt>Hours</dt><dd><span class="placeholder">[ECD HOURS]</span></dd></div>
+          <div class="info-row"><dt>Address</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">1521 SW 98th St<br>Seattle, WA 98106</a></dd></div>
+          <div class="info-row"><dt>Hours</dt><dd>Mon–Fri: Noon – 6 PM<br>Sat–Sun: 11 AM – 5 PM</dd></div>
         </dl>
         <div class="btn-row">
-          <a class="btn primary small js-map" href="[MAP LINK]" target="_blank" rel="noopener">
+          <a class="btn primary small js-map" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
             Get directions
           </a>
@@ -641,12 +638,6 @@
 
   <script>
     (function () {
-      // Until [MAP LINK] is filled in, send "Get directions" to a Maps search for the store.
-      var fallback = 'https://www.google.com/maps/search/?api=1&query=Emerald+City+Discs';
-      document.querySelectorAll('.js-map').forEach(function (a) {
-        if (a.getAttribute('href').indexOf('[MAP') === 0) a.setAttribute('href', fallback);
-      });
-
       // Thank-you note after the form posts back
       if (/[?&]sent=1/.test(location.search)) {
         document.getElementById('sentMsg').classList.add('show');
