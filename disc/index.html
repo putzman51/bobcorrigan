@@ -178,9 +178,10 @@
 
     .quick {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
+      max-width: 420px;
       gap: 0.8rem;
-      margin: 1.4rem 0 0.6rem;
+      margin: 1.6rem auto 0.4rem;
     }
     .quick-note {
       text-align: center;
@@ -428,6 +429,53 @@
     .mail-ticket h3 { font-size: 0.98rem; margin-bottom: 0.25rem; }
     .mail-ticket p { font-size: 0.85rem; margin-bottom: 0.8rem; }
 
+
+    /* ── Big headline ── */
+    .hero h1 { margin-bottom: 1.5rem; }
+    .h1-top {
+      display: block;
+      font-size: clamp(1.7rem, 8vw, 2.9rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    .h1-ty { display: block; margin-top: 0.55rem; }
+    .h1-ty span {
+      display: inline-block;
+      padding: 0.08em 0.35em 0.12em;
+      background: var(--green);
+      border: 3px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 6px 6px 0 var(--ink);
+      font-size: clamp(2.2rem, 11vw, 4.6rem);
+      white-space: nowrap;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 #fff;
+      transform: rotate(-3deg);
+      animation: slap 0.5s cubic-bezier(.2,1.6,.4,1) both;
+    }
+    @keyframes slap {
+      from { opacity: 0; transform: rotate(-12deg) scale(1.6); }
+      to   { opacity: 1; transform: rotate(-3deg) scale(1); }
+    }
+
+    /* ── Tournaments + contact ── */
+    .tourney { background: #fffaf0; }
+    .tourney p { margin-bottom: 1rem; }
+    .tourney .btn { display: inline-flex; }
+    .contact {
+      margin-top: 2rem;
+      padding: 1.4rem 1.1rem;
+      text-align: center;
+      border: 2px dashed var(--ink);
+      border-radius: 8px;
+    }
+    .contact p { margin-bottom: 1rem; }
+    .btn.big { min-height: 62px; font-size: 1.1rem; }
+    .contact .addr { display: block; margin-top: 0.7rem; font-size: 0.8rem; color: var(--muted); word-break: break-all; }
+
     /* ── Closing ── */
     .closing {
       margin-top: 2rem;
@@ -448,6 +496,7 @@
       .title-text { font-size: 0.85rem; }
       main { padding: 1.1rem 0.9rem 1.6rem; }
       .quick, .btn-row { grid-template-columns: 1fr; }
+      .tourney .btn { display: flex; }
       .prizes { grid-template-columns: 1fr; }
       .or { justify-self: center; margin: -0.1rem 0; }
       .card { padding: 1.2rem 1rem 1.1rem; }
@@ -455,7 +504,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .hero-disc { animation: none; }
+      .h1-ty span { animation: none; }
       .btn { transition: none; }
     }
   </style>
@@ -476,120 +525,44 @@
     </nav>
 
     <main>
+    <main>
       <!-- 1. Header + thank you -->
       <section class="hero">
-        <svg class="hero-disc" viewBox="0 0 120 120" aria-hidden="true">
-          <circle cx="60" cy="60" r="54" fill="#d4f0d8" stroke="#1a1714" stroke-width="3"/>
-          <circle cx="60" cy="60" r="42" fill="none" stroke="#1a1714" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.5"/>
-          <circle cx="60" cy="60" r="20" fill="#f0ebe3" stroke="#1a1714" stroke-width="2"/>
-          <path d="M22 44 Q60 20 98 44" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
-          <text x="60" y="64.5" text-anchor="middle" font-family="Space Mono, monospace" font-size="11" font-weight="700" fill="#1a1714">/disc</text>
-        </svg>
-        <h1>You found my disc — <span class="hl">thank you!</span></h1>
-        <p class="lede">Seriously, you're a legend. Pick whichever way back is easiest for you — and either way, there's <a href="#rewards">a reward in it for you</a>.</p>
+        <h1>
+          <span class="h1-top">You found my disc</span>
+          <span class="h1-ty"><span>Thank you!</span></span>
+        </h1>
+        <p class="lede">Seriously, you're a legend. Here's how to get it back to me — and yes, there's <a href="#rewards">a reward in it for you</a>.</p>
 
         <div class="quick">
-          <a class="btn primary js-map" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
+          <a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
             Get directions to ECD
           </a>
-          <a class="btn" href="mailto:robertpaulc@gmail.com?subject=Found%20your%20disc&amp;body=Hi%20Robert!%0D%0A%0D%0AThe%20disc%20(mold%20%2F%20color%20%2F%20plastic)%3A%20%0D%0AWhere%20I%20found%20it%20(course%20%2B%20hole)%3A%20%0D%0AHow%20I'd%20like%20to%20return%20it%20(drop%20at%20ECD%20%2F%20mail%20it)%3A%20%0D%0AReward%20I'd%20like%20(ECD%20store%20credit%20%2F%20a%20disc%20from%20your%20collection)%3A%20%0D%0A">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3.5 6.5L12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
-            Email Robert
-          </a>
         </div>
-        <p class="quick-note">Email is the best way to reach me.</p>
       </section>
 
-      <!-- 2. Option 1: ECD drop-off -->
+      <!-- 2. ECD drop-off -->
       <section class="card" id="ecd">
         <span class="sticker">Easiest</span>
-        <span class="eyebrow">Option 1</span>
+        <span class="eyebrow">How to return it</span>
         <h2>Drop it off at Emerald City Discs</h2>
         <ol class="steps">
           <li>Bring the disc to <b>Emerald City Discs (ECD)</b>.</li>
-          <li>Tell the staff it belongs to <span class="name-tag">Robert (Robert Paul C.)</span></li>
-          <li>Send me a quick email saying you dropped it off, so I can set up your reward.</li>
+          <li>Tell the staff it belongs to <span class="name-tag">Bob</span></li>
+          <li>Send me a quick email (<a href="#contact">button at the bottom</a>) saying you dropped it off, so I can set up your reward.</li>
         </ol>
         <dl class="info">
           <div class="info-row"><dt>Address</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">1521 SW 98th St<br>Seattle, WA 98106</a></dd></div>
           <div class="info-row"><dt>Hours</dt><dd>Mon–Fri: Noon – 6 PM<br>Sat–Sun: 11 AM – 5 PM</dd></div>
         </dl>
-        <div class="btn-row">
-          <a class="btn primary small js-map" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
-            Get directions
-          </a>
-          <a class="btn small" href="mailto:robertpaulc@gmail.com?subject=Dropped%20your%20disc%20at%20ECD&amp;body=Hi%20Robert!%20I%20dropped%20your%20disc%20off%20at%20Emerald%20City%20Discs.%0D%0A%0D%0AThe%20disc%20(mold%20%2F%20color%20%2F%20plastic)%3A%20%0D%0AWhere%20I%20found%20it%20(course%20%2B%20hole)%3A%20%0D%0AReward%20I'd%20like%20(ECD%20store%20credit%20%2F%20a%20disc%20from%20your%20collection)%3A%20%0D%0A">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            I dropped it off
-          </a>
-        </div>
-      </section>
-
-      <!-- 3. Option 2: Email -->
-      <section class="card" id="email">
-        <span class="eyebrow">Option 2</span>
-        <h2>Email me</h2>
-        <a class="email-big" href="mailto:robertpaulc@gmail.com?subject=Found%20your%20disc">robertpaulc@gmail.com</a>
-        <p>Helpful things to include:</p>
-        <ul class="checklist">
-          <li><b>The disc</b> <small>— mold, color, plastic</small></li>
-          <li><b>Where you found it</b> <small>— course and hole</small></li>
-          <li><b>How you'd like to return it</b> <small>— drop at ECD, or mail it</small></li>
-        </ul>
-        <a class="btn primary" href="mailto:robertpaulc@gmail.com?subject=Found%20your%20disc&amp;body=Hi%20Robert!%0D%0A%0D%0AThe%20disc%20(mold%20%2F%20color%20%2F%20plastic)%3A%20%0D%0AWhere%20I%20found%20it%20(course%20%2B%20hole)%3A%20%0D%0AHow%20I'd%20like%20to%20return%20it%20(drop%20at%20ECD%20%2F%20mail%20it)%3A%20%0D%0AReward%20I'd%20like%20(ECD%20store%20credit%20%2F%20a%20disc%20from%20your%20collection)%3A%20%0D%0A">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3.5 6.5L12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
-          Email Robert
+        <a class="btn primary small" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
+          Get directions
         </a>
-
-        <details class="form-wrap" id="formWrap">
-          <summary>No email app handy? Use this form</summary>
-          <form action="https://formsubmit.co/robertpaulc@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="Found your disc (via bobcorrigan.com/disc)">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://bobcorrigan.com/disc/?sent=1#email">
-            <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-            <label>Your name <span class="opt">(optional)</span>
-              <input type="text" name="name" autocomplete="name">
-            </label>
-            <label>Your email
-              <input type="email" name="email" autocomplete="email" required>
-            </label>
-            <label>The disc <span class="opt">(mold / color / plastic)</span>
-              <input type="text" name="disc" placeholder="e.g. green Star Destroyer">
-            </label>
-            <label>Where you found it <span class="opt">(course + hole)</span>
-              <input type="text" name="found_at" placeholder="e.g. Lake Fenwick, hole 7">
-            </label>
-            <label>How you'd like to return it
-              <select name="return_method">
-                <option>Drop it at Emerald City Discs</option>
-                <option>Already dropped it at ECD</option>
-                <option>Mail it (send me details)</option>
-                <option>Something else</option>
-              </select>
-            </label>
-            <label>Your reward
-              <select name="reward">
-                <option>ECD store credit</option>
-                <option>A disc from your collection</option>
-                <option>Thank-you gift box (if mailing)</option>
-                <option>Not sure yet</option>
-              </select>
-            </label>
-            <label>Anything else? <span class="opt">(optional)</span>
-              <textarea name="message"></textarea>
-            </label>
-            <button class="btn primary" type="submit">Send to Robert</button>
-          </form>
-        </details>
-        <div class="sent" id="sentMsg" role="status">Got it — thank you! I'll email you back soon.</div>
       </section>
 
-      <!-- 4. Rewards -->
+      <!-- 3. Rewards -->
       <section class="card rewards" id="rewards">
         <span class="sticker">Thank you!</span>
         <span class="eyebrow">Your reward</span>
@@ -619,30 +592,38 @@
           </svg>
           <div>
             <h3>Rather mail it back?</h3>
-            <p>I'll send you a thank-you gift box in return. Just email me first so we can sort out the mailing details.</p>
-            <a class="btn small" href="mailto:robertpaulc@gmail.com?subject=Mailing%20your%20disc%20back&amp;body=Hi%20Robert!%20I%20found%20your%20disc%20and%20I'd%20like%20to%20mail%20it%20back.%0D%0A%0D%0AThe%20disc%20(mold%20%2F%20color%20%2F%20plastic)%3A%20%0D%0AWhere%20I%20found%20it%20(course%20%2B%20hole)%3A%20%0D%0A">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3.5 6.5L12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
-              Email me about mailing
-            </a>
+            <p>I'll send you a thank-you gift box in return. Just <a href="#contact">email me</a> first so we can sort out the mailing details.</p>
           </div>
         </div>
       </section>
 
-      <!-- 5. Closing -->
+      <!-- 4. Tournaments -->
+      <section class="card tourney" id="tournaments">
+        <span class="eyebrow">See you out there?</span>
+        <h2>Are you playing any local tournaments?</h2>
+        <p>Feel free to check my PDGA profile! If we're playing any of the same events, we can always meet up before or after the round, and I'll be stoked to hand you a prize in person.</p>
+        <a class="btn small" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">
+          My PDGA profile
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </section>
+
+      <!-- 5. Email (the one email button) -->
+      <section class="contact" id="contact">
+        <p>Questions, drop-off heads-up, or mailing plans — email is the best way to reach me.</p>
+        <a class="btn primary big" href="mailto:robertpaulc@gmail.com?subject=Found%20your%20disc&amp;body=Hi%20Bob!%0D%0A%0D%0AThe%20disc%20(mold%20%2F%20color%20%2F%20plastic)%3A%20%0D%0AWhere%20I%20found%20it%20(course%20%2B%20hole)%3A%20%0D%0AHow%20I'm%20returning%20it%20(dropped%20at%20ECD%20%2F%20want%20to%20mail%20it%20%2F%20meet%20at%20a%20tournament)%3A%20%0D%0AReward%20I'd%20like%20(ECD%20store%20credit%20%2F%20a%20disc%20from%20your%20collection)%3A%20%0D%0A">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3.5 6.5L12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+          Email Bob
+        </a>
+        <span class="addr">robertpaulc@gmail.com</span>
+      </section>
+
+      <!-- 6. Closing -->
       <p class="closing">
         Good karma on the course is real — <strong>thanks for helping a fellow disc golfer out.</strong>
-        <span class="sig">— Robert</span>
+        <span class="sig">— Bob</span>
       </p>
     </main>
   </div>
-
-  <script>
-    (function () {
-      // Thank-you note after the form posts back
-      if (/[?&]sent=1/.test(location.search)) {
-        document.getElementById('sentMsg').classList.add('show');
-      }
-    })();
-  </script>
 </body>
 </html>
