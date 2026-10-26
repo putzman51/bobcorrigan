@@ -105,11 +105,16 @@
       cursor: text;
     }
 
-    /* PDGA button */
-    .pdga {
+    /* Title-bar buttons (Found my Disc? + PDGA) */
+    .tb-buttons {
       position: absolute;
       right: 10px;
+      display: flex;
+      gap: 6px;
+    }
+    .pdga {
       display: inline-flex;
+      white-space: nowrap;
       align-items: center;
       gap: 0.3rem;
       padding: 0.3rem 0.6rem 0.3rem 0.65rem;
@@ -128,6 +133,8 @@
     .pdga:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
     .pdga:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
     .pdga svg { width: 12px; height: 12px; }
+    .pdga.found { background: #ffe9a8; }
+    .pdga.found:hover { background: #ffdf85; }
 
     /* ── Photo wall ── */
     .wall {
@@ -204,7 +211,11 @@
     @media (max-width: 600px) {
       body { padding: 0.6rem; }
       .mac-window { margin: 0 auto 0.6rem; }
-      .wordmark { font-size: 0.85rem; }
+      /* make room for two buttons: wordmark slides left, next to the dots */
+      .title-bar { justify-content: flex-start; padding-left: 54px; }
+      .wordmark { font-size: 0.7rem; letter-spacing: 0.02em; }
+      .tb-buttons { right: 8px; gap: 5px; }
+      .pdga { font-size: 0.62rem; padding: 0.3rem 0.45rem; letter-spacing: 0.05em; }
       .traffic-lights { left: 10px; gap: 5px; }
       .traffic-dot { width: 9px; height: 9px; }
       .wall { columns: 2; column-gap: 8px; padding: 8px; }
@@ -212,7 +223,7 @@
       .lb-prev, .lb-next { top: auto; bottom: 14px; transform: none; }
     }
 
-    @media (max-width: 380px) {
+    @media (max-width: 359px) {
       .wordmark { display: none; }
     }
 
@@ -231,10 +242,13 @@
         <a class="traffic-dot maximize" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a>
       </div>
       <a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="wordmark">bobcorrigan.com</a>
-      <a class="pdga" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">
-        PDGA
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div class="tb-buttons">
+        <a class="pdga found" href="/disc/">Found my Disc?</a>
+        <a class="pdga" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">
+          PDGA
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
     </header>
 
     <main class="wall" id="wall">
