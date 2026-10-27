@@ -14,9 +14,9 @@
   <meta name="author" content="Robert Corrigan" />
   <link rel="canonical" href="https://bobcorrigan.com/disc/" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Found My Disc? \u2014 Bob Corrigan", "url": "https://bobcorrigan.com/disc/", "author": {"@type": "Person", "@id": "https://bobcorrigan.com/#person", "name": "Robert Corrigan", "alternateName": "Bob Corrigan", "url": "https://bobcorrigan.com/"}, "isPartOf": {"@id": "https://bobcorrigan.com/#website"}}</script>
-  <meta name="description" content="You found one of my discs — thank you! Here's how to get it back to me, and how to claim your reward." />
+  <meta name="description" content="Found a disc with Bob Corrigan's name on it? Drop it at Emerald City Discs in Seattle or email Bob, and he'll send a thank-you gift." />
   <meta property="og:title" content="Found my disc? Thank you!" />
-  <meta property="og:description" content="Drop it at Emerald City Discs or email me — either way, there's a reward in it for you." />
+  <meta property="og:description" content="Drop it at Emerald City Discs or send me a quick email. Thank-you gift included." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://bobcorrigan.com/disc/" />
   <meta name="theme-color" content="#d4f0d8" />
@@ -119,35 +119,11 @@
     .menu-bar a:hover { text-decoration: underline; }
     .menu-bar span { color: var(--muted); }
 
-    main { padding: 1.5rem 1.25rem 2rem; }
-
-    /* ── Hero ── */
-    .hero { text-align: center; padding: 0.5rem 0 1.25rem; }
-    .hero-disc {
-      width: 112px;
-      height: 112px;
-      margin: 0 auto 0.9rem;
-      display: block;
-      animation: wobble 3.2s ease-in-out infinite;
-      transform-origin: 50% 50%;
-    }
-    @keyframes wobble {
-      0%, 100% { transform: rotate(-8deg) translateY(0); }
-      50% { transform: rotate(8deg) translateY(-4px); }
-    }
-    h1 {
-      font-size: clamp(1.55rem, 6.4vw, 2.3rem);
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.7rem;
-    }
-    h1 .hl {
-      background: var(--green);
-      box-shadow: 0 0 0 2px var(--green);
-      border-radius: 2px;
-    }
-    .lede { max-width: 32em; margin: 0 auto; color: #3a342e; }
-
+    main { padding: 2.6rem 1.5rem 2.4rem; max-width: 30rem; margin: 0 auto; }
+    h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: 0.01em; line-height: 1.3; margin-bottom: 1rem; }
+    main p { color: #3a342e; }
+    main p + p { margin-top: 0.8rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.6rem 0 1.1rem; }
     /* ── Buttons ── */
     .btn {
       display: flex;
@@ -177,339 +153,17 @@
     .btn:focus-visible { outline: 3px solid var(--green-deep); outline-offset: 3px; }
     .btn.primary { background: var(--green); }
     .btn.primary:hover { background: var(--green-dark); }
-    .btn.small { min-height: 48px; font-size: 0.85rem; }
-
-    .quick {
-      display: grid;
-      grid-template-columns: 1fr;
-      max-width: 420px;
-      gap: 0.8rem;
-      margin: 1.6rem auto 0.4rem;
-    }
-    .quick-note {
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .quick-note a { font-weight: 700; color: var(--ink); }
-
-    /* ── Cards ── */
-    .card {
-      position: relative;
-      margin-top: 1.6rem;
-      padding: 1.3rem 1.2rem 1.25rem;
-      background: #fbf8f3;
-      border: 2px solid var(--ink);
-      border-radius: 8px;
-      box-shadow: 4px 4px 0 rgba(26,23,20,0.18);
-      scroll-margin-top: 60px;
-    }
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
-    }
-    .card h2 { font-size: 1.25rem; line-height: 1.25; margin-bottom: 0.6rem; }
-    .sticker {
-      position: absolute;
-      top: -14px;
-      right: 14px;
-      padding: 0.2rem 0.6rem;
-      background: var(--sun);
-      border: 2px solid var(--ink);
-      border-radius: 4px;
-      box-shadow: 2px 2px 0 var(--ink);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transform: rotate(3deg);
-    }
-
-    .steps { list-style: none; counter-reset: s; margin: 0.8rem 0 1rem; }
-    .steps li {
-      counter-increment: s;
-      position: relative;
-      padding-left: 2.3rem;
-      margin-bottom: 0.7rem;
-    }
-    .steps li::before {
-      content: counter(s);
-      position: absolute;
-      left: 0;
-      top: 0.05rem;
-      width: 1.6rem;
-      height: 1.6rem;
-      display: grid;
-      place-items: center;
-      border: 1.5px solid var(--ink);
-      border-radius: 50%;
-      background: var(--green);
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-    .name-tag {
-      background: var(--green);
-      padding: 0 0.25em;
-      border-radius: 2px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .info {
-      border-top: 1.5px dashed var(--rule);
-      border-bottom: 1.5px dashed var(--rule);
-      margin: 0 0 1rem;
-      padding: 0.4rem 0;
-    }
-    .info-row {
-      display: grid;
-      grid-template-columns: 4.6rem 1fr;
-      gap: 0.6rem;
-      padding: 0.35rem 0;
-      font-size: 0.88rem;
-    }
-    .info-row dt { font-weight: 700; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding-top: 0.15rem; }
-
-    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-
-    .email-big {
-      display: block;
-      margin: 0.2rem 0 0.9rem;
-      padding: 0.75rem 0.9rem;
-      background: var(--cream);
-      border: 1.5px solid var(--ink);
-      border-radius: 6px;
-      font-size: clamp(0.92rem, 4.2vw, 1.1rem);
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      word-break: break-all;
-    }
-    .email-big:hover { background: var(--green); }
-
-    .checklist { list-style: none; margin: 0.4rem 0 1.1rem; }
-    .checklist li { position: relative; padding-left: 1.7rem; margin-bottom: 0.45rem; }
-    .checklist li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.3rem;
-      width: 1rem;
-      height: 1rem;
-      border: 1.5px solid var(--ink);
-      border-radius: 3px;
-      background: #fff;
-    }
-    .checklist b { font-weight: 700; }
-    .checklist small { color: var(--muted); font-size: 0.8rem; }
-
-    /* ── Form ── */
-    details.form-wrap {
-      margin-top: 1rem;
-      border: 1.5px solid var(--ink);
-      border-radius: 6px;
-      background: var(--paper);
-    }
-    details.form-wrap summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 0.9rem 1rem;
-      min-height: 48px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    details.form-wrap summary::-webkit-details-marker { display: none; }
-    details.form-wrap summary::after { content: '+'; font-size: 1.3rem; line-height: 1; }
-    details.form-wrap[open] summary::after { content: '–'; }
-    details.form-wrap[open] summary { border-bottom: 1.5px dashed var(--rule); }
-
-    form { padding: 1rem; display: grid; gap: 0.85rem; }
-    label { display: grid; gap: 0.3rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.03em; }
-    label .opt { font-weight: 400; color: var(--muted); }
-    input, select, textarea {
-      font: inherit;
-      font-size: 16px; /* prevents iOS zoom on focus */
-      width: 100%;
-      padding: 0.7rem 0.75rem;
-      border: 1.5px solid var(--ink);
-      border-radius: 5px;
-      background: #fff;
-      color: var(--ink);
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231a1714' stroke-width='2'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.8rem center;
-      padding-right: 2.2rem;
-    }
-    textarea { min-height: 90px; resize: vertical; }
-    input:focus, select:focus, textarea:focus { outline: 3px solid var(--green-dark); outline-offset: 1px; }
-    .honey { position: absolute; left: -9999px; }
-    .sent {
-      display: none;
-      margin-top: 1rem;
-      padding: 0.8rem 1rem;
-      background: var(--green);
-      border: 1.5px solid var(--ink);
-      border-radius: 6px;
-      font-weight: 700;
-    }
-    .sent.show { display: block; }
-
-    /* ── Rewards (the standout) ── */
-    .rewards {
-      background: var(--green);
-      border-width: 2.5px;
-      box-shadow: 6px 6px 0 var(--ink);
-      padding-top: 1.6rem;
-    }
-    .rewards::before {
-      /* scorecard perforation along the top */
-      content: '';
-      position: absolute;
-      left: 12px; right: 12px; top: 8px;
-      height: 0;
-      border-top: 2px dotted rgba(26,23,20,0.35);
-    }
-    .rewards .eyebrow { color: var(--green-deep); }
-    .rewards h2 { font-size: clamp(1.4rem, 5.6vw, 1.75rem); }
-    .rewards .sticker { background: #fff; }
-    .prizes {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: stretch;
-      gap: 0.6rem;
-      margin: 1rem 0 1.1rem;
-    }
-    .prize {
-      background: #fbf8f3;
-      border: 2px solid var(--ink);
-      border-radius: 6px;
-      padding: 0.9rem 0.85rem;
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-    .prize .letter {
-      display: inline-grid;
-      place-items: center;
-      width: 2rem;
-      height: 2rem;
-      margin-bottom: 0.4rem;
-      border: 2px solid var(--ink);
-      border-radius: 50%;
-      background: var(--sun);
-      font-weight: 700;
-    }
-    .prize h3 { font-size: 1rem; line-height: 1.3; margin-bottom: 0.3rem; }
-    .prize p { font-size: 0.82rem; color: #3a342e; }
-    .or {
-      align-self: center;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-    }
-
-    .mail-ticket {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.85rem;
-      align-items: start;
-      padding: 1rem;
-      background: #fbf8f3;
-      border: 2px dashed var(--ink);
-      border-radius: 6px;
-    }
-    .mail-ticket svg { width: 44px; height: 44px; }
-    .mail-ticket h3 { font-size: 0.98rem; margin-bottom: 0.25rem; }
-    .mail-ticket p { font-size: 0.85rem; margin-bottom: 0.8rem; }
-
-
-    /* ── Big headline ── */
-    .hero h1 { margin-bottom: 1.5rem; }
-    .h1-top {
-      display: block;
-      font-size: clamp(1.7rem, 8vw, 2.9rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-    }
-    .h1-ty { display: block; margin-top: 0.55rem; }
-    .h1-ty span {
-      display: inline-block;
-      padding: 0.08em 0.35em 0.12em;
-      background: var(--green);
-      border: 3px solid var(--ink);
-      border-radius: 10px;
-      box-shadow: 6px 6px 0 var(--ink);
-      font-size: clamp(2.2rem, 11vw, 4.6rem);
-      white-space: nowrap;
-      line-height: 1;
-      letter-spacing: -0.04em;
-      text-transform: uppercase;
-      text-shadow: 3px 3px 0 #fff;
-      transform: rotate(-3deg);
-      animation: slap 0.5s cubic-bezier(.2,1.6,.4,1) both;
-    }
-    @keyframes slap {
-      from { opacity: 0; transform: rotate(-12deg) scale(1.6); }
-      to   { opacity: 1; transform: rotate(-3deg) scale(1); }
-    }
-
-    /* ── Tournaments + contact ── */
-    .tourney { background: #fffaf0; }
-    .tourney p { margin-bottom: 1rem; }
-    .tourney .btn { display: inline-flex; }
-    .contact {
-      margin-top: 2rem;
-      padding: 1.4rem 1.1rem;
-      text-align: center;
-      border: 2px dashed var(--ink);
-      border-radius: 8px;
-    }
-    .contact p { margin-bottom: 1rem; }
-    .btn.big { min-height: 62px; font-size: 1.1rem; }
-    .contact .addr { display: block; margin-top: 0.7rem; font-size: 0.8rem; color: var(--muted); word-break: break-all; }
-
-    /* ── Closing ── */
-    .closing {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.95rem;
-    }
-    .closing strong { background: var(--green); padding: 0 0.2em; }
-    .closing .sig { display: block; margin-top: 0.5rem; color: var(--muted); font-size: 0.8rem; }
-
-    .placeholder { background: var(--sun); padding: 0 0.2em; border-radius: 2px; }
-
-    /* ── Phone ── */
+    .btn { min-height: 44px; padding: 0.55rem 0.95rem; font-size: 0.82rem; box-shadow: 2px 2px 0 var(--ink); border-width: 1.5px; }
+    .btn:hover { box-shadow: 3px 3px 0 var(--ink); }
+    .small { font-size: 0.75rem; color: var(--muted); }
+    .small a { text-underline-offset: 3px; text-decoration-color: var(--rule); }
+    .sig { margin-top: 1.6rem; font-size: 0.85rem; }
     @media (max-width: 600px) {
-      body { padding: 0.6rem; font-size: 15px; }
+      body { padding: 0.6rem; }
       .mac-window { margin: 0 auto 0.6rem; }
-      .traffic-lights { left: 10px; gap: 5px; }
-      .traffic-dot { width: 9px; height: 9px; }
-      .title-text { font-size: 0.85rem; }
-      main { padding: 1.1rem 0.9rem 1.6rem; }
-      .quick, .btn-row { grid-template-columns: 1fr; }
-      .tourney .btn { display: flex; }
-      .prizes { grid-template-columns: 1fr; }
-      .or { justify-self: center; margin: -0.1rem 0; }
-      .card { padding: 1.2rem 1rem 1.1rem; }
+      main { padding: 2rem 1.1rem 2rem; }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .h1-ty span { animation: none; }
-      .btn { transition: none; }
-    }
+    @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
   </style>
 </head>
 <body>
@@ -528,104 +182,17 @@
     </nav>
 
     <main>
-    <main>
-      <!-- 1. Header + thank you -->
-      <section class="hero">
-        <h1>
-          <span class="h1-top">You found my disc</span>
-          <span class="h1-ty"><span>Thank you!</span></span>
-        </h1>
-        <p class="lede">Seriously, you're a legend. Here's how to get it back to me — and yes, there's <a href="#rewards">a reward in it for you</a>.</p>
+      <h1>Did you find my disc?</h1>
+      <p>If so, thank you! Please drop it off at <a href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">Emerald City Discs</a> in Seattle, or shoot me a quick email.</p>
+      <p>Either way, I'll be stoked to send a thank-you gift your way.</p>
 
-        <div class="quick">
-          <a class="btn primary" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
-            Get directions to ECD
-          </a>
-        </div>
-      </section>
+      <div class="actions">
+        <a class="btn primary" href="mailto:robertpaulc@gmail.com?subject=Found%20your%20disc&amp;body=Hi%20Bob!%20I%20found%20your%20disc%20at%20">Email Bob</a>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">Directions to ECD</a>
+      </div>
 
-      <!-- 2. ECD drop-off -->
-      <section class="card" id="ecd">
-        <span class="sticker">Easiest</span>
-        <span class="eyebrow">How to return it</span>
-        <h2>Drop it off at Emerald City Discs</h2>
-        <ol class="steps">
-          <li>Bring the disc to <b>Emerald City Discs (ECD)</b>.</li>
-          <li>Tell the staff it belongs to <span class="name-tag">Bob</span></li>
-          <li>Send me a quick email (<a href="#contact">button at the bottom</a>) saying you dropped it off, so I can set up your reward.</li>
-        </ol>
-        <dl class="info">
-          <div class="info-row"><dt>Address</dt><dd><a href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">1521 SW 98th St<br>Seattle, WA 98106</a></dd></div>
-          <div class="info-row"><dt>Hours</dt><dd>Mon–Fri: Noon – 6 PM<br>Sat–Sun: 11 AM – 5 PM</dd></div>
-        </dl>
-        <a class="btn primary small" href="https://www.google.com/maps/search/?api=1&amp;query=Emerald+City+Discs+1521+SW+98th+St+Seattle+WA+98106" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
-          Get directions
-        </a>
-      </section>
-
-      <!-- 3. Rewards -->
-      <section class="card rewards" id="rewards">
-        <span class="sticker">Thank you!</span>
-        <span class="eyebrow">Your reward</span>
-        <h2>Pick your prize</h2>
-        <p>As thanks for getting my disc home, you choose:</p>
-
-        <div class="prizes">
-          <div class="prize">
-            <span class="letter">A</span>
-            <h3>Store credit at Emerald City Discs</h3>
-            <p>Treat yourself to something new off the wall.</p>
-          </div>
-          <span class="or">OR</span>
-          <div class="prize">
-            <span class="letter">B</span>
-            <h3>A disc from my collection</h3>
-            <p>Any one that isn't "bagged" — meaning not one I actively carry in my bag.</p>
-          </div>
-        </div>
-
-        <div class="mail-ticket">
-          <svg viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="7" y="19" width="34" height="23" rx="2" fill="#ffe9a8" stroke="#1a1714" stroke-width="2.5"/>
-            <rect x="4" y="13" width="40" height="8" rx="2" fill="#fbf8f3" stroke="#1a1714" stroke-width="2.5"/>
-            <path d="M24 13v29" stroke="#1a1714" stroke-width="2.5"/>
-            <path d="M24 13c-3-6-11-7-11-2 0 3 6 2 11 2zM24 13c3-6 11-7 11-2 0 3-6 2-11 2z" fill="#d4f0d8" stroke="#1a1714" stroke-width="2.2" stroke-linejoin="round"/>
-          </svg>
-          <div>
-            <h3>Rather mail it back?</h3>
-            <p>I'll send you a thank-you gift box in return. Just <a href="#contact">email me</a> first so we can sort out the mailing details.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. Tournaments -->
-      <section class="card tourney" id="tournaments">
-        <span class="eyebrow">See you out there?</span>
-        <h2>Are you playing any local tournaments?</h2>
-        <p>Feel free to check my PDGA profile! If we're playing any of the same events, we can always meet up before or after the round, and I'll be stoked to hand you a prize in person.</p>
-        <a class="btn small" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">
-          My PDGA profile
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </section>
-
-      <!-- 5. Email (the one email button) -->
-      <section class="contact" id="contact">
-        <p>Questions, drop-off heads-up, or mailing plans — email is the best way to reach me.</p>
-        <a class="btn primary big" href="mailto:robertpaulc@gmail.com?subject=Found%20your%20disc&amp;body=Hi%20Bob!%0D%0A%0D%0AThe%20disc%20(mold%20%2F%20color%20%2F%20plastic)%3A%20%0D%0AWhere%20I%20found%20it%20(course%20%2B%20hole)%3A%20%0D%0AHow%20I'm%20returning%20it%20(dropped%20at%20ECD%20%2F%20want%20to%20mail%20it%20%2F%20meet%20at%20a%20tournament)%3A%20%0D%0AReward%20I'd%20like%20(ECD%20store%20credit%20%2F%20a%20disc%20from%20your%20collection)%3A%20%0D%0A">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3.5 6.5L12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
-          Email Bob
-        </a>
-        <span class="addr">robertpaulc@gmail.com</span>
-      </section>
-
-      <!-- 6. Closing -->
-      <p class="closing">
-        Good karma on the course is real — <strong>thanks for helping a fellow disc golfer out.</strong>
-        <span class="sig">— Bob</span>
-      </p>
+      <p class="small">robertpaulc@gmail.com · ECD is at 1521 SW 98th St, Seattle</p>
+      <p class="sig">— Bob</p>
     </main>
   </div>
 </body>
