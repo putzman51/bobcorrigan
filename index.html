@@ -141,7 +141,7 @@
 
     /* ── Retro boot banner ── */
     .boot {
-      margin: 40px 0 var(--gap);
+      margin: 40px 0 44px;
       padding: 10px;
       background: #d6d0c6;
       border: 2px solid var(--ink);
@@ -193,6 +193,48 @@
       background: repeating-linear-gradient(-45deg, var(--ink) 0 6px, var(--green) 6px 12px);
       background-size: 17px 17px;
       animation: barber 0.9s linear infinite;
+    }
+    /* ── Stat modules ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 8px 10px;
+      background: radial-gradient(ellipse at center, #22302a 0%, #141a17 80%);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px);
+      pointer-events: none;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8fc79a;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .stat-value {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--green);
+      text-shadow: 0 0 8px rgba(212, 240, 216, 0.6);
+      font-variant-numeric: tabular-nums;
     }
     @keyframes dot { 0% { opacity: 0; } 50% { opacity: 1; } }
     @keyframes blink { 50% { opacity: 0; } }
@@ -336,6 +378,11 @@
       .traffic-dot { width: 9px; height: 9px; }
       .boot { margin-top: 24px; padding: 7px; }
       .boot-screen { font-size: 13px; padding: 16px 12px 14px; }
+      .boot { margin-bottom: 32px; }
+      .stats { gap: 6px; margin-top: 7px; }
+      .stat { padding: 10px 4px 8px; gap: 5px; }
+      .stat-label { font-size: 8px; letter-spacing: 0.08em; }
+      .stat-value { font-size: 24px; }
       figcaption { font-size: 13px; padding-top: 12px; }
       .pic { box-shadow: 3px 3px 0 rgba(26, 23, 20, 0.16); }
       .num { display: none; }
@@ -370,9 +417,14 @@
     </header>
 
     <div class="col">
-      <div class="boot" aria-label="Disc Golf module running">
-        <div class="boot-screen" aria-hidden="true"><span class="boot-prompt">&gt;</span>Disc Golf module running<span class="dots"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></span><span class="cursor"></span></div>
+      <div class="boot">
+        <div class="boot-screen"><span class="boot-prompt" aria-hidden="true">&gt;</span>disc golf module running<span class="dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></span><span class="cursor"></span></div>
         <div class="boot-bar" aria-hidden="true"></div>
+        <div class="stats">
+          <div class="stat"><span class="stat-label">Ace Count</span><span class="stat-value">7</span></div>
+          <div class="stat"><span class="stat-label">2026 PDGA Wins</span><span class="stat-value">5</span></div>
+          <div class="stat"><span class="stat-label">Pro Cash</span><span class="stat-value">$170</span></div>
+        </div>
       </div>
 
       <main id="roll">
