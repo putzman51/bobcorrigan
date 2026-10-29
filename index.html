@@ -33,15 +33,18 @@
       --cream: #e4dccf;
       --muted: #8a8178;
       --accent: #3d7a4c;
-      --gap: 2in;          /* exactly 192px between photos */
+      --green: #d4f0d8;
+      --green-dark: #c2e8c7;
+      --gap: 1.5in;        /* exactly 144px between photos */
       --col: 640px;
       --port-cap: min(78vh, 600px);
     }
 
-    html { background: var(--paper); overflow-x: hidden; }
+    html { background: #b8b0a4; overflow-x: hidden; }
 
     body {
-      background: var(--paper);
+      background: #b8b0a4;
+      padding: 1.5rem;
       color: var(--ink);
       font-family: 'Space Mono', ui-monospace, monospace;
       -webkit-font-smoothing: antialiased;
@@ -58,25 +61,142 @@
       z-index: 0;
     }
 
-    .col {
+    /* ── Mac window ── */
+    .mac-window {
       position: relative;
       z-index: 1;
+      max-width: 780px;
+      margin: 0.5rem auto 1.5rem;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3);
+    }
+
+    .title-bar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
+      border-bottom: 2px solid var(--ink);
+      border-radius: 6px 6px 0 0;
+      user-select: none;
+    }
+
+    .traffic-lights { position: absolute; left: 12px; display: flex; gap: 6px; }
+    .traffic-dot {
+      display: block;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+    .traffic-dot.close { background: #ff6058; }
+    .traffic-dot.minimize { background: #ffbd2e; }
+    .traffic-dot.maximize { background: var(--green); }
+
+    .wordmark {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      text-decoration: none;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+      cursor: text;
+    }
+
+    .tb-buttons { position: absolute; right: 10px; display: flex; gap: 6px; }
+    .tb-btn {
+      display: inline-flex;
+      white-space: nowrap;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.3rem 0.6rem 0.3rem 0.65rem;
+      background: var(--green);
+      border: 1.5px solid var(--ink);
+      border-radius: 4px;
+      box-shadow: 2px 2px 0 var(--ink);
+      color: var(--ink);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+    .tb-btn:hover { background: var(--green-dark); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+    .tb-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+    .tb-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .tb-btn svg { width: 12px; height: 12px; }
+    .tb-btn.found { background: #ffe9a8; }
+    .tb-btn.found:hover { background: #ffdf85; }
+
+    .col {
       width: min(var(--col), 100% - 24px);
       margin: 0 auto;
     }
 
-    /* ── Headline ── */
-    h1 {
-      padding-top: 56px;
-      margin-bottom: var(--gap);
-      text-align: center;
-      font-size: 39px;
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: 0.02em;
-      text-wrap: balance;
+    /* ── Retro boot banner ── */
+    .boot {
+      margin: 40px 0 var(--gap);
+      padding: 10px;
+      background: #d6d0c6;
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16), inset 1px 1px 0 rgba(255,255,255,0.5), inset -1px -1px 0 rgba(0,0,0,0.12);
     }
-    h1 a { color: inherit; text-decoration: none; cursor: text; }
+    .boot-screen {
+      position: relative;
+      overflow: hidden;
+      padding: 22px 18px 20px;
+      background: radial-gradient(ellipse at center, #22302a 0%, #141a17 75%);
+      border: 2px solid var(--ink);
+      border-radius: 10px / 14px;
+      color: var(--green);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+      text-shadow: 0 0 6px rgba(212, 240, 216, 0.55);
+    }
+    .boot-screen::after {               /* scanlines */
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px);
+      pointer-events: none;
+    }
+    .boot-prompt { color: #8fc79a; margin-right: 0.5em; }
+    .dots span { animation: dot 1.6s steps(1) infinite; }
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+    .dots span:nth-child(4) { animation-delay: 0.6s; }
+    .dots span:nth-child(5) { animation-delay: 0.8s; }
+    .cursor {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.05em;
+      margin-left: 0.15em;
+      vertical-align: -0.15em;
+      background: var(--green);
+      box-shadow: 0 0 6px rgba(212, 240, 216, 0.6);
+      animation: blink 1s steps(1) infinite;
+    }
+    .boot-bar {
+      height: 14px;
+      margin-top: 10px;
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      background: repeating-linear-gradient(-45deg, var(--ink) 0 6px, var(--green) 6px 12px);
+      background-size: 17px 17px;
+      animation: barber 0.9s linear infinite;
+    }
+    @keyframes dot { 0% { opacity: 0; } 50% { opacity: 1; } }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes barber { to { background-position: 17px 0; } }
     .sr {
       position: absolute; width: 1px; height: 1px; overflow: hidden;
       clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
@@ -136,13 +256,11 @@
 
     /* ── Footer ── */
     .foot {
-      position: relative;
-      z-index: 1;
       text-align: center;
       font-size: 12px;
       line-height: 1.8;
       color: var(--muted);
-      padding: 0 0 48px;
+      padding: 0 16px 36px;
     }
     .foot a { color: var(--ink); text-underline-offset: 3px; }
     .foot a:hover { color: var(--accent); }
@@ -207,23 +325,57 @@
 
     /* ── Phones ── */
     @media (max-width: 700px) {
-      h1 { font-size: 30px; padding-top: 40px; }
+      body { padding: 0.6rem; }
+      .mac-window { margin: 0 auto 0.6rem; }
+      /* room for two buttons: wordmark slides left, next to the dots */
+      .title-bar { justify-content: flex-start; padding-left: 54px; }
+      .wordmark { font-size: 0.7rem; letter-spacing: 0.02em; }
+      .tb-buttons { right: 8px; gap: 5px; }
+      .tb-btn { font-size: 0.62rem; padding: 0.3rem 0.45rem; letter-spacing: 0.05em; }
+      .traffic-lights { left: 10px; gap: 5px; }
+      .traffic-dot { width: 9px; height: 9px; }
+      .boot { margin-top: 24px; padding: 7px; }
+      .boot-screen { font-size: 13px; padding: 16px 12px 14px; }
       figcaption { font-size: 13px; padding-top: 12px; }
       .pic { box-shadow: 3px 3px 0 rgba(26, 23, 20, 0.16); }
       .num { display: none; }
       .lb { display: none !important; }
     }
 
+    @media (max-width: 359px) { .wordmark { display: none; } }
+
     @media (prefers-reduced-motion: reduce) {
       .js .pic img { opacity: 1; transition: none; }
+      .dots span, .cursor, .boot-bar { animation: none; }
     }
   </style>
 </head>
 <body>
-  <div class="col">
-    <h1><a href="https://www.thenicestplace.net" target="_blank" rel="noopener">bobcorrigan.com</a><span class="sr"> · Robert (Bob) Corrigan, Redmond, WA</span></h1>
+  <div class="mac-window">
+    <h1 class="sr">Robert (Bob) Corrigan: poet, artist, and explorer of words in Redmond, WA</h1>
+    <header class="title-bar">
+      <div class="traffic-lights">
+        <span class="traffic-dot close"></span>
+        <span class="traffic-dot minimize"></span>
+        <a class="traffic-dot maximize" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a>
+      </div>
+      <a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="wordmark">bobcorrigan.com</a>
+      <div class="tb-buttons">
+        <a class="tb-btn found" href="/disc/">Found my Disc?</a>
+        <a class="tb-btn" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">
+          PDGA
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </header>
 
-    <main id="roll">
+    <div class="col">
+      <div class="boot" aria-label="Disc Golf module running">
+        <div class="boot-screen" aria-hidden="true"><span class="boot-prompt">&gt;</span>Disc Golf module running<span class="dots"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></span><span class="cursor"></span></div>
+        <div class="boot-bar" aria-hidden="true"></div>
+      </div>
+
+      <main id="roll">
       <figure class="frame" data-series="cloudcity"><div class="pic land" style="--r:1.3306"><img src="images/3boys.jpg" width="640" height="481" alt="Three of us, Cloud City Chaos, photograph by Bob Corrigan" loading="eager" fetchpriority="high" decoding="async"><span class="num" aria-hidden="true">01</span></div><figcaption>Three of us, Cloud City Chaos</figcaption></figure>
       <figure class="frame" data-series="jul28"><div class="pic port" style="--r:0.7500"><img src="images/ecd.jpeg" width="1512" height="2016" alt="Emerald City Discs, photograph by Bob Corrigan" loading="eager" fetchpriority="high" decoding="async"><span class="num" aria-hidden="true">02</span></div><figcaption>Emerald City Discs</figcaption></figure>
       <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.3333"><img src="images/ace17.jpg" width="1920" height="1440" alt="Ace on 17, photograph by Bob Corrigan" loading="lazy" decoding="async"><span class="num" aria-hidden="true">03</span></div><figcaption>Ace on 17</figcaption></figure>
@@ -294,14 +446,15 @@
       <figure class="frame" data-series="puttassassin"><div class="pic port" style="--r:0.8313"><img src="images/putt%20assassin.jpg" width="532" height="640" alt="Putt assassin, photograph by Bob Corrigan" loading="lazy" decoding="async"><span class="num" aria-hidden="true">68</span></div><figcaption>Putt assassin</figcaption></figure>
       <figure class="frame" data-series="idaho"><div class="pic port" style="--r:0.7500"><img src="images/winnerchixdinner.jpeg" width="480" height="640" alt="Winner winner, photograph by Bob Corrigan" loading="lazy" decoding="async"><span class="num" aria-hidden="true">69</span></div><figcaption>Winner winner</figcaption></figure>
       <figure class="frame" data-series="seatac-spring"><div class="pic land" style="--r:1.3333"><img src="images/seatac%20spring%202.jpg" width="1920" height="1440" alt="SeaTac Spring League, photograph by Bob Corrigan" loading="lazy" decoding="async"><span class="num" aria-hidden="true">70</span></div><figcaption>SeaTac Spring League</figcaption></figure>
-    </main>
-  </div>
+      </main>
+    </div>
 
-  <footer class="foot">
-    <p>Robert (Bob) Corrigan · Redmond, WA</p>
-    <p><a href="https://fallingspoon.com/">falling spoon</a> · <a href="https://secretvendingmachine.com/">secret vending machine</a> · <a href="https://supfrog.com/">supfrog</a> · <a href="/frolf.html">field notes</a> · <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA #316354</a> · <a href="/disc/">found my disc?</a> · <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener">beep boop</a></p>
-    <p class="copy">© <span id="yr">2026</span> Bob Corrigan</p>
-  </footer>
+    <footer class="foot">
+      <p>Robert (Bob) Corrigan · Redmond, WA</p>
+      <p><a href="https://fallingspoon.com/">falling spoon</a> · <a href="https://secretvendingmachine.com/">secret vending machine</a> · <a href="https://supfrog.com/">supfrog</a> · <a href="/frolf.html">field notes</a></p>
+      <p class="copy">© <span id="yr">2026</span> Bob Corrigan</p>
+    </footer>
+  </div>
 
   <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
     <button class="lb-btn lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button>
