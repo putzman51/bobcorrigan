@@ -8,6 +8,7 @@
   <title>Bob Corrigan — Pro Disc Golfer, Poet &amp; Film Photographer · Redmond, WA</title>
   <meta name="description" content="Bob Corrigan is an employer benefits professional, pro disc golfer, poet, and retro film photographer in Redmond, Washington, with two cats and a penchant for vintage RC models." />
   <meta name="author" content="Bob Corrigan" />
+  <meta name="theme-color" content="#f0ebe3" />
   <link rel="canonical" href="https://bobcorrigan.com/" />
   <meta property="og:title" content="Bob Corrigan — pro disc golfer, poet &amp; film photographer" />
   <meta property="og:description" content="Disc golf, poetry, and retro film photography from Redmond, Washington. Two cats, plenty of vintage RC models." />
@@ -23,7 +24,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,323 +32,415 @@
       --ink: #1a1714;
       --paper: #f0ebe3;
       --cream: #e4dccf;
-      --muted: #8a8178;
-      --accent: #3d7a4c;
+      --muted: #756c62;
+      --rule: #c8bfb4;
+      --accent: #2f7a45;
       --green: #d4f0d8;
-      --green-dark: #c2e8c7;
-      --gap: 0.75in;       /* exactly 72px between photos */
-      --col: 640px;
-      --port-cap: min(78vh, 600px);
+      --green-dark: #b9e6c0;
+      --sun: #ffe9a8;
+      --desk: #b8b0a4;
+      --phos: #d4f0d8;
+      --phos-dim: #8fc79a;
+      --gold: #f2cf66;
+      --silver: #d9dde0;
+      --bronze: #e0a878;
+      --mono: 'Space Mono', ui-monospace, Menlo, monospace;
+      --px: 'Pixelify Sans', 'Space Mono', ui-monospace, monospace;
+      --crtf: 'VT323', 'Space Mono', ui-monospace, monospace;
     }
 
-    html { background: #b8b0a4; overflow-x: hidden; }
+    html { background: var(--desk); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 48px; }
 
     body {
-      background: #b8b0a4;
-      padding: 1.5rem;
+      background: var(--desk);
       color: var(--ink);
-      font-family: 'Space Mono', ui-monospace, monospace;
-      -webkit-font-smoothing: antialiased;
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.65;
+      padding: 0 1.25rem 2.25rem;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* faint crosshatch, carried over from the old desktop pattern */
+    /* desktop crosshatch */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.15'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.22'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
     }
 
-    /* ── Mac window ── */
-    .mac-window {
-      position: relative;
-      z-index: 1;
-      max-width: 780px;
-      margin: 0.5rem auto 1.5rem;
-      border: 2px solid var(--ink);
-      border-radius: 8px;
-      background: var(--paper);
-      box-shadow: 4px 4px 0 rgba(0,0,0,0.15), inset 0 0 0 1px rgba(255,255,255,0.3);
+    a { color: inherit; }
+    img { max-width: 100%; }
+
+    .sr {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
     }
 
-    .title-bar {
+    /* ── System menu bar ── */
+    .menubar {
       position: sticky;
       top: 0;
-      z-index: 5;
+      z-index: 30;
       display: flex;
       align-items: center;
-      justify-content: center;
-      height: 44px;
-      background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
+      gap: 2px;
+      height: 34px;
+      margin: 0 -1.25rem;
+      padding: 0 10px;
+      background: var(--paper);
       border-bottom: 2px solid var(--ink);
-      border-radius: 6px 6px 0 0;
+      box-shadow: 0 3px 0 rgba(26, 23, 20, 0.12);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
       user-select: none;
     }
+    .menubar::-webkit-scrollbar { display: none; }
+    .menubar a { text-decoration: none; }
+    .mb-item { padding: 5px 9px; border-radius: 3px; }
+    .mb-item:hover, .mb-item:focus-visible, .mb-item[aria-current] { background: var(--ink); color: var(--paper); outline: none; }
+    .mb-logo { display: inline-flex; align-items: center; gap: 7px; }
+    .mb-logo svg { width: 16px; height: 16px; flex: none; }
+    .mb-space { flex: 1; min-width: 6px; }
+    .mb-clock { padding: 0 4px 0 10px; font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
 
-    .traffic-lights { position: absolute; left: 12px; display: flex; gap: 6px; }
-    .traffic-dot {
-      display: block;
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,0.2);
-    }
-    .traffic-dot.close { background: #ff6058; }
-    .traffic-dot.minimize { background: #ffbd2e; }
-    .traffic-dot.maximize { background: var(--green); }
-
-    .wordmark {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: var(--ink);
-      text-decoration: none;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.4);
-      cursor: text;
-    }
-
-    .tb-buttons { position: absolute; right: 10px; display: flex; gap: 6px; }
-    .tb-btn {
+    .pill {
       display: inline-flex;
-      white-space: nowrap;
       align-items: center;
       gap: 0.3rem;
-      padding: 0.3rem 0.6rem 0.3rem 0.65rem;
+      margin-left: 6px;
+      padding: 2px 8px 2px 9px;
       background: var(--green);
       border: 1.5px solid var(--ink);
       border-radius: 4px;
       box-shadow: 2px 2px 0 var(--ink);
       color: var(--ink);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-decoration: none;
+      font-size: 11px;
       transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
     }
-    .tb-btn:hover { background: var(--green-dark); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
-    .tb-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
-    .tb-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-    .tb-btn svg { width: 12px; height: 12px; }
-    .tb-btn.found { background: #ffe9a8; }
-    .tb-btn.found:hover { background: #ffdf85; }
+    .pill:hover { background: var(--green-dark); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+    .pill:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+    .pill:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .pill svg { width: 11px; height: 11px; }
+    .pill.sun { background: var(--sun); }
+    .pill.sun:hover { background: #ffdf85; }
 
-    .col {
-      width: min(var(--col), 100% - 24px);
-      margin: 0 auto;
+    /* ── Windows ── */
+    .win {
+      position: relative;
+      z-index: 1;
+      max-width: var(--w, 1080px);
+      margin: 1.6rem auto 0;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: 6px 6px 0 rgba(26, 23, 20, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
     }
+    .tbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      padding: 0 64px;
+      background:
+        repeating-linear-gradient(180deg, transparent 0 3px, rgba(26, 23, 20, 0.2) 3px 4px) 0 11px / 100% 19px no-repeat,
+        linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 45%, #cac3b8 100%);
+      border-bottom: 2px solid var(--ink);
+      border-radius: 6px 6px 0 0;
+      user-select: none;
+    }
+    .dots { position: absolute; left: 0; top: 0; bottom: 0; display: flex; align-items: center; gap: 6px; padding: 0 10px 0 12px; background: #d6d0c6; border-radius: 6px 0 0 0; }
+    .dot { display: block; width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.25); }
+    .dot.c { background: #ff6058; }
+    .dot.m { background: #ffbd2e; }
+    .dot.x { background: #7ddc8c; }
+    a.dot.x:hover { background: #4fce65; }
+    .ttl {
+      padding: 0 14px;
+      background: #d9d3c9;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      text-decoration: none;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tnote { position: absolute; right: 0; top: 0; bottom: 0; display: flex; align-items: center; padding: 0 12px 0 10px; background: #d6d0c6; border-radius: 0 6px 0 0; font-size: 11px; color: var(--muted); }
 
-    /* ── Retro boot banner ── */
-    .boot {
-      margin: 40px 0 44px;
+    /* ── CRT ── */
+    .bezel {
       padding: 10px;
       background: #d6d0c6;
       border: 2px solid var(--ink);
-      border-radius: 6px;
-      box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16), inset 1px 1px 0 rgba(255,255,255,0.5), inset -1px -1px 0 rgba(0,0,0,0.12);
+      border-radius: 8px;
+      box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16), inset 1px 1px 0 rgba(255, 255, 255, 0.55), inset -1px -1px 0 rgba(0, 0, 0, 0.14);
     }
-    .boot-screen {
+    .crt {
       position: relative;
       overflow: hidden;
-      padding: 22px 18px 20px;
-      background: radial-gradient(ellipse at center, #22302a 0%, #141a17 75%);
+      background: radial-gradient(ellipse at center, #24342c 0%, #141a17 78%);
       border: 2px solid var(--ink);
-      border-radius: 10px / 14px;
-      color: var(--green);
-      font-size: 17px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      line-height: 1.4;
+      border-radius: 12px / 16px;
+      color: var(--phos);
       text-shadow: 0 0 6px rgba(212, 240, 216, 0.55);
     }
-    .boot-screen::after {               /* scanlines */
+    .crt::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px);
+      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px);
       pointer-events: none;
     }
-    .boot-prompt { color: #8fc79a; margin-right: 0.5em; }
-    .dots span { animation: dot 1.6s steps(1) infinite; }
-    .dots span:nth-child(2) { animation-delay: 0.2s; }
-    .dots span:nth-child(3) { animation-delay: 0.4s; }
-    .dots span:nth-child(4) { animation-delay: 0.6s; }
-    .dots span:nth-child(5) { animation-delay: 0.8s; }
+    .prompt { color: var(--phos-dim); margin-right: 0.5em; }
     .cursor {
       display: inline-block;
       width: 0.6em;
       height: 1.05em;
       margin-left: 0.15em;
       vertical-align: -0.15em;
-      background: var(--green);
+      background: var(--phos);
       box-shadow: 0 0 6px rgba(212, 240, 216, 0.6);
       animation: blink 1s steps(1) infinite;
     }
-    .boot-bar {
+    .barber {
       height: 14px;
-      margin-top: 10px;
       border: 1.5px solid var(--ink);
       border-radius: 3px;
       background: repeating-linear-gradient(-45deg, var(--ink) 0 6px, var(--green) 6px 12px);
       background-size: 17px 17px;
       animation: barber 0.9s linear infinite;
     }
-    /* ── Stat modules ── */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      padding: 12px 8px 10px;
-      background: radial-gradient(ellipse at center, #22302a 0%, #141a17 80%);
-      border: 2px solid var(--ink);
-      border-radius: 6px;
-      position: relative;
-      overflow: hidden;
-    }
-    .stat::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px);
-      pointer-events: none;
-    }
-    .stat-label {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #8fc79a;
-      text-align: center;
-      white-space: nowrap;
-    }
-    .stat-value {
-      font-size: 34px;
-      font-weight: 700;
-      line-height: 1;
-      color: var(--green);
-      text-shadow: 0 0 8px rgba(212, 240, 216, 0.6);
-      font-variant-numeric: tabular-nums;
-    }
-    @keyframes dot { 0% { opacity: 0; } 50% { opacity: 1; } }
     @keyframes blink { 50% { opacity: 0; } }
     @keyframes barber { to { background-position: 17px 0; } }
-    .sr {
-      position: absolute; width: 1px; height: 1px; overflow: hidden;
-      clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
-    }
 
-    /* ── Photos ── */
-    .frame {
-      position: relative;
-      margin-bottom: var(--gap);
-    }
-
-    .pic {
-      position: relative;
-      margin: 0 auto;
-      background: var(--cream);
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.55rem 1rem;
       border: 1.5px solid var(--ink);
-      box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16);
-    }
-    .pic.land { width: 100%; }
-    .pic.port { width: min(100%, calc(var(--port-cap) * var(--r))); }
-
-    .pic img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    /* fade in only once fully loaded (JS on); no-JS shows photos straight away */
-    .js .pic img { opacity: 0; transition: opacity 0.6s ease; }
-    .js .pic img.is-loaded { opacity: 1; }
-
-
-    /* caption lives inside the 2in gap, adds no height */
-    figcaption {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      padding-top: 14px;
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
       text-align: center;
-      font-size: 15px;
-      color: var(--accent);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
     }
+    .btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+    .btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--ink); }
+    .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .btn.primary { background: var(--green); }
+    .btn.primary:hover { background: var(--green-dark); }
+
+    /* ── Finder-style list ── */
+    .log { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .log th {
+      padding: 7px 12px;
+      background: var(--cream);
+      border-bottom: 1.5px solid var(--ink);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .log th + th { border-left: 1px solid var(--rule); }
+    .log td { padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+    .log tbody tr:last-child td { border-bottom: 0; }
+    .log tbody tr:nth-child(even) { background: rgba(228, 220, 207, 0.4); }
+    .log tbody tr:hover { background: var(--green); }
+    .log .when { white-space: nowrap; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .log .ev a { font-weight: 700; text-decoration: none; }
+    .log .ev a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .log .ev small { display: block; font-size: 11.5px; color: var(--muted); }
+    .log .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .chip {
+      display: inline-block;
+      padding: 1px 8px;
+      border: 1.5px solid var(--ink);
+      border-radius: 99px;
+      background: var(--paper);
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .chip.gold { background: var(--gold); }
+    .chip.silver { background: var(--silver); }
+    .chip.bronze { background: var(--bronze); }
+    .tag {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      background: var(--ink);
+      border-radius: 3px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      vertical-align: 1px;
+    }
+
+    /* ── Simple text pages ── */
+    .filebar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.3rem 0.9rem;
+      border-bottom: 1.5px solid var(--ink);
+      background: var(--cream);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+    .filebar a { text-decoration: none; font-weight: 700; padding: 0.3rem 0; }
+    .filebar a:hover { text-decoration: underline; }
+    .filebar span { color: var(--muted); padding: 0.3rem 0; }
+    .h-px { font-family: var(--px); font-weight: 700; line-height: 1; letter-spacing: 0.01em; }
 
     /* ── Footer ── */
     .foot {
+      position: relative;
+      z-index: 1;
+      max-width: 44rem;
+      margin: 2.4rem auto 0;
       text-align: center;
       font-size: 12px;
       line-height: 1.8;
-      color: var(--muted);
-      padding: 0 16px 36px;
+      color: #5d554c;
     }
     .foot a { color: var(--ink); text-underline-offset: 3px; }
     .foot a:hover { color: var(--accent); }
     .foot .copy { margin-top: 10px; font-size: 11px; }
-
-    /* ── Full-screen view (desktop only) ── */
-    @media (min-width: 701px) {
-      .js .pic { cursor: zoom-in; }
-    }
-
-    .lb {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      display: none;
+    .icons { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; margin-bottom: 1.3rem; }
+    .icon {
+      display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 14px;
-      padding: 40px 88px 28px;
-      background: rgba(18, 16, 14, 0.94);
+      gap: 6px;
+      width: 104px;
+      padding: 8px 4px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
     }
-    .lb.open { display: flex; }
-    .lb img {
-      display: block;
-      max-width: 100%;
-      max-height: calc(100vh - 110px);
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      border: 2px solid var(--paper);
-    }
-    .lb p {
-      color: #cfe6d3;
-      font-size: 14px;
-      max-width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .lb p span { color: #9a9086; margin-right: 10px; }
+    .icon svg { width: 38px; height: 38px; filter: drop-shadow(2px 2px 0 rgba(26, 23, 20, 0.2)); transition: transform 0.15s ease; }
+    .icon span { padding: 1px 6px; border-radius: 3px; background: var(--paper); border: 1px solid var(--ink); }
+    .icon:hover svg { transform: translateY(-3px) rotate(-4deg); }
+    .icon:hover span, .icon:focus-visible span { background: var(--ink); color: var(--paper); }
+    .foot a.icon:hover { color: inherit; }
 
-    .lb-btn {
-      position: absolute;
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      background: var(--paper);
-      border: 1.5px solid var(--ink);
-      border-radius: 50%;
-      box-shadow: 2px 2px 0 #000;
-      color: var(--ink);
-      cursor: pointer;
+    /* ── Scroll reveal (JS only) ── */
+    .js .rv { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+    .js .rv.in { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      body { padding: 0 0.6rem 1.5rem; font-size: 13.5px; }
+      .menubar { margin: 0 -0.6rem; padding: 0 6px; font-size: 11px; letter-spacing: 0; }
+      .mb-item { padding: 5px 6px; }
+      .mb-clock, .mb-home, .mb-logo b { display: none; }
+      .pill { margin-left: 4px; padding: 2px 6px; font-size: 10.5px; }
+      .win { margin-top: 0.9rem; box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.2); }
+      .tnote { display: none; }
+      .icon { width: 92px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor, .barber { animation: none; }
+      .js .rv { opacity: 1; transform: none; transition: none; }
+      .btn, .pill { transition: none; }
+    }
+
+
+    /* ── Hero ── */
+    .hero { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.8fr); gap: 30px; align-items: center; padding: 28px 30px 30px; }
+    .screen { padding: 26px 26px 24px; }
+    .boot-line { font-size: 15px; font-weight: 700; letter-spacing: 0.04em; }
+    .dots5 span { animation: dot 1.6s steps(1) infinite; }
+    .dots5 span:nth-child(2) { animation-delay: 0.2s; }
+    .dots5 span:nth-child(3) { animation-delay: 0.4s; }
+    .dots5 span:nth-child(4) { animation-delay: 0.6s; }
+    .dots5 span:nth-child(5) { animation-delay: 0.8s; }
+    @keyframes dot { 0% { opacity: 0; } 50% { opacity: 1; } }
+    .hero-name {
+      margin: 20px 0 14px;
+      font-family: var(--px);
+      font-weight: 700;
+      font-size: clamp(46px, 8.2vw, 96px);
+      line-height: 0.88;
+      text-transform: uppercase;
+      color: #e9ffec;
+      text-shadow: 0 0 14px rgba(212, 240, 216, 0.55), 4px 4px 0 rgba(0, 0, 0, 0.5);
+    }
+    .hero-sub { font-family: var(--crtf); font-size: 23px; line-height: 1.15; letter-spacing: 0.06em; text-transform: uppercase; color: var(--phos-dim); }
+    .hero-sub b { font-weight: 400; color: var(--phos); }
+    .bezel .barber { margin-top: 10px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+    .stat { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 4px; min-height: 92px; padding: 12px 6px 9px; border-radius: 6px; text-decoration: none; }
+    .stat-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--phos-dim); white-space: nowrap; }
+    .stat-value { font-family: var(--crtf); font-size: 58px; line-height: 0.8; color: var(--phos); text-shadow: 0 0 10px rgba(212, 240, 216, 0.6); font-variant-numeric: tabular-nums; }
+    .stat-value.sm { font-size: 40px; line-height: 1; }
+    a.stat:hover .stat-value { color: #fff; }
+
+    .snap { background: var(--paper); border: 2px solid var(--ink); border-radius: 6px; box-shadow: 7px 7px 0 rgba(26, 23, 20, 0.25); transform: rotate(1.8deg); transition: transform 0.25s ease; overflow: hidden; }
+    .snap:hover { transform: rotate(0deg) scale(1.01); }
+    .snap .tbar { height: 26px; border-radius: 0; background: linear-gradient(180deg, #e8e2d8, #cac3b8); padding: 0 40px; }
+    .snap .dots { gap: 4px; padding: 0 8px; background: none; }
+    .snap .dot { width: 8px; height: 8px; }
+    .snap .ttl { font-size: 11px; background: none; }
+    .snap img { display: block; width: 100%; height: auto; background: var(--cream); }
+    .snap figcaption { padding: 7px 10px 8px; border-top: 2px solid var(--ink); font-size: 12px; color: var(--accent); font-weight: 700; text-align: center; }
+    .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; justify-content: center; }
+    .cta .btn { flex: 1 1 auto; }
+    .cta svg { width: 13px; height: 13px; }
+
+    /* ── Section heads ── */
+    .winhead { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding: 22px 24px 18px; }
+    .winhead h2 { font-family: var(--px); font-weight: 700; font-size: clamp(30px, 4.6vw, 44px); line-height: 1; }
+    .winhead p { max-width: 34rem; font-size: 13px; color: #4a433c; }
+    .winhead p a { font-weight: 700; text-underline-offset: 3px; }
+    .listwrap { border-top: 2px solid var(--ink); border-radius: 0 0 6px 6px; overflow: hidden; }
+    .log .ev small.m { display: none; }
+
+    /* ── Photo wall ── */
+    #roll { columns: 3; column-gap: 18px; padding: 20px 20px 4px; border-top: 2px solid var(--ink); }
+    .frame { break-inside: avoid; margin: 0 0 18px; background: var(--paper); border: 1.5px solid var(--ink); box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .frame:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 rgba(26, 23, 20, 0.22); }
+    .pic { background: var(--cream); }
+    .pic img { display: block; width: 100%; height: auto; }
+    .js .pic img { opacity: 0; transition: opacity 0.6s ease; }
+    .js .pic img.is-loaded { opacity: 1; }
+    .frame figcaption { padding: 6px 10px 7px; border-top: 1.5px solid var(--ink); font-size: 12px; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    @media (min-width: 701px) { .js .pic { cursor: zoom-in; } }
+
+    /* ── Full-screen view (desktop only) ── */
+    .lb { position: fixed; inset: 0; z-index: 50; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 40px 88px 28px; background: rgba(18, 16, 14, 0.94); }
+    .lb.open { display: flex; }
+    .lb img { display: block; max-width: 100%; max-height: calc(100vh - 110px); width: auto; height: auto; object-fit: contain; border: 2px solid var(--paper); }
+    .lb p { color: #cfe6d3; font-size: 14px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lb-btn { position: absolute; width: 46px; height: 46px; display: grid; place-items: center; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 50%; box-shadow: 2px 2px 0 #000; color: var(--ink); cursor: pointer; }
     .lb-btn:hover { background: #d4f0d8; }
     .lb-btn:focus-visible { outline: 2px solid #d4f0d8; outline-offset: 3px; }
     .lb-btn svg { width: 18px; height: 18px; }
@@ -355,151 +448,287 @@
     .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
     .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
 
-    /* ── Phones ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 26px; padding: 18px; }
+      .side { max-width: 420px; margin: 0 auto; width: 100%; }
+      #roll { columns: 2; }
+    }
     @media (max-width: 700px) {
-      body { padding: 0.6rem; }
-      .mac-window { margin: 0 auto 0.6rem; }
-      /* room for two buttons: wordmark slides left, next to the dots */
-      .title-bar { justify-content: flex-start; padding-left: 54px; }
-      .wordmark { font-size: 0.7rem; letter-spacing: 0.02em; }
-      .tb-buttons { right: 8px; gap: 5px; }
-      .tb-btn { font-size: 0.62rem; padding: 0.3rem 0.45rem; letter-spacing: 0.05em; }
-      .traffic-lights { left: 10px; gap: 5px; }
-      .traffic-dot { width: 9px; height: 9px; }
-      .boot { margin-top: 24px; padding: 7px; }
-      .boot-screen { font-size: 13px; padding: 16px 12px 14px; }
-      .boot { margin-bottom: 32px; }
-      .stats { gap: 6px; margin-top: 7px; }
-      .stat { padding: 10px 4px 8px; gap: 5px; }
-      .stat-label { font-size: 8px; letter-spacing: 0.08em; }
-      .stat-value { font-size: 24px; }
-      figcaption { font-size: 13px; padding-top: 12px; }
-      .pic { box-shadow: 3px 3px 0 rgba(26, 23, 20, 0.16); }
+      .hero { padding: 12px 12px 20px; }
+      .bezel { padding: 7px; }
+      .screen { padding: 18px 14px 16px; }
+      .boot-line { font-size: 12px; }
+      .hero-name { margin: 14px 0 10px; }
+      .hero-sub { font-size: 18px; }
+      .stats { grid-template-columns: repeat(2, 1fr); gap: 7px; margin-top: 7px; }
+      .stat { min-height: 78px; }
+      .stat-value { font-size: 50px; }
+      .stat-value.sm { font-size: 36px; }
+      .snap { transform: rotate(1deg); }
+      .winhead { padding: 16px 14px 14px; }
+      .log thead, .log .d { display: none; }
+      .log tr { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+      .log tbody tr:last-child { border-bottom: 0; }
+      .log td { padding: 0; border: 0; }
+      .log .ev { grid-column: 1 / -1; grid-row: 2; }
+      .log .ev small.m { display: block; }
+      #roll { column-gap: 10px; padding: 10px 10px 0; }
+      .frame { margin-bottom: 10px; box-shadow: 3px 3px 0 rgba(26, 23, 20, 0.16); }
+      .frame figcaption { font-size: 10.5px; padding: 4px 6px 5px; }
       .lb { display: none !important; }
     }
-
-    @media (max-width: 359px) { .wordmark { display: none; } }
-
     @media (prefers-reduced-motion: reduce) {
       .js .pic img { opacity: 1; transition: none; }
-      .dots span, .cursor, .boot-bar { animation: none; }
+      .dots5 span { animation: none; }
+      .snap, .frame { transition: none; }
     }
   </style>
 </head>
 <body>
-  <div class="mac-window">
-    <h1 class="sr">Bob Corrigan: employer benefits professional, pro disc golfer, poet, and retro film photographer in Redmond, WA</h1>
-    <header class="title-bar">
-      <div class="traffic-lights">
-        <span class="traffic-dot close"></span>
-        <span class="traffic-dot minimize"></span>
-        <a class="traffic-dot maximize" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a>
-      </div>
-      <a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="wordmark">bobcorrigan.com</a>
-      <div class="tb-buttons">
-        <a class="tb-btn found" href="/disc/">Found my Disc?</a>
-        <a class="tb-btn" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">
-          PDGA
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </header>
+  <nav class="menubar" aria-label="Site">
+    <a class="mb-item mb-logo" href="/" aria-label="bobcorrigan.com home"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="#d4f0d8" stroke="currentColor" stroke-width="8"/><circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="50" cy="50" r="6" fill="currentColor"/></svg><b>bobcorrigan.com</b></a>
+    <a class="mb-item mb-home" href="/" aria-current="page">Home</a>
+    <a class="mb-item" href="/frolf.html">Field Notes</a>
+    <a class="mb-item" href="/about/">About</a>
+    <span class="mb-space"></span>
+    <a class="pill sun" href="/disc/">Found my Disc?</a>
+    <a class="pill" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <span class="mb-clock" id="clk" aria-hidden="true"></span>
+  </nav>
 
-    <div class="col">
-      <div class="boot">
-        <div class="boot-screen"><span class="boot-prompt" aria-hidden="true">&gt;</span>disc golf module running<span class="dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></span><span class="cursor"></span></div>
-        <div class="boot-bar" aria-hidden="true"></div>
+  <h1 class="sr">Bob Corrigan: employer benefits professional, pro disc golfer, poet, and retro film photographer in Redmond, WA</h1>
+
+  <div class="win">
+    <header class="tbar">
+      <div class="dots"><span class="dot c"></span><span class="dot m"></span><a class="dot x" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a></div>
+      <a href="https://www.thenicestplace.net" target="_blank" rel="noopener" class="ttl">bobcorrigan.com</a>
+    </header>
+    <div class="hero">
+      <div class="bezel">
+        <div class="crt screen">
+          <p class="boot-line"><span class="prompt" aria-hidden="true">&gt;</span><span id="type">disc golf module running</span><span class="dots5" aria-hidden="true"><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span></span><span class="cursor"></span></p>
+          <p class="hero-name">Bob<br>Corrigan</p>
+          <p class="hero-sub"><b>Pro disc golfer</b> · Redmond, WA<br>Aces, wins + notes from the course</p>
+        </div>
+        <div class="barber" aria-hidden="true"></div>
         <div class="stats">
-          <div class="stat"><span class="stat-label">Ace Count</span><span class="stat-value">7</span></div>
-          <div class="stat"><span class="stat-label">2026 PDGA Wins</span><span class="stat-value">5</span></div>
-          <div class="stat"><span class="stat-label">Pro Cash</span><span class="stat-value">$199</span></div>
+          <div class="crt stat"><span class="stat-label">Ace Count</span><span class="stat-value" data-count="7">7</span></div>
+          <div class="crt stat"><span class="stat-label">Tournament Aces</span><span class="stat-value" data-count="2">2</span></div>
+          <div class="crt stat"><span class="stat-label">2026 PDGA Wins</span><span class="stat-value" data-count="5">5</span></div>
+          <div class="crt stat"><span class="stat-label">Pro Cash</span><span class="stat-value" data-count="199" data-pre="$">$199</span></div>
         </div>
       </div>
 
-      <main id="roll">
-      <figure class="frame" data-series="cloudcity"><div class="pic land" style="--r:1.3306"><img src="images/3boys.jpg" width="640" height="481" alt="Three of us, Cloud City Chaos, photograph by Bob Corrigan" loading="eager" fetchpriority="high" decoding="async"></div><figcaption>Three of us, Cloud City Chaos</figcaption></figure>
-      <figure class="frame" data-series="jul28"><div class="pic port" style="--r:0.7500"><img src="images/ecd.jpeg" width="1512" height="2016" alt="Emerald City Discs, photograph by Bob Corrigan" loading="eager" fetchpriority="high" decoding="async"></div><figcaption>Emerald City Discs</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.3333"><img src="images/ace17.jpg" width="1920" height="1440" alt="Ace on 17, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Ace on 17</figcaption></figure>
-      <figure class="frame" data-series="seatac-shenanigans"><div class="pic land" style="--r:1.3306"><img src="images/1st%20place%20card.jpg" width="640" height="481" alt="First place card, SeaTac, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>First place card, SeaTac</figcaption></figure>
-      <figure class="frame" data-series="godsgrove"><div class="pic port" style="--r:0.7516"><img src="images/godsgrove.jpg" width="481" height="640" alt="God&#x27;s Grove, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>God&#x27;s Grove</figcaption></figure>
-      <figure class="frame" data-series="acenick"><div class="pic land" style="--r:1.3333"><img src="images/acenick.jpeg" width="2016" height="1512" alt="Ace with Nick, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Ace with Nick</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic port" style="--r:0.7500"><img src="images/haul.jpg" width="1440" height="1920" alt="Sunnyside haul, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Sunnyside haul</figcaption></figure>
-      <figure class="frame" data-series="amcrew"><div class="pic port" style="--r:0.7516"><img src="images/am%20crew.jpg" width="481" height="640" alt="The am crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The am crew</figcaption></figure>
-      <figure class="frame" data-series="cloudcity"><div class="pic land" style="--r:1.3306"><img src="images/nick%20brian%20bob.jpg" width="640" height="481" alt="Nick, Brian and Bob, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Nick, Brian and Bob</figcaption></figure>
-      <figure class="frame" data-series="pier"><div class="pic port" style="--r:0.8433"><img src="images/firstplaceflower.jpg" width="1512" height="1793" alt="First place, Pier Park, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>First place, Pier Park</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.3333"><img src="images/pav.jpg" width="1920" height="1440" alt="At the pavilion, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>At the pavilion</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic port" style="--r:0.7500"><img src="images/discdork.jpeg" width="480" height="640" alt="Disc dork, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Disc dork</figcaption></figure>
-      <figure class="frame" data-series="oct-hooligan"><div class="pic land" style="--r:1.3333"><img src="images/hooligan.jpg" width="2016" height="1512" alt="Chris &amp; Bob-o on the loose!, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Chris &amp; Bob-o on the loose!</figcaption></figure>
-      <figure class="frame" data-series="demboyz"><div class="pic land" style="--r:1.3333"><img src="images/demboyz.jpeg" width="2016" height="1512" alt="Dem boyz, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Dem boyz</figcaption></figure>
-      <figure class="frame" data-series="sixrounds"><div class="pic land" style="--r:1.3333"><img src="images/icecream.jpg" width="1920" height="1440" alt="Ice cream stop, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Ice cream stop</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.3333"><img src="images/palouse.jpg" width="1920" height="1440" alt="The Palouse, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The Palouse</figcaption></figure>
-      <figure class="frame" data-series="deception"><div class="pic port" style="--r:0.7516"><img src="images/dips%20discs.jpg" width="481" height="640" alt="MA40 3rd, Deception Pass, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>MA40 3rd, Deception Pass</figcaption></figure>
-      <figure class="frame" data-series="parkjob"><div class="pic port" style="--r:0.7516"><img src="images/parkjob.jpg" width="481" height="640" alt="Park job, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Park job</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic land" style="--r:1.3333"><img src="images/farragut.jpeg" width="640" height="480" alt="Farragut, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Farragut</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic port" style="--r:0.7500"><img src="images/pretty.jpg" width="1440" height="1920" alt="Pretty hole, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pretty hole</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic port" style="--r:0.7500"><img src="images/web/shadow.jpg" width="1500" height="2000" alt="Shadow on hole 4, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Shadow on hole 4</figcaption></figure>
-      <figure class="frame" data-series="oct17"><div class="pic port" style="--r:0.7500"><img src="images/wifegolf.jpeg" width="1158" height="1544" alt="Golf date, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Golf date</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic port" style="--r:0.7500"><img src="images/slingshot.jpeg" width="480" height="640" alt="Slingshot, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Slingshot</figcaption></figure>
-      <figure class="frame" data-series="spons"><div class="pic port" style="--r:0.8781"><img src="images/spons.jpeg" width="1124" height="1280" alt="Event sponsor, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Event sponsor</figcaption></figure>
-      <figure class="frame" data-series="mobbin"><div class="pic port" style="--r:0.7500"><img src="images/mobbin.JPG" width="480" height="640" alt="Mobbin&#x27;, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Mobbin&#x27;</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic land" style="--r:1.3333"><img src="images/idaho.jpeg" width="640" height="480" alt="Idaho, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Idaho</figcaption></figure>
-      <figure class="frame" data-series="seatac-practice"><div class="pic port" style="--r:0.7516"><img src="images/seatac%20practice%20ace.jpg" width="481" height="640" alt="Practice ace, SeaTac, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Practice ace, SeaTac</figcaption></figure>
-      <figure class="frame" data-series="jul28"><div class="pic port" style="--r:0.7500"><img src="images/web/cakeputt.jpg" width="1500" height="2000" alt="Cake putt, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Cake putt</figcaption></figure>
-      <figure class="frame" data-series="farmers"><div class="pic land" style="--r:1.3333"><img src="images/yaywife.jpeg" width="640" height="480" alt="Yay, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Yay</figcaption></figure>
-      <figure class="frame" data-series="throwin"><div class="pic land" style="--r:1.4663"><img src="images/throw%20in%20almost.jpg" width="1066" height="727" alt="Almost a throw-in, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Almost a throw-in</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.4575"><img src="images/hobohotel.jpg" width="1440" height="988" alt="Hole 17, Hobo Hotel, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hole 17, Hobo Hotel</figcaption></figure>
-      <figure class="frame" data-series="sep4"><div class="pic port" style="--r:0.7500"><img src="images/stoic.jpeg" width="480" height="640" alt="Stoic, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Stoic</figcaption></figure>
-      <figure class="frame" data-series="copper"><div class="pic port" style="--r:0.7516"><img src="images/copper%20card.jpg" width="481" height="640" alt="Copper in the Mountains card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Copper in the Mountains card</figcaption></figure>
-      <figure class="frame" data-series="miss"><div class="pic land" style="--r:1.3358"><img src="images/miss.JPG" width="1830" height="1370" alt="The miss, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The miss</figcaption></figure>
-      <figure class="frame" data-series="rainwizard"><div class="pic land" style="--r:1.3306"><img src="images/slingin%20singles%20card.jpg" width="640" height="481" alt="Rain Wizard card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Rain Wizard card</figcaption></figure>
-      <figure class="frame" data-series="kayak"><div class="pic land" style="--r:1.4480"><img src="images/kayak4.jpg" width="1920" height="1326" alt="Kayak Point, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Kayak Point</figcaption></figure>
-      <figure class="frame" data-series="nov-sun"><div class="pic port" style="--r:0.7500"><img src="images/fallsun.jpg" width="1512" height="2016" alt="Pretty frolfer:-), photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pretty frolfer:-)</figcaption></figure>
-      <figure class="frame" data-series="bok"><div class="pic port" style="--r:0.7500"><img src="images/bokbob.jpg" width="1440" height="1920" alt="Bok Bob, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Bok Bob</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic port" style="--r:0.7500"><img src="images/hole5.jpeg" width="1512" height="2016" alt="Hole 5, Cutthroat, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hole 5, Cutthroat</figcaption></figure>
-      <figure class="frame" data-series="oct17"><div class="pic land" style="--r:1.3333"><img src="images/mpotee.jpeg" width="2016" height="1512" alt="On the tee, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>On the tee</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.3333"><img src="images/ma3nerds.jpg" width="1920" height="1440" alt="MA3 nerds, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>MA3 nerds</figcaption></figure>
-      <figure class="frame" data-series="dylan"><div class="pic land" style="--r:1.3306"><img src="images/dunkin%20with%20dylan.jpg" width="640" height="481" alt="Dunkin&#x27; with Dylan, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Dunkin&#x27; with Dylan</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic port" style="--r:0.7500"><img src="images/smackabee.jpeg" width="480" height="640" alt="Smackabee, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Smackabee</figcaption></figure>
-      <figure class="frame" data-series="schmoney"><div class="pic port" style="--r:0.7500"><img src="images/schmoney.jpeg" width="1512" height="2016" alt="Schmoney, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Schmoney</figcaption></figure>
-      <figure class="frame" data-series="sep4"><div class="pic port" style="--r:0.7911"><img src="images/hotroundjuel.jpg" width="1125" height="1422" alt="Hot round, -7, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hot round, -7</figcaption></figure>
-      <figure class="frame" data-series="bok"><div class="pic port" style="--r:0.7500"><img src="images/bok26.jpeg" width="1158" height="1544" alt="Bok &#x27;26, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Bok &#x27;26</figcaption></figure>
-      <figure class="frame" data-series="seatac-league"><div class="pic port" style="--r:0.7516"><img src="images/sogfrolf.jpg" width="481" height="640" alt="Soggy frolf, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Soggy frolf</figcaption></figure>
-      <figure class="frame" data-series="copper"><div class="pic land" style="--r:1.3306"><img src="images/aced%20in%20az.jpg" width="640" height="481" alt="Aced in Arizona, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Aced in Arizona</figcaption></figure>
-      <figure class="frame" data-series="procash"><div class="pic land" style="--r:1.7778"><img src="images/procash.JPG" width="1280" height="720" alt="Pro cash, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pro cash</figcaption></figure>
-      <figure class="frame" data-series="sixrounds"><div class="pic land" style="--r:1.3333"><img src="images/dips.jpg" width="1920" height="1440" alt="Six rounds in three days, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Six rounds in three days</figcaption></figure>
-      <figure class="frame" data-series="farmers"><div class="pic land" style="--r:1.3333"><img src="images/urboi.jpeg" width="640" height="480" alt="Welcome to Farmers Park, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Welcome to Farmers Park</figcaption></figure>
-      <figure class="frame" data-series="seatac-league"><div class="pic port" style="--r:0.7516"><img src="images/wetfrolf.jpg" width="481" height="640" alt="Wet frolf, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Wet frolf</figcaption></figure>
-      <figure class="frame" data-series="farmers"><div class="pic port" style="--r:0.4625"><img src="images/prettywife.PNG" width="296" height="640" alt="Pink disc, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pink disc</figcaption></figure>
-      <figure class="frame" data-series="practiceace"><div class="pic port" style="--r:0.7516"><img src="images/practice%20ace.jpg" width="481" height="640" alt="Practice ace, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Practice ace</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.3333"><img src="images/rescue.jpg" width="1920" height="1440" alt="Disc rescue, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Disc rescue</figcaption></figure>
-      <figure class="frame" data-series="farmers"><div class="pic land" style="--r:1.3333"><img src="images/teesponsor.jpeg" width="640" height="480" alt="Tee sponsor, Farmers Park Open, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Tee sponsor, Farmers Park Open</figcaption></figure>
-      <figure class="frame" data-series="deception"><div class="pic land" style="--r:1.3306"><img src="images/dipsdiscs.jpg" width="640" height="481" alt="Deception Pass card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Deception Pass card</figcaption></figure>
-      <figure class="frame" data-series="oct17"><div class="pic land" style="--r:1.1142"><img src="images/ace7.JPEG" width="1210" height="1086" alt="Ace on 7, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Ace on 7</figcaption></figure>
-      <figure class="frame" data-series="mp40"><div class="pic land" style="--r:1.3333"><img src="images/mp40.jpeg" width="2016" height="1512" alt="MP40 card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>MP40 card</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic port" style="--r:0.7500"><img src="images/sponsorsign.jpg" width="1440" height="1920" alt="Sunnyside Up sponsor, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Sunnyside Up sponsor</figcaption></figure>
-      <figure class="frame" data-series="nov-sun"><div class="pic land" style="--r:1.3333"><img src="images/pizzaselfie.jpg" width="2016" height="1512" alt="Vanessa and her caddy at South Fork, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Vanessa and her caddy at South Fork</figcaption></figure>
-      <figure class="frame" data-series="farmers"><div class="pic port" style="--r:0.7500"><img src="images/12.jpeg" width="1512" height="2016" alt="Hole 12, Farmers Park, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hole 12, Farmers Park</figcaption></figure>
-      <figure class="frame" data-series="sixrounds"><div class="pic land" style="--r:1.0901"><img src="images/pie.jpg" width="1125" height="1032" alt="Pie crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pie crew</figcaption></figure>
-      <figure class="frame" data-series="copper"><div class="pic land" style="--r:1.3306"><img src="images/AZ%20tourney%20director.jpg" width="640" height="481" alt="With the Arizona TD, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>With the Arizona TD</figcaption></figure>
-      <figure class="frame" data-series="shelton"><div class="pic land" style="--r:1.3306"><img src="images/fun%20card%20shelton.jpg" width="640" height="481" alt="Fun card at Shelton Springs, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Fun card at Shelton Springs</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic land" style="--r:1.3333"><img src="images/groupfarr.JPEG" width="640" height="480" alt="The Farragut crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The Farragut crew</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic land" style="--r:1.3333"><img src="images/group2.jpg" width="1920" height="1440" alt="Sunnyside Up crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Sunnyside Up crew</figcaption></figure>
-      <figure class="frame" data-series="starframe"><div class="pic land" style="--r:1.3333"><img src="images/markymark.jpg" width="1920" height="1440" alt="Star Frame Sunday, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Star Frame Sunday</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic land" style="--r:1.3333"><img src="images/bigups.jpeg" width="640" height="480" alt="Big ups, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Big ups</figcaption></figure>
-      <figure class="frame" data-series="sunnyside"><div class="pic port" style="--r:0.5641"><img src="images/handoff.jpg" width="722" height="1280" alt="The handoff, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The handoff</figcaption></figure>
-      <figure class="frame" data-series="puttassassin"><div class="pic port" style="--r:0.8313"><img src="images/putt%20assassin.jpg" width="532" height="640" alt="Putt assassin, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Putt assassin</figcaption></figure>
-      <figure class="frame" data-series="idaho"><div class="pic port" style="--r:0.7500"><img src="images/winnerchixdinner.jpeg" width="480" height="640" alt="Winner winner, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Winner winner</figcaption></figure>
-      <figure class="frame" data-series="seatac-spring"><div class="pic land" style="--r:1.3333"><img src="images/seatac%20spring%202.jpg" width="1920" height="1440" alt="SeaTac Spring League, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>SeaTac Spring League</figcaption></figure>
-      </main>
+      <div class="side">
+        <figure class="snap">
+          <div class="tbar" aria-hidden="true"><div class="dots"><span class="dot c"></span><span class="dot m"></span><span class="dot x"></span></div><span class="ttl">first_place.jpg</span></div>
+          <img src="images/firstplaceflower.jpg" width="1512" height="1793" alt="Bob Corrigan lying in a field of daisies after winning at Pier Park" fetchpriority="high" decoding="async">
+          <figcaption>First place, Pier Park · won in a play-off</figcaption>
+        </figure>
+        <div class="cta">
+          <a class="btn primary" href="/frolf.html">Read the field notes</a>
+          <a class="btn" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA profile <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
     </div>
-
-    <footer class="foot">
-      <p>Bob Corrigan · Redmond, WA</p>
-      <p>Employer benefits professional, pro disc golfer, poet &amp; retro film photographer, with two cats and a penchant for vintage RC models.</p>
-      <p><a href="https://fallingspoon.com/">falling spoon</a> · <a href="https://secretvendingmachine.com/">secret vending machine</a> · <a href="https://supfrog.com/">supfrog</a> · <a href="/frolf.html">field notes</a> · <a href="/about/">about</a></p>
-      <p class="copy">© <span id="yr">2026</span> Bob Corrigan</p>
-    </footer>
   </div>
+
+  <section class="win rv" aria-labelledby="season-h">
+    <header class="tbar">
+      <div class="dots"><span class="dot c"></span><span class="dot m"></span><a class="dot x" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a></div>
+      <span class="ttl">2026_season.log</span><span class="tnote">10 events</span>
+    </header>
+    <div class="winhead">
+      <h2 id="season-h">2026 on tour</h2>
+      <p>Sanctioned events I've written up so far: four wins, two aces and one play-off between January and April. Every row opens its field note. The full record lives on <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA</a>.</p>
+    </div>
+    <div class="listwrap">
+      <table class="log">
+        <thead><tr><th>Date</th><th>Event</th><th>Tier</th><th>Div</th><th>Round ratings</th><th>Finish</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="when">19 Apr</td>
+            <td class="ev"><a href="/frolf.html#no-13">Pier Park</a><small>Pier Park DGC · Portland, OR</small><small class="m">C-Tier · MA3 · 933</small></td>
+            <td class="d">C-Tier</td>
+            <td class="d">MA3</td>
+            <td class="d num">933</td>
+            <td class="fin"><span class="chip gold">1st · play-off</span></td>
+          </tr>
+          <tr>
+            <td class="when">10–12 Apr</td>
+            <td class="ev"><a href="/frolf.html#no-12">Whitmarsh</a><small>6 rounds in 3 days · Mt. Vernon, WA</small><small class="m">C-Tier · MA3</small></td>
+            <td class="d">C-Tier</td>
+            <td class="d">MA3</td>
+            <td class="d num">—</td>
+            <td class="fin"><span class="chip gold">1st</span></td>
+          </tr>
+          <tr>
+            <td class="when">4–5 Apr</td>
+            <td class="ev"><a href="/frolf.html#no-11">NXNW4</a><small>Kayak Point · Red Course</small><small class="m">B-Tier · MA3 · 897/877</small></td>
+            <td class="d">B-Tier</td>
+            <td class="d">MA3</td>
+            <td class="d num">897 · 877</td>
+            <td class="fin"><span class="chip ">11th</span></td>
+          </tr>
+          <tr>
+            <td class="when">28–29 Mar</td>
+            <td class="ev"><a href="/frolf.html#no-10">Sunnyside Up</a><span class="tag">ACE</span><small>Sunnyside Park · Pullman, WA</small><small class="m">B-Tier · MA3 · 866/906/916</small></td>
+            <td class="d">B-Tier</td>
+            <td class="d">MA3</td>
+            <td class="d num">866 · 906 · 916</td>
+            <td class="fin"><span class="chip gold">1st</span></td>
+          </tr>
+          <tr>
+            <td class="when">21 Mar</td>
+            <td class="ev"><a href="/frolf.html#no-07">Shelton Springs</a><small>Shelton, WA</small><small class="m">C-Tier · MA40 · 859/878</small></td>
+            <td class="d">C-Tier</td>
+            <td class="d">MA40</td>
+            <td class="d num">859 · 878</td>
+            <td class="fin"><span class="chip ">4th</span></td>
+          </tr>
+          <tr>
+            <td class="when">14 Mar</td>
+            <td class="ev"><a href="/frolf.html#no-05">Deception Pass Windy DG</a><small>Whidbey Island, WA</small><small class="m">C-Tier · MA40 · 906/885</small></td>
+            <td class="d">C-Tier</td>
+            <td class="d">MA40</td>
+            <td class="d num">906 · 885</td>
+            <td class="fin"><span class="chip bronze">3rd</span></td>
+          </tr>
+          <tr>
+            <td class="when">7 Mar</td>
+            <td class="ev"><a href="/frolf.html#no-04">Cloud City Chaos 4</a><small>SeaTac DGC · SeaTac, WA</small><small class="m">B-Tier · MA40 · 890/899</small></td>
+            <td class="d">B-Tier</td>
+            <td class="d">MA40</td>
+            <td class="d num">890 · 899</td>
+            <td class="fin"><span class="chip ">4th</span></td>
+          </tr>
+          <tr>
+            <td class="when">7 Feb</td>
+            <td class="ev"><a href="/frolf.html#no-03">Slingin' Singles 4</a><small>Emerald City Discs</small><small class="m">C-Tier · MA40 · 930/842</small></td>
+            <td class="d">C-Tier</td>
+            <td class="d">MA40</td>
+            <td class="d num">930 · 842</td>
+            <td class="fin"><span class="chip bronze">3rd</span></td>
+          </tr>
+          <tr>
+            <td class="when">31 Jan</td>
+            <td class="ev"><a href="/frolf.html#no-02">Copper in the Mountains</a><span class="tag">ACE</span><small>Discmania DGP · Miami, AZ</small><small class="m">C-Tier · MA40 · 853/943</small></td>
+            <td class="d">C-Tier</td>
+            <td class="d">MA40</td>
+            <td class="d num">853 · 943</td>
+            <td class="fin"><span class="chip silver">2nd</span></td>
+          </tr>
+          <tr>
+            <td class="when">10 Jan</td>
+            <td class="ev"><a href="/frolf.html#no-01">Say it Ain't Snow</a><small>SeaTac DGC · SeaTac, WA</small><small class="m">C-Tier · MA40 · 914/904</small></td>
+            <td class="d">C-Tier</td>
+            <td class="d">MA40</td>
+            <td class="d num">914 · 904</td>
+            <td class="fin"><span class="chip gold">1st</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="win rv" aria-labelledby="roll-h">
+    <header class="tbar">
+      <div class="dots"><span class="dot c"></span><span class="dot m"></span><a class="dot x" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a></div>
+      <span class="ttl">photo_roll</span><span class="tnote">73 items</span>
+    </header>
+    <div class="winhead">
+      <h2 id="roll-h">On the course</h2>
+      <p>73 photos, shuffled into a new order every visit. <button class="btn" id="shuffle" type="button" style="min-height:32px;padding:.25rem .8rem;margin-left:.4rem" hidden>Shuffle again</button></p>
+    </div>
+    <main id="roll">
+        <figure class="frame" data-series="cloudcity"><div class="pic"><img src="images/3boys.jpg" width="640" height="481" alt="Three of us, Cloud City Chaos, photograph by Bob Corrigan" loading="eager" fetchpriority="high" decoding="async"></div><figcaption>Three of us, Cloud City Chaos</figcaption></figure>
+        <figure class="frame" data-series="jul28"><div class="pic"><img src="images/ecd.jpeg" width="1512" height="2016" alt="Emerald City Discs, photograph by Bob Corrigan" loading="eager" fetchpriority="high" decoding="async"></div><figcaption>Emerald City Discs</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/ace17.jpg" width="1920" height="1440" alt="Ace on 17, photograph by Bob Corrigan" loading="eager" fetchpriority="high" decoding="async"></div><figcaption>Ace on 17</figcaption></figure>
+        <figure class="frame" data-series="seatac-shenanigans"><div class="pic"><img src="images/1st%20place%20card.jpg" width="640" height="481" alt="First place card, SeaTac, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>First place card, SeaTac</figcaption></figure>
+        <figure class="frame" data-series="godsgrove"><div class="pic"><img src="images/godsgrove.jpg" width="481" height="640" alt="God&#x27;s Grove, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>God&#x27;s Grove</figcaption></figure>
+        <figure class="frame" data-series="acenick"><div class="pic"><img src="images/acenick.jpeg" width="2016" height="1512" alt="Ace with Nick, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Ace with Nick</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/haul.jpg" width="1440" height="1920" alt="Sunnyside haul, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Sunnyside haul</figcaption></figure>
+        <figure class="frame" data-series="amcrew"><div class="pic"><img src="images/am%20crew.jpg" width="481" height="640" alt="The am crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The am crew</figcaption></figure>
+        <figure class="frame" data-series="cloudcity"><div class="pic"><img src="images/nick%20brian%20bob.jpg" width="640" height="481" alt="Nick, Brian and Bob, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Nick, Brian and Bob</figcaption></figure>
+        <figure class="frame" data-series="pier"><div class="pic"><img src="images/firstplaceflower.jpg" width="1512" height="1793" alt="First place, Pier Park, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>First place, Pier Park</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/pav.jpg" width="1920" height="1440" alt="At the pavilion, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>At the pavilion</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/discdork.jpeg" width="480" height="640" alt="Disc dork, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Disc dork</figcaption></figure>
+        <figure class="frame" data-series="oct-hooligan"><div class="pic"><img src="images/hooligan.jpg" width="2016" height="1512" alt="Chris &amp; Bob-o on the loose!, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Chris &amp; Bob-o on the loose!</figcaption></figure>
+        <figure class="frame" data-series="demboyz"><div class="pic"><img src="images/demboyz.jpeg" width="2016" height="1512" alt="Dem boyz, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Dem boyz</figcaption></figure>
+        <figure class="frame" data-series="sixrounds"><div class="pic"><img src="images/icecream.jpg" width="1920" height="1440" alt="Ice cream stop, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Ice cream stop</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/palouse.jpg" width="1920" height="1440" alt="The Palouse, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The Palouse</figcaption></figure>
+        <figure class="frame" data-series="deception"><div class="pic"><img src="images/dips%20discs.jpg" width="481" height="640" alt="MA40 3rd, Deception Pass, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>MA40 3rd, Deception Pass</figcaption></figure>
+        <figure class="frame" data-series="parkjob"><div class="pic"><img src="images/parkjob.jpg" width="481" height="640" alt="Park job, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Park job</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/farragut.jpeg" width="640" height="480" alt="Farragut, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Farragut</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/pretty.jpg" width="1440" height="1920" alt="Pretty hole, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pretty hole</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/web/shadow.jpg" width="1500" height="2000" alt="Shadow on hole 4, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Shadow on hole 4</figcaption></figure>
+        <figure class="frame" data-series="oct17"><div class="pic"><img src="images/wifegolf.jpeg" width="1158" height="1544" alt="Golf date, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Golf date</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/slingshot.jpeg" width="480" height="640" alt="Slingshot, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Slingshot</figcaption></figure>
+        <figure class="frame" data-series="spons"><div class="pic"><img src="images/spons.jpeg" width="1124" height="1280" alt="Event sponsor, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Event sponsor</figcaption></figure>
+        <figure class="frame" data-series="mobbin"><div class="pic"><img src="images/mobbin.JPG" width="480" height="640" alt="Mobbin&#x27;, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Mobbin&#x27;</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/idaho.jpeg" width="640" height="480" alt="Idaho, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Idaho</figcaption></figure>
+        <figure class="frame" data-series="seatac-practice"><div class="pic"><img src="images/seatac%20practice%20ace.jpg" width="481" height="640" alt="Practice ace, SeaTac, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Practice ace, SeaTac</figcaption></figure>
+        <figure class="frame" data-series="jul28"><div class="pic"><img src="images/web/cakeputt.jpg" width="1500" height="2000" alt="Cake putt, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Cake putt</figcaption></figure>
+        <figure class="frame" data-series="farmers"><div class="pic"><img src="images/yaywife.jpeg" width="640" height="480" alt="Yay, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Yay</figcaption></figure>
+        <figure class="frame" data-series="throwin"><div class="pic"><img src="images/throw%20in%20almost.jpg" width="1066" height="727" alt="Almost a throw-in, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Almost a throw-in</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/hobohotel.jpg" width="1440" height="988" alt="Hole 17, Hobo Hotel, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hole 17, Hobo Hotel</figcaption></figure>
+        <figure class="frame" data-series="sep4"><div class="pic"><img src="images/stoic.jpeg" width="480" height="640" alt="Stoic, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Stoic</figcaption></figure>
+        <figure class="frame" data-series="copper"><div class="pic"><img src="images/copper%20card.jpg" width="481" height="640" alt="Copper in the Mountains card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Copper in the Mountains card</figcaption></figure>
+        <figure class="frame" data-series="miss"><div class="pic"><img src="images/miss.JPG" width="1830" height="1370" alt="The miss, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The miss</figcaption></figure>
+        <figure class="frame" data-series="rainwizard"><div class="pic"><img src="images/slingin%20singles%20card.jpg" width="640" height="481" alt="Rain Wizard card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Rain Wizard card</figcaption></figure>
+        <figure class="frame" data-series="kayak"><div class="pic"><img src="images/kayak4.jpg" width="1920" height="1326" alt="Kayak Point, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Kayak Point</figcaption></figure>
+        <figure class="frame" data-series="nov-sun"><div class="pic"><img src="images/fallsun.jpg" width="1512" height="2016" alt="Pretty frolfer:-), photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pretty frolfer:-)</figcaption></figure>
+        <figure class="frame" data-series="bok"><div class="pic"><img src="images/bokbob.jpg" width="1440" height="1920" alt="Bok Bob, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Bok Bob</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/hole5.jpeg" width="1512" height="2016" alt="Hole 5, Cutthroat, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hole 5, Cutthroat</figcaption></figure>
+        <figure class="frame" data-series="oct17"><div class="pic"><img src="images/mpotee.jpeg" width="2016" height="1512" alt="On the tee, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>On the tee</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/ma3nerds.jpg" width="1920" height="1440" alt="MA3 nerds, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>MA3 nerds</figcaption></figure>
+        <figure class="frame" data-series="dylan"><div class="pic"><img src="images/dunkin%20with%20dylan.jpg" width="640" height="481" alt="Dunkin&#x27; with Dylan, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Dunkin&#x27; with Dylan</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/smackabee.jpeg" width="480" height="640" alt="Smackabee, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Smackabee</figcaption></figure>
+        <figure class="frame" data-series="schmoney"><div class="pic"><img src="images/schmoney.jpeg" width="1512" height="2016" alt="Schmoney, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Schmoney</figcaption></figure>
+        <figure class="frame" data-series="sep4"><div class="pic"><img src="images/hotroundjuel.jpg" width="1125" height="1422" alt="Hot round, -7, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hot round, -7</figcaption></figure>
+        <figure class="frame" data-series="bok"><div class="pic"><img src="images/bok26.jpeg" width="1158" height="1544" alt="Bok &#x27;26, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Bok &#x27;26</figcaption></figure>
+        <figure class="frame" data-series="seatac-league"><div class="pic"><img src="images/sogfrolf.jpg" width="481" height="640" alt="Soggy frolf, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Soggy frolf</figcaption></figure>
+        <figure class="frame" data-series="copper"><div class="pic"><img src="images/aced%20in%20az.jpg" width="640" height="481" alt="Aced in Arizona, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Aced in Arizona</figcaption></figure>
+        <figure class="frame" data-series="procash"><div class="pic"><img src="images/procash.JPG" width="1280" height="720" alt="Pro cash, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pro cash</figcaption></figure>
+        <figure class="frame" data-series="sixrounds"><div class="pic"><img src="images/dips.jpg" width="1920" height="1440" alt="Six rounds in three days, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Six rounds in three days</figcaption></figure>
+        <figure class="frame" data-series="farmers"><div class="pic"><img src="images/urboi.jpeg" width="640" height="480" alt="Welcome to Farmers Park, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Welcome to Farmers Park</figcaption></figure>
+        <figure class="frame" data-series="seatac-league"><div class="pic"><img src="images/wetfrolf.jpg" width="481" height="640" alt="Wet frolf, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Wet frolf</figcaption></figure>
+        <figure class="frame" data-series="farmers"><div class="pic"><img src="images/prettywife.PNG" width="296" height="640" alt="Pink disc, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pink disc</figcaption></figure>
+        <figure class="frame" data-series="practiceace"><div class="pic"><img src="images/practice%20ace.jpg" width="481" height="640" alt="Practice ace, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Practice ace</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/rescue.jpg" width="1920" height="1440" alt="Disc rescue, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Disc rescue</figcaption></figure>
+        <figure class="frame" data-series="farmers"><div class="pic"><img src="images/teesponsor.jpeg" width="640" height="480" alt="Tee sponsor, Farmers Park Open, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Tee sponsor, Farmers Park Open</figcaption></figure>
+        <figure class="frame" data-series="deception"><div class="pic"><img src="images/dipsdiscs.jpg" width="640" height="481" alt="Deception Pass card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Deception Pass card</figcaption></figure>
+        <figure class="frame" data-series="oct17"><div class="pic"><img src="images/ace7.JPEG" width="1210" height="1086" alt="Ace on 7, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Ace on 7</figcaption></figure>
+        <figure class="frame" data-series="mp40"><div class="pic"><img src="images/mp40.jpeg" width="2016" height="1512" alt="MP40 card, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>MP40 card</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/sponsorsign.jpg" width="1440" height="1920" alt="Sunnyside Up sponsor, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Sunnyside Up sponsor</figcaption></figure>
+        <figure class="frame" data-series="nov-sun"><div class="pic"><img src="images/pizzaselfie.jpg" width="2016" height="1512" alt="Vanessa and her caddy at South Fork, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Vanessa and her caddy at South Fork</figcaption></figure>
+        <figure class="frame" data-series="farmers"><div class="pic"><img src="images/12.jpeg" width="1512" height="2016" alt="Hole 12, Farmers Park, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Hole 12, Farmers Park</figcaption></figure>
+        <figure class="frame" data-series="sixrounds"><div class="pic"><img src="images/pie.jpg" width="1125" height="1032" alt="Pie crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Pie crew</figcaption></figure>
+        <figure class="frame" data-series="copper"><div class="pic"><img src="images/AZ%20tourney%20director.jpg" width="640" height="481" alt="With the Arizona TD, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>With the Arizona TD</figcaption></figure>
+        <figure class="frame" data-series="shelton"><div class="pic"><img src="images/fun%20card%20shelton.jpg" width="640" height="481" alt="Fun card at Shelton Springs, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Fun card at Shelton Springs</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/groupfarr.JPEG" width="640" height="480" alt="The Farragut crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The Farragut crew</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/group2.jpg" width="1920" height="1440" alt="Sunnyside Up crew, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Sunnyside Up crew</figcaption></figure>
+        <figure class="frame" data-series="starframe"><div class="pic"><img src="images/markymark.jpg" width="1920" height="1440" alt="Star Frame Sunday, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Star Frame Sunday</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/bigups.jpeg" width="640" height="480" alt="Big ups, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Big ups</figcaption></figure>
+        <figure class="frame" data-series="sunnyside"><div class="pic"><img src="images/handoff.jpg" width="722" height="1280" alt="The handoff, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>The handoff</figcaption></figure>
+        <figure class="frame" data-series="puttassassin"><div class="pic"><img src="images/putt%20assassin.jpg" width="532" height="640" alt="Putt assassin, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Putt assassin</figcaption></figure>
+        <figure class="frame" data-series="idaho"><div class="pic"><img src="images/winnerchixdinner.jpeg" width="480" height="640" alt="Winner winner, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>Winner winner</figcaption></figure>
+        <figure class="frame" data-series="seatac-spring"><div class="pic"><img src="images/seatac%20spring%202.jpg" width="1920" height="1440" alt="SeaTac Spring League, photograph by Bob Corrigan" loading="lazy" decoding="async"></div><figcaption>SeaTac Spring League</figcaption></figure>
+    </main>
+  </section>
+
+  <footer class="foot">
+    <div class="icons">
+      <a class="icon" href="https://fallingspoon.com/"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M10 4h16l9 9v27H10z" fill="#f0ebe3" stroke="#1a1714" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 4v9h9" fill="#d4f0d8" stroke="#1a1714" stroke-width="2.5" stroke-linejoin="round"/><path d="M15 20h14M15 26h14M15 32h9" stroke="#1a1714" stroke-width="2"/></svg><span>falling spoon</span></a>
+      <a class="icon" href="https://secretvendingmachine.com/"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="5" y="9" width="34" height="27" rx="2" fill="#f0ebe3" stroke="#1a1714" stroke-width="2.5"/><circle cx="15" cy="18" r="3" fill="#1a1714"/><path d="M8 33l9-9 6 6 5-4 8 7z" fill="#d4f0d8" stroke="#1a1714" stroke-width="2" stroke-linejoin="round"/></svg><span>secret vending machine</span></a>
+      <a class="icon" href="https://supfrog.com/"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M10 4h16l9 9v27H10z" fill="#f0ebe3" stroke="#1a1714" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 4v9h9" fill="#d4f0d8" stroke="#1a1714" stroke-width="2.5" stroke-linejoin="round"/><path d="M15 20h14M15 26h14M15 32h9" stroke="#1a1714" stroke-width="2"/></svg><span>supfrog</span></a>
+      <a class="icon" href="/frolf.html"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M5 13h13l4 4h17v19H5z" fill="#ffe9a8" stroke="#1a1714" stroke-width="2.5" stroke-linejoin="round"/></svg><span>field notes</span></a>
+      <a class="icon" href="/about/"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M10 4h16l9 9v27H10z" fill="#f0ebe3" stroke="#1a1714" stroke-width="2.5" stroke-linejoin="round"/><path d="M26 4v9h9" fill="#d4f0d8" stroke="#1a1714" stroke-width="2.5" stroke-linejoin="round"/><path d="M15 20h14M15 26h14M15 32h9" stroke="#1a1714" stroke-width="2"/></svg><span>about</span></a>
+    </div>
+    <p>Bob Corrigan · Redmond, WA</p>
+    <p>Employer benefits professional, pro disc golfer, poet &amp; retro film photographer, with two cats and a penchant for vintage RC models.</p>
+    <p class="copy">© <span id="yr">2026</span> Bob Corrigan</p>
+  </footer>
 
   <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
     <button class="lb-btn lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></button>
@@ -508,9 +737,50 @@
     <p id="lbCap"></p>
     <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   </div>
-
   <script>
     (function () {
+      var c = document.getElementById('clk');
+      if (c) {
+        var tick = function () {
+          var d = new Date();
+          c.textContent = d.toLocaleDateString([], { weekday: 'short' }) + ' ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        };
+        tick(); setInterval(tick, 20000);
+      }
+      var rv = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+      if (!('IntersectionObserver' in window)) { rv.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -6% 0px' });
+      rv.forEach(function (e) { io.observe(e); });
+    })();
+    (function () {
+      var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // ── Boot line types itself out ──
+      var ty = document.getElementById('type');
+      if (ty && !calm) {
+        var full = ty.textContent, n = 0;
+        ty.textContent = '';
+        (function step() { ty.textContent = full.slice(0, ++n); if (n < full.length) setTimeout(step, 38); })();
+      }
+
+      // ── Stats count up ──
+      Array.prototype.forEach.call(document.querySelectorAll('[data-count]'), function (el) {
+        var end = +el.getAttribute('data-count'), pre = el.getAttribute('data-pre') || '';
+        if (calm || !window.requestAnimationFrame) return;
+        var t0 = null, dur = 900 + Math.min(end, 200) * 4;
+        el.textContent = pre + '0';
+        setTimeout(function () {
+          requestAnimationFrame(function f(t) {
+            if (!t0) t0 = t;
+            var p = Math.min((t - t0) / dur, 1);
+            el.textContent = pre + Math.round(end * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(f);
+          });
+        }, 700);
+      });
+
       var roll = document.getElementById('roll');
       var frames = Array.prototype.slice.call(roll.querySelectorAll('.frame'));
 
@@ -520,7 +790,7 @@
         var left = list.slice(), out = [], last = null;
         for (var i = left.length - 1; i > 0; i--) { var j = rand(i + 1), t = left[i]; left[i] = left[j]; left[j] = t; }
         while (left.length) {
-          var counts = {}, s, pool, k;
+          var counts = {}, s, pool;
           left.forEach(function (f) { s = f.dataset.series; counts[s] = (counts[s] || 0) + 1; });
           var big = null;
           for (s in counts) { if (counts[s] > left.length / 2 && s !== last) { big = s; break; } }
@@ -537,14 +807,24 @@
         }
         return out;
       }
-
-      frames = mix(frames);
-      frames.forEach(function (f, i) {
-        roll.appendChild(f);
-        var img = f.querySelector('img');
-        if (i < 2) { img.loading = 'eager'; img.setAttribute('fetchpriority', 'high'); }
-        else { img.loading = 'lazy'; img.removeAttribute('fetchpriority'); }
-      });
+      function deal(first) {
+        frames = mix(frames);
+        // the first-place photo always leads
+        for (var k = 0; k < frames.length; k++) {
+          if (frames[k].querySelector('img').getAttribute('src').indexOf('firstplaceflower') > -1) { frames.unshift(frames.splice(k, 1)[0]); break; }
+        }
+        frames.forEach(function (f, i) {
+          roll.appendChild(f);
+          if (!first) return;
+          var img = f.querySelector('img');
+          if (i < 3) { img.loading = 'eager'; img.setAttribute('fetchpriority', 'high'); }
+          else { img.loading = 'lazy'; img.removeAttribute('fetchpriority'); }
+        });
+      }
+      deal(true);
+      var sh = document.getElementById('shuffle');
+      sh.hidden = false;
+      sh.addEventListener('click', function () { deal(false); });
 
       // ── Fade in once each photo has fully loaded ──
       frames.forEach(function (f) {
@@ -584,7 +864,6 @@
         lb.classList.remove('open');
         lb.hidden = true;
         document.body.style.overflow = '';
-        frames[current].scrollIntoView({ block: 'center' });
         if (opener && opener.focus) opener.focus({ preventScroll: true });
       }
 

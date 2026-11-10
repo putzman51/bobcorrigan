@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
+  <script>document.documentElement.className='js'</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Disc Golf Field Notes — Bob Corrigan</title>
   <meta name="author" content="Bob Corrigan" />
+  <meta name="theme-color" content="#f0ebe3" />
   <link rel="canonical" href="https://bobcorrigan.com/frolf.html" />
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Blog", "name": "Disc Golf Field Notes \u2014 Bob Corrigan", "url": "https://bobcorrigan.com/frolf.html", "author": {"@type": "Person", "@id": "https://bobcorrigan.com/#person", "name": "Bob Corrigan", "alternateName": "Robert Corrigan", "url": "https://bobcorrigan.com/", "jobTitle": "Employer benefits professional"}, "isPartOf": {"@id": "https://bobcorrigan.com/#website"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Blog", "name": "Disc Golf Field Notes — Bob Corrigan", "url": "https://bobcorrigan.com/frolf.html", "author": {"@type": "Person", "@id": "https://bobcorrigan.com/#person", "name": "Bob Corrigan", "alternateName": "Robert Corrigan", "url": "https://bobcorrigan.com/", "jobTitle": "Employer benefits professional"}, "isPartOf": {"@id": "https://bobcorrigan.com/#website"}}</script>
   <meta name="description" content="Bob Corrigan's disc golf field notes. Stories, photos, and write-ups from the course. PDGA #316354 · MA40." />
   <meta property="og:title" content="Field Notes — Bob Corrigan" />
   <meta property="og:description" content="Stories, photos + write-ups from the course." />
@@ -18,711 +20,533 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Space+Mono:wght@400;700&family=VT323&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --ink: #1a1714;
       --paper: #f0ebe3;
-      --cream: #e8e0d4;
-      --green: #6bc977;
-      --green-dim: #6bc97730;
-      --green-glow: #6bc97718;
-      --green-dark: #4db85a;
-      --muted: #8a8178;
+      --cream: #e4dccf;
+      --muted: #756c62;
       --rule: #c8bfb4;
-      --gold: #c9a84c;
-      --silver: #8a8a8a;
-      --bronze: #a0734a;
+      --accent: #2f7a45;
+      --green: #d4f0d8;
+      --green-dark: #b9e6c0;
+      --sun: #ffe9a8;
+      --desk: #b8b0a4;
+      --phos: #d4f0d8;
+      --phos-dim: #8fc79a;
+      --gold: #f2cf66;
+      --silver: #d9dde0;
+      --bronze: #e0a878;
+      --mono: 'Space Mono', ui-monospace, Menlo, monospace;
+      --px: 'Pixelify Sans', 'Space Mono', ui-monospace, monospace;
+      --crtf: 'VT323', 'Space Mono', ui-monospace, monospace;
     }
 
-    html { height: 100%; scroll-behavior: smooth; }
+    html { background: var(--desk); -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 48px; }
 
     body {
-      background: #b8b0a4;
+      background: var(--desk);
       color: var(--ink);
-      font-family: 'DM Mono', monospace;
-      font-weight: 300;
-      min-height: 100vh;
-      padding: 1.5rem;
-      position: relative;
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1.65;
+      padding: 0 1.25rem 2.25rem;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
+    /* desktop crosshatch */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image:
-        url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.15'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239e968a' fill-opacity='0.22'%3E%3Crect width='1' height='1' x='0' y='0'/%3E%3Crect width='1' height='1' x='3' y='3'/%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
     }
 
-    .mac-window {
+    a { color: inherit; }
+    img { max-width: 100%; }
+
+    .sr {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+    }
+
+    /* ── System menu bar ── */
+    .menubar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 34px;
+      margin: 0 -1.25rem;
+      padding: 0 10px;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+      box-shadow: 0 3px 0 rgba(26, 23, 20, 0.12);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      user-select: none;
+    }
+    .menubar::-webkit-scrollbar { display: none; }
+    .menubar a { text-decoration: none; }
+    .mb-item { padding: 5px 9px; border-radius: 3px; }
+    .mb-item:hover, .mb-item:focus-visible, .mb-item[aria-current] { background: var(--ink); color: var(--paper); outline: none; }
+    .mb-logo { display: inline-flex; align-items: center; gap: 7px; }
+    .mb-logo svg { width: 16px; height: 16px; flex: none; }
+    .mb-space { flex: 1; min-width: 6px; }
+    .mb-clock { padding: 0 4px 0 10px; font-weight: 400; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-left: 6px;
+      padding: 2px 8px 2px 9px;
+      background: var(--green);
+      border: 1.5px solid var(--ink);
+      border-radius: 4px;
+      box-shadow: 2px 2px 0 var(--ink);
+      color: var(--ink);
+      font-size: 11px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+    .pill:hover { background: var(--green-dark); transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+    .pill:active { transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+    .pill:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .pill svg { width: 11px; height: 11px; }
+    .pill.sun { background: var(--sun); }
+    .pill.sun:hover { background: #ffdf85; }
+
+    /* ── Windows ── */
+    .win {
       position: relative;
       z-index: 1;
-      max-width: 700px;
-      margin: 1rem auto;
+      max-width: var(--w, 1080px);
+      margin: 1.6rem auto 0;
       border: 2px solid var(--ink);
-      border-radius: 8px 8px 2px 2px;
+      border-radius: 8px;
       background: var(--paper);
-      box-shadow:
-        4px 4px 0 rgba(0,0,0,0.15),
-        inset 0 0 0 1px rgba(255,255,255,0.3);
-      overflow: hidden;
+      box-shadow: 6px 6px 0 rgba(26, 23, 20, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
     }
-
-    .title-bar {
+    .tbar {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      height: 28px;
-      background: linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 40%, #cac3b8 100%);
+      height: 40px;
+      padding: 0 64px;
+      background:
+        repeating-linear-gradient(180deg, transparent 0 3px, rgba(26, 23, 20, 0.2) 3px 4px) 0 11px / 100% 19px no-repeat,
+        linear-gradient(180deg, #e8e2d8 0%, #d6d0c6 45%, #cac3b8 100%);
       border-bottom: 2px solid var(--ink);
+      border-radius: 6px 6px 0 0;
       user-select: none;
     }
-
-    .traffic-lights {
-      position: absolute;
-      left: 10px;
-      display: flex;
-      gap: 6px;
-    }
-
-    .traffic-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,0.2);
-    }
-
-    .traffic-dot.close { background: #ff6058; }
-    .traffic-dot.minimize { background: #ffbd2e; }
-    .traffic-dot.maximize { background: var(--green); }
-
-    .title-bar-text {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-    }
-
-    .menu-bar {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      padding: 0.3rem 1rem;
-      background: var(--cream);
-      border-bottom: 1px solid var(--rule);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.5rem;
-      color: var(--muted);
-      user-select: none;
-    }
-
-    .menu-bar span { cursor: default; }
-    .menu-bar span:first-child { font-weight: 700; color: var(--ink); }
-    .menu-bar span:hover { color: var(--green-dark); }
-
-    .menu-bar a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .menu-bar a:hover { color: var(--ink); }
-
-    .window-body {
-      padding: 1.5rem;
-    }
-
-    /* ── Top bar ── */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--rule);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeIn 0.5s ease forwards 0.1s;
-    }
-
-    .top-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.55rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── Page title ── */
-    .page-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem;
-      font-weight: 400;
-      color: var(--ink);
-      margin-bottom: 0.3rem;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.15s;
-    }
-
-    .page-sub {
-      font-size: 0.5rem;
-      font-weight: 300;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.2s;
-    }
-
-    a.egg {
-      color: inherit;
-      text-decoration: none;
-      cursor: pointer;
-      font: inherit;
-    }
-    a.egg:hover, a.egg:visited, a.egg:active, a.egg:focus {
-      color: inherit;
-      text-decoration: none;
-      outline: none;
-    }
-
-    /* ── Section headers ── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 0.6rem;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-    }
-
-    .section-header.d1 { animation-delay: 0.35s; }
-    .section-header.d2 { animation-delay: 0.55s; }
-    .section-header.d3 { animation-delay: 0.75s; }
-
-    .section-title {
-      font-size: 0.48rem;
-      font-weight: 300;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .section-rule {
-      flex: 1;
-      height: 1px;
-      background: var(--rule);
-    }
-
-    /* ══════════════════════════════════════════
-       FIELD NOTES — Magazine Blog Posts
-       ══════════════════════════════════════════ */
-
-    .field-notes {
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards 0.8s;
-    }
-
-    /* ── Individual Post ── */
-    .post {
-      margin-bottom: 2rem;
-      border: 1.5px solid var(--rule);
-      background: var(--paper);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .post:last-child {
-      margin-bottom: 1.5rem;
-    }
-
-    /* Post image — full bleed hero */
-    .post-img {
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      display: block;
-      border-bottom: 1.5px solid var(--rule);
-      filter: contrast(1.02) saturate(0.92);
-    }
-
-    /* The meta strip above the headline */
-    .post-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.7rem 1rem 0;
-    }
-
-    .post-date {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.52rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .post-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.48rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--green-dark);
-      background: var(--green-glow);
-      border: 1px solid var(--green-dim);
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-    }
-
-    /* Post headline */
-    .post-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--ink);
-      padding: 0.4rem 1rem 0;
-    }
-
-    /* Subhead / location line */
-    .post-subhead {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.46rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0.2rem 1rem 0;
-    }
-
-    /* Round ratings strip — between headline and body */
-    .post-rounds {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.5rem 1rem 0;
-      font-family: 'DM Mono', monospace;
-      font-size: 0.5rem;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .post-rounds-label {
-      font-size: 0.42rem;
-      font-weight: 300;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .post-rounds-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--ink);
-      letter-spacing: 0.02em;
-    }
-
-    .post-rounds-sep {
-      color: var(--rule);
-    }
-
-    /* Body copy — editorial serif for readability */
-    .post-body {
-      padding: 0.6rem 1rem 0.9rem;
-      font-family: 'Source Serif 4', 'Cormorant Garamond', Georgia, serif;
-      font-size: 0.88rem;
-      font-weight: 400;
-      line-height: 1.75;
-      color: var(--ink);
-    }
-
-    .post-body p {
-      margin-bottom: 0.7rem;
-    }
-    .post-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Pull quote — for that one great line */
-    .post-pull {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      font-style: italic;
-      line-height: 1.4;
-      color: var(--green-dark);
-      border-left: 2.5px solid var(--green);
-      padding: 0.3rem 0 0.3rem 0.8rem;
-      margin: 0.5rem 1rem 0.3rem;
-    }
-
-    /* Secondary image inside post body */
-    .post-img-inline {
-      width: calc(100% + 2rem);
-      margin: 0.5rem -1rem 0.5rem;
-      aspect-ratio: 16 / 10;
-      object-fit: cover;
-      display: block;
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-      filter: contrast(1.02) saturate(0.92);
-    }
-
-    /* Score / result badge at bottom of post */
-    .post-result {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.55rem 1rem;
-      background: var(--cream);
-      border-top: 1px solid var(--rule);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.44rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .post-result-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--ink);
-      letter-spacing: 0;
-      text-transform: none;
-    }
-
-    .post-result-value.gold { color: var(--gold); }
-    .post-result-value.silver { color: var(--silver); }
-    .post-result-value.bronze { color: var(--bronze); }
-    .post-result-value.accent { color: var(--green-dark); }
-
-    /* Caption overlay on image */
-    .post-img-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .post-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 2.5rem 0.8rem 0.55rem;
-      background: linear-gradient(to top, rgba(26,23,20,0.65) 0%, transparent 100%);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.52rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.92);
-      text-transform: uppercase;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    }
-
-    /* Issue number / post count */
-    .post-issue {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.6rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.48rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.85);
-      background: rgba(26,23,20,0.5);
-      padding: 0.2rem 0.45rem;
-      border-radius: 1px;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    }
-
-    /* Divider between posts — decorative */
-    .post-divider {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin: 0.5rem 0 2rem;
-      opacity: 0.4;
-    }
-
-    .post-divider::before,
-    .post-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--rule);
-    }
-
-    .post-divider-icon {
-      width: 14px;
-      height: 14px;
-      opacity: 0.3;
-    }
-
-    /* ── Footer ── */
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 1rem;
-      border-top: 1px solid var(--rule);
-      opacity: 0;
-      animation: fadeIn 0.5s ease forwards 0.9s;
-    }
-
-    .footer-left {
-      font-size: 0.45rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .footer-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--green);
-    }
-
-    .beep-boop {
-      font-size: 0.45rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .beep-boop:hover { color: var(--green-dark); }
-
-    /* ── Slideshow ── */
-    .post-slideshow {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      border-bottom: 1.5px solid var(--rule);
-    }
-
-    .post-slideshow img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      filter: contrast(1.02) saturate(0.92);
-    }
-
-    .post-slideshow img.active {
-      opacity: 1;
-    }
-
-    .slide-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(26,23,20,0.45);
-      color: rgba(255,255,255,0.9);
-      border: none;
-      font-family: 'Space Mono', monospace;
+    .dots { position: absolute; left: 0; top: 0; bottom: 0; display: flex; align-items: center; gap: 6px; padding: 0 10px 0 12px; background: #d6d0c6; border-radius: 6px 0 0 0; }
+    .dot { display: block; width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.25); }
+    .dot.c { background: #ff6058; }
+    .dot.m { background: #ffbd2e; }
+    .dot.x { background: #7ddc8c; }
+    a.dot.x:hover { background: #4fce65; }
+    .ttl {
+      padding: 0 14px;
+      background: #d9d3c9;
       font-size: 0.9rem;
       font-weight: 700;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      z-index: 3;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      display: flex;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      text-decoration: none;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .tnote { position: absolute; right: 0; top: 0; bottom: 0; display: flex; align-items: center; padding: 0 12px 0 10px; background: #d6d0c6; border-radius: 0 6px 0 0; font-size: 11px; color: var(--muted); }
+
+    /* ── CRT ── */
+    .bezel {
+      padding: 10px;
+      background: #d6d0c6;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16), inset 1px 1px 0 rgba(255, 255, 255, 0.55), inset -1px -1px 0 rgba(0, 0, 0, 0.14);
+    }
+    .crt {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, #24342c 0%, #141a17 78%);
+      border: 2px solid var(--ink);
+      border-radius: 12px / 16px;
+      color: var(--phos);
+      text-shadow: 0 0 6px rgba(212, 240, 216, 0.55);
+    }
+    .crt::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px);
+      pointer-events: none;
+    }
+    .prompt { color: var(--phos-dim); margin-right: 0.5em; }
+    .cursor {
+      display: inline-block;
+      width: 0.6em;
+      height: 1.05em;
+      margin-left: 0.15em;
+      vertical-align: -0.15em;
+      background: var(--phos);
+      box-shadow: 0 0 6px rgba(212, 240, 216, 0.6);
+      animation: blink 1s steps(1) infinite;
+    }
+    .barber {
+      height: 14px;
+      border: 1.5px solid var(--ink);
+      border-radius: 3px;
+      background: repeating-linear-gradient(-45deg, var(--ink) 0 6px, var(--green) 6px 12px);
+      background-size: 17px 17px;
+      animation: barber 0.9s linear infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes barber { to { background-position: 17px 0; } }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 2px;
-      transition: background 0.15s;
-    }
-
-    .slide-btn:hover {
-      background: rgba(26,23,20,0.7);
-    }
-
-    .slide-btn.prev { left: 0.5rem; }
-    .slide-btn.next { right: 0.5rem; }
-
-    .slide-counter {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.6rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.48rem;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.55rem 1rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.85);
-      background: rgba(26,23,20,0.5);
-      padding: 0.2rem 0.45rem;
-      border-radius: 1px;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-      z-index: 3;
-    }
-
-    .slide-dots {
-      position: absolute;
-      bottom: 0.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 5px;
-      z-index: 3;
-    }
-
-    .slide-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.35);
-      border: 1px solid rgba(255,255,255,0.3);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      text-align: center;
       cursor: pointer;
-      transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+    .btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+    .btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--ink); }
+    .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .btn.primary { background: var(--green); }
+    .btn.primary:hover { background: var(--green-dark); }
+
+    /* ── Finder-style list ── */
+    .log { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .log th {
+      padding: 7px 12px;
+      background: var(--cream);
+      border-bottom: 1.5px solid var(--ink);
+      font-size: 10.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .log th + th { border-left: 1px solid var(--rule); }
+    .log td { padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+    .log tbody tr:last-child td { border-bottom: 0; }
+    .log tbody tr:nth-child(even) { background: rgba(228, 220, 207, 0.4); }
+    .log tbody tr:hover { background: var(--green); }
+    .log .when { white-space: nowrap; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .log .ev a { font-weight: 700; text-decoration: none; }
+    .log .ev a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .log .ev small { display: block; font-size: 11.5px; color: var(--muted); }
+    .log .num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .chip {
+      display: inline-block;
+      padding: 1px 8px;
+      border: 1.5px solid var(--ink);
+      border-radius: 99px;
+      background: var(--paper);
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .chip.gold { background: var(--gold); }
+    .chip.silver { background: var(--silver); }
+    .chip.bronze { background: var(--bronze); }
+    .tag {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      background: var(--ink);
+      border-radius: 3px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      vertical-align: 1px;
     }
 
-    .slide-dot.active {
-      background: rgba(255,255,255,0.9);
+    /* ── Simple text pages ── */
+    .filebar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.3rem 0.9rem;
+      border-bottom: 1.5px solid var(--ink);
+      background: var(--cream);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+    .filebar a { text-decoration: none; font-weight: 700; padding: 0.3rem 0; }
+    .filebar a:hover { text-decoration: underline; }
+    .filebar span { color: var(--muted); padding: 0.3rem 0; }
+    .h-px { font-family: var(--px); font-weight: 700; line-height: 1; letter-spacing: 0.01em; }
+
+    /* ── Footer ── */
+    .foot {
+      position: relative;
+      z-index: 1;
+      max-width: 44rem;
+      margin: 2.4rem auto 0;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #5d554c;
+    }
+    .foot a { color: var(--ink); text-underline-offset: 3px; }
+    .foot a:hover { color: var(--accent); }
+    .foot .copy { margin-top: 10px; font-size: 11px; }
+    .icons { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; margin-bottom: 1.3rem; }
+    .icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 104px;
+      padding: 8px 4px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .icon svg { width: 38px; height: 38px; filter: drop-shadow(2px 2px 0 rgba(26, 23, 20, 0.2)); transition: transform 0.15s ease; }
+    .icon span { padding: 1px 6px; border-radius: 3px; background: var(--paper); border: 1px solid var(--ink); }
+    .icon:hover svg { transform: translateY(-3px) rotate(-4deg); }
+    .icon:hover span, .icon:focus-visible span { background: var(--ink); color: var(--paper); }
+    .foot a.icon:hover { color: inherit; }
+
+    /* ── Scroll reveal (JS only) ── */
+    .js .rv { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+    .js .rv.in { opacity: 1; transform: none; }
+
+    @media (max-width: 700px) {
+      body { padding: 0 0.6rem 1.5rem; font-size: 13.5px; }
+      .menubar { margin: 0 -0.6rem; padding: 0 6px; font-size: 11px; letter-spacing: 0; }
+      .mb-item { padding: 5px 6px; }
+      .mb-clock, .mb-home, .mb-logo b { display: none; }
+      .pill { margin-left: 4px; padding: 2px 6px; font-size: 10.5px; }
+      .win { margin-top: 0.9rem; box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.2); }
+      .tnote { display: none; }
+      .icon { width: 92px; }
     }
 
-    @media (max-width: 600px) {
-      .post-slideshow { aspect-ratio: 4 / 3; }
-      .slide-btn { width: 28px; height: 28px; font-size: 0.8rem; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cursor, .barber { animation: none; }
+      .js .rv { opacity: 1; transform: none; transition: none; }
+      .btn, .pill { transition: none; }
     }
 
-    /* ── Animations ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
+
+    .win { --w: 860px; }
+    .notes-head { padding: 34px 20px 26px; text-align: center; }
+    .kicker { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .notes-head h1 { font-family: var(--px); font-weight: 700; font-size: clamp(48px, 10vw, 84px); line-height: 0.95; margin: 0.2em 0 0.15em; }
+    .notes-head p.sub { font-size: 13px; color: #4a433c; }
+    .toc { margin: 0 22px; border: 1.5px solid var(--ink); border-radius: 6px; overflow: hidden; box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16); }
+    .log .no { width: 1%; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .log .fin { text-align: right; }
+    .log .ev small.m { display: none; }
+
+    .posts { width: min(700px, 100% - 32px); margin: 0 auto; padding-bottom: 12px; }
+    .post { padding-top: 64px; }
+    .post-img-wrap { position: relative; background: #141a17; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; box-shadow: 5px 5px 0 rgba(26, 23, 20, 0.2); }
+    .post-img { display: block; margin: 0 auto; max-width: 100%; min-height: 200px; max-height: 560px; width: auto; height: auto; }
+    .post-issue { position: absolute; top: 10px; left: 10px; z-index: 3; padding: 1px 9px; background: var(--sun); border: 1.5px solid var(--ink); border-radius: 4px; box-shadow: 2px 2px 0 var(--ink); font-size: 12px; font-weight: 700; }
+    .post-caption { display: block; padding: 6px 10px; background: var(--cream); border-top: 2px solid var(--ink); font-size: 11.5px; color: #4a433c; }
+    .post-meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .post-tag { color: var(--accent); font-weight: 700; text-align: right; }
+    .post-headline { font-family: var(--px); font-weight: 700; font-size: clamp(30px, 5.6vw, 44px); line-height: 1.02; margin-top: 8px; }
+    .post-subhead { margin-top: 8px; font-size: 12.5px; color: var(--muted); }
+    .post-rounds { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; margin-top: 16px; padding: 8px 16px 7px; border-radius: 8px; font-family: var(--crtf); font-size: 26px; line-height: 1.1; }
+    .post-rounds-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--phos-dim); margin-right: 4px; }
+    .post-rounds-sep { color: var(--phos-dim); }
+    .post-body { margin-top: 20px; font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; line-height: 1.7; color: #2a2520; }
+    .post-body p + p { margin-top: 1em; }
+    .post-img-inline { display: block; margin: 24px auto 6px; max-height: 520px; width: auto; height: auto; border: 2px solid var(--ink); border-radius: 6px; box-shadow: 5px 5px 0 rgba(26, 23, 20, 0.2); }
+    .post-pull { margin-top: 26px; padding: 16px 20px 17px; background: var(--green); border: 2px solid var(--ink); border-radius: 6px; box-shadow: 4px 4px 0 var(--ink); font-family: var(--px); font-weight: 500; font-size: 22px; line-height: 1.25; }
+    .post-result { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 22px; padding-top: 14px; border-top: 2px dashed var(--ink); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .post-result .chip { font-size: 12.5px; padding: 3px 12px; letter-spacing: 0.02em; text-transform: none; color: var(--ink); box-shadow: 2px 2px 0 var(--ink); }
+
+    .slides { position: relative; aspect-ratio: 4 / 3; }
+    .slides img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.4s ease; }
+    .slides img.active { opacity: 1; }
+    .slide-btn { position: absolute; top: 50%; z-index: 2; width: 40px; height: 40px; transform: translateY(-50%); display: grid; place-items: center; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 50%; box-shadow: 2px 2px 0 #000; color: var(--ink); font: 700 22px/1 var(--mono); cursor: pointer; }
+    .slide-btn:hover { background: var(--green); }
+    .slide-btn.prev { left: 10px; }
+    .slide-btn.next { right: 10px; }
+    .slide-counter { position: absolute; top: 10px; right: 10px; z-index: 2; padding: 1px 8px; background: rgba(20, 26, 23, 0.82); border-radius: 3px; color: var(--phos); font-size: 11px; }
+    .slide-dots { position: absolute; bottom: 10px; left: 0; right: 0; z-index: 2; display: flex; justify-content: center; gap: 6px; }
+    .slide-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(240, 235, 227, 0.5); border: 1px solid #000; cursor: pointer; }
+    .slide-dot.active { background: var(--green); }
+
+    .notes-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 56px; padding: 12px 18px; border-top: 2px solid var(--ink); background: var(--cream); border-radius: 0 0 6px 6px; font-size: 11.5px; color: var(--muted); }
+    .notes-foot a { font-weight: 700; color: var(--ink); text-underline-offset: 3px; }
+    .footer-dot { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: #4fce65; border: 1px solid var(--ink); }
+
+    @media (max-width: 700px) {
+      .notes-head { padding: 24px 14px 20px; }
+      .toc { margin: 0 12px; }
+      .log thead, .log .no { display: none; }
+      .log tr { display: grid; grid-template-columns: 1fr auto; gap: 3px 10px; padding: 9px 12px; border-bottom: 1px solid var(--rule); }
+      .log tbody tr:last-child { border-bottom: 0; }
+      .log td { padding: 0; border: 0; }
+      .log .ev { grid-column: 1 / -1; grid-row: 2; }
+      .posts { width: calc(100% - 24px); }
+      .post { padding-top: 48px; }
+      .post-body { font-size: 17px; }
+      .post-pull { font-size: 19px; }
+      .post-rounds { font-size: 22px; }
+      .post-meta { font-size: 10.5px; letter-spacing: 0.06em; }
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      body { padding: 0.5rem; }
-      .mac-window {
-        margin: 0;
-        min-height: calc(100vh - 1rem);
-        border-radius: 8px 8px 2px 2px;
-      }
-      .window-body {
-        padding: 1rem;
-      }
-      .page-title { font-size: 1.4rem; }
-
-      /* Field Notes mobile */
-      .post {
-        margin-left: -1rem;
-        margin-right: -1rem;
-        border-left: none;
-        border-right: none;
-      }
-      .post-img { aspect-ratio: 4 / 3; }
-      .post-headline { font-size: 1.2rem; }
-
-      /* Bigger body text on mobile */
-      .post-body {
-        font-size: 0.95rem;
-        line-height: 1.8;
-      }
-
-      .post-pull { font-size: 1.05rem; }
-      .post-img-inline { aspect-ratio: 4 / 3; }
-
-      /* Bigger image overlay text on mobile */
-      .post-caption {
-        font-size: 0.58rem;
-        font-weight: 700;
-        padding: 2.8rem 0.8rem 0.6rem;
-      }
-
-      .post-issue {
-        font-size: 0.52rem;
-        padding: 0.22rem 0.5rem;
-      }
-
-      /* Bigger tag on mobile */
-      .post-tag {
-        font-size: 0.52rem;
-        padding: 0.3rem 0.7rem;
-      }
-
-      .post-date {
-        font-size: 0.52rem;
-      }
-
-      /* Round ratings on mobile */
-      .post-rounds-value {
-        font-size: 1rem;
-      }
-    }
+    @media (prefers-reduced-motion: reduce) { .slides img { transition: none; } }
   </style>
 </head>
 <body>
+  <nav class="menubar" aria-label="Site">
+    <a class="mb-item mb-logo" href="/" aria-label="bobcorrigan.com home"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="#d4f0d8" stroke="currentColor" stroke-width="8"/><circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="50" cy="50" r="6" fill="currentColor"/></svg><b>bobcorrigan.com</b></a>
+    <a class="mb-item mb-home" href="/">Home</a>
+    <a class="mb-item" href="/frolf.html" aria-current="page">Field Notes</a>
+    <a class="mb-item" href="/about/">About</a>
+    <span class="mb-space"></span>
+    <a class="pill sun" href="/disc/">Found my Disc?</a>
+    <a class="pill" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <span class="mb-clock" id="clk" aria-hidden="true"></span>
+  </nav>
 
-  <div class="mac-window">
-
-    <div class="title-bar">
-      <div class="traffic-lights">
-        <span class="traffic-dot close"></span>
-        <span class="traffic-dot minimize"></span>
-        <span class="traffic-dot maximize"></span>
-      </div>
-      <span class="title-bar-text">Field Notes</span>
+  <div class="win">
+    <header class="tbar">
+      <div class="dots"><span class="dot c"></span><span class="dot m"></span><a class="dot x" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a></div>
+      <span class="ttl">Field Notes</span><span class="tnote">13 entries</span>
+    </header>
+    <div class="notes-head">
+      <p class="kicker">Bob Corrigan · Berg Operator</p>
+      <h1>Field Notes</h1>
+      <p class="sub">Stories, photos + write-ups from the course.</p>
     </div>
 
-    <nav class="menu-bar">
-      <span>File</span>
-      <a href="/">← Home</a>
-    </nav>
+    <div class="toc">
+      <table class="log">
+        <thead><tr><th>No.</th><th>Entry</th><th>Date</th><th style="text-align:right">Result</th></tr></thead>
+        <tbody>
+            <tr>
+              <td class="no">13</td>
+              <td class="ev"><a href="#no-13">Pier Park Play-off!</a></td>
+              <td class="when">19 Apr 2026</td>
+              <td class="fin"><span class="chip gold">1st Place · MA3 (Play-off)</span></td>
+            </tr>
+            <tr>
+              <td class="no">12</td>
+              <td class="ev"><a href="#no-12">6 Rounds in 3 Days</a></td>
+              <td class="when">10–12 Apr 2026</td>
+              <td class="fin"><span class="chip gold">1st Place · MA3</span></td>
+            </tr>
+            <tr>
+              <td class="no">11</td>
+              <td class="ev"><a href="#no-11">Kayak Point (NXNW4)</a></td>
+              <td class="when">4–5 Apr 2026</td>
+              <td class="fin"><span class="chip ">11th Place · MA3</span></td>
+            </tr>
+            <tr>
+              <td class="no">10</td>
+              <td class="ev"><a href="#no-10">Sunnyside Up (First MA3 Win!)</a></td>
+              <td class="when">28–29 Mar 2026</td>
+              <td class="fin"><span class="chip gold">1st Place · MA3</span></td>
+            </tr>
+            <tr>
+              <td class="no">09</td>
+              <td class="ev"><a href="#no-09">SeaTac Spring League #2</a></td>
+              <td class="when">26 Mar 2026</td>
+              <td class="fin"><span class="chip ">906 · MA40</span></td>
+            </tr>
+            <tr>
+              <td class="no">08</td>
+              <td class="ev"><a href="#no-08">Star Frame Sunday</a></td>
+              <td class="when">22 Mar 2026</td>
+              <td class="fin"><span class="chip ">9th of 14 · Casual</span></td>
+            </tr>
+            <tr>
+              <td class="no">07</td>
+              <td class="ev"><a href="#no-07">Shelton Springs</a></td>
+              <td class="when">21 Mar 2026</td>
+              <td class="fin"><span class="chip ">4th Place · MA40</span></td>
+            </tr>
+            <tr>
+              <td class="no">06</td>
+              <td class="ev"><a href="#no-06">League Round (SeaTac)</a></td>
+              <td class="when">20 Mar 2026</td>
+              <td class="fin"><span class="chip ">891 · MA40</span></td>
+            </tr>
+            <tr>
+              <td class="no">05</td>
+              <td class="ev"><a href="#no-05">Deception Pass Windy DG (First Trophy!)</a></td>
+              <td class="when">14 Mar 2026</td>
+              <td class="fin"><span class="chip bronze">3rd Place · MA40</span></td>
+            </tr>
+            <tr>
+              <td class="no">04</td>
+              <td class="ev"><a href="#no-04">SeaTac (Cloud City Chaos 4)</a></td>
+              <td class="when">7 Mar 2026</td>
+              <td class="fin"><span class="chip ">4th Place · MA40</span></td>
+            </tr>
+            <tr>
+              <td class="no">03</td>
+              <td class="ev"><a href="#no-03">Behold, the Rain Wizard</a></td>
+              <td class="when">7 Feb 2026</td>
+              <td class="fin"><span class="chip bronze">3rd Place · MA40</span></td>
+            </tr>
+            <tr>
+              <td class="no">02</td>
+              <td class="ev"><a href="#no-02">Copper in the Mountains</a></td>
+              <td class="when">31 Jan 2026</td>
+              <td class="fin"><span class="chip silver">2nd Place · MA40</span></td>
+            </tr>
+            <tr>
+              <td class="no">01</td>
+              <td class="ev"><a href="#no-01">SeaTac Shenanigans</a></td>
+              <td class="when">10 Jan 2026</td>
+              <td class="fin"><span class="chip gold">1st Place · MA40</span></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <div class="window-body">
-
-      <div class="top-bar">
-        <span class="top-label">Bob Corrigan · Berg Operator</span>
-      </div>
-
-      <h1 class="page-title">Field Notes</h1>
-
-      <div class="field-notes">
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 13 — Pier Park Play-off    │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+    <div class="posts">
+        <article class="post rv" id="no-13">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/firstplaceflower.jpg" alt="First place at Pier Park DGC in Portland" />
+            <img class="post-img" src="images/firstplaceflower.jpg" alt="First place at Pier Park DGC in Portland" fetchpriority="high" />
             <span class="post-issue">No. 13</span>
             <span class="post-caption">Pier Park DGC · Portland, OR</span>
           </div>
@@ -732,38 +556,22 @@
           </div>
           <h2 class="post-headline">Pier Park Play-off!</h2>
           <p class="post-subhead">C-Tier · Pier Park DGC · Portland, OR</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rating</span>
-            <span class="post-rounds-value">933</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rating</span><span class="post-rounds-value">933</span></div>
           <div class="post-body">
-            <p>Pier Park is one of the PNW's absolute best courses. There's many greats, but this section of woods is quite the treat. Competing in MA3 is very fun and offering me great competition. This match was no different, a lot of great scores and I was staying on par for most of the round. Grabbed 3 birds and only 1 bogey, so at 2 under I was tied for first.</p>
-            <p>I had not played off before, but it's essentially the first person to drop a point loses. My play-off competitor was fierce and we both hit edge of C1 putts to stay in it on the first hole. We went around one, two, and three twice. Then moved to 8, 9, &amp; 10. We both held pars on eight and nine, and ten is where I hit par again, but Sean found a bogey. He had a big shot that missed, and the comebacker bounced off the bucket. I stepped up for the tap in and closed out the round.</p>
-            <p>A first place victory is always fun, but overall the day was filled with great shots on the card and a lot of fun memories in the woods. I'm pleased to have shot a 933 and it felt like I can do that and better again!</p>
-            <p>Playing the night before and getting field work in the morning seemed to work pretty well. I'm going to note that routine because it's really nice knowing where the fairway hits are.</p>
-            <p>My first play-off was thrilling. A high stakes game of disc golf that I had not yet experienced. I'm happy to compete and love winning. LFG.</p>
+            <p>Pier Park is one of the best courses in the PNW, and this stretch of woods is a treat. I stayed near par all round: 3 birds, 1 bogey, 2 under, tied for first.</p>
+            <p>My first play-off. First person to drop a stroke loses. We both hit edge-of-C1 putts to stay alive on the first hole, went around 1, 2 and 3 twice, then moved to 8, 9 and 10. On 10 I made par and Sean found a bogey. I stepped up for the tap in and closed out the round.</p>
+            <p>I shot a 933 and it felt repeatable. Playing the night before and doing field work that morning helped, so I'm keeping that routine.</p>
+            <p>A play-off is a kind of pressure I had not felt before. I love competing and I love winning. LFG.</p>
           </div>
           <div class="post-pull">"I stepped up for the tap in and closed out the round."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value gold">1st Place · MA3 (Play-off)</span>
+            <span class="chip gold">1st Place · MA3 (Play-off)</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 12 — 6 Rounds in 3 Days    │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-12">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/dips.jpg" alt="Weekend disc golf marathon across three courses" />
+            <img class="post-img" src="images/dips.jpg" alt="Weekend disc golf marathon across three courses" loading="lazy" />
             <span class="post-issue">No. 12</span>
             <span class="post-caption">SeaTac · Whitmarsh · South Fork</span>
           </div>
@@ -773,50 +581,27 @@
           </div>
           <h2 class="post-headline">6 Rounds in 3 Days</h2>
           <p class="post-subhead">SeaTac · Whitmarsh (Mt. Vernon) · South Fork</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rated</span>
-            <span class="post-rounds-value">874</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">854</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">947</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">879</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">862</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rated</span><span class="post-rounds-value">874</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">854</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">947</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">879</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">862</span></div>
           <div class="post-body">
-            <p>What a weekend! The highlights were the good times outside of sanctioned play, honestly. Getting to meet new people and hang out with good friends and having meals was such a blast. Staying nearby Whitmarsh was very nice because it turns out the Mount Vernon/Burlington area has great food. Don't sleep on "Big Scoop," it's truly a spot that will not disappoint. Train Wreck Bar &amp; Grill has an amazing Rueben. Scratch kitchen soul-food!</p>
+            <p>What a weekend! The best parts were off the card: new people, good friends, great meals. Mount Vernon and Burlington have serious food. Don't sleep on "Big Scoop," and Train Wreck Bar &amp; Grill makes an amazing Reuben.</p>
           </div>
-          <img class="post-img-inline" src="images/icecream.jpg" alt="Big Scoop — don't sleep on it" />
+          <img class="post-img-inline" src="images/icecream.jpg" alt="Big Scoop — don&#x27;t sleep on it" loading="lazy" />
           <div class="post-body">
-            <p>SeaTac league round was very ordinary. Shot near my rating, didn't have a round of great golf but got through it and learned a few things along the way. Nice weather and it's so nice being able to play with great people.</p>
-            <p>Friday afternoon, my first time seeing Whitmarsh, and knowing it's kind of a legendary little course, I wanted to give it my best. I love technical little wooded shots, and this course gives you chances to score. I didn't find a lot of points first round through, but my goal was simply learn where to avoid the bogeys. That plan can go sideways, and did a few times in round Saturday, but I think the practice round gave me a little boost going in.</p>
-            <p>Complete lackluster performance from me Saturday morning Round 1. I knew I needed to step it up, and I was firmly on the chase card in 7th place. I avoided the bogeys and late 2nd round started finding the birds. It culminated in a 120 foot throw-in, then I just needed to play the last hole. The magical moment was when my friend was waiting for me on the last hole to let me know I was in the lead and to just par this last hole and it's mine. I was a little shocked and kept it together. Taking the top of the box, didn't even pump a shot, just fired off an easy smooth drive that actually hit within 30 feet of the pin. We walked down talking about pitching it under the basket because the par will win the round.</p>
-            <p>It was a joy being able to win and have the support of Brian and the Bok Squad to share it with me. I'm having a lot of fun playing disc and enjoying it with such a cool group of people.</p>
+            <p>The SeaTac league round was ordinary. I shot near my rating and learned a few things.</p>
+            <p>Friday was my first look at Whitmarsh, a legendary little wooded course. My only goal for the practice round was to learn where the bogeys live.</p>
+            <p>Saturday's first round was flat and left me on the chase card in 7th. In round two I avoided the bogeys, found birds late, and hit a 120 foot throw-in. My friend was waiting on the last hole to tell me I was in the lead: just par it and it's mine. I threw an easy, smooth drive to within 30 feet. Par was all I needed.</p>
+            <p>Sharing that with Brian and the Bok Squad was a joy.</p>
           </div>
-          <img class="post-img-inline" src="images/pie.jpg" alt="Post-round eats" />
+          <img class="post-img-inline" src="images/pie.jpg" alt="Post-round eats" loading="lazy" />
           <div class="post-pull">"My friend was waiting on the last hole to let me know I was in the lead. Just par this last hole and it's mine."</div>
           <div class="post-result">
             <span>Whitmarsh</span>
-            <span class="post-result-value gold">1st Place · MA3</span>
+            <span class="chip gold">1st Place · MA3</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 11 — Kayak Point NXNW4     │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-11">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/kayak4.jpg" alt="Disc golf at Kayak Point" />
+            <img class="post-img" src="images/kayak4.jpg" alt="Disc golf at Kayak Point" loading="lazy" />
             <span class="post-issue">No. 11</span>
             <span class="post-caption">Kayak Point · NXNW4 · Red Course</span>
           </div>
@@ -826,53 +611,39 @@
           </div>
           <h2 class="post-headline">Kayak Point (NXNW4)</h2>
           <p class="post-subhead">NXNW4, Sponsored by Discraft · Kayak Point · Red Course</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 897</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 877</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 897</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 877</span></div>
           <div class="post-body">
-            <p>A great weekend of disc golf. Amazing crisp clean spring weather with sunshine and light winds. This was the biggest field I've joined, and I really enjoyed it. Great playing going on in the MA3 division, with the winner averaging 933 over both rounds. That's solid game! Super chill cards, fun meeting some awesome players. I only beat one guy on each of my cards, but with the larger field, I walked with 58.5 player points since I beat 12 guys. This is a great haul for 2 rounds of fun. I'm on pace to keep collecting toward the 1000 that will get me into AM Worlds '27.</p>
-            <p>There were a few moments where I played exceptional disc golf this weekend. One was late in Round 1 where I was tucked on hole 16. A huge upshot, where basically one distance and shape was required about 160 feet out. I threw a Fireball and pulled exactly hard enough to find the target way up to the left. I turned it so well the guys nearby cheered. This was one hole after hitting a 50 foot death putt in the wind. The whole card cheered loudly on that one! I love hitting those shots, everyone does, but such a simple and pure joy to ring up the chains and stop in the basket from anything farther than 15 feet.</p>
+            <p>Crisp spring weather, sunshine, light wind, and the biggest field I've joined. The MA3 winner averaged 933 over two rounds. That's solid game!</p>
+            <p>I only beat one guy on each card, but in a field this size that was 12 players and 58.5 points. I'm on pace for the 1000 that gets me into AM Worlds '27.</p>
+            <p>Two shots I'll remember, both late in round one. A 50 foot death putt in the wind that got the whole card cheering. Then on 16, a 160 foot Fireball upshot that turned exactly as hard as it had to.</p>
+            <p>Such a simple and pure joy to ring up the chains and stop in the basket.</p>
           </div>
           <div class="post-pull">"Such a simple and pure joy to ring up the chains and stop in the basket."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value accent">11th Place · MA3</span>
+            <span class="chip ">11th Place · MA3</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 10 — Sunnyside Up B-Tier   │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-10">
           <div class="post-img-wrap">
-            <div class="post-slideshow" id="pullman-slideshow">
+            <div class="slides" id="pullman-slideshow">
               <img src="images/ace17.jpg" alt="Skip-ace on Hole 17 at Sunnyside Park" class="active" />
-              <img src="images/sponsorsign.jpg" alt="Hole sponsor sign at Sunnyside Up" />
-              <img src="images/palouse.jpg" alt="The Palouse landscape near Pullman" />
-              <img src="images/pretty.jpg" alt="Beautiful views on the course" />
-              <img src="images/pav.jpg" alt="On the course at Sunnyside Park" />
-              <img src="images/ma3nerds.jpg" alt="The MA3 crew at Sunnyside Up" />
-              <img src="images/group2.jpg" alt="Group photo at Sunnyside Up" />
-              <img src="images/handoff.jpg" alt="Trophy handoff moment" />
-              <img src="images/haul.jpg" alt="The haul from Sunnyside Up" />
-              <img src="images/rescue.jpg" alt="Disc rescue mission" />
-              <img src="images/hobohotel.jpg" alt="The hobo hotel lodging situation" />
-              <button class="slide-btn prev" onclick="slideNav('pullman-slideshow',-1)">‹</button>
-              <button class="slide-btn next" onclick="slideNav('pullman-slideshow',1)">›</button>
+              <img src="images/sponsorsign.jpg" alt="Hole sponsor sign at Sunnyside Up" loading="lazy" />
+              <img src="images/palouse.jpg" alt="The Palouse landscape near Pullman" loading="lazy" />
+              <img src="images/pretty.jpg" alt="Beautiful views on the course" loading="lazy" />
+              <img src="images/pav.jpg" alt="On the course at Sunnyside Park" loading="lazy" />
+              <img src="images/ma3nerds.jpg" alt="The MA3 crew at Sunnyside Up" loading="lazy" />
+              <img src="images/group2.jpg" alt="Group photo at Sunnyside Up" loading="lazy" />
+              <img src="images/handoff.jpg" alt="Trophy handoff moment" loading="lazy" />
+              <img src="images/haul.jpg" alt="The haul from Sunnyside Up" loading="lazy" />
+              <img src="images/rescue.jpg" alt="Disc rescue mission" loading="lazy" />
+              <img src="images/hobohotel.jpg" alt="The hobo hotel lodging situation" loading="lazy" />
+              <button class="slide-btn prev" type="button" data-dir="-1" aria-label="Previous photo">‹</button>
+              <button class="slide-btn next" type="button" data-dir="1" aria-label="Next photo">›</button>
               <span class="slide-counter" id="pullman-slideshow-counter">1 / 11</span>
               <div class="slide-dots" id="pullman-slideshow-dots"></div>
             </div>
+            <span class="post-issue">No. 10</span>
             <span class="post-caption">Sunnyside Up · Sunnyside Park · Pullman, WA</span>
           </div>
           <div class="post-meta">
@@ -881,41 +652,22 @@
           </div>
           <h2 class="post-headline">Sunnyside Up (First MA3 Win!)</h2>
           <p class="post-subhead">Sunnyside Up B-Tier · Sunnyside Park · Pullman, WA</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 866</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 906</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R3: 916</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 866</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 906</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R3: 916</span></div>
           <div class="post-body">
-            <p>First time playing MA3, and had an amazing time meeting eastern WA locals and ripping their course with them. Took 1st place by 3 strokes, but it was close all the way down to the last hole. I was sitting at E and 2nd place was sitting at +1 stepping up to the last tee pad. The whole thing came down to a downhill island shot, and the island was smaller than C1.</p>
-            <p>I had honors, grabbed my Envy, and knew that I had to give this a smooth throw with a firm snap to both get it there and keep it straight. I had missed the island in practice and was 1 for 2 in the first two rounds. I decided to keep my nerves at bay when I stepped up. I knew being relaxed is the way. I thought of a friend who I used to disc golf with a lot, pretended he was standing down by the basket, and tossed it down to him. It floated straight toward the basket and landed about 10 feet to the left. 200 or so feet down, kept it straight.</p>
-            <p>After hitting the green and just needing to watch everyone drive, I checked the score for the first time. I knew I was doing pretty good, but once I looked I immediately knew I was standing there a winner of the 3 rounds in MA3. A great feeling, and as we all played out the hole I just enjoyed the moment. When Michael came up to shake my hand on the win I gave him a hug and thanked him. What a day!</p>
-            <p>Especially when my morning started with a skip-ace on the hole I sponsored for the event. 3/29, Hole 17, Sunnyside Park, Skip-Ace. Pro who witnessed it: Isaac McGonigal. He inked me up. Also, I wrote "hole 2" on the disc because I started each round on 16, so I saw it as hole 2. I was so excited on the ace I didn't really think it through and now I just want to keep it as "hole 2" because it shows how unbelievable the feeling of an ace is. Hole what? Does it even matter?!</p>
+            <p>My first time playing MA3, and I won by 3 strokes. It was close to the end. On the last tee I was at E and second place was at +1.</p>
+            <p>The last hole is a downhill island, smaller than C1. I had missed it in practice and was 1 for 2 in the rounds. I grabbed my Envy and told myself to stay relaxed. I thought of a friend I used to play with, pretended he was standing down by the basket, and tossed it down to him. It landed 10 feet left of the pin, about 200 feet down.</p>
+            <p>Then I checked the score for the first time and knew I had it. Michael came over to shake my hand and I gave him a hug. What a day!</p>
+            <p>It started with a skip-ace on hole 17, the hole I sponsored. Isaac McGonigal witnessed it and inked me up. I wrote "hole 2" on the disc because I started each round on 16. I'm keeping it that way. Hole what? Does it even matter?!</p>
           </div>
           <div class="post-pull">"I thought of a friend, pretended he was standing down by the basket, and tossed it down to him."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value gold">1st Place · MA3</span>
+            <span class="chip gold">1st Place · MA3</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 9 — SeaTac Spring League    │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-09">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/seatac spring 2.jpg" alt="SeaTac Spring League Round 2" />
+            <img class="post-img" src="images/seatac%20spring%202.jpg" alt="SeaTac Spring League Round 2" loading="lazy" />
             <span class="post-issue">No. 09</span>
             <span class="post-caption">SeaTac Disc Golf Course · SeaTac, WA</span>
           </div>
@@ -925,35 +677,20 @@
           </div>
           <h2 class="post-headline">SeaTac Spring League #2</h2>
           <p class="post-subhead">Spring League Round 2 · SeaTac DGC · SeaTac, WA</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rating</span>
-            <span class="post-rounds-value">906</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rating</span><span class="post-rounds-value">906</span></div>
           <div class="post-body">
-            <p>Had a great time playing on a really cool card. Good group, with a 950+ rated pro in the group! I was able to follow a few of his lines and really enjoyed the great weather and solid disc golf. Shooting over 900 was fun, I was really hitting some great putts. Feels good to make them stick!</p>
-            <p>This round was a great way to get warm for the 3-rounder ahead Saturday/Sunday in Pullman.</p>
+            <p>A really cool card with a 950+ rated pro on it. I followed a few of his lines and hit some great putts. Shooting over 900 was fun. Feels good to make them stick!</p>
+            <p>A good warm-up for three rounds in Pullman this weekend.</p>
           </div>
           <div class="post-pull">"Shooting over 900 was fun. Feels good to make them stick!"</div>
           <div class="post-result">
             <span>Rating</span>
-            <span class="post-result-value accent">906 · MA40</span>
+            <span class="chip ">906 · MA40</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 8 — Star Frame Sunday      │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-08">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/markymark.jpg" alt="Star frame moment at Jackson Golf Course" />
+            <img class="post-img" src="images/markymark.jpg" alt="Star frame moment at Jackson Golf Course" loading="lazy" />
             <span class="post-issue">No. 08</span>
             <span class="post-caption">Jackson Golf Course · Seattle, WA</span>
           </div>
@@ -964,30 +701,18 @@
           <h2 class="post-headline">Star Frame Sunday</h2>
           <p class="post-subhead">Casual Round Meetup · Jackson Golf Course · Seattle, WA</p>
           <div class="post-body">
-            <p>Another amazing day on the course. Decided to jump on a meetup for 18 holes at Jackson. A great ball golf/disc golf hybrid course, where everyone is enjoying their shots on the same fairways. Our baskets are usually sitting just beyond the green, with each green playing as a hazard. The course itself provides really fun elevation changes and shot shapes in addition to pristine grounds.</p>
-            <p>I was paired up with a great guy who was finding great lines and we even celebrated a star frame after both of us fully parked the same forehand on 17. Fun round, amazing weather and just a chill way to grab a few birds on a Sunday morning.</p>
+            <p>I jumped on a meetup for 18 holes at Jackson, a ball golf and disc golf hybrid. Everyone shares the fairways, and the baskets sit just past the greens, which play as hazards. Fun elevation, fun shot shapes, pristine grounds.</p>
+            <p>My cardmate was finding great lines. We celebrated a star frame after both of us fully parked the same forehand on 17. A chill way to grab a few birds on a Sunday morning.</p>
           </div>
           <div class="post-pull">"We celebrated a star frame after both of us fully parked the same forehand on 17."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value accent">9th of 14 · Casual</span>
+            <span class="chip ">9th of 14 · Casual</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 7 — Shelton Springs        │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-07">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/fun card shelton.jpg" alt="Scorecard from Shelton Springs" />
+            <img class="post-img" src="images/fun%20card%20shelton.jpg" alt="Scorecard from Shelton Springs" loading="lazy" />
             <span class="post-issue">No. 07</span>
             <span class="post-caption">Shelton Springs Disc Golf · Shelton, WA</span>
           </div>
@@ -997,39 +722,22 @@
           </div>
           <h2 class="post-headline">Shelton Springs</h2>
           <p class="post-subhead">Shelton Springs Disc Golf · Shelton, WA</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 859</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 878</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 859</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 878</span></div>
           <div class="post-body">
-            <p>Absolutely legendary course. I've seen it so many times on coverage, so it gave me the chills a little bit when I was able to park a signature island hole surrounded by pavers and tap in for bird. I played white then red tees, where the white tees are a lot more challenging. I felt very lucky to be on the MA1 card for Round 1. A local budding pro, 22 years old, who dyes discs and is a fun guy to play disc golf with, absolutely shredded the white tees. I got some good shots in and laced a few fairways (between bogey holes, of course). I walk away stronger.</p>
-            <p>I played two rounds under my rating, but the thing is: that's the game. I'm happy with the experience and hanging out in the woods with a bunch of good dudes flinging frisbees.</p>
-            <p>Round 2 gave me a chance at redemption on a lackluster rating off the first. I finished under par, and I didn't even realize that until the end. I was finding windows through the trees, cutting in with a Fireball and trying shots I've never even thought of before.</p>
-            <p>I walk away knowing that I need more putting in my life. When I practice putting daily, my rounds feel a lot better. I have been working very diligently on my upshots instead of putting, but now it's time to start putting these together. I won the day with a positive mindset, enjoying great weather, and seeing where I gain strokes.</p>
+            <p>A legendary course I've watched on coverage for years. It gave me the chills when I parked the signature island hole and tapped in for bird.</p>
+            <p>I played the white tees, then the red. The whites are much harder. I was on the MA1 card in round one and watched a 22 year old local shred them. I laced a few fairways between the bogeys.</p>
+            <p>Round two was my shot at redemption. I finished under par without knowing it, cutting a Fireball through windows I had never tried before.</p>
+            <p>Both rounds were under my rating, but that's the game. The lesson: I need more putting. I've been working on upshots, and now it's time to put the two together.</p>
           </div>
           <div class="post-pull">"It gave me the chills when I parked the signature island hole and tapped in for bird."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value accent">4th Place · MA40</span>
+            <span class="chip ">4th Place · MA40</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 6 — League Round (SeaTac)  │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-06">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/sogfrolf.jpg" alt="League round at SeaTac Disc Golf Course" />
+            <img class="post-img" src="images/sogfrolf.jpg" alt="League round at SeaTac Disc Golf Course" loading="lazy" />
             <span class="post-issue">No. 06</span>
             <span class="post-caption">SeaTac Disc Golf Course · SeaTac, WA</span>
           </div>
@@ -1039,36 +747,21 @@
           </div>
           <h2 class="post-headline">League Round (SeaTac)</h2>
           <p class="post-subhead">League Round · SeaTac DGC · SeaTac, WA</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rating</span>
-            <span class="post-rounds-value">891</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rating</span><span class="post-rounds-value">891</span></div>
           <div class="post-body">
-            <p>Lots of fun carving up the fairways today. For every 25–30 foot putt I made it felt like I dropped a 15… So, that's how it went. Always about 5–6 strokes from where I want to be. I see where they are, and going to clean them up.</p>
-            <p>I just got promoted from the waitlist for 2 rounds at Shelton Springs tomorrow. Too excited. First time playing there and a full 6 player MA40 field to compete with. I'm going to get a full reset and eat a lot of pizza tonight. Wipe everything down and get the bags packed in the morning for an early drive. Glad I had a strong SeaTac round (well, not too strong) today to get the jitters out of the way and hopefully just swing very smoothly all day tomorrow.</p>
+            <p>Lots of fun carving up the fairways. For every 25–30 foot putt I made, I dropped a 15. Always about 5–6 strokes from where I want to be. I see where they are, and I'm going to clean them up.</p>
+            <p>I just came off the waitlist for two rounds at Shelton Springs tomorrow, with a full six player MA40 field. Too excited. Tonight is a full reset and a lot of pizza.</p>
           </div>
-          <img class="post-img-inline" src="images/wetfrolf.jpg" alt="Wet conditions on the course at SeaTac" />
+          <img class="post-img-inline" src="images/wetfrolf.jpg" alt="Wet conditions on the course at SeaTac" loading="lazy" />
           <div class="post-pull">"Always about 5–6 strokes from where I want to be. I see where they are."</div>
           <div class="post-result">
             <span>Rating</span>
-            <span class="post-result-value accent">891 · MA40</span>
+            <span class="chip ">891 · MA40</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 5 — Deception Pass         │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-05">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/dips discs.jpg" alt="Disc golf at Deception Pass on Whidbey Island" />
+            <img class="post-img" src="images/dips%20discs.jpg" alt="Disc golf at Deception Pass on Whidbey Island" loading="lazy" />
             <span class="post-issue">No. 05</span>
             <span class="post-caption">Deception Pass Disc Golf · Whidbey Island, WA</span>
           </div>
@@ -1078,38 +771,23 @@
           </div>
           <h2 class="post-headline">Deception Pass Windy DG (First Trophy!)</h2>
           <p class="post-subhead">Deception Pass · Whidbey Island, WA</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 906</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 885</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 906</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 885</span></div>
           <div class="post-body">
-            <p>A beautiful day on the course with two great dudes on the card. Deception Pass gets wind, it's kind of the whole deal up there, but at least we didn't get rained on, which in March qualifies as a gift. The course itself presented some real footing challenges, but summer will sort that out soon enough. Driving over the bridges onto Whidbey Island is such a treat every time. I will absolutely be back up here for more disc golf.</p>
-            <p>Stayed in the mix all day. Hit one big 60-foot putt that I'm still thinking about, and was parking for birdie from 250 to 300 feet six different times. Finished 3rd, and then got a genuine surprise: my first trophy. Hardware! They handed it over and I just stood there grinning. Used the credits to pick up a Berg and a Berg X, both in colors I'm excited about. My friend Brian from Bok Squad is going to dip-dye one of them so it looks like a black-and-white cookie but with neon colors. Can't wait to see how that turns out.</p>
+            <p>A beautiful day with two great dudes on the card. Deception Pass gets wind, but no rain, which in March is a gift. The drive over the bridges onto Whidbey Island is a treat every time.</p>
+            <p>I stayed in the mix all day. One big 60 foot putt, and six drives parked for birdie from 250 to 300 feet.</p>
+            <p>I finished 3rd and got a surprise: my first trophy. Hardware! They handed over the trophy and I just stood there grinning.</p>
+            <p>The credits went to a Berg and a Berg X. Brian from Bok Squad is going to dip-dye one like a black-and-white cookie, in neon.</p>
           </div>
-          <img class="post-img-inline" src="images/dipsdiscs.jpg" alt="Custom dip-dyed discs from Dips Discs" />
+          <img class="post-img-inline" src="images/dipsdiscs.jpg" alt="Custom dip-dyed discs from Dips Discs" loading="lazy" />
           <div class="post-pull">"They handed over the trophy and I just stood there grinning."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value bronze">3rd Place · MA40</span>
+            <span class="chip bronze">3rd Place · MA40</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 4 — Cloud City Chaos 4     │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-04">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/3boys.jpg" alt="Playing disc golf at SeaTac DGC" />
+            <img class="post-img" src="images/3boys.jpg" alt="Playing disc golf at SeaTac DGC" loading="lazy" />
             <span class="post-issue">No. 04</span>
             <span class="post-caption">SeaTac Disc Golf Course · SeaTac, WA</span>
           </div>
@@ -1119,37 +797,21 @@
           </div>
           <h2 class="post-headline">SeaTac (Cloud City Chaos 4)</h2>
           <p class="post-subhead">Cloud City Chaos 4 · SeaTac DGC · SeaTac, WA</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 890</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 899</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 890</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 899</span></div>
           <div class="post-body">
-            <p>Fun day throwing in good weather. SeaTac really knows how to present a challenge, and I stayed fairly steady with minimal blow-ups. Not my best performance numbers-wise, but the kind of day where you learn something. Got to play with a few seasoned regional players I hadn't met yet, which is one of the best parts of these events, the card is always teaching you something if you're paying attention.</p>
-            <p>Picked up some real lessons watching the better players shape their shots and stay consistent hole after hole. The kind of stuff you can't get from YouTube. Shooting one stroke better in Round 2 than Round 1 felt genuinely strong, finishing on the upswing is a good habit to build, and both rounds pushed my rating up slightly. Progress is progress.</p>
+            <p>Good weather and a real challenge from SeaTac. I stayed steady with few blow-ups. Not my best numbers, but a day where I learned something.</p>
+            <p>I played with seasoned regional players I hadn't met and watched how they shape shots and stay consistent. You can't get that from YouTube. The card is always teaching you something if you're paying attention.</p>
+            <p>Round two was one stroke better than round one, and both pushed my rating up. Progress is progress.</p>
           </div>
           <div class="post-pull">"The card is always teaching you something if you're paying attention."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value accent">4th Place · MA40</span>
+            <span class="chip ">4th Place · MA40</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 3 — Slingin' Singles 4     │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-03">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/slingin singles card.jpg" alt="Scorecard from Slingin' Singles 4" />
+            <img class="post-img" src="images/slingin%20singles%20card.jpg" alt="Scorecard from Slingin&#x27; Singles 4" loading="lazy" />
             <span class="post-issue">No. 03</span>
             <span class="post-caption">Slingin' Singles 4 · Emerald City Discs</span>
           </div>
@@ -1159,37 +821,21 @@
           </div>
           <h2 class="post-headline">Behold, the Rain Wizard</h2>
           <p class="post-subhead">Slingin' Singles 4 · Emerald City Discs</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 930</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 842</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 930</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 842</span></div>
           <div class="post-body">
-            <p>Round 1 was a revelation. Finished 1 under par, clean, confident, everything clicking. Felt like I was finally figuring this whole thing out. Then lunch happened, and after lunch, the Pacific Northwest remembered what it does best. A cold, persistent rain rolled in and turned the course into a slip-and-slide. Traction? Gone. Dry towels? Submerged by the halfway point. Gear? Soggy. Morale? Fading.</p>
-            <p>The 88-point swing between rounds was humbling. Even in the rain, I should be staying more consistent rating-wise, that's the honest takeaway. But the card had a calm energy to it, everybody grinding through the same conditions, nobody complaining too hard. Lessons learned. The Rain Wizard title is aspirational at best, but you gotta name the chapter something.</p>
+            <p>Round one was a revelation: 1 under par, clean, everything clicking.</p>
+            <p>Then lunch happened, and a cold, steady rain turned the course into a slip-and-slide. Traction? Gone. Dry towels? Soaked by the halfway point. Morale? Fading.</p>
+            <p>The 88 point swing between rounds was humbling. Even in rain I should hold my rating better. The card stayed calm and nobody complained much. The Rain Wizard title is aspirational at best.</p>
           </div>
           <div class="post-pull">"The Rain Wizard title is aspirational at best."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value bronze">3rd Place · MA40</span>
+            <span class="chip bronze">3rd Place · MA40</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 2 — Copper in the Mountains│
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-02">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/copper card.jpg" alt="Scorecard from the Discmania course in copper country Arizona" />
+            <img class="post-img" src="images/copper%20card.jpg" alt="Scorecard from the Discmania course in copper country Arizona" loading="lazy" />
             <span class="post-issue">No. 02</span>
             <span class="post-caption">Discmania Disc Golf Park · Miami, AZ</span>
           </div>
@@ -1199,38 +845,22 @@
           </div>
           <h2 class="post-headline">Copper in the Mountains</h2>
           <p class="post-subhead">NADGT C Tier 2 Rounder · Discmania DGP · Miami, AZ</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 853</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 943</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 853</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 943</span></div>
           <div class="post-body">
-            <p>Worth the drive up to the mountains just for the signature hole alone: a big dumptruck bed as a backdrop with a hanging basket, sitting right in the heart of copper country. This Discmania Disc Golf Park is a short course, but don't let that fool you, the mandos and generous OB markings make it a serious short-game exercise. Extremely fun and well designed to punish lazy shots.</p>
-            <p>And then it happened. First sanctioned ace. The signature hole, no less. An official 1 now living on my PDGA stats forever. Garrett on our card aced one too, and we were both losing our minds about it. Finished just a few strokes short of first, but the guy who took it played beautifully steady all day, genuinely honored to compete with him. Todd the tournament director and his wife Anissa were incredible hosts, making sure everyone enjoyed themselves from start to finish. Oh, and the local Mexican restaurant afterward? Possibly the best I've ever had. The whole trip was a 10.</p>
+            <p>Worth the drive for the signature hole alone: a hanging basket in front of a big dump truck bed, in the heart of copper country. The course is short, but the mandos and OB punish lazy shots.</p>
+            <p>And then it happened. My first sanctioned ace, on the signature hole. An official 1 now living on my PDGA stats forever. Garrett on our card aced one too, and we both lost our minds.</p>
+            <p>I finished a few strokes short of first, behind a guy who played beautifully steady all day. Todd the tournament director and his wife Anissa were incredible hosts. The Mexican restaurant afterward may be the best I've ever had. The whole trip was a 10.</p>
           </div>
-          <img class="post-img-inline" src="images/AZ tourney director.jpg" alt="With tournament director Todd and Anissa in Arizona" />
+          <img class="post-img-inline" src="images/AZ%20tourney%20director.jpg" alt="With tournament director Todd and Anissa in Arizona" loading="lazy" />
           <div class="post-pull">"An official 1 now living on my PDGA stats forever."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value silver">2nd Place · MA40</span>
+            <span class="chip silver">2nd Place · MA40</span>
           </div>
         </article>
-
-        <div class="post-divider">
-          <svg class="post-divider-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="4"/>
-            <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="3"/>
-            <circle cx="50" cy="50" r="6" fill="currentColor"/>
-          </svg>
-        </div>
-
-        <!-- ┌─────────────────────────────────┐
-             │  POST 1 — SeaTac Shenanigans     │
-             └─────────────────────────────────┘ -->
-        <article class="post">
+        <article class="post rv" id="no-01">
           <div class="post-img-wrap">
-            <img class="post-img" src="images/1st place card.jpg" alt="First place scorecard at Say it Ain't Snow" />
+            <img class="post-img" src="images/1st%20place%20card.jpg" alt="First place scorecard at Say it Ain&#x27;t Snow" loading="lazy" />
             <span class="post-issue">No. 01</span>
             <span class="post-caption">SeaTac Disc Golf Course · SeaTac, WA</span>
           </div>
@@ -1240,84 +870,73 @@
           </div>
           <h2 class="post-headline">SeaTac Shenanigans</h2>
           <p class="post-subhead">Say it Ain't Snow · SeaTac DGC · SeaTac, WA</p>
-          <div class="post-rounds">
-            <span class="post-rounds-label">Rounds</span>
-            <span class="post-rounds-value">R1: 914</span>
-            <span class="post-rounds-sep">·</span>
-            <span class="post-rounds-value">R2: 904</span>
-          </div>
+          <div class="crt post-rounds"><span class="post-rounds-label">Rounds</span><span class="post-rounds-value">R1: 914</span><span class="post-rounds-sep">·</span><span class="post-rounds-value">R2: 904</span></div>
           <div class="post-body">
-            <p>Pretty weather, my 4th tournament, and somehow I won the whole thing. Started both rounds with a double bogey, just absolutely punting the opening hole like it's a tradition now, then tightened up and played real golf the rest of the way. The group on the card was great, and the competition stayed close until the very end. Finished one stroke better in each round, meaning the last two holes could have gone either way. That kind of pressure is exactly why you sign up for these.</p>
-            <p>The highlights reel is short but sweet: a throw-in from about 100 feet on hole 6 for the birdie, the kind of shot where the disc disappears behind some trees and you just hear chains, and a 45-foot putt that felt significant because I practice that distance obsessively. Big moments, both of them. Bought P2 D-Line putters with the prize money, which feels like the most disc golf way possible to reinvest your winnings.</p>
+            <p>Pretty weather, my 4th tournament, and somehow I won the whole thing.</p>
+            <p>I opened both rounds with a double bogey, like it's a tradition now, then tightened up and played real golf. It stayed close to the end. I finished one stroke better in each round, so the last two holes could have gone either way.</p>
+            <p>Two highlights. A throw-in from about 100 feet on hole 6: the disc disappears behind some trees and you just hear chains. And a 45 foot putt, the distance I practice obsessively.</p>
+            <p>I spent the prize money on P2 D-Line putters. The most disc golf way to reinvest your winnings.</p>
           </div>
           <div class="post-pull">"The disc disappears behind some trees and you just hear chains."</div>
           <div class="post-result">
             <span>Result</span>
-            <span class="post-result-value gold">1st Place · MA40</span>
+            <span class="chip gold">1st Place · MA40</span>
           </div>
         </article>
-
-      </div><!-- /field-notes -->
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-left">
-          <span class="footer-dot"></span>
-          Updated 2026
-        </div>
-        <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" class="beep-boop">Beep Boop</a>
-      </footer>
-
     </div>
+
+    <footer class="notes-foot">
+      <div><span class="footer-dot"></span>Updated 2026</div>
+      <a href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener">Beep Boop</a>
+    </footer>
   </div>
 
-  <svg style="position:fixed;bottom:-60px;right:-40px;width:220px;height:220px;opacity:0.04;z-index:0;pointer-events:none;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="46" fill="none" stroke="#1a1714" stroke-width="2"/>
-    <circle cx="50" cy="50" r="30" fill="none" stroke="#1a1714" stroke-width="1"/>
-    <circle cx="50" cy="50" r="14" fill="none" stroke="#1a1714" stroke-width="1.5"/>
-    <circle cx="50" cy="50" r="5" fill="#1a1714"/>
-  </svg>
-
+  <footer class="foot">
+    <p><a href="/">← back to bobcorrigan.com</a> · <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA profile</a></p>
+  </footer>
   <script>
-    function initSlideshow(id) {
-      var el = document.getElementById(id);
+    (function () {
+      var c = document.getElementById('clk');
+      if (c) {
+        var tick = function () {
+          var d = new Date();
+          c.textContent = d.toLocaleDateString([], { weekday: 'short' }) + ' ' + d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        };
+        tick(); setInterval(tick, 20000);
+      }
+      var rv = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+      if (!('IntersectionObserver' in window)) { rv.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -6% 0px' });
+      rv.forEach(function (e) { io.observe(e); });
+    })();
+    (function () {
+      var el = document.getElementById('pullman-slideshow');
       if (!el) return;
       var imgs = el.querySelectorAll('img');
-      var dots = document.getElementById(id + '-dots');
+      var dots = document.getElementById('pullman-slideshow-dots');
+      var counter = document.getElementById('pullman-slideshow-counter');
+      var cur = 0;
+      function goTo(n) {
+        cur = (n + imgs.length) % imgs.length;
+        for (var i = 0; i < imgs.length; i++) {
+          imgs[i].classList.toggle('active', i === cur);
+          dots.children[i].classList.toggle('active', i === cur);
+        }
+        counter.textContent = (cur + 1) + ' / ' + imgs.length;
+      }
       for (var i = 0; i < imgs.length; i++) {
         var d = document.createElement('span');
         d.className = 'slide-dot' + (i === 0 ? ' active' : '');
         d.setAttribute('data-i', i);
-        d.onclick = function() { goTo(id, parseInt(this.getAttribute('data-i'))); };
+        d.onclick = function () { goTo(parseInt(this.getAttribute('data-i'), 10)); };
         dots.appendChild(d);
       }
-    }
-
-    function goTo(id, n) {
-      var el = document.getElementById(id);
-      var imgs = el.querySelectorAll('img');
-      var dots = document.getElementById(id + '-dots').children;
-      var counter = document.getElementById(id + '-counter');
-      for (var i = 0; i < imgs.length; i++) {
-        imgs[i].classList.remove('active');
-        dots[i].classList.remove('active');
-      }
-      imgs[n].classList.add('active');
-      dots[n].classList.add('active');
-      counter.textContent = (n + 1) + ' / ' + imgs.length;
-      el.setAttribute('data-current', n);
-    }
-
-    function slideNav(id, dir) {
-      var el = document.getElementById(id);
-      var imgs = el.querySelectorAll('img');
-      var cur = parseInt(el.getAttribute('data-current') || '0');
-      var next = (cur + dir + imgs.length) % imgs.length;
-      goTo(id, next);
-    }
-
-    initSlideshow('pullman-slideshow');
+      Array.prototype.forEach.call(el.querySelectorAll('.slide-btn'), function (b) {
+        b.addEventListener('click', function () { goTo(cur + parseInt(b.getAttribute('data-dir'), 10)); });
+      });
+    })();
   </script>
-
 </body>
 </html>
