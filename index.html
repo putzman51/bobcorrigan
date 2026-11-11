@@ -483,6 +483,66 @@
       .dots5 span { animation: none; }
       .snap, .frame { transition: none; }
     }
+
+    /* ── Rating stats ── */
+    .rate { --amber: #ffcf5c; display: grid; gap: 18px; padding: 20px; border-top: 2px solid var(--ink); }
+    .rate > * { min-width: 0; }
+    .rtiles { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .rtiles .stat { min-height: 108px; }
+    .stat-note { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; letter-spacing: 0.04em; color: var(--phos-dim); text-shadow: none; }
+    .scope { padding: 14px 14px 8px; }
+    .scope-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 18px; margin-bottom: 8px; }
+    .scope-h h3 { font-family: var(--crtf); font-weight: 400; font-size: 25px; line-height: 1; letter-spacing: 0.06em; text-transform: uppercase; }
+    .key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--phos-dim); text-shadow: none; }
+    .key span { display: inline-flex; align-items: center; gap: 6px; }
+    .key i { display: inline-block; flex: none; }
+    .k-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--phos); }
+    .k-avg { width: 16px; height: 2px; background: var(--amber); }
+    .k-rt { width: 16px; border-top: 2px dashed var(--phos-dim); }
+    .k-out { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--phos-dim); }
+    .rate svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .rate svg text { font-family: var(--mono); font-size: 11px; fill: #5d554c; }
+    .rate .crt svg text { fill: var(--phos-dim); }
+    .rgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .rcard { min-width: 0; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 6px; box-shadow: 4px 4px 0 rgba(26, 23, 20, 0.16); overflow: hidden; }
+    .rcard-h { display: flex; align-items: baseline; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; padding: 7px 12px; background: var(--cream); border-bottom: 1.5px solid var(--ink); }
+    .rcard-h h3 { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .rcard-h span { font-size: 11px; color: #5d554c; }
+    .rcard-b { padding: 14px 12px 10px; }
+    .rtab { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+    .rtab th { padding: 6px 12px; border-bottom: 1px solid var(--rule); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; text-align: left; color: #5d554c; white-space: nowrap; }
+    .rtab td { padding: 7px 12px; border-bottom: 1px solid var(--rule); }
+    .rtab tr:last-child td { border-bottom: 0; }
+    .rtab tbody tr:hover { background: var(--green); }
+    .rtab .num { text-align: right; white-space: nowrap; }
+    .rtab .dt { white-space: nowrap; color: #5d554c; }
+    .rtab i { color: #5d554c; }
+    .rall summary { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 9px 12px; background: var(--cream); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; list-style: none; user-select: none; }
+    .rall summary::-webkit-details-marker { display: none; }
+    .rall summary::after { content: '+ open'; font-weight: 400; letter-spacing: 0.04em; text-transform: none; color: #5d554c; }
+    .rall[open] summary { border-bottom: 1.5px solid var(--ink); }
+    .rall[open] summary::after { content: '− close'; }
+    .rall summary:hover { background: var(--green); }
+    .rall summary:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+    .tscroll { overflow-x: auto; }
+    .rsrc { font-size: 11px; color: #5d554c; }
+    .rtip { position: absolute; z-index: 5; left: 0; top: 0; max-width: 250px; padding: 6px 9px; background: var(--ink); border-radius: 4px; box-shadow: 3px 3px 0 rgba(26, 23, 20, 0.25); color: var(--paper); font-size: 11.5px; line-height: 1.45; opacity: 0; pointer-events: none; transition: opacity 0.1s; }
+    .rtip b { color: var(--green); }
+    @media (max-width: 900px) {
+      .rtiles { grid-template-columns: repeat(3, 1fr); }
+      .rgrid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .rate { gap: 12px; padding: 12px; }
+      .rtiles { grid-template-columns: repeat(2, 1fr); gap: 7px; }
+      .rtiles .stat { min-height: 96px; }
+      .scope { padding: 12px 8px 6px; }
+      .scope-h h3 { font-size: 22px; }
+      .rgrid { gap: 12px; }
+      .rtab { font-size: 12px; }
+      .rtab th, .rtab td { padding-left: 8px; padding-right: 8px; }
+      .rtab .hm { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -534,103 +594,309 @@
     </div>
   </div>
 
-  <section class="win rv" aria-labelledby="season-h">
+  <section class="win rv" id="rating" aria-labelledby="rating-h">
     <header class="tbar">
       <div class="dots"><span class="dot c"></span><span class="dot m"></span><a class="dot x" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a></div>
-      <span class="ttl">2026_season.log</span><span class="tnote">10 events</span>
+      <span class="ttl">pdga_rating.stats</span><span class="tnote">49 rounds</span>
     </header>
     <div class="winhead">
-      <h2 id="season-h">2026 on tour</h2>
-      <p>Sanctioned events I've written up so far: four wins, two aces and one play-off between January and April. Every row opens its field note. The full record lives on <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA</a>.</p>
+      <h2 id="rating-h">Rated 901</h2>
+      <p>Every PDGA-rated round from November 2025 through October 2026, as of the November 10, 2026 ratings update. Hover or tap a dot to see the round behind it. Official numbers live on <a href="https://www.pdga.com/player/316354/details" target="_blank" rel="noopener">PDGA</a>.</p>
     </div>
-    <div class="listwrap">
-      <table class="log">
-        <thead><tr><th>Date</th><th>Event</th><th>Tier</th><th>Div</th><th>Round ratings</th><th>Finish</th></tr></thead>
-        <tbody>
-          <tr>
-            <td class="when">19 Apr</td>
-            <td class="ev"><a href="/frolf.html#no-13">Pier Park</a><small>Pier Park DGC · Portland, OR</small><small class="m">C-Tier · MA3 · 933</small></td>
-            <td class="d">C-Tier</td>
-            <td class="d">MA3</td>
-            <td class="d num">933</td>
-            <td class="fin"><span class="chip gold">1st · play-off</span></td>
-          </tr>
-          <tr>
-            <td class="when">10–12 Apr</td>
-            <td class="ev"><a href="/frolf.html#no-12">Whitmarsh</a><small>6 rounds in 3 days · Mt. Vernon, WA</small><small class="m">C-Tier · MA3</small></td>
-            <td class="d">C-Tier</td>
-            <td class="d">MA3</td>
-            <td class="d num">—</td>
-            <td class="fin"><span class="chip gold">1st</span></td>
-          </tr>
-          <tr>
-            <td class="when">4–5 Apr</td>
-            <td class="ev"><a href="/frolf.html#no-11">NXNW4</a><small>Kayak Point · Red Course</small><small class="m">B-Tier · MA3 · 897/877</small></td>
-            <td class="d">B-Tier</td>
-            <td class="d">MA3</td>
-            <td class="d num">897 · 877</td>
-            <td class="fin"><span class="chip ">11th</span></td>
-          </tr>
-          <tr>
-            <td class="when">28–29 Mar</td>
-            <td class="ev"><a href="/frolf.html#no-10">Sunnyside Up</a><span class="tag">ACE</span><small>Sunnyside Park · Pullman, WA</small><small class="m">B-Tier · MA3 · 866/906/916</small></td>
-            <td class="d">B-Tier</td>
-            <td class="d">MA3</td>
-            <td class="d num">866 · 906 · 916</td>
-            <td class="fin"><span class="chip gold">1st</span></td>
-          </tr>
-          <tr>
-            <td class="when">21 Mar</td>
-            <td class="ev"><a href="/frolf.html#no-07">Shelton Springs</a><small>Shelton, WA</small><small class="m">C-Tier · MA40 · 859/878</small></td>
-            <td class="d">C-Tier</td>
-            <td class="d">MA40</td>
-            <td class="d num">859 · 878</td>
-            <td class="fin"><span class="chip ">4th</span></td>
-          </tr>
-          <tr>
-            <td class="when">14 Mar</td>
-            <td class="ev"><a href="/frolf.html#no-05">Deception Pass Windy DG</a><small>Whidbey Island, WA</small><small class="m">C-Tier · MA40 · 906/885</small></td>
-            <td class="d">C-Tier</td>
-            <td class="d">MA40</td>
-            <td class="d num">906 · 885</td>
-            <td class="fin"><span class="chip bronze">3rd</span></td>
-          </tr>
-          <tr>
-            <td class="when">7 Mar</td>
-            <td class="ev"><a href="/frolf.html#no-04">Cloud City Chaos 4</a><small>SeaTac DGC · SeaTac, WA</small><small class="m">B-Tier · MA40 · 890/899</small></td>
-            <td class="d">B-Tier</td>
-            <td class="d">MA40</td>
-            <td class="d num">890 · 899</td>
-            <td class="fin"><span class="chip ">4th</span></td>
-          </tr>
-          <tr>
-            <td class="when">7 Feb</td>
-            <td class="ev"><a href="/frolf.html#no-03">Slingin' Singles 4</a><small>Emerald City Discs</small><small class="m">C-Tier · MA40 · 930/842</small></td>
-            <td class="d">C-Tier</td>
-            <td class="d">MA40</td>
-            <td class="d num">930 · 842</td>
-            <td class="fin"><span class="chip bronze">3rd</span></td>
-          </tr>
-          <tr>
-            <td class="when">31 Jan</td>
-            <td class="ev"><a href="/frolf.html#no-02">Copper in the Mountains</a><span class="tag">ACE</span><small>Discmania DGP · Miami, AZ</small><small class="m">C-Tier · MA40 · 853/943</small></td>
-            <td class="d">C-Tier</td>
-            <td class="d">MA40</td>
-            <td class="d num">853 · 943</td>
-            <td class="fin"><span class="chip silver">2nd</span></td>
-          </tr>
-          <tr>
-            <td class="when">10 Jan</td>
-            <td class="ev"><a href="/frolf.html#no-01">Say it Ain't Snow</a><small>SeaTac DGC · SeaTac, WA</small><small class="m">C-Tier · MA40 · 914/904</small></td>
-            <td class="d">C-Tier</td>
-            <td class="d">MA40</td>
-            <td class="d num">914 · 904</td>
-            <td class="fin"><span class="chip gold">1st</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="rate">
+      <div class="rtiles" id="rtTiles"></div>
+
+      <div class="bezel">
+        <div class="crt scope">
+          <div class="scope-h">
+            <h3>Every rated round</h3>
+            <div class="key" aria-hidden="true">
+              <span><i class="k-dot"></i>Round</span>
+              <span><i class="k-avg"></i>8-round average</span>
+              <span><i class="k-rt"></i>Player rating</span>
+              <span><i class="k-out"></i>Dropped outlier</span>
+            </div>
+          </div>
+          <svg id="rtLine" role="img" aria-label="Round ratings over time, with a rolling average of the last 8 rounds"></svg>
+        </div>
+      </div>
+
+      <div class="rgrid">
+        <div class="rcard">
+          <div class="rcard-h"><h3>How my rounds spread out</h3><span>rounds per 20-point band</span></div>
+          <div class="rcard-b"><svg id="rtHist" role="img" aria-label="Distribution of round ratings"></svg></div>
+        </div>
+        <div class="rcard">
+          <div class="rcard-h"><h3>By event tier</h3><span>dot = average · line = worst to best</span></div>
+          <div class="rcard-b"><svg id="rtTier" role="img" aria-label="Average round rating by event tier"></svg></div>
+        </div>
+        <div class="rcard">
+          <div class="rcard-h"><h3>Best rounds</h3><span>top 6</span></div>
+          <table class="rtab" id="rtBest"></table>
+        </div>
+        <div class="rcard">
+          <div class="rcard-h"><h3>Average round by season</h3><span>Nov '25 to Oct '26</span></div>
+          <div class="rcard-b"><svg id="rtSeason" role="img" aria-label="Average round rating by season"></svg></div>
+        </div>
+      </div>
+
+      <details class="rcard rall">
+        <summary>All rounds</summary>
+        <div class="tscroll"><table class="rtab" id="rtAll"></table></div>
+      </details>
+      <p class="rsrc">Source: PDGA Ratings Detail. Multi-day events and leagues are plotted on their start date.</p>
     </div>
+    <div class="rtip" id="rtTip" aria-hidden="true"></div>
   </section>
+  <script>
+    (function () {
+      var root = document.getElementById('rating');
+      if (!root || !document.createElementNS) return;
+      var PLAYER_RATING = 901;
+      // [event, tier, start date, division, score, round rating, counted?]
+      var R = [
+        ["Par for the Corpse 4","C","2026-10-31","MP40",49,966,1],
+        ["Farmers Park Open 4","C","2026-08-29","MP40",54,957,1],
+        ["Skagit River Open","C","2026-04-11","MA3",49,951,1],
+        ["NADGT C Tier @ Bullion Plaza","C","2026-01-31","MA40",60,943,1],
+        ["Stumptown Bag Tag Series #1","C","2026-04-19","MA3",59,933,1],
+        ["Slingin' Singles 4!","C","2026-02-07","MA40",55,930,1],
+        ["Ladies of the Lake: Knights Honor","C","2026-06-27","MA3",53,926,1],
+        ["Ladies of the Lake: Knights Honor","C","2026-06-27","MA3",53,926,1],
+        ["Seatac & Lakewood Summer League","L","2026-07-17","MP40",68,922,1],
+        ["Mountain View Championship 3","B","2026-08-15","MP40",58,921,1],
+        ["NADGT Oregon Premier","A","2026-04-25","MA3",61,916,1],
+        ["Seatac & Lakewood Summer League","L","2026-07-17","MP40",53,915,1],
+        ["Sunnyside Up 20.26","B","2026-03-28","MA3",60,914,1],
+        ["Say it Ain't Snow","C","2026-01-10","MA40",64,914,1],
+        ["Mountain View Championship 3","B","2026-08-15","MP40",59,911,1],
+        ["SeaTac Spring League","L","2026-03-20","MA40",67,907,1],
+        ["Sunnyside Up 20.26","B","2026-03-28","MA3",61,904,1],
+        ["Say it Ain't Snow","C","2026-01-10","MA40",65,904,1],
+        ["Farmers Park Open 4","C","2026-08-29","MP40",54,903,1],
+        ["North Whidbey Open","C","2026-03-14","MA40",62,900,1],
+        ["South Fork Tuesdays Spring","L","2026-04-21","MA3",55,899,1],
+        ["SeaTac Spring League","L","2026-03-20","MA40",93,899,1],
+        ["Cloud City Chaos – Part 4!","B","2026-03-07","MA40",67,899,1],
+        ["Throw Kindness Open","C","2026-06-06","MP40",70,897,1],
+        ["Par Wars Episode IV","C","2026-05-23","MP40",56,897,1],
+        ["Seatac & Lakewood Summer League","L","2026-07-17","MP40",57,896,1],
+        ["South Fork Tuesdays Fall","L","2026-09-29","RAH",57,895,1],
+        ["Throw For Hope Open","XC","2026-10-17","MPO",53,893,1],
+        ["NXNW IV","B","2026-04-04","MA3",63,891,1],
+        ["North Whidbey Open","C","2026-03-14","MA40",63,890,1],
+        ["Cloud City Chaos – Part 4!","B","2026-03-07","MA40",68,890,1],
+        ["SeaTac Spring League","L","2026-03-20","MA40",70,888,1],
+        ["NXNW IV","B","2026-04-04","MA3",64,882,1],
+        ["Laura Palmer Memorial 2","C","2026-04-12","MA3",64,880,1],
+        ["SeaTac Spring League","L","2026-03-20","MA40",68,879,1],
+        ["Sirens of the Springs","C","2026-03-21","MA40",70,878,1],
+        ["Leftover Turnover 5","C","2025-11-28","MA40",104,877,1],
+        ["SeaTac Spring League","L","2026-03-20","MA40",68,874,1],
+        ["SeaTac Spring League","L","2026-03-20","MA40",72,874,1],
+        ["Sunnyside Up 20.26","B","2026-03-28","MA3",64,872,1],
+        ["Throw Kindness Open","C","2026-06-06","MP40",74,864,1],
+        ["Laura Palmer Memorial 2","C","2026-04-12","MA3",66,861,1],
+        ["Sirens of the Springs","C","2026-03-21","MA40",83,858,1],
+        ["NADGT C Tier @ Bullion Plaza","C","2026-01-31","MA40",68,853,1],
+        ["Skagit River Open","C","2026-04-11","MA3",57,849,1],
+        ["Par for the Corpse","C","2025-11-01","MA40",61,848,1],
+        ["NADGT Oregon Premier","A","2026-04-25","MA3",60,847,1],
+        ["Slingin' Singles 4!","C","2026-02-07","MA40",63,842,1],
+        ["Seatac Slowdown","C","2025-11-15","MA40",80,821,0]
+      ].map(function (r) { return { ev: r[0], tier: r[1], iso: r[2], d: new Date(r[2] + 'T12:00:00'), div: r[3], score: r[4], rt: r[5], ok: !!r[6] }; });
+
+      var NS = 'http://www.w3.org/2000/svg';
+      var $ = function (id) { return document.getElementById(id); };
+      var el = function (t, a, p) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+      var txt = function (p, a, s) { var e = el('text', a, p); e.textContent = s; return e; };
+      var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+      var mean = function (a) { return a.reduce(function (s, v) { return s + v; }, 0) / a.length; };
+      var fmtD = function (d) { return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); };
+      var INK = '#1a1714', GRID = '#c8bfb4', ACC = '#2f7a45', PHOS = '#d4f0d8', DIM = '#8fc79a', AMBER = '#ffcf5c';
+
+      var counted = R.filter(function (r) { return r.ok; });
+      var vals = counted.map(function (r) { return r.rt; });
+      var avg = mean(vals);
+      var sd = Math.sqrt(mean(vals.map(function (v) { return (v - avg) * (v - avg); })));
+      var chron = R.slice().sort(function (a, b) { return a.d - b.d || a.rt - b.rt; });
+      var best = counted.reduce(function (a, b) { return b.rt > a.rt ? b : a; });
+      var n900 = vals.filter(function (v) { return v >= 900; }).length;
+      var n950 = vals.filter(function (v) { return v >= 950; }).length;
+      var dropped = R.length - counted.length;
+
+      // ── Tooltip ──
+      var tip = $('rtTip');
+      function showTip(e, html) {
+        tip.innerHTML = html;
+        var b = root.getBoundingClientRect();
+        var x = e.clientX - b.left + 14, y = e.clientY - b.top - tip.offsetHeight - 12;
+        if (x + tip.offsetWidth > b.width - 8) x = Math.max(8, e.clientX - b.left - tip.offsetWidth - 14);
+        tip.style.left = x + 'px'; tip.style.top = y + 'px'; tip.style.opacity = 1;
+      }
+      function hideTip() { tip.style.opacity = 0; }
+      function hover(node, html) {
+        node.addEventListener('mousemove', function (e) { showTip(e, html); });
+        node.addEventListener('mouseleave', hideTip);
+        node.addEventListener('touchstart', function (e) { showTip(e.touches[0], html); }, { passive: true });
+      }
+      window.addEventListener('scroll', hideTip, { passive: true });
+
+      function prep(s, fallback, H) {
+        var W = Math.round(s.getBoundingClientRect().width) || fallback;
+        while (s.firstChild) s.removeChild(s.firstChild);
+        s.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+        return W;
+      }
+
+      // ── Tiles ──
+      $('rtTiles').innerHTML = [
+        ['Player rating', PLAYER_RATING, 'Nov 2026 update'],
+        ['Best round', best.rt, best.ev],
+        ['Rated rounds', counted.length, dropped + ' outlier dropped'],
+        ['Rounds 900+', n900, Math.round(n900 / counted.length * 100) + '% of rounds'],
+        ['Rounds 950+', n950, 'personal-best territory'],
+        ['Consistency', '±' + Math.round(sd), 'std. deviation, pts']
+      ].map(function (t) {
+        return '<div class="crt stat"><span class="stat-label">' + t[0] + '</span><span class="stat-value">' + t[1] + '</span><span class="stat-note">' + esc(t[2]) + '</span></div>';
+      }).join('');
+
+      // ── Timeline ──
+      function drawLine() {
+        var s = $('rtLine'), small = s.getBoundingClientRect().width < 520;
+        var H = small ? 230 : 300, W = prep(s, 900, H), m = { l: 36, r: 12, t: 22, b: 26 };
+        var x0 = new Date('2025-10-20T12:00:00'), x1 = new Date('2026-11-15T12:00:00'), y0 = 800, y1 = 990;
+        var X = function (d) { return m.l + (d - x0) / (x1 - x0) * (W - m.l - m.r); };
+        var Y = function (v) { return m.t + (y1 - v) / (y1 - y0) * (H - m.t - m.b); };
+        for (var v = 820; v <= 980; v += 40) {
+          el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: 'rgba(212,240,216,0.14)' }, s);
+          txt(s, { x: m.l - 6, y: Y(v) + 4, 'text-anchor': 'end' }, v);
+        }
+        for (var mo = 0; mo < 13; mo += small ? 3 : 2) {
+          var d = new Date(2025, 10 + mo, 1);
+          txt(s, { x: X(d), y: H - 6, 'text-anchor': mo === 12 ? 'end' : 'middle' },
+            d.toLocaleDateString('en-US', { month: 'short' }) + (mo === 0 || d.getMonth() === 0 ? ' ’' + String(d.getFullYear()).slice(2) : ''));
+        }
+        el('line', { x1: m.l, x2: W - m.r, y1: Y(PLAYER_RATING), y2: Y(PLAYER_RATING), stroke: DIM, 'stroke-dasharray': '5 4', 'stroke-width': 1.5 }, s);
+        txt(s, { x: m.l + 4, y: Y(PLAYER_RATING) - 6, style: 'fill:' + PHOS }, PLAYER_RATING + ' rating');
+        // rolling average of the last 8 counted rounds
+        var c = chron.filter(function (r) { return r.ok; }), pts = [], seenDay = {};
+        c.forEach(function (r) {
+          if (seenDay[r.iso]) return; seenDay[r.iso] = 1;
+          var upto = c.filter(function (q) { return q.d <= r.d; });
+          if (upto.length < 8) return;
+          pts.push(X(r.d).toFixed(1) + ',' + Y(mean(upto.slice(-8).map(function (q) { return q.rt; }))).toFixed(1));
+        });
+        el('path', { d: 'M' + pts.join('L'), fill: 'none', stroke: AMBER, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, s);
+        // dots, nudged apart when several rounds share a start date
+        var seen = {}, rad = small ? 3.5 : 4.5;
+        chron.forEach(function (r) {
+          seen[r.iso] = (seen[r.iso] || 0) + 1;
+          var cx = X(r.d) + (seen[r.iso] - 1) * (small ? 4 : 5), cy = Y(r.rt);
+          el('circle', r.ok ? { cx: cx, cy: cy, r: rad, fill: PHOS, stroke: '#141a17', 'stroke-width': 1.5 }
+                            : { cx: cx, cy: cy, r: rad - 0.5, fill: 'none', stroke: DIM, 'stroke-width': 1.5 }, s);
+          hover(el('circle', { cx: cx, cy: cy, r: 11, fill: 'transparent' }, s),
+            '<b>' + r.rt + '</b>' + (r.ok ? '' : ' (dropped)') + ' · ' + esc(r.ev) + '<br>' + fmtD(r.d) + ' · ' + r.div + ' · score ' + r.score);
+        });
+        txt(s, { x: X(best.d) + 6, y: Y(best.rt) - 9, 'text-anchor': 'end', style: 'fill:#e9ffec;font-weight:700' }, best.rt + ' PB');
+      }
+
+      // ── Histogram ──
+      function drawHist() {
+        var s = $('rtHist'), H = 210, W = prep(s, 420, H), m = { l: 24, r: 4, t: 18, b: 24 }, bins = [];
+        for (var b = 820; b < 980; b += 20) bins.push({ lo: b, n: counted.filter(function (r) { return r.rt >= b && r.rt < b + 20; }).length });
+        var mx = Math.max.apply(null, bins.map(function (q) { return q.n; })), bw = (W - m.l - m.r) / bins.length;
+        var Y = function (v) { return m.t + (1 - v / mx) * (H - m.t - m.b); };
+        [0, 5, 10, 15].filter(function (v) { return v <= mx; }).forEach(function (v) {
+          el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v ? GRID : INK, 'stroke-width': v ? 1 : 1.5 }, s);
+          txt(s, { x: m.l - 6, y: Y(v) + 4, 'text-anchor': 'end' }, v);
+        });
+        bins.forEach(function (q, i) {
+          var x = m.l + i * bw + 3, w = bw - 6;
+          if (q.n) {
+            el('rect', { x: x, y: Y(q.n), width: w, height: H - m.b - Y(q.n), fill: ACC, stroke: INK, 'stroke-width': 1.5 }, s);
+            txt(s, { x: x + w / 2, y: Y(q.n) - 5, 'text-anchor': 'middle', style: 'fill:' + INK + ';font-weight:700' }, q.n);
+          }
+          txt(s, { x: x + w / 2, y: H - 6, 'text-anchor': 'middle' }, q.lo);
+          hover(el('rect', { x: x, y: m.t, width: w, height: H - m.t - m.b, fill: 'transparent' }, s),
+            '<b>' + q.n + ' round' + (q.n === 1 ? '' : 's') + '</b> rated ' + q.lo + '–' + (q.lo + 19));
+        });
+      }
+
+      // ── Tier: average dot on a worst-to-best line ──
+      function drawTier() {
+        var names = { A: 'A-Tier', B: 'B-Tier', C: 'C-Tier', L: 'League', XC: 'XC-Tier' }, g = {};
+        counted.forEach(function (r) { (g[r.tier] = g[r.tier] || []).push(r.rt); });
+        var rows = Object.keys(g).map(function (k) {
+          return { k: k, n: g[k].length, avg: mean(g[k]), lo: Math.min.apply(null, g[k]), hi: Math.max.apply(null, g[k]) };
+        }).sort(function (a, b) { return b.avg - a.avg; });
+        var s = $('rtTier'), rh = 34, H = 8 + rows.length * rh + 24, W = prep(s, 420, H), lx = 78, rx = W - 44;
+        var X = function (v) { return lx + (v - 830) / (980 - 830) * (rx - lx); };
+        [850, 900, 950].forEach(function (v) {
+          el('line', { x1: X(v), x2: X(v), y1: 6, y2: H - 22, stroke: GRID }, s);
+          txt(s, { x: X(v), y: H - 6, 'text-anchor': 'middle' }, v);
+        });
+        rows.forEach(function (r, i) {
+          var y = 8 + i * rh + rh / 2;
+          txt(s, { x: 0, y: y, style: 'fill:' + INK + ';font-weight:700;font-size:12px' }, names[r.k]);
+          txt(s, { x: 0, y: y + 13, style: 'font-size:10px' }, r.n + ' rd' + (r.n > 1 ? 's' : ''));
+          if (r.hi > r.lo) {
+            el('path', { d: 'M' + X(r.lo) + ',' + y + 'H' + X(r.hi) + 'M' + X(r.lo) + ',' + (y - 5) + 'v10M' + X(r.hi) + ',' + (y - 5) + 'v10', stroke: INK, 'stroke-width': 1.5, fill: 'none' }, s);
+          }
+          el('circle', { cx: X(r.avg), cy: y, r: 6.5, fill: ACC, stroke: INK, 'stroke-width': 1.5 }, s);
+          txt(s, { x: W - 2, y: y + 4, 'text-anchor': 'end', style: 'fill:' + INK + ';font-weight:700;font-size:13px' }, Math.round(r.avg));
+          hover(el('rect', { x: 0, y: y - rh / 2, width: W, height: rh, fill: 'transparent' }, s),
+            '<b>' + names[r.k] + '</b>: avg ' + r.avg.toFixed(1) + ' over ' + r.n + ' round' + (r.n > 1 ? 's' : '') + '<br>worst ' + r.lo + ' · best ' + r.hi);
+        });
+      }
+
+      // ── Season ──
+      function drawSeason() {
+        var s = $('rtSeason'), H = 210, W = prep(s, 420, H), m = { l: 30, r: 6, t: 22, b: 24 };
+        var seasons = [['Winter', '2025-11-01', '2026-03-01'], ['Spring', '2026-03-01', '2026-06-01'], ['Summer', '2026-06-01', '2026-09-01'], ['Fall', '2026-09-01', '2026-12-01']].map(function (q) {
+          var rs = counted.filter(function (r) { return r.iso >= q[1] && r.iso < q[2]; }).map(function (r) { return r.rt; });
+          return { n: q[0], cnt: rs.length, avg: mean(rs) };
+        });
+        var y0 = 860, y1 = 940, bw = (W - m.l - m.r) / 4;
+        var Y = function (v) { return m.t + (y1 - v) / (y1 - y0) * (H - m.t - m.b); };
+        [860, 880, 900, 920, 940].forEach(function (v) {
+          el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: GRID }, s);
+          txt(s, { x: m.l - 6, y: Y(v) + 4, 'text-anchor': 'end' }, v);
+        });
+        var pts = seasons.map(function (q, i) { return [m.l + bw * i + bw / 2, Y(q.avg)]; });
+        el('path', { d: 'M' + pts.map(function (p) { return p.join(','); }).join('L'), fill: 'none', stroke: INK, 'stroke-width': 2 }, s);
+        seasons.forEach(function (q, i) {
+          var cx = pts[i][0], cy = pts[i][1];
+          el('circle', { cx: cx, cy: cy, r: 6.5, fill: ACC, stroke: INK, 'stroke-width': 1.5 }, s);
+          txt(s, { x: cx, y: cy - 12, 'text-anchor': 'middle', style: 'fill:' + INK + ';font-weight:700;font-size:13px' }, Math.round(q.avg));
+          txt(s, { x: cx, y: H - 6, 'text-anchor': 'middle' }, q.n);
+          hover(el('rect', { x: cx - bw / 2, y: m.t, width: bw, height: H - m.t - m.b, fill: 'transparent' }, s),
+            '<b>' + q.n + '</b>: avg ' + q.avg.toFixed(1) + ' over ' + q.cnt + ' rounds');
+        });
+      }
+
+      // ── Tables ──
+      $('rtBest').innerHTML = '<thead><tr><th>Event</th><th>Date</th><th class="num">Rating</th></tr></thead><tbody>' +
+        counted.slice().sort(function (a, b) { return b.rt - a.rt; }).slice(0, 6).map(function (r, i) {
+          return '<tr><td>' + esc(r.ev) + '</td><td class="dt">' + r.d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) + '</td><td class="num">' +
+            (i ? '<b>' + r.rt + '</b>' : '<span class="chip gold">' + r.rt + '</span>') + '</td></tr>';
+        }).join('') + '</tbody>';
+      $('rtAll').innerHTML = '<thead><tr><th>Date</th><th>Event</th><th class="hm">Tier</th><th class="hm">Div</th><th class="num">Score</th><th class="num">Rating</th></tr></thead><tbody>' +
+        R.slice().sort(function (a, b) { return b.d - a.d || b.rt - a.rt; }).map(function (r) {
+          return '<tr><td class="dt">' + fmtD(r.d) + '</td><td>' + esc(r.ev) + (r.ok ? '' : ' <i>(dropped)</i>') + '</td><td class="hm">' + r.tier + '</td><td class="hm">' + r.div +
+            '</td><td class="num">' + r.score + '</td><td class="num"><b>' + r.rt + '</b></td></tr>';
+        }).join('') + '</tbody>';
+
+      // ── Draw at the real pixel width so labels stay readable on phones ──
+      var lastW = 0, timer;
+      function draw() { lastW = root.clientWidth; hideTip(); drawLine(); drawHist(); drawTier(); drawSeason(); }
+      draw();
+      window.addEventListener('resize', function () {
+        clearTimeout(timer);
+        timer = setTimeout(function () { if (root.clientWidth !== lastW) draw(); }, 150);
+      });
+    })();
+  </script>
 
   <section class="win rv" aria-labelledby="roll-h">
     <header class="tbar">
