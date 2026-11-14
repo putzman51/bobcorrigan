@@ -95,6 +95,11 @@
     .panel-h { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 12px; }
     .panel-h h3 { font-size: 18px; font-weight: 700; }
     .panel-h p { font-size: 13.5px; color: var(--soft); }
+    .sum { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 26px; margin-bottom: 22px; padding: 16px 0 18px; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--rule); }
+    .sum span { display: flex; flex-direction: column; font-size: 15px; font-weight: 600; line-height: 1.3; }
+    .sum b { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 4.6vw, 58px); line-height: 1; font-variant-numeric: tabular-nums; }
+    .sum i { padding-bottom: 22px; font-family: var(--display); font-style: normal; font-weight: 700; font-size: 34px; line-height: 1; color: var(--soft); }
+    .sum .sum-t b { color: var(--violet); }
     .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
     .rtab { width: 100%; border-collapse: collapse; font-size: 15px; }
     .rtab th { padding: 6px 10px 8px 0; border-bottom: 2px solid var(--ink); font-size: 13px; font-weight: 600; text-align: left; color: var(--soft); white-space: nowrap; }
@@ -189,6 +194,11 @@
       .tally div:nth-child(4) { padding-left: 16px; border-left: 1px solid var(--rule); }
       .tally div:nth-child(odd) { padding-left: 0; border-left: 0; }
       .trio { grid-template-columns: 1fr; }
+      .sum { gap: 8px 16px; }
+      .sum i { padding-bottom: 20px; font-size: 26px; }
+      .sum .sum-t { flex-basis: 100%; }
+      .sum .eq { display: none; }
+      .sum .sum-t b::before { content: '= '; color: var(--soft); font-weight: 700; }
       .moments { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; gap: 12px; }
       .mo img { height: auto; aspect-ratio: 1; }
       .m-a, .m-b, .m-e, .m-f, .more { grid-column: 1 / -1; grid-row: auto; }
@@ -271,6 +281,14 @@
         <h2 id="rounds-h">Round by round</h2>
         <p>Every PDGA-rated round from November 2025 through October 2026. Hover or tap a dot to see the round behind it.</p>
       </div>
+
+      <p class="sum needs-js" aria-label="Throws plus penalty strokes equals total strokes">
+        <span><b id="sThrows">3,118</b> actual throws</span>
+        <i aria-hidden="true">+</i>
+        <span><b id="sPen">4</b> penalty strokes</span>
+        <i class="eq" aria-hidden="true">=</i>
+        <span class="sum-t"><b id="sTotal">3,122</b> total strokes, all 49 rounds</span>
+      </p>
 
       <div class="panel needs-js">
         <div class="panel-h">
@@ -469,6 +487,10 @@
       $('tBest').textContent = best.rt;
       $('tBestEv').textContent = best.ev;
       $('t900').textContent = n900;
+      var PENALTY_STROKES = 4, strokes = R.reduce(function (s, r) { return s + r.score; }, 0);
+      $('sTotal').textContent = strokes.toLocaleString('en-US');
+      $('sPen').textContent = PENALTY_STROKES;
+      $('sThrows').textContent = (strokes - PENALTY_STROKES).toLocaleString('en-US');
       $('tPct').textContent = Math.round(n900 / counted.length * 100) + '% of the time';
 
       // ── Tooltip ──
