@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="zyq-lg8pU8aI22oIa7izaOGvQ7TSrKmBaJJps34cocg" />
-  <title>Bob Corrigan — Pro Disc Golfer, PDGA #316354 · Redmond, WA</title>
+  <title>Bob Corrigan — Disc Golfer, PDGA #316354 · Redmond, WA</title>
   <meta name="description" content="Bob Corrigan is an employer benefits professional, pro disc golfer, poet, and retro film photographer in Redmond, Washington, with two cats and a penchant for vintage RC models." />
   <meta name="author" content="Bob Corrigan" />
   <meta name="theme-color" content="#17153b" />
@@ -26,6 +26,16 @@
   <link rel="preload" href="/assets/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/assets/site.css" />
   <style>
+    /* ── Streak: two white pinstripes that take the corner with the frame ── */
+    .home { position: relative; }
+    .streak, .streak::after { position: absolute; z-index: 2; border: solid #fff; border-width: 3px 0 0 3px; pointer-events: none;
+      -webkit-mask-image: linear-gradient(to right, #000 50%, transparent), linear-gradient(to bottom, #000 45%, transparent);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to right, #000 50%, transparent), linear-gradient(to bottom, #000 45%, transparent);
+      mask-composite: intersect; }
+    .streak { left: calc(var(--gut) + 8px); top: calc(var(--gut) + 7px); width: min(46%, 520px); height: 400px; border-top-left-radius: 27px; }
+    .streak::after { content: ''; left: 5px; top: 4px; width: 78%; height: 68%; border-width: 1.5px 0 0 1.5px; border-top-left-radius: 20px; -webkit-mask-image: none; mask-image: none; opacity: 0.7; }
+
     /* ── Hero ── */
     .hero { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr); }
     .hero::before { content: ''; position: absolute; left: 64px; top: 0; width: 30px; height: 30px; background: radial-gradient(circle at 100% 100%, transparent 29.5px, var(--ink) 30px); }
@@ -39,7 +49,7 @@
     .who h1 { font-family: var(--display); font-weight: 800; font-size: clamp(46px, 7.6vw, 96px); line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase; }
     .who p { max-width: 34rem; margin-top: 14px; color: var(--soft); font-size: clamp(17px, 1.6vw, 19px); }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: end; margin-top: clamp(28px, 4vw, 48px); }
-    .rating-n { font-family: var(--display); font-weight: 900; font-size: clamp(132px, 19vw, 236px); line-height: 0.78; letter-spacing: -0.01em; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .rating-n { font-family: var(--display); font-weight: 900; font-size: clamp(132px, 15.5vw, 196px); line-height: 0.78; letter-spacing: -0.01em; color: var(--tang); font-variant-numeric: tabular-nums; }
     .rating-l { margin-top: 18px; font-size: 17px; font-weight: 600; }
     .rating-l span { display: block; font-weight: 400; color: var(--soft); font-size: 15px; }
     .hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
@@ -154,6 +164,8 @@
     @media (max-width: 760px) {
       .hero { grid-template-columns: 1fr; }
       .hero::before { display: none; }
+      .streak { left: calc(var(--gut) + 6px); top: calc(var(--gut) + 5px); width: 62%; height: 30px; border-width: 2px 0 0 2px; border-top-left-radius: 21px; }
+      .streak::after { left: 3px; top: 3px; border-width: 1px 0 0 1px; border-top-left-radius: 17px; }
       .rail { flex-direction: row; gap: 4px; height: 12px; margin-top: 5px; font-size: 0; }
       .rail span, .rail span:first-child, .rail .r-t, .rail .r-o { min-height: 0; padding: 0; }
       .rail .r-v { width: 64px; }
@@ -186,9 +198,10 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <div class="frame">
+  <div class="frame home">
+    <span class="streak" aria-hidden="true"></span>
     <header class="topbar">
-      <a class="brand" href="/" aria-label="Bob Corrigan, home"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="11" ry="6.2" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="12" cy="11" rx="5.4" ry="2.4" fill="#f2762e"/></svg>Bob Corrigan</a>
+      <a class="brand" href="/" aria-label="Bob Corrigan, home"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="11" ry="6.2" fill="#f2762e"/></svg>Bob Corrigan</a>
       <nav class="nav" aria-label="Site">
         <a href="#rounds">Rounds</a>
         <a href="#moments">Moments</a>
@@ -201,11 +214,11 @@
 
     <main id="main">
     <div class="hero">
-      <div class="rail" aria-hidden="true"><span></span><span class="r-v">316354</span><span class="r-t">PRO</span><span class="r-o">901</span></div>
+      <div class="rail" aria-hidden="true"><span></span><span class="r-v">316354</span><span class="r-t">PNW</span><span class="r-o">901</span></div>
       <div class="hero-main">
         <div class="who">
           <h1>Bob Corrigan</h1>
-          <p>Pro disc golfer out of Redmond, Washington. Employer benefits professional the rest of the week.</p>
+          <p>Disc golfer in the PNW.</p>
         </div>
 
         <div class="hero-grid">
@@ -287,71 +300,42 @@
         <figure class="mo m-e"><button type="button" aria-label="View photo: Schmoney"><img src="/images/hl/trophy.jpg" width="1050" height="1400" alt="Sword-in-the-stone trophy with a plaque reading Ladies of the Lake, Knight's Honor, Champion MA3" loading="lazy" decoding="async"></button><figcaption>Schmoney. <span>Ladies of the Lake champion, MA3.</span></figcaption></figure>
         <figure class="mo m-f"><button type="button" aria-label="View photo: On the tee"><img src="/images/hl/on-the-tee.jpg" width="1400" height="1050" alt="Bob on the tee with his card" loading="lazy" decoding="async"></button><figcaption>On the tee</figcaption></figure>
         <div class="more">
-          <p>The full roll, 73 photos</p>
+          <p>40 more from the course</p>
           <p class="more-n needs-js">Reshuffled every visit.</p>
-          <button class="btn needs-js" id="galBtn" type="button" aria-expanded="false" aria-controls="gallery">Show all photos</button>
+          <button class="btn needs-js" id="galBtn" type="button" aria-expanded="false" aria-controls="gallery">Show more photos</button>
         </div>
       </div>
 
       <div class="gallery" id="gallery">
         <figure><button type="button" aria-label="View photo: Three of us, Cloud City Chaos"><img src="/images/thumb/3boys.jpg" data-full="/images/3boys.jpg" width="640" height="481" alt="Three of us, Cloud City Chaos" loading="lazy" decoding="async"></button><figcaption>Three of us, Cloud City Chaos</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Emerald City Discs"><img src="/images/thumb/ecd.jpg" data-full="/images/ecd.jpeg" width="760" height="1013" alt="Emerald City Discs" loading="lazy" decoding="async"></button><figcaption>Emerald City Discs</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Ace on 17"><img src="/images/thumb/ace17.jpg" data-full="/images/ace17.jpg" width="760" height="570" alt="Ace on 17" loading="lazy" decoding="async"></button><figcaption>Ace on 17</figcaption></figure>
         <figure><button type="button" aria-label="View photo: First place card, SeaTac"><img src="/images/thumb/1st-place-card.jpg" data-full="/images/1st%20place%20card.jpg" width="640" height="481" alt="First place card, SeaTac" loading="lazy" decoding="async"></button><figcaption>First place card, SeaTac</figcaption></figure>
         <figure><button type="button" aria-label="View photo: God&#x27;s Grove"><img src="/images/thumb/godsgrove.jpg" data-full="/images/godsgrove.jpg" width="481" height="640" alt="God&#x27;s Grove" loading="lazy" decoding="async"></button><figcaption>God&#x27;s Grove</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Ace with Nick"><img src="/images/thumb/acenick.jpg" data-full="/images/acenick.jpeg" width="760" height="570" alt="Ace with Nick" loading="lazy" decoding="async"></button><figcaption>Ace with Nick</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Sunnyside haul"><img src="/images/thumb/haul.jpg" data-full="/images/haul.jpg" width="760" height="1013" alt="Sunnyside haul" loading="lazy" decoding="async"></button><figcaption>Sunnyside haul</figcaption></figure>
         <figure><button type="button" aria-label="View photo: The am crew"><img src="/images/thumb/am-crew.jpg" data-full="/images/am%20crew.jpg" width="481" height="640" alt="The am crew" loading="lazy" decoding="async"></button><figcaption>The am crew</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Nick, Brian and Bob"><img src="/images/thumb/nick-brian-bob.jpg" data-full="/images/nick%20brian%20bob.jpg" width="640" height="481" alt="Nick, Brian and Bob" loading="lazy" decoding="async"></button><figcaption>Nick, Brian and Bob</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: First place, Pier Park"><img src="/images/thumb/firstplaceflower.jpg" data-full="/images/firstplaceflower.jpg" width="760" height="901" alt="First place, Pier Park" loading="lazy" decoding="async"></button><figcaption>First place, Pier Park</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: At the pavilion"><img src="/images/thumb/pav.jpg" data-full="/images/pav.jpg" width="760" height="570" alt="At the pavilion" loading="lazy" decoding="async"></button><figcaption>At the pavilion</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Disc dork"><img src="/images/thumb/discdork.jpg" data-full="/images/discdork.jpeg" width="480" height="640" alt="Disc dork" loading="lazy" decoding="async"></button><figcaption>Disc dork</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Chris &amp; Bob-o on the loose!"><img src="/images/thumb/hooligan.jpg" data-full="/images/hooligan.jpg" width="760" height="570" alt="Chris &amp; Bob-o on the loose!" loading="lazy" decoding="async"></button><figcaption>Chris &amp; Bob-o on the loose!</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Dem boyz"><img src="/images/thumb/demboyz.jpg" data-full="/images/demboyz.jpeg" width="760" height="570" alt="Dem boyz" loading="lazy" decoding="async"></button><figcaption>Dem boyz</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Ice cream stop"><img src="/images/thumb/icecream.jpg" data-full="/images/icecream.jpg" width="760" height="570" alt="Ice cream stop" loading="lazy" decoding="async"></button><figcaption>Ice cream stop</figcaption></figure>
         <figure><button type="button" aria-label="View photo: The Palouse"><img src="/images/thumb/palouse.jpg" data-full="/images/palouse.jpg" width="760" height="570" alt="The Palouse" loading="lazy" decoding="async"></button><figcaption>The Palouse</figcaption></figure>
         <figure><button type="button" aria-label="View photo: MA40 3rd, Deception Pass"><img src="/images/thumb/dips-discs.jpg" data-full="/images/dips%20discs.jpg" width="481" height="640" alt="MA40 3rd, Deception Pass" loading="lazy" decoding="async"></button><figcaption>MA40 3rd, Deception Pass</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Park job"><img src="/images/thumb/parkjob.jpg" data-full="/images/parkjob.jpg" width="481" height="640" alt="Park job" loading="lazy" decoding="async"></button><figcaption>Park job</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Farragut"><img src="/images/thumb/farragut.jpg" data-full="/images/farragut.jpeg" width="640" height="480" alt="Farragut" loading="lazy" decoding="async"></button><figcaption>Farragut</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Pretty hole"><img src="/images/thumb/pretty.jpg" data-full="/images/pretty.jpg" width="760" height="1013" alt="Pretty hole" loading="lazy" decoding="async"></button><figcaption>Pretty hole</figcaption></figure>
+        <figure><button type="button" aria-label="View photo: Fairway, Sunnyside Up"><img src="/images/thumb/pretty.jpg" data-full="/images/pretty.jpg" width="760" height="1013" alt="Fairway, Sunnyside Up" loading="lazy" decoding="async"></button><figcaption>Fairway, Sunnyside Up</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Shadow on hole 4"><img src="/images/thumb/shadow.jpg" data-full="/images/web/shadow.jpg" width="760" height="1013" alt="Shadow on hole 4" loading="lazy" decoding="async"></button><figcaption>Shadow on hole 4</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Golf date"><img src="/images/thumb/wifegolf.jpg" data-full="/images/wifegolf.jpeg" width="760" height="1013" alt="Golf date" loading="lazy" decoding="async"></button><figcaption>Golf date</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Slingshot"><img src="/images/thumb/slingshot.jpg" data-full="/images/slingshot.jpeg" width="480" height="640" alt="Slingshot" loading="lazy" decoding="async"></button><figcaption>Slingshot</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Event sponsor"><img src="/images/thumb/spons.jpg" data-full="/images/spons.jpeg" width="760" height="865" alt="Event sponsor" loading="lazy" decoding="async"></button><figcaption>Event sponsor</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Mobbin&#x27;"><img src="/images/thumb/mobbin.jpg" data-full="/images/mobbin.JPG" width="480" height="640" alt="Mobbin&#x27;" loading="lazy" decoding="async"></button><figcaption>Mobbin&#x27;</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Idaho"><img src="/images/thumb/idaho.jpg" data-full="/images/idaho.jpeg" width="640" height="480" alt="Idaho" loading="lazy" decoding="async"></button><figcaption>Idaho</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Practice ace, SeaTac"><img src="/images/thumb/seatac-practice-ace.jpg" data-full="/images/seatac%20practice%20ace.jpg" width="481" height="640" alt="Practice ace, SeaTac" loading="lazy" decoding="async"></button><figcaption>Practice ace, SeaTac</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Cake putt"><img src="/images/thumb/cakeputt.jpg" data-full="/images/web/cakeputt.jpg" width="760" height="1013" alt="Cake putt" loading="lazy" decoding="async"></button><figcaption>Cake putt</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Yay"><img src="/images/thumb/yaywife.jpg" data-full="/images/yaywife.jpeg" width="640" height="480" alt="Yay" loading="lazy" decoding="async"></button><figcaption>Yay</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Almost a throw-in"><img src="/images/thumb/throw-in-almost.jpg" data-full="/images/throw%20in%20almost.jpg" width="760" height="518" alt="Almost a throw-in" loading="lazy" decoding="async"></button><figcaption>Almost a throw-in</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Hole 17, Hobo Hotel"><img src="/images/thumb/hobohotel.jpg" data-full="/images/hobohotel.jpg" width="760" height="521" alt="Hole 17, Hobo Hotel" loading="lazy" decoding="async"></button><figcaption>Hole 17, Hobo Hotel</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Stoic"><img src="/images/thumb/stoic.jpg" data-full="/images/stoic.jpeg" width="480" height="640" alt="Stoic" loading="lazy" decoding="async"></button><figcaption>Stoic</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Copper in the Mountains card"><img src="/images/thumb/copper-card.jpg" data-full="/images/copper%20card.jpg" width="481" height="640" alt="Copper in the Mountains card" loading="lazy" decoding="async"></button><figcaption>Copper in the Mountains card</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: The miss"><img src="/images/thumb/miss.jpg" data-full="/images/miss.JPG" width="760" height="569" alt="The miss" loading="lazy" decoding="async"></button><figcaption>The miss</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Rain Wizard card"><img src="/images/thumb/slingin-singles-card.jpg" data-full="/images/slingin%20singles%20card.jpg" width="640" height="481" alt="Rain Wizard card" loading="lazy" decoding="async"></button><figcaption>Rain Wizard card</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Kayak Point"><img src="/images/thumb/kayak4.jpg" data-full="/images/kayak4.jpg" width="760" height="525" alt="Kayak Point" loading="lazy" decoding="async"></button><figcaption>Kayak Point</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Pretty frolfer:-)"><img src="/images/thumb/fallsun.jpg" data-full="/images/fallsun.jpg" width="760" height="1013" alt="Pretty frolfer:-)" loading="lazy" decoding="async"></button><figcaption>Pretty frolfer:-)</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Bok Bob"><img src="/images/thumb/bokbob.jpg" data-full="/images/bokbob.jpg" width="760" height="1013" alt="Bok Bob" loading="lazy" decoding="async"></button><figcaption>Bok Bob</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Hole 5, Cutthroat"><img src="/images/thumb/hole5.jpg" data-full="/images/hole5.jpeg" width="760" height="1013" alt="Hole 5, Cutthroat" loading="lazy" decoding="async"></button><figcaption>Hole 5, Cutthroat</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: On the tee"><img src="/images/thumb/mpotee.jpg" data-full="/images/mpotee.jpeg" width="760" height="570" alt="On the tee" loading="lazy" decoding="async"></button><figcaption>On the tee</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: MA3 nerds"><img src="/images/thumb/ma3nerds.jpg" data-full="/images/ma3nerds.jpg" width="760" height="570" alt="MA3 nerds" loading="lazy" decoding="async"></button><figcaption>MA3 nerds</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Dunkin&#x27; with Dylan"><img src="/images/thumb/dunkin-with-dylan.jpg" data-full="/images/dunkin%20with%20dylan.jpg" width="640" height="481" alt="Dunkin&#x27; with Dylan" loading="lazy" decoding="async"></button><figcaption>Dunkin&#x27; with Dylan</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Smackabee"><img src="/images/thumb/smackabee.jpg" data-full="/images/smackabee.jpeg" width="480" height="640" alt="Smackabee" loading="lazy" decoding="async"></button><figcaption>Smackabee</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Schmoney"><img src="/images/thumb/schmoney.jpg" data-full="/images/schmoney.jpeg" width="760" height="1013" alt="Schmoney" loading="lazy" decoding="async"></button><figcaption>Schmoney</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Hot round, -7"><img src="/images/thumb/hotroundjuel.jpg" data-full="/images/hotroundjuel.jpg" width="760" height="961" alt="Hot round, -7" loading="lazy" decoding="async"></button><figcaption>Hot round, -7</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Bok &#x27;26"><img src="/images/thumb/bok26.jpg" data-full="/images/bok26.jpeg" width="760" height="1013" alt="Bok &#x27;26" loading="lazy" decoding="async"></button><figcaption>Bok &#x27;26</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Soggy frolf"><img src="/images/thumb/sogfrolf.jpg" data-full="/images/sogfrolf.jpg" width="481" height="640" alt="Soggy frolf" loading="lazy" decoding="async"></button><figcaption>Soggy frolf</figcaption></figure>
+        <figure><button type="button" aria-label="View photo: MA3 card, Sunnyside Up"><img src="/images/thumb/ma3nerds.jpg" data-full="/images/ma3nerds.jpg" width="760" height="570" alt="MA3 card, Sunnyside Up" loading="lazy" decoding="async"></button><figcaption>MA3 card, Sunnyside Up</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Aced in Arizona"><img src="/images/thumb/aced-in-az.jpg" data-full="/images/aced%20in%20az.jpg" width="640" height="481" alt="Aced in Arizona" loading="lazy" decoding="async"></button><figcaption>Aced in Arizona</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Pro cash"><img src="/images/thumb/procash.jpg" data-full="/images/procash.JPG" width="760" height="428" alt="Pro cash" loading="lazy" decoding="async"></button><figcaption>Pro cash</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Six rounds in three days"><img src="/images/thumb/dips.jpg" data-full="/images/dips.jpg" width="760" height="570" alt="Six rounds in three days" loading="lazy" decoding="async"></button><figcaption>Six rounds in three days</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Welcome to Farmers Park"><img src="/images/thumb/urboi.jpg" data-full="/images/urboi.jpeg" width="640" height="480" alt="Welcome to Farmers Park" loading="lazy" decoding="async"></button><figcaption>Welcome to Farmers Park</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Wet frolf"><img src="/images/thumb/wetfrolf.jpg" data-full="/images/wetfrolf.jpg" width="481" height="640" alt="Wet frolf" loading="lazy" decoding="async"></button><figcaption>Wet frolf</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Pink disc"><img src="/images/thumb/prettywife.jpg" data-full="/images/prettywife.PNG" width="296" height="640" alt="Pink disc" loading="lazy" decoding="async"></button><figcaption>Pink disc</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Practice ace"><img src="/images/thumb/practice-ace.jpg" data-full="/images/practice%20ace.jpg" width="481" height="640" alt="Practice ace" loading="lazy" decoding="async"></button><figcaption>Practice ace</figcaption></figure>
+        <figure><button type="button" aria-label="View photo: Rain round, SeaTac league"><img src="/images/thumb/wetfrolf.jpg" data-full="/images/wetfrolf.jpg" width="481" height="640" alt="Rain round, SeaTac league" loading="lazy" decoding="async"></button><figcaption>Rain round, SeaTac league</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Disc rescue"><img src="/images/thumb/rescue.jpg" data-full="/images/rescue.jpg" width="760" height="570" alt="Disc rescue" loading="lazy" decoding="async"></button><figcaption>Disc rescue</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Tee sponsor, Farmers Park Open"><img src="/images/thumb/teesponsor.jpg" data-full="/images/teesponsor.jpeg" width="640" height="480" alt="Tee sponsor, Farmers Park Open" loading="lazy" decoding="async"></button><figcaption>Tee sponsor, Farmers Park Open</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Deception Pass card"><img src="/images/thumb/dipsdiscs.jpg" data-full="/images/dipsdiscs.jpg" width="640" height="481" alt="Deception Pass card" loading="lazy" decoding="async"></button><figcaption>Deception Pass card</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Ace on 7"><img src="/images/thumb/ace7.jpg" data-full="/images/ace7.JPEG" width="760" height="682" alt="Ace on 7" loading="lazy" decoding="async"></button><figcaption>Ace on 7</figcaption></figure>
         <figure><button type="button" aria-label="View photo: MP40 card"><img src="/images/thumb/mp40.jpg" data-full="/images/mp40.jpeg" width="760" height="570" alt="MP40 card" loading="lazy" decoding="async"></button><figcaption>MP40 card</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Sunnyside Up sponsor"><img src="/images/thumb/sponsorsign.jpg" data-full="/images/sponsorsign.jpg" width="760" height="1013" alt="Sunnyside Up sponsor" loading="lazy" decoding="async"></button><figcaption>Sunnyside Up sponsor</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Vanessa and her caddy at South Fork"><img src="/images/thumb/pizzaselfie.jpg" data-full="/images/pizzaselfie.jpg" width="760" height="570" alt="Vanessa and her caddy at South Fork" loading="lazy" decoding="async"></button><figcaption>Vanessa and her caddy at South Fork</figcaption></figure>
@@ -362,10 +346,6 @@
         <figure><button type="button" aria-label="View photo: The Farragut crew"><img src="/images/thumb/groupfarr.jpg" data-full="/images/groupfarr.JPEG" width="640" height="480" alt="The Farragut crew" loading="lazy" decoding="async"></button><figcaption>The Farragut crew</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Sunnyside Up crew"><img src="/images/thumb/group2.jpg" data-full="/images/group2.jpg" width="760" height="570" alt="Sunnyside Up crew" loading="lazy" decoding="async"></button><figcaption>Sunnyside Up crew</figcaption></figure>
         <figure><button type="button" aria-label="View photo: Star Frame Sunday"><img src="/images/thumb/markymark.jpg" data-full="/images/markymark.jpg" width="760" height="570" alt="Star Frame Sunday" loading="lazy" decoding="async"></button><figcaption>Star Frame Sunday</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Big ups"><img src="/images/thumb/bigups.jpg" data-full="/images/bigups.jpeg" width="640" height="480" alt="Big ups" loading="lazy" decoding="async"></button><figcaption>Big ups</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: The handoff"><img src="/images/thumb/handoff.jpg" data-full="/images/handoff.jpg" width="620" height="1100" alt="The handoff" loading="lazy" decoding="async"></button><figcaption>The handoff</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Putt assassin"><img src="/images/thumb/putt-assassin.jpg" data-full="/images/putt%20assassin.jpg" width="532" height="640" alt="Putt assassin" loading="lazy" decoding="async"></button><figcaption>Putt assassin</figcaption></figure>
-        <figure><button type="button" aria-label="View photo: Winner winner"><img src="/images/thumb/winnerchixdinner.jpg" data-full="/images/winnerchixdinner.jpeg" width="480" height="640" alt="Winner winner" loading="lazy" decoding="async"></button><figcaption>Winner winner</figcaption></figure>
         <figure><button type="button" aria-label="View photo: SeaTac Spring League"><img src="/images/thumb/seatac-spring-2.jpg" data-full="/images/seatac%20spring%202.jpg" width="760" height="570" alt="SeaTac Spring League" loading="lazy" decoding="async"></button><figcaption>SeaTac Spring League</figcaption></figure>
       </div>
       <div class="gal-end needs-js" id="galEnd" hidden><button class="btn ghost" id="galHide" type="button">Hide photos</button></div>
@@ -663,7 +643,7 @@
         }
         gal.classList.toggle('is-open', open); end.hidden = !open;
         btn.setAttribute('aria-expanded', open);
-        btn.textContent = open ? 'Hide photos' : 'Show all photos';
+        btn.textContent = open ? 'Hide photos' : 'Show more photos';
         if (open) gal.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
         else btn.focus();
       }
