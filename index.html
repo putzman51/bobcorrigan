@@ -48,7 +48,15 @@
     .hero-main { min-width: 0; padding: clamp(28px, 4.5vw, 54px) 0 0 clamp(26px, 4.5vw, 60px); }
     .who h1 { font-family: var(--display); font-weight: 800; font-size: clamp(46px, 7.6vw, 96px); line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase; }
     .who p { max-width: 34rem; margin-top: 14px; color: var(--soft); font-size: clamp(17px, 1.6vw, 19px); }
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: end; margin-top: clamp(28px, 4vw, 48px); }
+    .who { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+    .hero-pic { display: block; object-fit: cover; object-position: 50% 62%; background: var(--rule); }
+    .pic-d { flex: none; width: clamp(150px, 15vw, 196px); height: auto; aspect-ratio: 5 / 4; border-radius: 16px; }
+    .pic-m { display: none; }
+    .masters { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--rule); max-width: 24rem; }
+    .masters b { font-family: var(--display); font-weight: 800; font-size: 46px; line-height: 0.9; font-variant-numeric: tabular-nums; }
+    .masters span { font-size: 17px; font-weight: 600; line-height: 1.3; }
+    .masters i { display: block; font-style: normal; font-weight: 400; font-size: 15px; color: var(--soft); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: end; margin-top: clamp(20px, 2.2vw, 30px); }
     .rating-n { font-family: var(--display); font-weight: 900; font-size: clamp(132px, 15.5vw, 196px); line-height: 0.78; letter-spacing: -0.01em; color: var(--tang); font-variant-numeric: tabular-nums; }
     @media (min-width: 761px) { .rating-n { font-size: clamp(92px, 10.85vw, 137px); } }
     .rating-l { margin-top: 18px; font-size: 17px; font-weight: 600; }
@@ -173,6 +181,9 @@
       .rail .r-t { width: 40px; }
       .rail .r-o { width: 26px; border-radius: 0 99px 99px 0; }
       .hero-main { padding-left: 0; }
+      .pic-d { display: none; }
+      .rating-row { display: flex; align-items: stretch; gap: 16px; }
+      .pic-m { display: block; flex: 1; min-width: 0; width: auto; height: auto; max-height: 104px; align-self: flex-end; border-radius: 14px; }
       .rating-l { margin-top: 12px; }
       .tally { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .tally div:nth-child(4) { padding-left: 16px; border-left: 1px solid var(--rule); }
@@ -218,14 +229,18 @@
       <div class="rail" aria-hidden="true"><span></span><span class="r-v">316354</span><span class="r-t">PNW</span><span class="r-o">901</span></div>
       <div class="hero-main">
         <div class="who">
-          <h1>Bob Corrigan</h1>
-          <p>Disc golfer in the PNW.</p>
+          <div>
+            <h1>Bob Corrigan</h1>
+            <p>Disc golfer in the PNW.</p>
+          </div>
+          <img class="hero-pic pic-d" src="/images/hl/first-place-pier-park-sm.jpg" width="560" height="664" alt="Bob lying in a field of daisies after his first-place finish at Pier Park" decoding="async">
         </div>
 
         <div class="hero-grid">
           <div>
-            <p class="rating-n" id="heroRating">901</p>
+            <div class="rating-row"><p class="rating-n" id="heroRating">901</p><img class="hero-pic pic-m" src="/images/hl/first-place-pier-park-sm.jpg" width="560" height="664" alt="Bob lying in a field of daisies after his first-place finish at Pier Park" decoding="async"></div>
             <p class="rating-l">PDGA player rating <span>As of the November 10, 2026 update. For scale, 1000 is scratch golf.</span></p>
+            <p class="masters"><b>942</b><span>Masters rating <i>No. 1,494 worldwide, pro men 40–49</i></span></p>
             <div class="hero-cta">
               <a class="btn" href="#rounds">See every round</a>
               <a class="btn ghost" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">Official PDGA profile</a>
