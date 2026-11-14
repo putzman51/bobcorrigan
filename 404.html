@@ -15,23 +15,46 @@
     })();
   </script>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #b8b0a4; color: #1a1714; font-family: 'Space Mono', monospace; min-height: 100vh; display: grid; place-items: center; padding: 1rem; }
-    .box { max-width: 420px; width: 100%; background: #f0ebe3; border: 2px solid #1a1714; border-radius: 8px; box-shadow: 4px 4px 0 rgba(0,0,0,0.15); padding: 2rem 1.4rem; text-align: center; }
-    h1 { font-size: 1.4rem; margin-bottom: 0.5rem; }
-    p { margin-bottom: 1.2rem; }
-    a { display: block; margin-top: 0.7rem; padding: 0.85rem; border: 2px solid #1a1714; border-radius: 6px; box-shadow: 3px 3px 0 #1a1714; background: #d4f0d8; color: #1a1714; font-weight: 700; text-decoration: none; }
-    a.alt { background: #f0ebe3; }
-  </style>
+  <link rel="preload" href="/assets/fonts/big-shoulders-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body>
-  <div class="box">
-    <h1>OB! Page not found.</h1>
-    <p>Take a penalty stroke and try one of these:</p>
-    <a href="/disc/">Found my disc?</a>
-    <a class="alt" href="/">bobcorrigan.com home</a>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="frame">
+    <header class="topbar solo">
+      <a class="brand" href="/" aria-label="Bob Corrigan, home"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="11" ry="6.2" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="12" cy="11" rx="5.4" ry="2.4" fill="#f2762e"/></svg>Bob Corrigan</a>
+      <nav class="nav" aria-label="Site">
+        <a href="/#rounds">Rounds</a>
+        <a href="/#moments">Moments</a>
+        <a href="/frolf.html">Field notes</a>
+        <a href="/about/">About</a>
+        <a class="push wide" href="/disc/">Found my disc?</a>
+        <a class="pdga" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener"><span class="wide">PDGA </span>#316354</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page" style="--cap: var(--tang)">
+      <h1>Out of bounds</h1>
+      <p class="lede">That page isn't on the course. Take a penalty stroke and try one of these.</p>
+      <div class="actions">
+        <a class="btn" href="/">Back to the home page</a>
+        <a class="btn ghost" href="/disc/">Found my disc?</a>
+      </div>
+    </main>
   </div>
+
+  <footer class="foot">
+    <div class="foot-in">
+      <p>Bob Corrigan</p>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/frolf.html">Field notes</a>
+        <a href="/disc/">Found my disc?</a>
+        <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA profile</a>
+      </nav>
+      <p class="copy">Redmond, Washington. © 2026 Bob Corrigan.</p>
+    </div>
+  </footer>
 </body>
 </html>

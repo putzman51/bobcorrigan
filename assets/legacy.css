@@ -1,0 +1,59 @@
+/* Field notes: brings the older page markup into the current system. Load after the page's inline styles. */
+:root {
+  --ink: #17153b; --paper: #f2f1f6; --cream: #e9e7f2; --muted: #4d4a72; --rule: #d8d5e6;
+  --accent: #08706c; --green: #e2ddfb; --green-dark: #cfc7f7; --sun: #f4ce5e; --gold: #f4ce5e;
+  --phos: #ffffff; --phos-dim: #b9aef2;
+  --mono: var(--body); --px: var(--display); --crtf: var(--display);
+}
+html { background: var(--paper); }
+body { padding: 0; background: var(--paper); font-family: var(--body); font-size: 17px; line-height: 1.55; }
+body::before { display: none; }
+.js .rv { opacity: 1; transform: none; }
+.win { max-width: 760px; margin: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.tbar { display: none; }
+.notes-head { padding: clamp(36px, 6vw, 72px) 0 26px; text-align: left; }
+.notes-head h1 { margin: 0; font-weight: 800; font-size: clamp(46px, 7.6vw, 88px); line-height: 0.92; text-transform: uppercase; }
+.notes-head h1::before { content: ''; display: block; width: 76px; height: 12px; margin-bottom: 18px; border-radius: 99px; background: var(--teal); }
+.kicker { display: none; }
+.notes-head p.sub { margin-top: 14px; font-size: 19px; color: var(--muted); }
+.toc { margin: 0; padding: 10px 22px; border: 0; border-radius: 18px; background: #fff; box-shadow: none; }
+.log { font-size: 15.5px; }
+.log th { padding: 8px 12px 8px 0; background: none; border-bottom: 2px solid var(--ink); font-size: 13px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--muted); }
+.log th + th { border-left: 0; }
+.log td { padding: 11px 12px 11px 0; }
+.log tbody tr:nth-child(even), .log tbody tr:hover { background: none; }
+.log .ev a { text-decoration: underline; text-decoration-color: var(--rule); }
+.log .ev a:hover { text-decoration-color: currentColor; }
+.chip { padding: 3px 11px; border: 0; background: var(--cream); font-size: 13px; font-weight: 600; }
+.chip.gold { background: var(--gold); }
+.crt { background: var(--ink); border: 0; border-radius: 12px; color: #fff; text-shadow: none; }
+.crt::after { display: none; }
+.posts { width: 100%; }
+.post-img-wrap { border: 0; border-radius: 14px; background: var(--ink); box-shadow: none; }
+.post-issue { padding: 2px 12px; border: 0; border-radius: 99px; box-shadow: none; font-family: var(--display); font-size: 15px; font-weight: 800; letter-spacing: 0.04em; }
+.post-caption { border-top: 0; font-size: 13.5px; color: var(--muted); }
+.post-meta { font-size: 14px; letter-spacing: 0; text-transform: none; }
+.post-headline { font-weight: 800; font-size: clamp(34px, 5.6vw, 50px); line-height: 0.98; text-transform: uppercase; }
+.post-subhead { font-size: 15px; }
+.post-rounds { font-weight: 800; font-size: 30px; padding: 10px 18px; }
+.post-rounds-label { font-size: 13px; letter-spacing: 0; text-transform: none; }
+.post-body { font-family: var(--body); font-size: 18px; line-height: 1.65; color: var(--ink); }
+.post-img-inline { border: 0; border-radius: 14px; box-shadow: none; }
+.post-pull { padding: 20px 24px; border: 0; border-radius: 14px; box-shadow: none; font-weight: 700; font-size: 26px; line-height: 1.15; }
+.post-result { border-top: 1px solid var(--rule); font-size: 14px; letter-spacing: 0; text-transform: none; }
+.post-result .chip { box-shadow: none; font-size: 14px; }
+.slide-btn { border: 0; box-shadow: none; }
+.slide-btn:hover { background: var(--sun); }
+.slide-counter { background: rgba(23, 21, 59, 0.82); border-radius: 99px; }
+.slide-dot.active { background: var(--tang); }
+.notes-foot { margin-top: 56px; padding: 14px 0 0; border-top: 1px solid var(--rule); border-radius: 0; background: none; font-size: 14px; color: var(--muted); }
+.footer-dot { display: none; }
+.foot { max-width: none; margin: clamp(64px, 9vw, 110px) 0 0; text-align: left; font-size: 17px; line-height: 1.55; color: #fff; }
+.foot a { color: #fff; }
+.foot a:hover { color: var(--butter); }
+@media (max-width: 700px) {
+  body { padding: 0; font-size: 17px; }
+  .toc { margin: 0; padding: 4px 16px; }
+  .log tr { padding: 11px 0; }
+  .posts { width: 100%; }
+}

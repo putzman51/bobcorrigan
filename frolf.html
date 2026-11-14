@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Disc Golf Field Notes — Bob Corrigan</title>
   <meta name="author" content="Bob Corrigan" />
-  <meta name="theme-color" content="#f0ebe3" />
+  <meta name="theme-color" content="#17153b" />
   <link rel="canonical" href="https://bobcorrigan.com/frolf.html" />
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Blog", "name": "Disc Golf Field Notes — Bob Corrigan", "url": "https://bobcorrigan.com/frolf.html", "author": {"@type": "Person", "@id": "https://bobcorrigan.com/#person", "name": "Bob Corrigan", "alternateName": "Robert Corrigan", "url": "https://bobcorrigan.com/", "jobTitle": "Employer benefits professional"}, "isPartOf": {"@id": "https://bobcorrigan.com/#website"}}</script>
   <meta name="description" content="Bob Corrigan's disc golf field notes. Stories, photos, and write-ups from the course. PDGA #316354 · MA40." />
@@ -18,9 +18,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Space+Mono:wght@400;700&family=VT323&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -433,20 +430,25 @@
     }
     @media (prefers-reduced-motion: reduce) { .slides img { transition: none; } }
   </style>
+  <link rel="stylesheet" href="/assets/site.css" />
+  <link rel="stylesheet" href="/assets/legacy.css" />
 </head>
 <body>
-  <nav class="menubar" aria-label="Site">
-    <a class="mb-item mb-logo" href="/" aria-label="bobcorrigan.com home"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="#d4f0d8" stroke="currentColor" stroke-width="8"/><circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="50" cy="50" r="6" fill="currentColor"/></svg><b>bobcorrigan.com</b></a>
-    <a class="mb-item mb-home" href="/">Home</a>
-    <a class="mb-item" href="/frolf.html" aria-current="page">Field Notes</a>
-    <a class="mb-item" href="/about/">About</a>
-    <span class="mb-space"></span>
-    <a class="pill sun" href="/disc/">Found my Disc?</a>
-    <a class="pill" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7V15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <span class="mb-clock" id="clk" aria-hidden="true"></span>
-  </nav>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="frame">
+    <header class="topbar solo">
+      <a class="brand" href="/" aria-label="Bob Corrigan, home"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="11" ry="6.2" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="12" cy="11" rx="5.4" ry="2.4" fill="#f2762e"/></svg>Bob Corrigan</a>
+      <nav class="nav" aria-label="Site">
+        <a href="/#rounds">Rounds</a>
+        <a href="/#moments">Moments</a>
+        <a href="/frolf.html" aria-current="page">Field notes</a>
+        <a href="/about/">About</a>
+        <a class="push wide" href="/disc/">Found my disc?</a>
+        <a class="pdga" href="https://www.pdga.com/player/316354" target="_blank" rel="noopener"><span class="wide">PDGA </span>#316354</a>
+      </nav>
+    </header>
 
-  <div class="win">
+  <div class="win" id="main">
     <header class="tbar">
       <div class="dots"><span class="dot c"></span><span class="dot m"></span><a class="dot x" href="https://www.youtube.com/watch?v=a8K6QUPmv8Q" target="_blank" rel="noopener" aria-label="Beep boop"></a></div>
       <span class="ttl">Field Notes</span><span class="tnote">13 entries</span>
@@ -891,8 +893,20 @@
     </footer>
   </div>
 
+  </div>
+
   <footer class="foot">
-    <p><a href="/">← back to bobcorrigan.com</a> · <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA profile</a></p>
+    <div class="foot-in">
+      <p>Bob Corrigan</p>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/frolf.html">Field notes</a>
+        <a href="/disc/">Found my disc?</a>
+        <a href="https://www.pdga.com/player/316354" target="_blank" rel="noopener">PDGA profile</a>
+      </nav>
+      <p class="copy">Redmond, Washington. © 2026 Bob Corrigan.</p>
+    </div>
   </footer>
   <script>
     (function () {

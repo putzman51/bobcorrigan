@@ -1,0 +1,20 @@
+/* Warm-up and workout tools: same palette and type as the rest of the site. Load after the page's inline styles. */
+@font-face { font-family: 'DM Mono'; src: url('/assets/fonts/schibsted-grotesk-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'DM Mono'; src: url('/assets/fonts/schibsted-grotesk-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Space Mono'; src: url('/assets/fonts/schibsted-grotesk-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('/assets/fonts/big-shoulders-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Cormorant Garamond'; src: url('/assets/fonts/big-shoulders-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; font-style: italic; font-display: swap; }
+:root {
+  --ink: #17153b; --paper: #ffffff; --cream: #f2f1f6; --muted: #4d4a72; --rule: #d8d5e6;
+  --green: #e2ddfb; --green-dim: #6a4fe030; --green-glow: #6a4fe014; --green-dark: #cfc7f7; --green-accent: #6a4fe0;
+  --warm: #f2762e; --done-bg: rgba(106, 79, 224, 0.06); --done-border: rgba(106, 79, 224, 0.35);
+}
+html { background: #f2f1f6; }
+body { background: #f2f1f6; font-weight: 400; font-size: 106%; }
+body::before { display: none; }
+.mac-window { border: 0; border-radius: 22px; box-shadow: none; }
+.title-bar { height: 44px; background: var(--ink); border-bottom: 0; }
+.title-bar-text { color: #fff; font-family: 'Cormorant Garamond'; font-size: 1.05rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; }
+.traffic-lights { display: none; }
+.menu-bar { padding: 0.6rem 1.5rem; background: var(--cream); font-size: 0.8rem; }
+.menu-bar a { font-weight: 600 !important; color: var(--ink) !important; }

@@ -12,9 +12,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -26,11 +23,11 @@
       --ink: #1a1714;
       --paper: #f0ebe3;
       --cream: #e8e0d4;
-      --green: #d4f0d8;
-      --green-dim: #d4f0d830;
-      --green-glow: #d4f0d818;
+      --green: #e2ddfb;
+      --green-dim: #e2ddfb30;
+      --green-glow: #e2ddfb18;
       --green-dark: #c2e8c7;
-      --green-accent: #4a9e6e;
+      --green-accent: #6a4fe0;
       --muted: #8a8178;
       --rule: #c8bfb4;
       --warm: #d4a373;
@@ -42,7 +39,7 @@
     html { height: 100%; scroll-behavior: smooth; }
 
     body {
-      background: #b8b0a4;
+      background: #f2f1f6;
       color: var(--ink);
       font-family: 'DM Mono', monospace;
       font-weight: 300;
@@ -362,8 +359,8 @@
 
     /* ── Warmup ── */
     .warmup-card {
-      border: 2px solid #3a7d55;
-      background: #e8f5ec;
+      border: 2px solid #6a4fe0;
+      background: #f1eefd;
       padding: 1rem 1.1rem;
       margin-bottom: 0.65rem;
       border-radius: 2px;
@@ -371,18 +368,18 @@
     .warmup-label {
       font-size: 0.55rem;
       font-weight: 700;
-      color: #2d6a46;
+      color: #4a35b0;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
       padding-bottom: 0.4rem;
-      border-bottom: 1px solid #b8dcc4;
+      border-bottom: 1px solid #d8d0f7;
     }
     .warmup-item {
       font-family: 'DM Mono', monospace;
       font-size: 0.85rem;
       font-weight: 400;
-      color: #1a3d28;
+      color: #17153b;
       padding: 0.35rem 0;
       line-height: 1.5;
       border-bottom: 1px solid #d0e8d6;
@@ -573,7 +570,7 @@
       border-color: var(--green-dark);
       color: var(--green-accent);
     }
-    .info-box.gb strong { color: #3a7d55; font-weight: 400; }
+    .info-box.gb strong { color: #6a4fe0; font-weight: 400; }
     .info-box.yb {
       background: var(--yellow-dim);
       border-color: var(--yellow-border);
@@ -659,6 +656,7 @@
       .title-bar-text { font-size: 0.5rem; }
     }
   </style>
+<link rel="stylesheet" href="/assets/tools.css" />
 </head>
 <body>
 
