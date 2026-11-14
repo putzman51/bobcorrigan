@@ -83,15 +83,17 @@ a:hover { color: var(--violet); }
 
 @media (max-width: 900px) { .nav .wide { display: none; } .nav a.pdga { margin-left: auto; } }
 @media (max-width: 760px) {
-  .topbar, .topbar.solo { flex-wrap: wrap; padding: 10px 10px 8px 20px; border-radius: 26px 22px 22px 0; font-size: 14px; }
+  .topbar, .topbar.solo { flex-wrap: wrap; gap: 2px 6px; padding: 9px 9px 8px 20px; border-radius: 26px 22px 22px 0; font-size: 14px; }
   .topbar.solo { border-radius: 24px; }
-  .topbar { position: relative; }
-  .brand { width: 100%; font-size: 20px; }
-  .nav a.pdga { position: absolute; top: 9px; right: 9px; margin: 0; padding: 6px 12px; }
-  .nav { margin-left: -10px; }
-  .nav { margin-right: 0; }
-  .nav a { padding: 7px 9px; }
-  .nav a.pdga { padding: 7px 12px; }
+  .topbar::before { content: ''; order: 3; flex-basis: 100%; height: 0; }
+  .brand { order: 0; margin-right: auto; font-size: 20px; }
+  .brand-t { display: none; }
+  .nav { display: contents; }
+  .nav .wide { display: inline; }
+  .nav a { order: 4; padding: 7px 9px; white-space: nowrap; }
+  .nav a:first-child { margin-left: -9px; }
+  .nav a.push { order: 1; margin-left: auto; }
+  .nav a.pdga { order: 2; margin-left: 0; padding: 6px 12px; }
 }
 
 /* ── Section heads ── */
@@ -111,6 +113,8 @@ a:hover { color: var(--violet); }
   cursor: pointer; transition: background 0.15s ease;
 }
 .btn:hover { background: var(--violet); color: #fff; }
+.btn.violet { background: var(--violet); }
+.btn.violet:hover { background: var(--ink); }
 .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--ink); }
 .btn.ghost:hover { background: var(--ink); color: #fff; }
 
