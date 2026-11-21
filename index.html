@@ -279,7 +279,7 @@
     <section class="sec" id="rounds" aria-labelledby="rounds-h" style="--cap: var(--violet)">
       <div class="sec-h">
         <h2 id="rounds-h">Round by round</h2>
-        <p>Every PDGA-rated round from November 2025 through October 2026. Hover or tap a dot to see the round behind it.</p>
+        <p>Every PDGA-rated round from November 2025 through November 2026. Hover or tap a dot to see the round behind it.</p>
       </div>
 
       <p class="sum needs-js" aria-label="Throws plus penalty strokes equals total strokes">
@@ -416,6 +416,7 @@
       var R = [
         ["Par for the Corpse 4","C","2026-10-31","MP40",49,966,1],
         ["Farmers Park Open 4","C","2026-08-29","MP40",54,957,1],
+        ["Seatac Slowdown 4","C","2026-11-21","MPO",69,952,1],
         ["Skagit River Open","C","2026-04-11","MA3",49,951,1],
         ["NADGT C Tier @ Bullion Plaza","C","2026-01-31","MA40",60,943,1],
         ["Stumptown Bag Tag Series #1","C","2026-04-19","MA3",59,933,1],
@@ -561,7 +562,7 @@
       function drawLine() {
         var s = $('line'), small = s.getBoundingClientRect().width < 520;
         var H = small ? 240 : 320, W = prep(s, 1000, H), m = { l: 38, r: 10, t: 22, b: 28 };
-        var x0 = new Date('2025-10-20T12:00:00'), x1 = new Date('2026-11-15T12:00:00'), y0 = 810, y1 = 985;
+        var x0 = new Date('2025-10-20T12:00:00'), x1 = new Date('2026-12-05T12:00:00'), y0 = 810, y1 = 985;
         var X = function (d) { return m.l + (d - x0) / (x1 - x0) * (W - m.l - m.r); };
         var Y = function (v) { return m.t + (y1 - v) / (y1 - y0) * (H - m.t - m.b); };
         for (var v = 820; v <= 980; v += 40) {
